@@ -8,7 +8,7 @@ Proposed technology for developement :- Java with Spring
  
  Team Lead : Aditya Surve
  
- Team Information :
+ Team 13 Information :
 
 | Sr.No  | Name             | Email                          |  Student Id  |
 | ------ |:----------------:| ------------------------------:| ------------:|
