@@ -23,7 +23,8 @@ public class LoginController {
 	public ModelAndView showWelcomePage(@RequestParam String name, @RequestParam String password) {
 
 		ModelAndView modelAndView = null;
-
+			
+			
 			
 			modelAndView = new ModelAndView("car-info");
 //			modelAndView.addObject("name", name);
