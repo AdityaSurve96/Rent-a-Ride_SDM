@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
 	box-sizing: border-box;
 }
-
-
 
 #myInput {
 	background-image: url('/css/searchicon.png');
@@ -108,62 +107,18 @@
 			<th style="width: 10%;">Color</th>
 			
 		</tr>
+		
+		<c:forEach var="car" items="${cars}">
 		<tr class="CarInfo">
-			<td>D6</td>
-			<td>XY720</td>
-			<td>Volvo</td>
-			<td>2019</td>
-			<td>Red</td>
+			<td>{{car.model}}</td>
+			<td>{{car.type}}</td>
+			<td>{{car.make}}</td>
+			<td>{{car.type}}</td>
+			<td>{{car.year}}</td>
+			<td>{{car.color}}</td>
 		</tr>
-		<tr class="CarInfo">
-			<td>Mustang</td>
-			<td>GT</td>
-			<td>Ford</td>
-			<td>2001</td>
-			<td>White, Black</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>A4</td>
-			<td>Sports</td>
-			<td>Audi</td>
-			<td>2011</td>
-			<td>Black</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>A6</td>
-			<td>Sports</td>
-			<td>Audi</td>
-			<td>2011</td>
-			<td>Black</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>X1</td>
-			<td>Sports</td>
-			<td>BMW</td>
-			<td>2011</td>
-			<td>Red</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>X3</td>
-			<td>Sports</td>
-			<td>BMW</td>
-			<td>2011</td>
-			<td>Red</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>X5</td>
-			<td>LX</td>
-			<td>BMW</td>
-			<td>2018</td>
-			<td>Red</td>
-		</tr>
-		<tr class="CarInfo">
-			<td>X5</td>
-			<td>Sports</td>
-			<td>BMW</td>
-			<td>2015</td>
-			<td>Navy-Blue</td>
-		</tr>
+		</c:forEach>
+		
 	</table>
 
 	<script>
@@ -307,4 +262,3 @@
 	</script>
 
 </body>
-</html>

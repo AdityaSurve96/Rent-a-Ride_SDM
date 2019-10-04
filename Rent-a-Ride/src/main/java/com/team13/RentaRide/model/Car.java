@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Car {
 
-	private String name;
+	private String make;
 	private String model;
 	private String licenseNumber;
 	private String color;
@@ -21,12 +21,12 @@ public class Car {
 		this.year = year;
 	}
 
-	public String getName() {
-		return name;
+	public String getMake() {
+		return make;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMake(String make) {
+		this.make = make;
 	}
 
 	public String getModel() {
@@ -79,7 +79,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [name=" + name + ", model=" + model + ", licenseNumber=" + licenseNumber + ", color=" + color
+		return "Car [name=" + make + ", model=" + model + ", licenseNumber=" + licenseNumber + ", color=" + color
 				+ ", description=" + description + ", price=" + price + ", isAvailable=" + isAvailable + "]";
 	}
 

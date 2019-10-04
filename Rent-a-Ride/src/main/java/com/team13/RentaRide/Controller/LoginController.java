@@ -31,12 +31,12 @@ public class LoginController {
 //			modelAndView.addObject("password", password);
 
 			Car car1 = new Car();
-			car1.setName("Aston Martin E");
+			car1.setModel("Aston Martin E");
 			car1.setColor("Red");
 			car1.setYear(2017);
 
 			Car car2 = new Car();
-			car2.setName("BMW CT4");
+			car2.setModel("BMW CT4");
 			car2.setColor("Blue");
 			car2.setYear(2018);
 
