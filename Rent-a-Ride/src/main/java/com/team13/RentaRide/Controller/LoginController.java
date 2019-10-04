@@ -14,27 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class LoginController {
 	
-	@RequestMapping("/helloworld")
+	@RequestMapping("/LoginPage")
 	public ModelAndView showLoginPage(){
 		
-		return new ModelAndView("index");
+		return new ModelAndView("Login");
 	}
 	
-//	@RequestMapping("/l",method = RequestMethod.POST)
-//	public ModelAndView showWelcomePage(@RequestParam String name, @RequestParam String password){
-//		
-//		ModelAndView modelAndView = null;
-//		
-//		 try {
-//		       
-//		       modelAndView = new ModelAndView("welcome.jsp");
-//		       modelAndView.addObject("name", name);
-//		       modelAndView.addObject("password", password);
-//		    } catch(IndexOutOfBoundsException e) {
-//		       System.out.println("PROBLEMMMMMMMMMMMMMMM2s");
-//		    }
-//		    return modelAndView;
-//	
-//	}
-//
+
+	@RequestMapping("/registerClient")
+	public ModelAndView showRegisterClientPage(){
+		
+		return new ModelAndView("RegisterClient");
+	}
 }
