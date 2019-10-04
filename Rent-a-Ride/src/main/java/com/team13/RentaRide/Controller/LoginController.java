@@ -14,7 +14,7 @@ import com.team13.RentaRide.model.Car;
 
 public class LoginController {
 
-	@RequestMapping("/LoginClerk")
+	@RequestMapping("/LoginClerk")	
 	public ModelAndView showLoginPage() {
 		return new ModelAndView("Login");
 	}
