@@ -11,6 +11,15 @@ public class Car {
 	private String description;
 	private BigDecimal price;
 	boolean isAvailable;
+	private Integer year;
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 
 	public String getName() {
 		return name;
