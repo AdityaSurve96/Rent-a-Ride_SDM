@@ -1,4 +1,4 @@
-package com.team13.RentaRide.Model;
+package com.team13.RentaRide.model;
 
 public class Client {
 	

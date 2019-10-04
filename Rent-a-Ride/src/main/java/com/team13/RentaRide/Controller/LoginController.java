@@ -16,7 +16,7 @@ public class LoginController {
 
 	@RequestMapping("/LoginClerk")
 	public ModelAndView showLoginPage() {
-		return new ModelAndView("login");
+		return new ModelAndView("Login");
 	}
 
 	@RequestMapping(value = "/LoginClerk", method = RequestMethod.POST)
