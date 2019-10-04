@@ -6,12 +6,22 @@ public class Car {
 
 	private String make;
 	private String model;
+	private String type;
+
 	private String licenseNumber;
 	private String color;
 	private String description;
 	private BigDecimal price;
 	boolean isAvailable;
 	private Integer year;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public Integer getYear() {
 		return year;
@@ -79,8 +89,9 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [name=" + make + ", model=" + model + ", licenseNumber=" + licenseNumber + ", color=" + color
-				+ ", description=" + description + ", price=" + price + ", isAvailable=" + isAvailable + "]";
+		return "Car [make=" + make + ", model=" + model + ", type=" + type + ", licenseNumber=" + licenseNumber
+				+ ", color=" + color + ", description=" + description + ", price=" + price + ", isAvailable="
+				+ isAvailable + ", year=" + year + "]";
 	}
 
 }

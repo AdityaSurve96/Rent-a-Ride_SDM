@@ -33,17 +33,28 @@ public class LoginController {
 			Car car1 = new Car();
 			car1.setModel("Aston Martin E");
 			car1.setColor("Red");
+			car1.setMake("Make1");
 			car1.setYear(2017);
 
 			Car car2 = new Car();
-			car2.setModel("BMW CT4");
-			car2.setColor("Blue");
+			car2.setModel("X5");
+			
+			car2.setMake("BMW");
+			car2.setColor("Black");
 			car2.setYear(2018);
+			
+			
+			Car car3 = new Car();
+			car3.setModel("D6");
+			car3.setType("SUV");
+			car3.setMake("Volvo");
+			car3.setColor("Blue");
+			car3.setYear(2018);
 
 			ArrayList<Car> cars = new ArrayList<>();
 
 			cars.add(car1);
-			cars.add(car2);
+			cars.add(car3);
 			
 		
 
