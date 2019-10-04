@@ -53,5 +53,13 @@ public class LoginController {
 		
 		
 	}
+	
+ 	@RequestMapping("/registerClient")
+ 	public ModelAndView showRegisterClientPage() {
+ 		
+ 		return new ModelAndView("RegisterClient");
+
+ 	}
+
 
 }
