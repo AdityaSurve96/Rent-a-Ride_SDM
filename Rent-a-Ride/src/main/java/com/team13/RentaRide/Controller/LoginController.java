@@ -26,7 +26,7 @@ public class LoginController {
 			
 			
 			
-			modelAndView = new ModelAndView("car-info");
+			modelAndView = new ModelAndView("car-catalog-info-page");
 //			modelAndView.addObject("name", name);
 //			modelAndView.addObject("password", password);
 
