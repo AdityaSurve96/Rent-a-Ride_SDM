@@ -43,8 +43,4 @@ public class RentCar {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
-	
 }
