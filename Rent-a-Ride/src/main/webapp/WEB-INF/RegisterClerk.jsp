@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1" />
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<title>Register here</title>
 </head>
 <body>
-	<font color="red">${errorMessage}</font>
 	<form method="post">
+	
 		Email : <input type="text" name="email" /> 
 		Password : <input type="password" name="password" /> 
 
-		<button type="submit" formaction="/loginAsClerk">Login as Clerk</button>
-		<button type="submit" formaction="/registerClerk">Register as Clerk</button>
+		
+		<button type="submit" formaction="/clerkRegistered">RegisterYourself</button>
 	</form>
 </body>
 </html>

@@ -2,13 +2,16 @@ package com.team13.RentaRide.model;
 
 public class Clerk {
 
+	
+	private  String email;
+	private  String password;
+	
+	
 	public Clerk(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
-	private  String email;
-	private  String password;
 	public String getEmail() {
 		return email;
 	}
