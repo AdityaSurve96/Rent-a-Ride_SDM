@@ -103,7 +103,7 @@ a:hover {
 <div class="card">
 <img src="/Users/kalpeshthakare/Documents/Workspace/IntelliJ/Rent-a-Ride_SDM/Rent-a-Ride/src/main/resources/static/images/car1.jpg" style="width:350px;height:350px;">
   <p class="price">$199.99</p>
-  <strong><label>Name : </label> </strong> <label>Aston Martin E</label>  <br>
+  <strong><label>Model : </label> </strong> <label>Aston Martin E</label>  <br>
   <strong> <label>Licence-Id : </label> </strong> <label>LBYRNTH</label>  <br>
   <strong><label>Color : </label> </strong> <label>Red</label>  <br>
   <strong> <label>Car Availability : </label></strong> <label>Available</label>  <br><br>
