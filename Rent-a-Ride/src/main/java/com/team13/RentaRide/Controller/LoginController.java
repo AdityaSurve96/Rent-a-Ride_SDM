@@ -37,18 +37,13 @@ public class LoginController {
 		}
 
 		if (flag) {
-			ModelAndView modelAndView;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-			modelAndView = new ModelAndView("car-catalog-info-page");
+			ModelAndView modelAndView = new ModelAndView("car-catalog-info-page");
 			modelAndView.addObject("cars", DataStore.getAllCars());
 			return modelAndView;
 
 		}
 		ModelAndView modelAndView = new ModelAndView("Login");
-		modelAndView.addObject("errorMessage","INVALID LOGIN!.. Please try again");
+		modelAndView.addObject("errorMessage", "INVALID LOGIN!.. Please try again");
 		return modelAndView;
 
 	}
