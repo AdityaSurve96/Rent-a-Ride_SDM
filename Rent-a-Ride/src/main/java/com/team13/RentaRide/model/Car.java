@@ -4,21 +4,23 @@ import java.math.BigDecimal;
 
 public class Car {
 
+	private String licensePlateNumber;
+	
 	private String make;
 	private String model;
 	private String type;
-
-	private String licenseNumber;
 	private String color;
+	private Integer year;
+	
 	private String description;
 	private BigDecimal price;
 	boolean isAvailable;
-	private Integer year;
+	
 
 	public String getType() {
 		return type;
 	}
-
+	
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -47,12 +49,12 @@ public class Car {
 		this.model = model;
 	}
 
-	public String getLicenseNumber() {
-		return licenseNumber;
+	public String getLicensePlateNumber() {
+		return licensePlateNumber;
 	}
 
 	public void setLicenseNumber(String licenseNumber) {
-		this.licenseNumber = licenseNumber;
+		this.licensePlateNumber = licensePlateNumber;
 	}
 
 	public String getColor() {
@@ -89,7 +91,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [make=" + make + ", model=" + model + ", type=" + type + ", licenseNumber=" + licenseNumber
+		return "Car [make=" + make + ", model=" + model + ", type=" + type + ", licenseNumber=" + licensePlateNumber
 				+ ", color=" + color + ", description=" + description + ", price=" + price + ", isAvailable="
 				+ isAvailable + ", year=" + year + "]";
 	}
