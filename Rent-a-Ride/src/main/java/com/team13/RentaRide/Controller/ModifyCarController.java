@@ -20,7 +20,7 @@ import com.team13.RentaRide.utils.DataStore;
 public class ModifyCarController {
 	
 	@RequestMapping(value = "/Modify" , method = RequestMethod.POST)
-	public ModelAndView Modify(@RequestParam String driverLicenceNumber, @RequestParam String licensePlateNumber,@RequestParam String firstName, @RequestParam String lastName,@RequestParam String phoneNumber){
+	public ModelAndView Modify1(@RequestParam String driverLicenceNumber, @RequestParam String licensePlateNumber,@RequestParam String firstName, @RequestParam String lastName,@RequestParam String phoneNumber){
 
 		return new ModelAndView("car-catalog-info-page");
 	}
@@ -28,7 +28,7 @@ public class ModifyCarController {
 	
 	
 	@RequestMapping(value = "/Delete" , method = RequestMethod.POST)
-	public ModelAndView Modify(@RequestParam String driverLicenceNumber, @RequestParam String licensePlateNumber,@RequestParam String firstName, @RequestParam String lastName,@RequestParam String phoneNumber){
+	public ModelAndView Modify2(@RequestParam String driverLicenceNumber, @RequestParam String licensePlateNumber,@RequestParam String firstName, @RequestParam String lastName,@RequestParam String phoneNumber){
 
 		return new ModelAndView("car-catalog-info-page");
 	}
