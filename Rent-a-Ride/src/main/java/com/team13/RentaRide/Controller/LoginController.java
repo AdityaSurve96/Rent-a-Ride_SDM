@@ -47,7 +47,7 @@ public class LoginController {
 
 		}
 		ModelAndView modelAndView = new ModelAndView("Login");
-		modelAndView.addObject("errorMessage","INVALIDLOGIN!.. Please try again");
+		modelAndView.addObject("errorMessage","INVALID LOGIN!.. Please try again");
 		return modelAndView;
 
 	}
