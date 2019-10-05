@@ -1,8 +1,6 @@
 package com.team13.RentaRide.Controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Clerk;
 import com.team13.RentaRide.model.ClerksHolder;
 import com.team13.RentaRide.utils.DataStore;
@@ -41,6 +38,10 @@ public class LoginController {
 
 		if (flag) {
 			ModelAndView modelAndView;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			modelAndView = new ModelAndView("car-catalog-info-page");
 			modelAndView.addObject("cars", DataStore.getAllCars());
 			return modelAndView;

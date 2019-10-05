@@ -1,3 +1,39 @@
+function setInputValue(type) {
+	switch (type) {
+	case 'model':
+		var modelDropdown = document.getElementById("model");
+		var modelFilter = modelDropdown.options[modelDropdown.selectedIndex].value;
+		var modelInput = document.getElementById("modelInput");
+		modelInput.setAttribute('value', modelFilter);
+		break;
+	case 'type':
+		var typeDropdown = document.getElementById("type");
+		var typeFilter = typeDropdown.options[typeDropdown.selectedIndex].value;
+		var typeInput = document.getElementById("typeInput");
+		typeInput.setAttribute('value', typeFilter);
+		break;
+	case 'color':
+		var colorDropdown = document.getElementById("color");
+		var colorFilter = colorDropdown.options[colorDropdown.selectedIndex].value;
+		var colorInput = document.getElementById("colorInput");
+		colorInput.setAttribute('value', colorFilter);
+		break;
+	case 'make':
+		var makeDropdown = document.getElementById("make");
+		var makeFilter = makeDropdown.options[makeDropdown.selectedIndex].value;
+		var makeInput = document.getElementById("makeInput");
+		makeInput.setAttribute('value', makeFilter);
+		break;
+	case 'year':
+		var yearDropdown = document.getElementById("year");
+		var yearFilter = yearDropdown.options[yearDropdown.selectedIndex].value;
+		var yearInput = document.getElementById("yearInput");
+		yearInput.setAttribute('value', yearFilter);
+		break;
+	}
+
+};
+
 function filterCars() {
 
 	var filters = [ {
@@ -65,7 +101,6 @@ function filterCars() {
 				tr[i].style.display = "none";
 			}
 		}
-
 
 		// type filter
 		if (typeTd && typeFilter != 'invalid') {

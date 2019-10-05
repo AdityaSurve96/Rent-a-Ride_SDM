@@ -7,68 +7,69 @@
 <script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
 <link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
 
-
 </head>
 <body>
-<form method="get" action="carList">
+<form method="POST" action="filterCars">
 	<h2>Available Cars</h2>
 	<div>
 		<label>Model</label> 
-		<select id="model">
+		<input type="hidden" name="modelInput" id="modelInput"/>
+		<select id="model" onChange="setInputValue('model')" >
 			<option value="invalid">---</option>
 			<option value="D6">D6</option>
-			<option value="Mustang">Mustang</option>
-			<option value="A4">A4</option>
-			<option value="X1">X1</option>
+			<option value="X6">X6</option>
 			<option value="X3">X3</option>
-			<option value="X5">X5</option>
-			
+			<option value="Cruze">Cruze</option>
+			<option value="Mirage">Mirage</option>
 		</select>
 		&nbsp;<label>Type</label>
-		<select id="type"">
+		<input type="hidden" name="typeInput" id="typeInput"/>
+		<select id="type" onChange="setInputValue('type')">
 			<option value="invalid">---</option>
-			<option value="XY720">XY720</option>
-			<option value="GT">GT</option>
-			<option value="LX">LX</option>
-			<option value="Sports">Sports</option>
+			<option value="Sedan">Sedan</option>
+			<option value="SUV">SUV</option>
 		</select> 
 		&nbsp;<label>Make</label> 
-		<select id="make"">
+		<input type="hidden" name="makeInput" id="makeInput"/>
+		<select id="make" onChange="setInputValue('make')">
 			<option value="invalid">---</option>
 			<option value="Volvo">Volvo</option>
-			<option value="Ford">Ford</option>
-			<option value="Audi">Audi</option>
 			<option value="BMW">BMW</option>
-			
+			<option value="Chevrolet">Chevrolet</option>
+			<option value="Mitsubishi">Mitsubishi</option>
 		</select> 
 		
 		&nbsp;<label>Year</label>
-		<select id="year">
+		<input type="hidden" name="yearInput" id="yearInput"/>
+		<select id="year" onChange="setInputValue('year')">
 			<option value="invalid">---</option>
-			<option value="2001">2001</option>
 			<option value="2011">2011</option>
-			<option value="2015">2015</option>
-			<option value="2018">2018</option>
-			<option value="2019">2019</option>
+			<option value="2009">2009</option>
+			<option value="2010">2010</option>
+			<option value="2017">2017</option>
+			<option value="2012">2012</option>
 		</select>
 		
 		&nbsp;<label>Color</label>
-		<select id="color">
+		<input type="hidden" name="colorInput" id="colorInput"/>
+		<select id="color" onChange="setInputValue('color')">
 			<option value="invalid">---</option>
 			<option value="Red">Red</option>
 			<option value="Black">Black</option>
 			<option value="White">White</option>
 			<option value="Blue">Blue</option>
-			<option value="Navy">Navy</option>
+			<option value="Green">Green</option>
 		</select>
 		
-		<input type="submit">Search</button>
+		<input type="submit" value="Search"/>
 		
 		<input type="checkbox" id="isAvailable"><label>Show Only Available</label>
 		
 	</div>
-
+</form>
 <br>
+
+<form>
 	<table id="myTable">
 		<tr class="header">
 			<th style="width: 20%;">Model</th>
@@ -93,5 +94,5 @@
 		</c:forEach>
 		
 	</table>
-</form>
+	</form>
 </body>
