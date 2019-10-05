@@ -53,7 +53,7 @@ public class Car {
 		return licensePlateNumber;
 	}
 
-	public void setLicenseNumber(String licenseNumber) {
+	public void setLicensePlateNumber(String licenseNumber) {
 		this.licensePlateNumber = licensePlateNumber;
 	}
 

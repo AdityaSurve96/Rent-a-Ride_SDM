@@ -3,7 +3,8 @@ package com.team13.RentaRide.model;
 public class Client {
 	
 	private String driverLicenceNumber;
-	private String clientName;
+	private String clientFirstName;
+	private String clientLastName;
 	private int phoneNumber;
 	private int licenceExpiryDate;
 	private String emailID;
@@ -14,11 +15,18 @@ public class Client {
 	public void setLicenceNumber(String licenceNumber) {
 		this.driverLicenceNumber = driverLicenceNumber;
 	}
-	public String getClientName() {
-		return clientName;
+	
+	public String getClientFirstName() {
+		return clientFirstName;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientFirstName(String clientFirstName) {
+		this.clientFirstName = clientFirstName;
+	}
+	public String getClientLastName() {
+		return clientLastName;
+	}
+	public void setClientLastName(String clientLastName) {
+		this.clientLastName = clientLastName;
 	}
 	public int getPhoneNumber() {
 		return phoneNumber;
@@ -38,20 +46,21 @@ public class Client {
 	public void setEmailID(String emailID) {
 		this.emailID = emailID;
 	}
+	public Client(String driverLicenceNumber, String clientFirstName, String clientLastName, int phoneNumber,
+			int licenceExpiryDate, String emailID) {
+		super();
+		this.driverLicenceNumber = driverLicenceNumber;
+		this.clientFirstName = clientFirstName;
+		this.clientLastName = clientLastName;
+		this.phoneNumber = phoneNumber;
+		this.licenceExpiryDate = licenceExpiryDate;
+		this.emailID = emailID;
+	}
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Client [licenceNumber=");
-		builder.append(driverLicenceNumber);
-		builder.append(", clientName=");
-		builder.append(clientName);
-		builder.append(", phoneNumber=");
-		builder.append(phoneNumber);
-		builder.append(", licenceExpiryDate=");
-		builder.append(licenceExpiryDate);
-		builder.append(", emailID=");
-		builder.append(emailID);
-		builder.append("]");
-		return builder.toString();
+		return "Client [driverLicenceNumber=" + driverLicenceNumber + ", clientFirstName=" + clientFirstName
+				+ ", clientLastName=" + clientLastName + ", phoneNumber=" + phoneNumber + ", licenceExpiryDate="
+				+ licenceExpiryDate + ", emailID=" + emailID + "]";
 	}
+
 }

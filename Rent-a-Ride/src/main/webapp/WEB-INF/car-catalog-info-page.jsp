@@ -76,6 +76,8 @@
 			<th style="width: 20%;">Make</th>
 			<th style="width: 10%;">Year</th>
 			<th style="width: 10%;">Color</th>
+			<th style="width: 10%;">Availablity</th>
+			
 			
 		</tr>
 		
@@ -86,6 +88,7 @@
 			<td>${car.make}</td>
 			<td>${car.year}</td>
 			<td>${car.color}</td>
+			<td>${car.isAvailable}</td>
 		</tr>
 		</c:forEach>
 		
