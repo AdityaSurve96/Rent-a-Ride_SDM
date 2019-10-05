@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Car {
 
 	private String licensePlateNumber;
-	
+
 	private String make;
 	private String model;
 	private String type;
@@ -15,12 +15,12 @@ public class Car {
 	private String description;
 	private BigDecimal price;
 	boolean isAvailable;
-	
+	private String availableToRentOrNot;
 
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -53,7 +53,7 @@ public class Car {
 		return licensePlateNumber;
 	}
 
-	public void setLicensePlateNumber(String licenseNumber) {
+	public void setLicensePlateNumber(String licensePlateNumber) {
 		this.licensePlateNumber = licensePlateNumber;
 	}
 
@@ -87,7 +87,23 @@ public class Car {
 
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+//		this.availableToRentOrNot = isAvailable ? "YES" : "NO";
+
 	}
+
+
+	
+	public String getAvailableToRentOrNot() {
+		return availableToRentOrNot;
+	}
+
+	public void setAvailableToRentOrNot(boolean ava) {
+		if(ava) {
+			this.availableToRentOrNot = "YES";
+		}
+		else
+			this.availableToRentOrNot = "NO";
+		}
 
 	@Override
 	public String toString() {

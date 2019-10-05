@@ -25,7 +25,8 @@ public class DataStore {
 		c1.setPrice(BigDecimal.valueOf(25.55d));
 		c1.setType("Sedan");
 		c1.setYear(2011);
-
+		c1.setAvailableToRentOrNot(c1.isAvailable());
+	
 		// CAR 2
 		Car c2 = new Car();
 		c2.setAvailable(true);
@@ -37,7 +38,8 @@ public class DataStore {
 		c2.setPrice(BigDecimal.valueOf(55.55d));
 		c2.setType("SUV");
 		c2.setYear(2009);
-
+		c2.setAvailableToRentOrNot(c2.isAvailable());
+	
 		// CAR 3
 		Car c3 = new Car();
 		c3.setAvailable(true);
@@ -49,7 +51,8 @@ public class DataStore {
 		c3.setPrice(BigDecimal.valueOf(25.90d));
 		c3.setType("SUV");
 		c3.setYear(2010);
-
+		c3.setAvailableToRentOrNot(c3.isAvailable());
+		
 		// CAR 4
 		Car c4 = new Car();
 		c4.setAvailable(true);
@@ -61,7 +64,8 @@ public class DataStore {
 		c4.setPrice(BigDecimal.valueOf(34.5d));
 		c4.setType("SUV");
 		c4.setYear(2017);
-
+		c4.setAvailableToRentOrNot(c4.isAvailable());
+		
 		// CAR 5
 		Car c5 = new Car();
 		c5.setAvailable(true);
@@ -73,7 +77,8 @@ public class DataStore {
 		c5.setPrice(BigDecimal.valueOf(19.12d));
 		c5.setType("SUV");
 		c5.setYear(2012);
-
+		c5.setAvailableToRentOrNot(c5.isAvailable());
+		
 		cars.add(c1);
 		cars.add(c2);
 		cars.add(c3);

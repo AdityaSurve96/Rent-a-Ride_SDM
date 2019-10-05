@@ -42,8 +42,6 @@ public class LoginController {
 		if (flag) {
 			ModelAndView modelAndView;
 			modelAndView = new ModelAndView("car-catalog-info-page");
-
-			modelAndView = new ModelAndView("car-catalog-info-page");
 			modelAndView.addObject("cars", DataStore.getAllCars());
 			return modelAndView;
 
