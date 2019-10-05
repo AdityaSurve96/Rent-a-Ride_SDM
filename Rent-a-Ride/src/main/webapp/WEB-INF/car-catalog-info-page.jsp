@@ -10,11 +10,11 @@
 
 </head>
 <body>
-
+<form method="get" action="carList">
 	<h2>Available Cars</h2>
 	<div>
 		<label>Model</label> 
-		<select id="model" onchange="filterCars()">
+		<select id="model">
 			<option value="invalid">---</option>
 			<option value="D6">D6</option>
 			<option value="Mustang">Mustang</option>
@@ -25,7 +25,7 @@
 			
 		</select>
 		&nbsp;<label>Type</label>
-		<select id="type" onchange="filterCars()">
+		<select id="type"">
 			<option value="invalid">---</option>
 			<option value="XY720">XY720</option>
 			<option value="GT">GT</option>
@@ -33,7 +33,7 @@
 			<option value="Sports">Sports</option>
 		</select> 
 		&nbsp;<label>Make</label> 
-		<select id="make" onchange="filterCars()">
+		<select id="make"">
 			<option value="invalid">---</option>
 			<option value="Volvo">Volvo</option>
 			<option value="Ford">Ford</option>
@@ -43,7 +43,7 @@
 		</select> 
 		
 		&nbsp;<label>Year</label>
-		<select id="year" onchange="filterCars()">
+		<select id="year">
 			<option value="invalid">---</option>
 			<option value="2001">2001</option>
 			<option value="2011">2011</option>
@@ -53,7 +53,7 @@
 		</select>
 		
 		&nbsp;<label>Color</label>
-		<select id="color" onchange="filterCars()">
+		<select id="color">
 			<option value="invalid">---</option>
 			<option value="Red">Red</option>
 			<option value="Black">Black</option>
@@ -61,6 +61,8 @@
 			<option value="Blue">Blue</option>
 			<option value="Navy">Navy</option>
 		</select>
+		
+		<input type="submit">Search</button>
 		
 		<input type="checkbox" id="isAvailable"><label>Show Only Available</label>
 		
@@ -88,5 +90,5 @@
 		</c:forEach>
 		
 	</table>
-
+</form>
 </body>

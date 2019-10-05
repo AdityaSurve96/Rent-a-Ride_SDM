@@ -1,4 +1,13 @@
 function filterCars() {
+
+	var filters = [ {
+		model : null,
+		make : null,
+		type : null,
+		color : null,
+		year : null
+	} ];
+
 	var input, filter, table, tr, td, i, txtValue;
 
 	console.log("test...");
@@ -35,14 +44,16 @@ function filterCars() {
 
 		// model filter
 		if (modelTd && modelFilter != 'invalid') {
-			var txtValue = modelTd.textContent || modelTd.innerText;
-			console.log(txtValue);
-			if (txtValue.toLowerCase().indexOf(modelFilter.toLowerCase()) > -1) {
-				console.log("matched");
-				tr[i].style.display = "";
-			} else {
-				tr[i].style.display = "none";
-			}
+			// var txtValue = modelTd.textContent || modelTd.innerText;
+			// console.log(txtValue);
+			// if (txtValue.toLowerCase().indexOf(modelFilter.toLowerCase()) >
+			// -1) {
+			// console.log("matched");
+			// tr[i].style.display = "";
+			// } else {
+			// tr[i].style.display = "none";
+			// }
+
 		}
 
 		// make filter
@@ -54,6 +65,7 @@ function filterCars() {
 				tr[i].style.display = "none";
 			}
 		}
+
 
 		// type filter
 		if (typeTd && typeFilter != 'invalid') {
