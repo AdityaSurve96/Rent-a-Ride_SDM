@@ -110,11 +110,11 @@
 		
 		<c:forEach var="car" items="${cars}">
 		<tr class="CarInfo">
-			<td>{{car.model}}</td>
-			<td>{{car.type}}</td>
-			<td>{{car.make}}</td>
-			<td>{{car.year}}</td>
-			<td>{{car.color}}</td>
+			<td>${car.model}</td>
+			<td>${car.type}</td>
+			<td>${car.make}</td>
+			<td>${car.year}</td>
+			<td>${car.color}</td>
 		</tr>
 		</c:forEach>
 		
