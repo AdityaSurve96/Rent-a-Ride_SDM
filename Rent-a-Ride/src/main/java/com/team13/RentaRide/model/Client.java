@@ -2,28 +2,46 @@ package com.team13.RentaRide.model;
 
 public class Client {
 	
-	private String licenceNumber;
-	private String clientName;
-	private int phoneNumber;
+	private String driverLicence;
+	private String firstName;
+	private String lastName;
+	private int mobile;
 	private int licenceExpiryDate;
 	private String emailID;
+	
+	
+	
+	
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	
+	
+	
+	
 	public String getLicenceNumber() {
-		return licenceNumber;
+		return driverLicence;
 	}
-	public void setLicenceNumber(String licenceNumber) {
-		this.licenceNumber = licenceNumber;
+	public void setLicenceNumber(String driverlicence) {
+		this.driverLicence = driverlicence;
 	}
-	public String getClientName() {
-		return clientName;
+	
+	public int getmobile() {
+		return mobile;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-	public int getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setmobile(int mobile) {
+		this.mobile = mobile;
 	}
 	public int getLicenceExpiryDate() {
 		return licenceExpiryDate;
@@ -40,12 +58,14 @@ public class Client {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Client [licenceNumber=");
-		builder.append(licenceNumber);
-		builder.append(", clientName=");
-		builder.append(clientName);
-		builder.append(", phoneNumber=");
-		builder.append(phoneNumber);
+		builder.append("Client [driverlicence=");
+		builder.append(driverLicence);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", mobile=");
+		builder.append(mobile);
 		builder.append(", licenceExpiryDate=");
 		builder.append(licenceExpiryDate);
 		builder.append(", emailID=");
