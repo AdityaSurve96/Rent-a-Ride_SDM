@@ -5,17 +5,21 @@ public class Client {
 	private String driverLicenceNumber;
 	private String clientFirstName;
 	private String clientLastName;
-	private int phoneNumber;
-	private int licenceExpiryDate;
+	private String driverLicenseNumber;
+	private String clientName;
+	private Integer phoneNumber;
+	private Integer licenceExpiryDate;
 	private String emailID;
 	
-	public String getdriverLicenceNumber() {
+	
+	
+	
+	public String getDriverLicenceNumber() {
 		return driverLicenceNumber;
 	}
-	public void setLicenceNumber(String licenceNumber) {
+	public void setDriverLicenceNumber(String driverLicenceNumber) {
 		this.driverLicenceNumber = driverLicenceNumber;
 	}
-	
 	public String getClientFirstName() {
 		return clientFirstName;
 	}
@@ -28,16 +32,28 @@ public class Client {
 	public void setClientLastName(String clientLastName) {
 		this.clientLastName = clientLastName;
 	}
-	public int getPhoneNumber() {
+	public String getDriverLicenseNumber() {
+		return driverLicenseNumber;
+	}
+	public void setDriverLicenseNumber(String driverLicenseNumber) {
+		this.driverLicenseNumber = driverLicenseNumber;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public int getLicenceExpiryDate() {
+	public Integer getLicenceExpiryDate() {
 		return licenceExpiryDate;
 	}
-	public void setLicenceExpiryDate(int licenceExpiryDate) {
+	public void setLicenceExpiryDate(Integer licenceExpiryDate) {
 		this.licenceExpiryDate = licenceExpiryDate;
 	}
 	public String getEmailID() {
@@ -46,8 +62,8 @@ public class Client {
 	public void setEmailID(String emailID) {
 		this.emailID = emailID;
 	}
-	public Client(String driverLicenceNumber, String clientFirstName, String clientLastName, int phoneNumber,
-			int licenceExpiryDate, String emailID) {
+	public Client(String driverLicenceNumber, String clientFirstName, String clientLastName, Integer phoneNumber,
+			Integer licenceExpiryDate, String emailID) {
 		super();
 		this.driverLicenceNumber = driverLicenceNumber;
 		this.clientFirstName = clientFirstName;
@@ -58,9 +74,20 @@ public class Client {
 	}
 	@Override
 	public String toString() {
-		return "Client [driverLicenceNumber=" + driverLicenceNumber + ", clientFirstName=" + clientFirstName
-				+ ", clientLastName=" + clientLastName + ", phoneNumber=" + phoneNumber + ", licenceExpiryDate="
-				+ licenceExpiryDate + ", emailID=" + emailID + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Client [licenceNumber=");
+		builder.append(driverLicenseNumber);
+		builder.append(", clientName=");
+		builder.append(clientName);
+		builder.append(", phoneNumber=");
+		builder.append(phoneNumber);
+		builder.append(", licenceExpiryDate=");
+		builder.append(licenceExpiryDate);
+		builder.append(", emailID=");
+		builder.append(emailID);
+		builder.append("]");
+		return builder.toString();
+
 	}
 
 }

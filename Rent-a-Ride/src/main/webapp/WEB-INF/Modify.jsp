@@ -1,6 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 <style>
 
 * {
@@ -87,27 +91,37 @@ a:hover {
 }
 </style>
 </head>
-<body background="grey">
+<body background ="Light grey">
+<br>
+<br>
+<br>
+<br>
+
+<br>
 
 <div class="row">
 
 <div class="card">
+<br><br>
 
-  <strong><label>Car Licence No : </label>
-</strong>
-    <label>LBRCOA</label>  <br><br>
-   <strong> <label>Client Name: </label>
-</strong>
+<form action="">
 
-    <label>XXXXx</label>  <br><br>
-    <strong><label>Client Mobile : </label>
-</strong>
-
-      <label>4383455508</label>  <br><br>
-    <strong><label>Client Drivers Licence: </label>
-</strong>
-
-      <label>xxxx53465</label>  <br><br>
+  <strong>Car License Plate  :</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" name="licensePlateNumber" value="LBRCOA">
+  <br><br>
+  <strong>Client First Name:</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" name="firstName" value="Divya">
+  <br><br>
+  <strong>Client Last Name :</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <input type="text" name="lastName" value="Pandit">
+  <br><br>
+  <strong>Client Mobile Number :</strong>&nbsp
+  <input type="text" name="Mobile" value="4383455508">
+  <br><br>
+ <strong> Client Drivers License:</strong>&nbsp
+  <input type="text" name="licenceNo" value="xxxx53465">
+  <br><br>
+</form>
 
   <strong><a href="#" class="card" style="background-color:lightgrey;color:black;">Modify</a></strong>
   <br>
@@ -119,11 +133,11 @@ a:hover {
 <br>
 <br>
 
-<!-- <div align="center">
-<a href="#" class="modify"> modify</a> -->
+<div align="center">
 <a href="#" class="card" style="background-color:black;color:white;">Back</a>
 <a href="#" class="delete"> delete </a>
 </div>
+
 
 </body>
 </html>
