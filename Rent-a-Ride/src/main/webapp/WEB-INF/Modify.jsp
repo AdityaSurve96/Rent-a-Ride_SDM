@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="styles/universal.css" rel="stylesheet" type="text/css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style>
@@ -92,6 +91,25 @@ a:hover {
 }
 </style>
 </head>
+<body background ="Light grey">
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+<div class="row">
+
+<div class="card">
+<br><br>
+
+<form method="post">
+
+  <div class="row">
+
+<div class="card">
+
   <strong><label >Car Licence No : </label>
 </strong>
   <input value = "${carLicenseNumber}" type="text" name="CarLicenseNo" readonly><br><br>
@@ -132,10 +150,8 @@ a:hover {
   <strong>
   		<button type="submit" class="card" 
   		style="background-color:lightgrey;color:black;" 
-  		formaction="/gotoRentalsPageAfterModify">Confirm Modification</button>
-  		<button type="submit" class="card" 
-  		style="background-color:lightgrey;color:black;" 
-  		formaction="/gotoRentalsPageAfterDelete">Confirm Deletion</button>
+  		formaction="/gotoRentalsPageAfterModify">Confirm</button>
+  		
   </strong>
   </strong>
   <br>
