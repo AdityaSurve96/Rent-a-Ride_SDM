@@ -87,7 +87,7 @@ public class Car {
 
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
-//		this.availableToRentOrNot = isAvailable ? "YES" : "NO";
+
 
 	}
 
@@ -99,10 +99,10 @@ public class Car {
 
 	public void setAvailableToRentOrNot(boolean ava) {
 		if(ava) {
-			this.availableToRentOrNot = "YES";
+			this.availableToRentOrNot = "AVAILABLE";
 		}
 		else
-			this.availableToRentOrNot = "NO";
+			this.availableToRentOrNot = "UNAVAILABLE";
 		}
 
 	@Override

@@ -79,14 +79,18 @@
 			<th style="width: 10%;">Availability For Rent</th>
 		</tr>
 		
-		<c:forEach var="car" items="${cars}">
+		<c:forEach var="car" items="${cars}" varStatus="loopCounter">
 		<tr class="CarInfo">
 			<td>${car.model}</td>
 			<td>${car.type}</td>
 			<td>${car.make}</td>
 			<td>${car.year}</td>
 			<td>${car.color}</td>
-			<td>${car.availableToRentOrNot}</td>
+			<td>  
+			<input value="${loopCounter.count}" type = "hidden" name = "licensePlateInput${loopCounter.count}" />
+			<input type="submit" formaction="/carDetailView${loopCounter.count}" value="${car.availableToRentOrNot}" />
+			 
+			</td>
 		</tr>
 		</c:forEach>
 		

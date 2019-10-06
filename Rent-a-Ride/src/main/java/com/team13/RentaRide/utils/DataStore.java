@@ -29,7 +29,7 @@ public class DataStore {
 	
 		// CAR 2
 		Car c2 = new Car();
-		c2.setAvailable(true);
+		c2.setAvailable(false);
 		c2.setColor("Blue");
 		c2.setDescription("Good for a mountain trip");
 		c2.setLicensePlateNumber("T57 335");
@@ -68,7 +68,7 @@ public class DataStore {
 		
 		// CAR 5
 		Car c5 = new Car();
-		c5.setAvailable(true);
+		c5.setAvailable(false);
 		c5.setColor("Green");
 		c5.setDescription("Available with Infant car seat");
 		c5.setLicensePlateNumber("F55 604");
