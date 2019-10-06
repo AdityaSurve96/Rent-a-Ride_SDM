@@ -119,34 +119,41 @@ a:hover {
 
 </strong>
 
-    <input type="text" name="clientFirstName"> <br><br>
+    <input value = "${clientFirstName}" type="text" name="clientFirstName"> <br><br>
+   
     <strong> <label>Client Last Name: </label>
 
 </strong>
 
-    <input type="text" name="clientLastName"> <br><br>
+    <input value = "${clientLastName}" type="text" name="clientLastName"> <br><br>
     
     
     
     <strong><label>Client Mobile : </label>
 </strong>
 
-       <input type="text" name="phoneNumber"> <br><br>
+       <input value = "${phoneNumber}" type="text" name="phoneNumber"> <br><br>
+   
     <strong><label>Client Drivers Licence: </label>
 </strong>
 
-      <input type="text" name="driverLicenceNumber">  <br><br>
+      <input value = "${driverLicenceNumber}" type="text" name="driverLicenceNumber">  <br><br>
+      
       <strong><label>Expiration Date : </label>
       
-       <input type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
+       <input value = "${licenceExpiryDate}" type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
+	
 	<strong><label>Rental Due Date: </label>
 </strong>
-	   <input type="text" name="dueDate" placeholder="yyyy/mm/dd">  <br><br>
+	   <input value = "${dueDate}" type="text" name="dueDate" placeholder="yyyy/mm/dd">  <br><br>
 
   <strong>
   		<button type="submit" class="card" 
   		style="background-color:lightgrey;color:black;" 
-  		formaction="/RentCarForClient">Confirm Rental</button>
+  		formaction="/gotoRentalsPageAfterModify">Confirm Modification</button>
+  		<button type="submit" class="card" 
+  		style="background-color:lightgrey;color:black;" 
+  		formaction="/gotoRentalsPageAfterDelete">Confirm Deletion</button>
   </strong>
   </strong>
   <br>
