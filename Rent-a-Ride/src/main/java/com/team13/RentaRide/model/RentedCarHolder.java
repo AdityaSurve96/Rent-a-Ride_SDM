@@ -1,11 +1,12 @@
 package com.team13.RentaRide.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class RentedCarHolder {
 
     private static RentedCarHolder instance;
-    private static ArrayList<RentedCar> rentedCarList ;
+    private static List<RentedCar> rentedCarList ;
     private RentedCarHolder() {
     	rentedCarList = new ArrayList<RentedCar>();
     }
@@ -16,14 +17,14 @@ public final class RentedCarHolder {
         return instance;
     }
     
-    public void addRentals(Car c, Client cl) {
+    public void addRentals(Car c, Client cl , String dueDate) {
 		
-		RentedCar rc = new RentedCar(c, cl);
+		RentedCar rc = new RentedCar(c, cl, dueDate);
 		rentedCarList.add(rc);
 		
 	}
 
-	public ArrayList<RentedCar> getRentals(){
+	public List<RentedCar> getRentals(){
 
 		return rentedCarList;
 	}

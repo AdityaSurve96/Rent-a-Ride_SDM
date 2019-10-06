@@ -1,6 +1,7 @@
 package com.team13.RentaRide.Controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -28,58 +29,78 @@ public class RentCarController {
 		Car c=null;
 		for (Car car : cars) {
 			if(car.getLicensePlateNumber().equals(licensePlate)) {
-				
+
 				c = car;
 				break;
 
 			}
 		}
-		
-			ModelAndView modelAndView;
-			modelAndView = new ModelAndView("RentCarForClient");
-			modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
-			return modelAndView;
-		
+
+		ModelAndView modelAndView;
+		modelAndView = new ModelAndView("RentCarForClient");
+		modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
+		return modelAndView;
+
 	}
-	
+
 	@RequestMapping(value ="/RentCarForClient",  method = RequestMethod.POST)
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName,@RequestParam String clientLastName,
-									   @RequestParam String phoneNumber,@RequestParam String driverLicenceNumber,
-									   @RequestParam String licenceExpiryDate, @RequestParam String CarLicenseNoForForm) {
-		
+			@RequestParam String phoneNumber,@RequestParam String driverLicenceNumber,
+			@RequestParam String licenceExpiryDate, @RequestParam String CarLicenseNoForForm,
+			@RequestParam String dueDate) {
+
 		String licnum = CarLicenseNoForForm;
 		List<Car> cars = DataStore.getAllCars();
 		Car c=null;
 		for (Car car : cars) {
 			String lic = car.getLicensePlateNumber();
-			
+
 			if(lic.equals(licnum)) {
-				
+
 				c = car;
 				break;
 
 			}
 		}
-		
+
 		Integer phnumber = Integer.parseInt(phoneNumber);
-		
+
 		Client cl = new Client(driverLicenceNumber, clientFirstName, clientLastName, phnumber, licenceExpiryDate );
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
 		RentedCarHolder rh = RentedCarHolder.getInstance();
-		rh.addRentals(c, cl);
-		
+		rh.addRentals(c, cl,dueDate);
+
 		modelAndView.addObject("rentals", rh.getRentals());
 		
 		return modelAndView;
+
+	}
+
+
+
+	@RequestMapping(value = "/backToCarCatalog")
+	public ModelAndView goToCarCatalog() {
+
+		ModelAndView modelAndView  = new ModelAndView("car-catalog-info-page");
 		
+		RentedCarHolder rh = RentedCarHolder.getInstance();
+		List<RentedCar> renCars = rh.getRentals();
 		
+		List<Car> catalogCars = DataStore.getAllCars();
+
 		
-	
-		
+
+
+
+
+
+		return modelAndView;
+
+
 	}
 }
 
 
-	
+
 
 

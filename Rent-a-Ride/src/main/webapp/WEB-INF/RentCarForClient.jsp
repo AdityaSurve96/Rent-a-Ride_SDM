@@ -125,6 +125,9 @@ a:hover {
       <strong><label>Expiration Date : </label>
       
        <input type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
+	<strong><label>Rental Due Date: </label>
+</strong>
+	   <input type="text" name="dueDate" placeholder="yyyy/mm/dd">  <br><br>
 
   <strong>
   		<button type="submit" class="card" 

@@ -6,11 +6,20 @@ public class RentedCar {
 	
 	private Car rentedCar;
 	private Client carsClient;
-	
-	public RentedCar(Car rentedCar, Client carsClient) {
+	private String dueDate;
+	public RentedCar(Car rentedCar, Client carsClient, String dueDate) {
 		super();
 		this.rentedCar = rentedCar;
 		this.carsClient = carsClient;
+		this.dueDate = dueDate;
+	}
+
+	public String getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
 	}
 
 	public Car getRentedCar() {
@@ -29,10 +38,7 @@ public class RentedCar {
 		this.carsClient = carsClient;
 	}
 	
-	@Override
-	public String toString() {
-		return "RentedCar [rentedCar=" + rentedCar + ", carsClient=" + carsClient + "]";
-	}
+
 	
 	
 }

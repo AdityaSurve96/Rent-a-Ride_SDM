@@ -13,7 +13,7 @@
 <body>
 <form>
 <h1 style="text-align:left;float:left;">Rented Cars List</h1> 
-<h2 style="text-align:right;float:right;"><a href="/carCatalog">Go to Car Catalog</a></h2> 
+<h2 style="text-align:right;float:right;"><a href="/backToCarCatalog">Go to Car Catalog</a></h2> 
 <hr style="clear:both;"/>
 	<table id="myTable">
 		<tr class="header">
@@ -21,6 +21,7 @@
 			<th style="width: 20%;">Client First Name</th>
 			<th style="width: 20%;">Client Last Name</th>
 			<th style="width: 10%;">Client D.L</th>
+			<th style="width: 10%;">Due Date</th>
 			<th style="width: 10%;">Modification</th>
 			<th style="width: 10%;">Deletion</th>
 			
@@ -31,6 +32,7 @@
 			<td>${rentedcar.rentedCar.licensePlateNumber}</td>
 			<td>${rentedcar.carsClient.clientFirstName}</td>
 			<td>${rentedcar.carsClient.clientLastName}</td>
+			<td>${rentedcar.dueDate}</td>
 			<td>${rentedcar.carsClient.driverLicenceNumber}</td>
 			<td>  
 			<input value="${loopCounter.count}" type = "hidden" name = "rentedCarNumber${loopCounter.count}" />
