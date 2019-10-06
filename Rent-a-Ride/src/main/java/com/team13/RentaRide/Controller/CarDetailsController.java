@@ -93,6 +93,48 @@ public class CarDetailsController {
 
 	}
 
+	@RequestMapping("/back")
+	public ModelAndView showPreviousCar() {
+		System.out.println("FROM PREV "+index);
+		List<Car> allCars = DataStore.getAllCars();
+	
+		if( index > 1 ) {
+
+			Car prevCar = allCars.get((index-2));
+			index = index - 1 ;
+			System.out.println("FROM PREV NEW "+index);
+			ModelAndView modelAndView = showCarView(prevCar);
+			return modelAndView;
+		}
+
+		else {
+			Car sameCar = allCars.get((index-1));
+			ModelAndView modelAndView = showCarView(sameCar);
+			return modelAndView;
+		}
+	}
+
+
+	@RequestMapping("/next")
+	public ModelAndView showNextCar() {
+		System.out.println("FROM NEXT "+index);
+		List<Car> allCars2 = DataStore.getAllCars();
+
+		if( index < 5 ) {
+
+			Car nextCar = allCars2.get((index));
+			index = index + 1 ;
+			System.out.println("FROM NEXT NEW "+index);
+			ModelAndView modelAndView = showCarView(nextCar);
+			return modelAndView;
+		}
+		else {
+			Car sameCar = allCars2.get((index-1));
+			ModelAndView modelAndView = showCarView(sameCar);
+			return modelAndView;
+		}
+
+	}
 	public ModelAndView showCarView(Car c) {
 		ModelAndView modelAndView= new ModelAndView("CarDetails");
 
