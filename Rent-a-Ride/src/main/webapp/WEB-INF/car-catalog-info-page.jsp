@@ -6,6 +6,7 @@
 
 <script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
 <link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 
 </head>
 <body>
@@ -63,13 +64,12 @@
 		</select>
 		<input type="submit" value="Search"/>
 		<input type="checkbox" id="isAvailable"><label>Show Only Available</label>
-		
 	</div>
 </form>
 <br>
 
 <form>
-	<table id="myTable">
+	<table id="myTable" class="sortable">
 		<tr class="header">
 			<th style="width: 20%;">Model</th>
 			<th style="width: 20%;">Type</th>
@@ -77,8 +77,6 @@
 			<th style="width: 10%;">Year</th>
 			<th style="width: 10%;">Color</th>
 			<th style="width: 10%;">Availability For Rent</th>
-			
-			
 		</tr>
 		
 		<c:forEach var="car" items="${cars}">
