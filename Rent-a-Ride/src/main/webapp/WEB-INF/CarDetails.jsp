@@ -110,9 +110,18 @@ a:hover {
   <strong> <label>Licence-Id : </label> </strong> <label>${CarLicensePlate}</label>  <br>
   <strong><label>Color : </label> </strong> <label>${CarColor}</label>  <br>
   <strong> <label>Car Availability : </label></strong> <label>${CarAvail}</label>  <br><br>
- <strong><a href="/rentTheSelectedCar${CarAvailablity}" class="card" style="background-color:lightgrey;color:black;">${showRentOrNot}</a></strong> <br><br> 
-<strong><a href="/back" class="card" style="background-color:black;color:white;" >Back</a></strong>
+  
+  <form method="post">
+  
+  <input value="${CarLicensePlate}" type = "hidden" name = "licensePlate" />
+  <strong><input type="submit" class="card" style="background-color:lightgrey;color:black;" formaction="/rentTheSelectedCar${CarAvailablity}" value="${showRentOrNot}" /></strong><br><br> 
+ 
+ 
+ <%-- <strong><a href="/rentTheSelectedCar${CarAvailablity}"  class="card" style="background-color:lightgrey;color:black;">${showRentOrNot}</a></strong> <br><br>  --%>
 
+
+</form>
+<strong><a href="/back" class="card" style="background-color:black;color:white;" >Back</a></strong>
 <strong><a href="/next" class="next">Next</a></strong>
   </div>
 

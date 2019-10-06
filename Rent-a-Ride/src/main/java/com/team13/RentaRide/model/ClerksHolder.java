@@ -11,7 +11,7 @@ public class ClerksHolder {
 		clerkList= new ArrayList<Clerk>();
 	}
 	
-	 public static synchronized ClerksHolder getInstance() {
+	 public static ClerksHolder getInstance() {
 		if(ch == null) {
 			ch = new ClerksHolder();
 		}

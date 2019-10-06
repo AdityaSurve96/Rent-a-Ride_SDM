@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,31 +91,48 @@ a:hover {
 </style>
 </head>
 <body background="grey">
-
+<form method="post">
 <div class="row">
 
 <div class="card">
 
   <strong><label >Car Licence No : </label>
 </strong>
-  <input type="text" name=""> <br><br>
-   
+  <input value = "${carLicenseNumber}" type="text" name="CarLicenseNo" readonly><br><br>
+   <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
 
-   <strong> <label>Client Name: </label>
+   <strong> <label>Client First Name: </label>
 
 </strong>
 
-    <input type="text" name=""> <br><br>
+    <input type="text" name="clientFirstName"> <br><br>
+    <strong> <label>Client Last Name: </label>
+
+</strong>
+
+    <input type="text" name="clientLastName"> <br><br>
+    
+    
+    
     <strong><label>Client Mobile : </label>
 </strong>
 
-       <input type="text" name=""> <br><br>
+       <input type="text" name="phoneNumber"> <br><br>
     <strong><label>Client Drivers Licence: </label>
 </strong>
 
-      <input type="text" name="">  <br><br>
+      <input type="text" name="driverLicenceNumber">  <br><br>
+      <strong><label>Expiration Date : </label>
+      
+       <input type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
 
-  <strong><a href="#" class="card" style="background-color:lightgrey;color:black;">Create Rental for client</a></strong>
+  <strong>
+  		<button type="submit" class="card" 
+  		style="background-color:lightgrey;color:black;" 
+  		formaction="/RentCarForClient">Confirm Rental</button>
+  </strong>
+  </strong>
+  
   <br>
   <br>
   <br>
@@ -130,17 +141,12 @@ a:hover {
 <br>
 <br>
 <br>
-
-
-
-<div align="center">
+</form>
+<!-- <div align="center">
 <a href="A:\FALL 19\SDM\Car1.html" class="modify">&laquo; Previous</a>
 <a href="A:\FALL 19\SDM\car.html" class="card" style="background-color:black;color:white;">Back</a>
 <a href="A:\FALL 19\SDM\Car3.html" class="delete">Next &raquo;</a>
 </div>
 
-</body>
-</html>
-
-</body>
+ --></body>
 </html>
