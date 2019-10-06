@@ -102,24 +102,21 @@ a:hover {
 
 <div class="card">
 <img src="/Users/kalpeshthakare/Documents/Workspace/IntelliJ/Rent-a-Ride_SDM/Rent-a-Ride/src/main/resources/static/images/car1.jpg" style="width:350px;height:350px;">
-  <p class="price">$199.99</p>
-  <strong><label>Model : </label> </strong> <label>Aston Martin E</label>  <br>
-  <strong> <label>Licence-Id : </label> </strong> <label>LBYRNTH</label>  <br>
-  <strong><label>Color : </label> </strong> <label>Red</label>  <br>
-  <strong> <label>Car Availability : </label></strong> <label>Available</label>  <br><br>
-  <strong><a href="" class="card" style="background-color:lightgrey;color:black;">Rent</a></strong> <br><br>
+ <p class="price">${price}</p>
+  <strong><label>Model :  </label> </strong> <label>${CarModel}</label>  <br>
+   <strong><label>Make :  </label> </strong> <label>${CarMake}</label>  <br>
+    <strong><label>Year :  </label> </strong> <label>${CarYear}</label>  <br>
+     <strong><label>Type :  </label> </strong> <label>${CarType}</label>  <br>
+  <strong> <label>Licence-Id : </label> </strong> <label>${CarLicensePlate}</label>  <br>
+  <strong><label>Color : </label> </strong> <label>${CarColor}</label>  <br>
+  <strong> <label>Car Availability : </label></strong> <label>${CarAvail}</label>  <br><br>
+ <strong><a href="/rentTheSelectedCar${CarAvailablity}" class="card" style="background-color:lightgrey;color:black;">${showRentOrNot}</a></strong> <br><br> 
+<strong><a href="/back" class="card" style="background-color:black;color:white;" >Back</a></strong>
+
+<strong><a href="/next" class="next">Next</a></strong>
   </div>
 
 </div>
-
-<br>
-<br>
-
-<div align="center">
-<a href="" class="card" style="background-color:black;color:white;">Back</a>
-<a href="" class="next">Next &raquo;</a>
-</div>
-
 
 </body>
 </html>
