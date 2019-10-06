@@ -18,10 +18,12 @@ public class CarController {
 
 	@RequestMapping(value = "/filterCars", method = RequestMethod.POST)
 	public ModelAndView getFilteredCarInfo(@RequestParam String modelInput, @RequestParam String typeInput,
-			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput) {
+			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput,
+			@RequestParam Integer yearOffset) {
 
 		List<Car> cars = DataStore.getAllCars();
 		List<Car> carsToSend = new ArrayList<>();
+		Integer yearFilter = !StringUtils.isEmpty(yearInput) ? Integer.valueOf(yearInput) : 0;
 
 		for (Car car : cars) {
 
@@ -49,12 +51,24 @@ public class CarController {
 				continue;
 			}
 			System.out.println("Checking yearInput " + yearInput + " and car year" + car.getYear());
+			System.out.println("yearOffset " + yearOffset);
 
-			if (!StringUtils.isEmpty(yearInput) && !Integer.valueOf(yearInput).equals(car.getYear())) {
+			if (yearOffset == null && !StringUtils.isEmpty(yearInput)
+					&& !Integer.valueOf(yearInput).equals(car.getYear())) {
 				System.out.println("setting year add false");
 				continue;
 
+			} else if (yearOffset != null && yearOffset < 0) {
+				System.out.println("yearFilter - yearOffset  =  " + (yearFilter - yearOffset));
+				if (!(car.getYear() >= yearFilter + yearOffset && car.getYear() <= yearFilter)) {
+					continue;
+				}
+			} else if (yearOffset != null && yearOffset > 0) {
+				if (!(car.getYear() <= yearFilter + yearOffset && car.getYear() >= yearFilter)) {
+					continue;
+				}
 			}
+
 			carsToSend.add(car);
 		}
 

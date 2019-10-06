@@ -49,6 +49,7 @@
 			<option value="2017">2017</option>
 			<option value="2012">2012</option>
 		</select>
+		Year Offset <input class="smallNumberInput" type="number" name="yearOffset" width="10" max="5"/>
 		
 		&nbsp;<label>Color</label>
 		<input type="hidden" name="colorInput" id="colorInput"/>
@@ -60,9 +61,7 @@
 			<option value="Blue">Blue</option>
 			<option value="Green">Green</option>
 		</select>
-		
 		<input type="submit" value="Search"/>
-		
 		<input type="checkbox" id="isAvailable"><label>Show Only Available</label>
 		
 	</div>
@@ -77,7 +76,7 @@
 			<th style="width: 20%;">Make</th>
 			<th style="width: 10%;">Year</th>
 			<th style="width: 10%;">Color</th>
-			<th style="width: 10%;">Availablity For Rent</th>
+			<th style="width: 10%;">Availability For Rent</th>
 			
 			
 		</tr>
