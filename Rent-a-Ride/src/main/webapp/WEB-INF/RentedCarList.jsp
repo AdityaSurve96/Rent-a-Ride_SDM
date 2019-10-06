@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form>
+<form method = post>
 <h2 style="text-align:left;float:left;">Rented Cars List</h2> 
 <h2 style="text-align:right;float:right;"><a href="/backToCarCatalog">Go to Car Catalog</a></h2> 
 <hr style="clear:both;"/>
@@ -36,13 +36,13 @@
 			<td>${rentedcar.dueDate}</td>
 			
 			<td>  
-			<input value="${loopCounter.count}" type = "hidden" name = "rentedCarNumber${loopCounter.count}" />
-			<input type="submit" formaction="/rentedCarDetailView${loopCounter.count}" value="MODIFY" />
+			<input value="${loopCounter.count}" type = "hidden" name = "modifyCarNumber${loopCounter.count}" />
+			<input type="submit" formaction="/modifyCarDetailView${loopCounter.count}" value="MODIFY/DELETE" />
 			</td>
-			<td>  
-			<input value="${loopCounter.count}" type = "hidden" name = "rentedCarNumber${loopCounter.count}" />
-			<input type="submit" formaction="/rentedCarDetailView${loopCounter.count}" value="DELETE" />
-			</td>
+		<%-- 	<td>  
+			<input value="${loopCounter.count}" type = "hidden" name = "deleteCarNumber${loopCounter.count}" />
+			<input type="submit" formaction="/deleteCarDetailView${loopCounter.count}" value="DELETE" />
+			</td> --%>
 		</tr>
 		</c:forEach>
 		
