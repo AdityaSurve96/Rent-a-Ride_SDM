@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
 <script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
 <link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -11,8 +13,18 @@
 </head>
 <body>
 <form method="POST" action="filterCars">
-	<h2 style="text-align:left;float:left;">Available Cars Catalog</h2> 
-	<h2 style="text-align:right;float:right;"><a href="/backToRentedCarList">Go to Rented Car List </a></h2> 
+<div class="container">
+	<div align="right">
+	<div class="col-md-6">
+	<h2>CAR CATALOG</h2> 
+	</div>
+	<div class="col-md-6">
+		<h3>
+			<a href="/backToRentedCarList"><u>See All Rentals</u></a>
+		</h3>
+	</div> 
+	</div>
+
 	<hr style="clear:both;"/>
 	<div>
 		<label>Model</label> 
@@ -52,7 +64,8 @@
 			<option value="2017">2017</option>
 			<option value="2012">2012</option>
 		</select>
-		Year Offset <input class="smallNumberInput" type="number" name="yearOffset" width="10" max="5"/>
+		Year Offset 
+		<input size="3" type="number" name="yearOffset" width="10" max="5"/>
 		
 		&nbsp;<label>Color</label>
 		<input type="hidden" name="colorInput" id="colorInput"/>
@@ -64,13 +77,22 @@
 			<option value="Blue">Blue</option>
 			<option value="Green">Green</option>
 		</select>
-		<input type="submit" value="Search"/>
-		<input type="checkbox" id="isAvailable"><label>Show Only Available</label>
-	</div>
+
+		&nbsp; 
+		<input type="submit" value="Search" class="btn btn-primary btn-md"/>
+
+		&nbsp; 
+		<input class="custom-control-input" id="showOnlyAvailable" type="checkbox"/>
+        <label class="custom-control-label" for="checkbox-large">
+            Show Only Available
+        </label>
+</div>
+</div>
 </form>
 <br>
 
 <form>
+	<div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
 			<th style="width: 20%;">Model</th>
@@ -89,13 +111,16 @@
 			<td>${car.year}</td>
 			<td>${car.color}</td>
 			<td>  
-			<input value="${loopCounter.count}" type = "hidden" name = "licensePlateInput${loopCounter.count}" />
-			<input type="submit" formaction="/carDetailView${loopCounter.count}" value="${car.availableToRentOrNot}" />
+			<input value="${loopCounter.count}"  type = "hidden" name = "licensePlateInput${loopCounter.count}" />
+			
+			<input class="btn btn-primary btn-sm"  type="submit" formaction="/carDetailView${loopCounter.count}" 
+			value="${car.availableToRentOrNot}" />
 			 
 			</td>
 		</tr>
 		</c:forEach>
 		
 	</table>
+	</div>
 	</form>
 </body>

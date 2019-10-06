@@ -1,44 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+	
 <!DOCTYPE html>
+
 <html>
 	<head>
-		<link href="styles/login-style.css" rel="stylesheet" type="text/css"/>
+		<link href="styles/universal.css" rel="stylesheet" type="text/css"/>
 		<meta http-equi="Content-Type" content="text/html; charset=UTF-8">
 		<title>Login</title>
 	</head>
 	
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/custom.css" rel="stylesheet" />
 	
 	
 	<body style="backgorund-color: #E6E6FA; text-align: center;">
-	<img src="images/header.jpg">
-	
 	<font color="red">${errorMessage}</font>
 		
 	<form method="post">
-	
-		<div class="login-box">
-			<img src="images/avatar.png" class="avatar">
-	
-			<h1>SIGN IN</h1>
+	<div class="container col-md-12">	
+		<div>
+			<h1>Sign In</h1>
+			<br><br>
 			
 				<div>
-					<label>Email</label>
-					<input type="text" name="email" class="form-control" placeholder="enter username here">
+					<label>Username</label>
+					<input type="email" name="email" placeholder="Email Id">
 				</div>
-			
-			<br>
-				
 				<div>
 					<label>Password</label>
-					<input type="text" name="password" class="form-control" placeholder="enter password here">	
+					<input type="password" name="password" placeholder="Password">	
 				</div>
 			
 			
-				<br><button type="submit"  formaction="/loginAsClerk" value="signin" class="btn">Login as Clerk</button></br>
-				<br><button type="submit"  formaction="/registerClerk" value="signup" class="btn">Register as Clerk</button></br>
-				<br><button type="reset" class="btn">Reset</button></br>
-		</div>>
+				<br><br>
+				<button type="submit" class="btn btn-primary btn-md" formaction="/loginAsClerk" value="signin" >Login</button>
+				<button type="submit"  class="btn btn-primary btn-md" formaction="/registerClerk" value="signup" >Register</button>
+				<button type="reset"  class="btn btn-primary btn-md" >Reset</button>
+		</div>
+		</div>
 	</form>
 </body>
 </html>

@@ -4,144 +4,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
-}
-
-/* Remove extra left and right margins, due to padding */
-.row {margin: 0 -5px;}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-}
-
-.card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
-
-.card button:hover {
-  opacity: 0.7;
-}
-a {
-  text-decoration: none;
-  display: inline-block;
-  padding: 8px 16px;
-}
-
-a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.previous {
-  background-color: #f1f1f1;
-  color: black;
-}
-
-.next {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.round {
-  border-radius: 50%;
-}
-</style>
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	<link href="css/custom.css" rel="stylesheet" />
+	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
+	<link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 </head>
-<body background="grey">
+
+<body>
+
 <form method="post">
-<div class="row">
 
-<div class="card">
 
-  <strong><label >Car Licence No : </label>
-</strong>
-  <input value = "${carLicenseNumber}" type="text" name="CarLicenseNo" readonly><br><br>
-   <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
+<div class="container" align="center">
+ <div class="form">
+ <h2>Create A New Rental</h2>
+ <br><br>
+<div align="center">
 
-   <strong> <label>Client First Name: </label>
-
-</strong>
-
-    <input type="text" name="clientFirstName"> <br><br>
-    <strong> <label>Client Last Name: </label>
-
-</strong>
-
-    <input type="text" name="clientLastName"> <br><br>
-    
-    
-    
-    <strong><label>Client Mobile : </label>
-</strong>
-
-       <input type="text" name="phoneNumber"> <br><br>
-    <strong><label>Client Drivers Licence: </label>
-</strong>
-
-      <input type="text" name="driverLicenceNumber">  <br><br>
-      <strong><label>Expiration Date : </label>
-      
-       <input type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
-	<strong><label>Rental Due Date: </label>
-</strong>
-	   <input type="text" name="dueDate" placeholder="yyyy/mm/dd">  <br><br>
-
-  <strong>
-  		<button type="submit" class="card" 
-  		style="background-color:lightgrey;color:black;" 
-  		formaction="/RentCarForClient">Confirm Rental</button>
-  </strong>
-  </strong>
-  
-  <br>
-  <br>
-  <br>
-  </div>
+<div class="form">
+ <div class="col-md-6"><label class="pull-right">Car License Number:</label></div>
+ <div class="col-md-6"><input value = "${carLicenseNumber}" class="pull-left" type="text" name="CarLicenseNo" readonly>
+ 	 <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
+ </div>
+ </div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client First Name:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="text" name="clientFirstName"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client Last Name:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="text" name="clientLastName"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client Mobile:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="number" name="phoneNumber"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client Drivers License:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="text" name="driverLicenceNumber"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Expiry Date:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
 </div>
-
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Rental Due Date:</label></div>
+ 	<div class="col-md-6"><input class="pull-left" type="text" name="dueDate" placeholder="yyyy/mm/dd"></div>
+ 	</div>
+</div>  
+   </div>
+ <div>
+ <br>
+ <div align="center">
+  	<button type="submit" class="btn btn-primary btn-sm" formaction="/RentCarForClient">Confirm</button>
+  	<a href="/back" class="btn btn-primary btn-sm">Back</a>
+ </div>
+ </div>
+ </div>
+ 
 </form>
 </body>
 </html>

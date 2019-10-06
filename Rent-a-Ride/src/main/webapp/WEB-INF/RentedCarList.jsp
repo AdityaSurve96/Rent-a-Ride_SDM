@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- 
- 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
+<link href="styles/universal.css" rel="stylesheet" type="text/css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 <form method = post>
-<h2 style="text-align:left;float:left;">Rented Cars List</h2> 
-<h2 style="text-align:right;float:right;"><a href="/backToCarCatalog">Go to Car Catalog</a></h2> 
+<div class="container" align="center">
+<h2>Rental Records</h2> 
+<h2><a href="/backToCarCatalog">Back to Car Catalog</a></h2> 
 <hr style="clear:both;"/>
 	<table id="myTable">
 		<tr class="header">
@@ -24,7 +24,6 @@
 			<th style="width: 10%;">Due Date</th>
 			<th style="width: 10%;">Modification</th>
 			<th style="width: 10%;">Deletion</th>
-			
 		</tr>
 		
 		<c:forEach var="rentedcar" items="${rentals}" varStatus="loopCounter">
@@ -47,6 +46,7 @@
 		</c:forEach>
 		
 	</table>
+	</div>
 	</form>
 </body>
 </html>

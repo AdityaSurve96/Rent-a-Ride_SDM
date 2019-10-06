@@ -41,10 +41,7 @@ public class RentCarController {
 		modelAndView = new ModelAndView("RentCarForClient");
 		modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
 		return modelAndView;
-
 	}
-	
-	
 	
 	
 	@RequestMapping(value= "/rentTheSelectedCarfalse")
