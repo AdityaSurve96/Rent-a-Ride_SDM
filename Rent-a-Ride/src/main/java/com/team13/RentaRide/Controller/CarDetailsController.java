@@ -92,6 +92,24 @@ public class CarDetailsController {
 
 
 	}
+
+	public ModelAndView showCarView(Car c) {
+		ModelAndView modelAndView= new ModelAndView("CarDetails");
+
+		modelAndView.addObject("price",c.getPrice());
+		modelAndView.addObject("CarModel",c.getModel());
+		modelAndView.addObject("CarMake",c.getMake());
+		modelAndView.addObject("CarYear",c.getYear());
+		modelAndView.addObject("CarType",c.getType());
+		modelAndView.addObject("CarLicensePlate",c.getLicensePlateNumber());
+		modelAndView.addObject("CarColor",c.getColor());
+		modelAndView.addObject("CarAvail",c.getAvailableToRentOrNot());
+		modelAndView.addObject("CarAvailablity",c.isAvailable());
+		String rentedOrNot = c.isAvailable() ? "Rent" : "RENTED"; 
+		modelAndView.addObject("showRentOrNot",rentedOrNot);
+
+		return modelAndView;
+	}
 	
 
 }
