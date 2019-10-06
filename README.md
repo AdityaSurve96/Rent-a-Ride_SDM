@@ -17,4 +17,11 @@ Proposed technology for developement :- Java with Spring
 | 3      | Divya Pandit     | divyapandit13@gmail.com        |  40087471    |
 | 4      | Pranoti Mulay    | opranoti@gmail.com             |  40129435    |
 | 5      | Kundana Gangam   | kundanagangam@gmail.com        |  40085658    |
-| 6      | Kalpesh Thakare  | kalpeshthakare1994@gmail.com   |  40081751    |
+| 6      | Kalpesh Thakare  | kalpeshthakare1994@gmail.com   |  40081751    |  
+
+
+
+Steps:
+1. Register : With email and Password
+2. Login : Login with Same Credentials
+3. Login to see Car Catalog.
