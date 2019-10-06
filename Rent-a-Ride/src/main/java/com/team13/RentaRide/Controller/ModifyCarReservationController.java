@@ -1,5 +1,7 @@
 package com.team13.RentaRide.Controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +19,7 @@ import com.team13.RentaRide.model.RentedCarHolder;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
-public class ModifyCarController {
+public class ModifyCarReservationController {
 
 
 
@@ -26,8 +28,17 @@ public class ModifyCarController {
 	public ModelAndView ModifyRental(@RequestParam String CarLicenseNoForForm, @RequestParam String clientFirstName, 
 			@RequestParam String clientLastName, @RequestParam String phoneNumber,
 			@RequestParam String driverLicenceNumber, @RequestParam String licenceExpiryDate,
-			@RequestParam Date dueDate){
+			@RequestParam String dueDate){
 
+		Date  dueDateinDateFormat=null;
+		try {
+			dueDateinDateFormat=new SimpleDateFormat("yyyy/MM/dd").parse(dueDate);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
 		Car theCar=null;
 		Client theClient=null;
@@ -48,9 +59,18 @@ public class ModifyCarController {
 		theClient.setDriverLicenceNumber(driverLicenceNumber);
 		theClient.setLicenceExpiryDate(licenceExpiryDate);
 		theClient.setPhoneNumber(Integer.parseInt(phoneNumber));
-		rc.setDueDate(dueDate);
+		
+		rc.setDueDate(dueDateinDateFormat);
 
+		Date currentDate = new Date();
 
+		String cancelReturn = ((currentDate).compareTo(dueDateinDateFormat) >=0) ? "RETURN" : "CANCEL" ;
+    	
+		rc.setOperation(cancelReturn);
+		
+		
+		
+		
 		modelAndView.addObject("rentals", rh.getRentals());
 
 		return modelAndView;
@@ -65,8 +85,7 @@ public class ModifyCarController {
 
 		RentedCarHolder rh = RentedCarHolder.getInstance();
 		List<RentedCar> rentedList = rh.getRentals();
-		Car theCar=null;
-		Client theClient = null;
+		
 		RentedCar deletedRental = null;
 
 		for (RentedCar rentedItem : rentedList) {

@@ -1,5 +1,6 @@
 package com.team13.RentaRide.Controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +42,10 @@ public class RentCarController {
 		modelAndView = new ModelAndView("RentCarForClient");
 		modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
 		return modelAndView;
+
 	}
+	
+	
 	
 	
 	@RequestMapping(value= "/rentTheSelectedCarfalse")
@@ -69,8 +73,18 @@ public class RentCarController {
 			@RequestParam String licenceExpiryDate, @RequestParam String CarLicenseNoForForm,
 			@RequestParam String dueDate) {
 		
+		Date  dueDateinDateFormat=null;
 		Integer phnumber = Integer.parseInt(phoneNumber);
-
+		try {
+			dueDateinDateFormat=new SimpleDateFormat("yyyy/MM/dd").parse(dueDate);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		String licnum = CarLicenseNoForForm;
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
@@ -92,10 +106,12 @@ public class RentCarController {
 		Client cl = new Client(driverLicenceNumber, clientFirstName, clientLastName, phnumber, licenceExpiryDate );
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
 		RentedCarHolder rh = RentedCarHolder.getInstance();
-		rh.addRentals(c, cl,dueDate);
-
-		modelAndView.addObject("rentals", rh.getRentals());
 		
+		
+		rh.addRentals(c, cl,dueDateinDateFormat);
+	
+		
+		modelAndView.addObject("rentals", rh.getRentals());
 		return modelAndView;
 
 	}
@@ -114,22 +130,9 @@ public class RentCarController {
 		
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-	
 		
-//		for (RentedCar rencar : renCars) {
-//			Car rC = rencar.getRentedCar();
-//			
-//			for (Car car : carsList) {
-//				if(rC.getLicensePlateNumber().equals(car.getLicensePlateNumber())) {
-//					
-//					car.setAvailable(false);
-//					car.setAvailableToRentOrNot(car.isAvailable());
-//				}
-//			}
-//		}
-
 		modelAndView.addObject("cars", carsList);
-	
+		
 		return modelAndView;
 
 
@@ -147,14 +150,13 @@ public class RentCarController {
 		
 		RentedCarHolder  rh = RentedCarHolder.getInstance();
 		modelAndView.addObject("rentals", rh.getRentals());
+		Date currentDate = new Date();
+	
+		
 		
 		return modelAndView;
  		
 	}
-	
-
-	
-	
 	
 	
 	
@@ -167,7 +169,7 @@ public class RentCarController {
 			
 		return modelAndView;
 	}
-	@RequestMapping(value = "/modifyCarDetailView" , method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyCarDetailView2" , method = RequestMethod.POST)
 	public ModelAndView Modify2(@RequestParam String modifyCarNumber2){
 		
 		Integer index  = Integer.parseInt(modifyCarNumber2);
@@ -199,7 +201,59 @@ public class RentCarController {
 			
 		return modelAndView;
 	}
+
 	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/deleteCarDetailView1" , method = RequestMethod.POST)
+	public ModelAndView CancelReturn1(@RequestParam String deleteCarNumber1){
+		
+		Integer index  = Integer.parseInt(deleteCarNumber1);
+		ModelAndView modelAndView = setFieldforCancel(index);
+			
+		return modelAndView;
+	}	
+	
+	
+	@RequestMapping(value = "/deleteCarDetailView2" , method = RequestMethod.POST)
+	public ModelAndView CancelReturn2(@RequestParam String deleteCarNumber2){
+		
+		Integer index  = Integer.parseInt(deleteCarNumber2);
+		ModelAndView modelAndView = setFieldforCancel(index);
+			
+		return modelAndView;
+	}	
+	
+	
+	@RequestMapping(value = "/deleteCarDetailView3" , method = RequestMethod.POST)
+	public ModelAndView CancelReturn3(@RequestParam String deleteCarNumber3){
+		
+		Integer index  = Integer.parseInt(deleteCarNumber3);
+		ModelAndView modelAndView = setFieldforCancel(index);
+			
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/deleteCarDetailView4" , method = RequestMethod.POST)
+	public ModelAndView CancelReturn4(@RequestParam String deleteCarNumber4){
+		
+		Integer index  = Integer.parseInt(deleteCarNumber4);
+		ModelAndView modelAndView = setFieldforCancel(index);
+			
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/deleteCarDetailView5" , method = RequestMethod.POST)
+	public ModelAndView CancelReturn5(@RequestParam String deleteCarNumber5){
+		
+		Integer index  = Integer.parseInt(deleteCarNumber5);
+		ModelAndView modelAndView = setFieldforCancel(index);
+			
+		return modelAndView;
+	}
 	
 	
 	
@@ -207,6 +261,27 @@ public class RentCarController {
 	public ModelAndView setFieldforModification(Integer index) {
 		
 		ModelAndView modelAndView = new ModelAndView("Modify");
+		RentedCarHolder rh = RentedCarHolder.getInstance();
+		List<RentedCar> rentedCarList = rh.getRentals();
+		RentedCar rCar = rentedCarList.get(index-1);
+		Car theCar = rCar.getRentedCar();
+		Client theClient = rCar.getCarsClient();
+		modelAndView.addObject("carLicenseNumber",theCar.getLicensePlateNumber());
+		modelAndView.addObject("clientFirstName",theClient.getClientFirstName());
+		modelAndView.addObject("clientLastName",theClient.getClientLastName());
+		modelAndView.addObject("phoneNumber",theClient.getPhoneNumber());
+		modelAndView.addObject("driverLicenceNumber",theClient.getDriverLicenceNumber());
+		modelAndView.addObject("licenceExpiryDate",theClient.getLicenceExpiryDate());
+		modelAndView.addObject("dueDate",rCar.getDueDate());
+	
+		return modelAndView;
+		
+	}
+	
+	
+public ModelAndView setFieldforCancel(Integer index) {
+		
+		ModelAndView modelAndView = new ModelAndView("CancelReturn");
 		RentedCarHolder rh = RentedCarHolder.getInstance();
 		List<RentedCar> rentedCarList = rh.getRentals();
 		RentedCar rCar = rentedCarList.get(index-1);

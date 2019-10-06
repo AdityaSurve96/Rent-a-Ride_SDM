@@ -1,6 +1,7 @@
 package com.team13.RentaRide.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public final class RentedCarHolder {
@@ -17,9 +18,13 @@ public final class RentedCarHolder {
         return instance;
     }
     
-    public void addRentals(Car c, Client cl , String dueDate) {
-		
+    public void addRentals(Car c, Client cl , Date dueDate) {
+    	Date currentDate = new Date();
+
+		String cancelReturn = ((currentDate).compareTo(dueDate) >=0) ? "RETURN" : "CANCEL" ;
+    	
 		RentedCar rc = new RentedCar(c, cl, dueDate);
+		rc.setOperation(cancelReturn);
 		rentedCarList.add(rc);
 		
 	}

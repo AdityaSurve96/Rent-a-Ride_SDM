@@ -11,7 +11,6 @@ public class Car {
 	private String type;
 	private String color;
 	private Integer year;
-	
 	private String description;
 	private BigDecimal price;
 	boolean isAvailable;
