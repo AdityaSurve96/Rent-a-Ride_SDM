@@ -24,10 +24,11 @@ public class RentCarController {
 
 	@RequestMapping(value= "/rentTheSelectedCartrue")
 	public ModelAndView showCarRentalPage(@RequestParam String licensePlate) {
-
-		List<Car> cars = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
+		
 		Car c=null;
-		for (Car car : cars) {
+		for (Car car : carsList) {
 			if(car.getLicensePlateNumber().equals(licensePlate)) {
 
 				c = car;
@@ -42,6 +43,20 @@ public class RentCarController {
 		return modelAndView;
 
 	}
+	
+	@RequestMapping(value= "/rentTheSelectedCarfalse")
+	public ModelAndView showCatalogPage(@RequestParam String licensePlate) {
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
+		
+		
+
+		ModelAndView modelAndView;
+		modelAndView = new ModelAndView("car-catalog-info-page");
+		modelAndView.addObject("cars", carsList);
+		return modelAndView;
+
+	}
 
 	@RequestMapping(value ="/RentCarForClient",  method = RequestMethod.POST)
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName,@RequestParam String clientLastName,
@@ -50,9 +65,10 @@ public class RentCarController {
 			@RequestParam String dueDate) {
 
 		String licnum = CarLicenseNoForForm;
-		List<Car> cars = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		Car c=null;
-		for (Car car : cars) {
+		for (Car car : carsList) {
 			String lic = car.getLicensePlateNumber();
 
 			if(lic.equals(licnum)) {
@@ -86,17 +102,40 @@ public class RentCarController {
 		RentedCarHolder rh = RentedCarHolder.getInstance();
 		List<RentedCar> renCars = rh.getRentals();
 		
-		List<Car> catalogCars = DataStore.getAllCars();
-
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
+	
 		
+		for (RentedCar rencar : renCars) {
+			Car rC = rencar.getRentedCar();
+			
+			for (Car car : carsList) {
+				if(rC.getLicensePlateNumber().equals(car.getLicensePlateNumber())) {
+					
+					car.setAvailable(false);
+					car.setAvailableToRentOrNot(car.isAvailable());
+				}
+			}
+		}
 
-
-
-
-
+		modelAndView.addObject("cars", carsList);
+	
 		return modelAndView;
 
 
+	}
+	
+	
+	@RequestMapping(value= "/backToRentedCarList")
+	public ModelAndView showRentedCarPage() {
+		
+		ModelAndView modelAndView = new ModelAndView("RentedCarList");
+		
+		RentedCarHolder  rh = RentedCarHolder.getInstance();
+		modelAndView.addObject("rentals", rh.getRentals());
+		
+		return modelAndView;
+ 		
 	}
 }
 

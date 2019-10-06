@@ -11,7 +11,9 @@
 </head>
 <body>
 <form method="POST" action="filterCars">
-	<h2>Available Cars</h2>
+	<h2 style="text-align:left;float:left;">Available Cars Catalog</h2> 
+	<h2 style="text-align:right;float:right;"><a href="/backToRentedCarList">Go to Rented Car List </a></h2> 
+	<hr style="clear:both;"/>
 	<div>
 		<label>Model</label> 
 		<input type="hidden" name="modelInput" id="modelInput"/>

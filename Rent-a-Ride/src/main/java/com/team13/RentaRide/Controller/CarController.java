@@ -21,7 +21,9 @@ public class CarController {
 			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput,
 			@RequestParam Integer yearOffset) {
 
-		List<Car> cars = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		
+		List<Car> cars = ds.getAllCars();
 		List<Car> carsToSend = new ArrayList<>();
 		Integer yearFilter = !StringUtils.isEmpty(yearInput) ? Integer.valueOf(yearInput) : 0;
 

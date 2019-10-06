@@ -17,7 +17,8 @@ public class CarDetailsController {
 	@RequestMapping("/carDetailView1")
 	public ModelAndView showCarDetails1(@RequestParam String licensePlateInput1) {
 		index = Integer.parseInt(licensePlateInput1);
-		List<Car> carsList = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		//		CarHolder chold = CarHolder.getInstance();
 		//		 = chold.getCars();
 
@@ -31,7 +32,8 @@ public class CarDetailsController {
 	public ModelAndView showCarDetails2(@RequestParam String licensePlateInput2) {
 
 		index = Integer.parseInt(licensePlateInput2);
-		List<Car> carsList = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		//		CarHolder chold = CarHolder.getInstance();
 		//		 = chold.getCars();
 
@@ -49,7 +51,8 @@ public class CarDetailsController {
 
 		index = Integer.parseInt(licensePlateInput3);
 
-		List<Car> carsList = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		//		CarHolder chold = CarHolder.getInstance();
 		//		 = chold.getCars();
 
@@ -65,7 +68,8 @@ public class CarDetailsController {
 	public ModelAndView showCarDetails4(@RequestParam String licensePlateInput4) {
 
 		index = Integer.parseInt(licensePlateInput4);
-		List<Car> carsList = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		//		CarHolder chold = CarHolder.getInstance();
 		//		 = chold.getCars();
 		Car aCarObject = carsList.get((index-1));
@@ -81,7 +85,8 @@ public class CarDetailsController {
 
 		index = Integer.parseInt(licensePlateInput5);
 
-		List<Car> carsList = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 		//		CarHolder chold = CarHolder.getInstance();
 		//		 = chold.getCars();
 		Car aCarObject = carsList.get((index-1));
@@ -96,11 +101,12 @@ public class CarDetailsController {
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 		System.out.println("FROM PREV "+index);
-		List<Car> allCars = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 	
 		if( index > 1 ) {
 
-			Car prevCar = allCars.get((index-2));
+			Car prevCar = carsList.get((index-2));
 			index = index - 1 ;
 			System.out.println("FROM PREV NEW "+index);
 			ModelAndView modelAndView = showCarView(prevCar);
@@ -108,7 +114,7 @@ public class CarDetailsController {
 		}
 
 		else {
-			Car sameCar = allCars.get((index-1));
+			Car sameCar = carsList.get((index-1));
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}
@@ -118,18 +124,19 @@ public class CarDetailsController {
 	@RequestMapping("/next")
 	public ModelAndView showNextCar() {
 		System.out.println("FROM NEXT "+index);
-		List<Car> allCars2 = DataStore.getAllCars();
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
 
 		if( index < 5 ) {
 
-			Car nextCar = allCars2.get((index));
+			Car nextCar = carsList.get((index));
 			index = index + 1 ;
 			System.out.println("FROM NEXT NEW "+index);
 			ModelAndView modelAndView = showCarView(nextCar);
 			return modelAndView;
 		}
 		else {
-			Car sameCar = allCars2.get((index-1));
+			Car sameCar = carsList.get((index-1));
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}

@@ -104,40 +104,56 @@ a:hover {
 <div class="card">
 <br><br>
 
-<form action="">
+<form method="post">
 
-  <strong>Car License Plate  :</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <input type="text" name="licensePlateNumber" value="LBRCOA">
-  <br><br>
-  <strong>Client First Name:</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <input type="text" name="firstName" value="Divya">
-  <br><br>
-  <strong>Client Last Name :</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  <input type="text" name="lastName" value="Pandit">
-  <br><br>
-  <strong>Client Mobile Number :</strong>&nbsp
-  <input type="text" name="Mobile" value="4383455508">
-  <br><br>
- <strong> Client Drivers License:</strong>&nbsp
-  <input type="text" name="licenceNo" value="xxxx53465">
-  <br><br>
-</form>
+  <div class="row">
 
-  <strong><a href="#" class="card" style="background-color:lightgrey;color:black;">Modify</a></strong>
+<div class="card">
+
+  <strong><label >Car Licence No : </label>
+</strong>
+  <input value = "${carLicenseNumber}" type="text" name="CarLicenseNo" readonly><br><br>
+   <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
+
+   <strong> <label>Client First Name: </label>
+
+</strong>
+
+    <input type="text" name="clientFirstName"> <br><br>
+    <strong> <label>Client Last Name: </label>
+
+</strong>
+
+    <input type="text" name="clientLastName"> <br><br>
+    
+    
+    
+    <strong><label>Client Mobile : </label>
+</strong>
+
+       <input type="text" name="phoneNumber"> <br><br>
+    <strong><label>Client Drivers Licence: </label>
+</strong>
+
+      <input type="text" name="driverLicenceNumber">  <br><br>
+      <strong><label>Expiration Date : </label>
+      
+       <input type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"> <br><br>
+	<strong><label>Rental Due Date: </label>
+</strong>
+	   <input type="text" name="dueDate" placeholder="yyyy/mm/dd">  <br><br>
+
+  <strong>
+  		<button type="submit" class="card" 
+  		style="background-color:lightgrey;color:black;" 
+  		formaction="/RentCarForClient">Confirm Rental</button>
+  </strong>
+  </strong>
   <br>
   <br>
   <br>
   </div>
 </div>
-<br>
-<br>
-<br>
-
-<div align="center">
-<a href="#" class="card" style="background-color:black;color:white;">Back</a>
-<a href="#" class="delete"> delete </a>
-</div>
-
-
+</form>
 </body>
 </html>

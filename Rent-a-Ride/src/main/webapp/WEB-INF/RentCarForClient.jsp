@@ -141,15 +141,7 @@ a:hover {
   <br>
   </div>
 </div>
-<br>
-<br>
-<br>
-</form>
-<!-- <div align="center">
-<a href="A:\FALL 19\SDM\Car1.html" class="modify">&laquo; Previous</a>
-<a href="A:\FALL 19\SDM\car.html" class="card" style="background-color:black;color:white;">Back</a>
-<a href="A:\FALL 19\SDM\Car3.html" class="delete">Next &raquo;</a>
-</div>
 
- --></body>
+</form>
+</body>
 </html>
