@@ -6,16 +6,28 @@
 <head>
 <link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
 <link href="styles/universal.css" rel="stylesheet" type="text/css"/>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <form method = post>
-<div class="container" align="center">
-<h2>Rental Records</h2> 
-<h2><a href="/backToCarCatalog">Back to Car Catalog</a></h2> 
+
+<div class="col-md-6">
+	<h2>Rental Records</h2> 
+	</div>
+	<div class="col-md-6">
+		<h3>
+			<a href="/backToCarCatalog"><u>Back to Car Catalog</u></a>
+		</h3>
+	</div> 
+
 <hr style="clear:both;"/>
-	<table id="myTable">
+<div class="container">
+	<table id="myTable" class="sortable">
 		<tr class="header">
 			<th style="width: 20%;">Car License Plate Number</th>
 			<th style="width: 20%;">Client First Name</th>
@@ -35,13 +47,15 @@
 			<td>${rentedcar.dueDate}</td>
 			
 			<td>  
-			<input value="${loopCounter.count}" type = "hidden" name = "modifyCarNumber${loopCounter.count}" />
-			<input type="submit" formaction="/modifyCarDetailView${loopCounter.count}" value="MODIFY/DELETE" />
+			<input value= "${loopCounter.count}" type = "hidden" name = "modifyCarNumber${loopCounter.count}" />
+			<input type= "submit" formaction= "/modifyCarDetailView${loopCounter.count}" value="MODIFY" />
 			</td>
-		<%-- 	<td>  
-			<input value="${loopCounter.count}" type = "hidden" name = "deleteCarNumber${loopCounter.count}" />
-			<input type="submit" formaction="/deleteCarDetailView${loopCounter.count}" value="DELETE" />
-			</td> --%>
+			
+			<td>  
+			<input value= "${loopCounter.count}" type = "hidden" name = "deleteCarNumber${loopCounter.count}" />
+			<input type= "submit" formaction= "/deleteCarDetailView${loopCounter.count}" value= "${rentedcar.operation}" />
+			</td>
+			
 		</tr>
 		</c:forEach>
 		
