@@ -1,5 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -21,7 +22,7 @@
 
 		<div class="container col-md-12" align="center">
 				<div class="row">
-					<h1>Clerk Homepage</h1>
+					<h1>Clerk Home Page</h1>
 				</div>
 <br><br>				
 			
