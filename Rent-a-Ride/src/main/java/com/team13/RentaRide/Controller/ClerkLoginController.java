@@ -11,24 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Clerk;
-import com.team13.RentaRide.model.ClerksHolder;
+import com.team13.RentaRide.model.ClerksList;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 
-public class LoginController {
+public class ClerkLoginController {
 
-	@RequestMapping("/LoginClerk")
+	@RequestMapping("/ClerkLoginPage")
 	public ModelAndView showLoginPage() {
-		return new ModelAndView("Login");
+		return new ModelAndView("ClerkLoginPage");
 	}
 
-	@RequestMapping(value = "/loginAsClerk", method = RequestMethod.POST)
+	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		
 		boolean flag = false;
 		Clerk c = new Clerk(email, password);
-		ClerksHolder chold = ClerksHolder.getInstance();
+		ClerksList chold = ClerksList.getInstance();
 		ArrayList<Clerk> clerks = chold.getRegisteredClerks();
 
 		for (Clerk clerk : clerks) {
@@ -37,17 +37,17 @@ public class LoginController {
 				break;
 			}
 		}
-
-		if (flag) {
-			ModelAndView modelAndView = new ModelAndView("car-catalog-info-page");
-			DataStore ds = DataStore.getInstance();
 			
-			modelAndView.addObject("cars", ds.getAllCars());
+		if (flag) {
+			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
+//			DataStore ds = DataStore.getInstance();
+//			
+//			modelAndView.addObject("cars", ds.getAllCars());
 			return modelAndView;
 
 		}
-		ModelAndView modelAndView = new ModelAndView("Login");
-		modelAndView.addObject("errorMessage", "INVALID LOGIN!.. Please try again");
+		ModelAndView modelAndView = new ModelAndView("ClerkLoginPage");
+		modelAndView.addObject("errorMessage", "INVALID LOGIN! Please try again.");
 		return modelAndView;
 
 	}

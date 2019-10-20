@@ -7,7 +7,7 @@ import java.util.List;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
-import com.team13.RentaRide.model.RentedCarHolder;
+import com.team13.RentaRide.model.RentedCarList;
 
 public final class DataStore {
 	

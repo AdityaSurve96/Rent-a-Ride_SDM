@@ -74,7 +74,7 @@ public class CarController {
 			carsToSend.add(car);
 		}
 
-		return new ModelAndView("car-catalog-info-page", "cars", carsToSend);
+		return new ModelAndView("CarCatalog", "cars", carsToSend);
 
 	}
 

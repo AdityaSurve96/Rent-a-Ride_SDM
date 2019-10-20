@@ -35,8 +35,8 @@
 			
 			
 				<br><br>
-				<button type="submit" class="btn btn-primary btn-md" formaction="/loginAsClerk" value="signin" >Login</button>
-				<button type="submit"  class="btn btn-primary btn-md" formaction="/registerClerk" value="signup" >Register</button>
+				<button type="submit" class="btn btn-primary btn-md" formaction="/tryTologinAsClerk" value="Sign In" >Login</button>
+				<button type="submit"  class="btn btn-primary btn-md" formaction="/tryToRegisterAsClerk" value="Sign Up" >Register</button>
 				<button type="reset"  class="btn btn-primary btn-md" >Reset</button>
 		</div>
 		</div>

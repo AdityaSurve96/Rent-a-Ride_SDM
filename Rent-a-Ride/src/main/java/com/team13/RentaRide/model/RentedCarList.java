@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public final class RentedCarHolder {
+public final class RentedCarList {
 
-    private static RentedCarHolder instance;
+    private static RentedCarList instance;
     private static List<RentedCar> rentedCarList ;
-    private RentedCarHolder() {
+    private RentedCarList() {
     	rentedCarList = new ArrayList<RentedCar>();
     }
 
-    public static RentedCarHolder getInstance(){
+    public static RentedCarList getInstance(){
         if(instance == null)
-            instance = new RentedCarHolder();
+            instance = new RentedCarList();
         return instance;
     }
     

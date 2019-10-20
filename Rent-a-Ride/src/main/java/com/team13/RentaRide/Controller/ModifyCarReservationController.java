@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
-import com.team13.RentaRide.model.RentedCarHolder;
+import com.team13.RentaRide.model.RentedCarList;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
@@ -42,7 +42,7 @@ public class ModifyCarReservationController {
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
 		Car theCar=null;
 		Client theClient=null;
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		List<RentedCar> carList = rh.getRentals();
 		RentedCar rc=null;
 		for (RentedCar rentedCar : carList) {
@@ -83,7 +83,7 @@ public class ModifyCarReservationController {
 			@RequestParam String driverLicenceNumber, @RequestParam String licenceExpiryDate,
 			@RequestParam String dueDate){
 
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		List<RentedCar> rentedList = rh.getRentals();
 		
 		RentedCar deletedRental = null;

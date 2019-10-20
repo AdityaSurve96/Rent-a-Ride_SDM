@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
-import com.team13.RentaRide.model.RentedCarHolder;
+import com.team13.RentaRide.model.RentedCarList;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
@@ -56,7 +56,7 @@ public class RentCarController {
 		
 
 		ModelAndView modelAndView;
-		modelAndView = new ModelAndView("car-catalog-info-page");
+		modelAndView = new ModelAndView("CarCatalog");
 		modelAndView.addObject("cars", carsList);
 		return modelAndView;
 
@@ -69,9 +69,9 @@ public class RentCarController {
 	
 	@RequestMapping(value ="/RentCarForClient",  method = RequestMethod.POST)
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName,@RequestParam String clientLastName,
-			@RequestParam String phoneNumber,@RequestParam String driverLicenceNumber,
-			@RequestParam String licenceExpiryDate, @RequestParam String CarLicenseNoForForm,
-			@RequestParam String dueDate) {
+									   @RequestParam String phoneNumber,@RequestParam String driverLicenceNumber,
+									   @RequestParam String licenceExpiryDate, @RequestParam String CarLicenseNoForForm,
+									   @RequestParam String dueDate) {
 		
 		Date  dueDateinDateFormat=null;
 		Integer phnumber = Integer.parseInt(phoneNumber);
@@ -105,7 +105,7 @@ public class RentCarController {
 	
 		Client cl = new Client(driverLicenceNumber, clientFirstName, clientLastName, phnumber, licenceExpiryDate );
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		
 		
 		rh.addRentals(c, cl,dueDateinDateFormat);
@@ -123,9 +123,9 @@ public class RentCarController {
 	@RequestMapping(value = "/backToCarCatalog")
 	public ModelAndView goToCarCatalog() {
 
-		ModelAndView modelAndView  = new ModelAndView("car-catalog-info-page");
+		ModelAndView modelAndView  = new ModelAndView("CarCatalog");
 		
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		List<RentedCar> renCars = rh.getRentals();
 		
 		DataStore ds = DataStore.getInstance();
@@ -148,7 +148,7 @@ public class RentCarController {
 		
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
 		
-		RentedCarHolder  rh = RentedCarHolder.getInstance();
+		RentedCarList  rh = RentedCarList.getInstance();
 		modelAndView.addObject("rentals", rh.getRentals());
 		Date currentDate = new Date();
 	
@@ -261,7 +261,7 @@ public class RentCarController {
 	public ModelAndView setFieldforModification(Integer index) {
 		
 		ModelAndView modelAndView = new ModelAndView("Modify");
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		List<RentedCar> rentedCarList = rh.getRentals();
 		RentedCar rCar = rentedCarList.get(index-1);
 		Car theCar = rCar.getRentedCar();
@@ -282,7 +282,7 @@ public class RentCarController {
 public ModelAndView setFieldforCancel(Integer index) {
 		
 		ModelAndView modelAndView = new ModelAndView("CancelReturn");
-		RentedCarHolder rh = RentedCarHolder.getInstance();
+		RentedCarList rh = RentedCarList.getInstance();
 		List<RentedCar> rentedCarList = rh.getRentals();
 		RentedCar rCar = rentedCarList.get(index-1);
 		Car theCar = rCar.getRentedCar();

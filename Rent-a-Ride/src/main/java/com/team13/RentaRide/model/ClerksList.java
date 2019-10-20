@@ -2,18 +2,18 @@ package com.team13.RentaRide.model;
 
 import java.util.ArrayList;
 
-public class ClerksHolder {
+public class ClerksList {
 
-	private static ClerksHolder ch;
+	private static ClerksList ch;
 	private static ArrayList<Clerk> clerkList ;
 
-	private ClerksHolder() {
+	private ClerksList() {
 		clerkList= new ArrayList<Clerk>();
 	}
 	
-	 public static ClerksHolder getInstance() {
+	 public static ClerksList getInstance() {
 		if(ch == null) {
-			ch = new ClerksHolder();
+			ch = new ClerksList();
 		}
 		return ch;
 	}
