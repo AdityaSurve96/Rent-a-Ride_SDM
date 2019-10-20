@@ -25,7 +25,7 @@ public class ClerkLoginController {
 
 	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
-		
+
 		boolean flag = false;
 		Clerk c = new Clerk(email, password);
 		ClerksList chold = ClerksList.getInstance();
@@ -37,12 +37,13 @@ public class ClerkLoginController {
 				break;
 			}
 		}
-			
+
 		if (flag) {
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
-//			DataStore ds = DataStore.getInstance();
-//			
-//			modelAndView.addObject("cars", ds.getAllCars());
+			// DataStore ds = DataStore.getInstance();
+			//
+			// modelAndView.addObject("cars", ds.getAllCars());
+
 			return modelAndView;
 
 		}
