@@ -13,8 +13,18 @@ public class Car {
 	private Integer year;
 	private String description;
 	private BigDecimal price;
-	boolean isAvailable;
-	private String availableToRentOrNot;
+	private String availableReservedOrRented;
+
+
+	
+
+	public String getAvailableReservedOrRented() {
+		return availableReservedOrRented;
+	}
+
+	public void setAvailableReservedOrRented(String availableReservedOrRented) {
+		this.availableReservedOrRented = availableReservedOrRented;
+	}
 
 	public String getType() {
 		return type;
@@ -80,35 +90,11 @@ public class Car {
 		this.price = price;
 	}
 
-	public boolean isAvailable() {
-		return isAvailable;
-	}
-
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
-
-
-	}
-
-
-	
-	public String getAvailableToRentOrNot() {
-		return availableToRentOrNot;
-	}
-
-	public void setAvailableToRentOrNot(boolean ava) {
-		if(ava) {
-			this.availableToRentOrNot = "AVAILABLE";
-		}
-		else
-			this.availableToRentOrNot = "UNAVAILABLE";
-		}
 
 	@Override
 	public String toString() {
 		return "Car [make=" + make + ", model=" + model + ", type=" + type + ", licenseNumber=" + licensePlateNumber
-				+ ", color=" + color + ", description=" + description + ", price=" + price + ", isAvailable="
-				+ isAvailable + ", year=" + year + "]";
+				+ ", color=" + color + ", description=" + description + ", price=" + price + ", year=" + year + "]";
 	}
 
 }

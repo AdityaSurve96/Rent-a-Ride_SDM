@@ -46,13 +46,13 @@
 			<td>${reservedCar.associatedClient.driverLicenceNumber}</td>
 			<td>${reservedCar.startDate}</td>
 			<td>${reservedCar.dueDate}</td>
+			
 			<td>  
 			<form method ="post">
 			<input value= "${reservedCar.car.licensePlateNumber}" type = "hidden" name = "carLicencePlateNumber" />
 			<input type = "submit" formaction="/cancelThisReservation" value="CANCEL">
 			</form>
 			</td>
-		
 		</tr>
 		</c:forEach>
 		
