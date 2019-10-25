@@ -22,8 +22,6 @@ import com.team13.RentaRide.utils.DataStore;
 public class ModifyCarReservationController {
 
 
-
-
 	@RequestMapping(value = "/gotoRentalsPageAfterModify" , method = RequestMethod.POST)
 	public ModelAndView ModifyRental(@RequestParam String CarLicenseNoForForm, @RequestParam String clientFirstName, 
 			@RequestParam String clientLastName, @RequestParam String phoneNumber,

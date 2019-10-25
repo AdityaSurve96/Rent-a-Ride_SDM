@@ -10,29 +10,41 @@
 	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 </head>
 
-<body style="backgorund-color: #E6E6FA; text-align: center;">
-	<form name="myForm" method="post">
-	
-	<div class="container" align="center">
-	<h1>Admin Registration</h1>
+<body>
+<div class="container" align="center">
+<div>
+	<font color="red">${errorMessage}</font>
+</div>		
+	<form name="myForm" method="post" class="form-horizontal">
+	<div class="container col-md-12">	
+	<h2>Admin Registration</h2>
 	<br><br>
-	<div>
-		<label>Username</label>
-		<input type="email" name="email" placeholder="Email Id">
+	<div class="form-group">
+		<div class="col-md-5">
+			<label class="control-label pull-right">Username</label>
+		</div>
+		<div class="col-md-3">
+			<input class="form-control pull-left" type="email" name="email" placeholder="Email Id">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-md-5">
+			<label class="control-label pull-right">Password</label>
+		</div>
+		<div class="col-md-3">
+			<input class="form-control pull-left" type="password" name="password" placeholder="Password">	
+		</div>
 	</div>
 	
 	<br>
-	
-	<div>
-		<label>Password</label>
-		<input type="password" name="password" placeholder="Password">	
-	</div>
-	
 	<br>
-	<br>
+	<div class="form-group">
 		<button type="submit"  formaction="/registerAdmin" class="btn btn-primary btn-md">Register</button>
 		<button type="reset"  class="btn btn-primary btn-md" >Reset</button>
 	</div>
+	</div>
 	</form>
+</div>	
 </body>
 </html>

@@ -19,15 +19,13 @@
 <br><br>
 
 		<div class="container col-md-12" align="center">
-				<div class="row">
-					<h1>Admin Home Page</h1>
-				</div>
-<br><br>				
-			
-				<!-- ../../webapp/WEB-INF/jsp/login.jsp -->
-				<br><Br>
-				<a href="LoginAdmin" class="btn btn-primary btn-lg">Manage Catalog</a> 
-				<a href="#" class="btn btn-primary btn-lg">View Rentals</a>
+			<div class="row">
+				<h1>Welcome, Admin</h1>
+			</div>
+		<br><br>				
+		<br><Br>
+			<a href="/adminManageCatalog" class="btn btn-primary btn-lg">Manage Catalog</a> 
+			<a href="/adminViewRentals" class="btn btn-primary btn-lg">View Rentals</a>
 		</div>
 </body>
 
