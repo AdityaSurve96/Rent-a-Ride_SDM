@@ -20,16 +20,18 @@ public class ClerkLoginController {
 
 	@RequestMapping("/ClerkLoginPage")
 	public ModelAndView showLoginPage() {
+		DataStore ds = DataStore.getInstance();
 		return new ModelAndView("ClerkLoginPage");
 	}
-
+		
+	
 	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 
 		boolean flag = false;
 		Clerk c = new Clerk(email, password);
-		ClerksList chold = ClerksList.getInstance();
-		ArrayList<Clerk> clerks = chold.getRegisteredClerks();
+		DataStore ds = DataStore.getInstance();
+		List<Clerk> clerks = ds.getRegisteredClerks();
 
 		for (Clerk clerk : clerks) {
 			if (c.getEmail().equals(clerk.getEmail()) && c.getPassword().equals(clerk.getPassword())) {
@@ -40,9 +42,6 @@ public class ClerkLoginController {
 
 		if (flag) {
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
-			// DataStore ds = DataStore.getInstance();
-			//
-			// modelAndView.addObject("cars", ds.getAllCars());
 
 			return modelAndView;
 

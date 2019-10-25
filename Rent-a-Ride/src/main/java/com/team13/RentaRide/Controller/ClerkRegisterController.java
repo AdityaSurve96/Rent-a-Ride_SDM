@@ -7,25 +7,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.ClerksList;
+import com.team13.RentaRide.utils.DataStore;
 
 
 @Controller
 public class ClerkRegisterController {
-
-
+	
+	
 	@RequestMapping("/tryToRegisterAsClerk")
 	public ModelAndView showRegisterClerkPage() {
 
 		return new ModelAndView("ClerkRegisterPage");
 
 	}
-
+	
 
 	@RequestMapping(value = "/clerkRegistered" , method = RequestMethod.POST)
-	public ModelAndView registerClerk(@RequestParam String email, @RequestParam String password){
+	public ModelAndView registerClerk(@RequestParam String email, @RequestParam String password) {
 
-		ClerksList ch = ClerksList.getInstance();
-		ch.addClerks(email,password);
+		DataStore ds = DataStore.getInstance();
+		ds.addClerk(email, password);
+		
 		return new ModelAndView("ClerkLoginPage");
 	}
 
