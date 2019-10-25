@@ -91,7 +91,7 @@
 </form>
 <br>
 
-<form>
+
 	<div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
@@ -110,17 +110,17 @@
 			<td>${car.make}</td>
 			<td>${car.year}</td>
 			<td>${car.color}</td>
-			<td>  
-			<input value="${loopCounter.count}"  type = "hidden" name = "licensePlateInput${loopCounter.count}" />
+			<td>
+			<form method = "post">  
+				<input value="${car.licensePlateNumber}"  type = "hidden" name = "licensePlateInput" />
 			
-			<input class="btn btn-primary btn-sm"  type="submit" formaction="/carDetailView${loopCounter.count}" 
-			value="${car.availableToRentOrNot}" />
-			 
+				<input class="btn btn-primary btn-sm"  type="submit" formaction="/carDetailView" value="${car.availableReservedOrRented}" />
+			 </form>
 			</td>
 		</tr>
 		</c:forEach>
 		
 	</table>
 	</div>
-	</form>
+	
 </body>

@@ -30,7 +30,7 @@
 				<br><Br>
 				<a href="LoginClerk" class="btn btn-primary btn-lg">Manage Clients</a> 
 				
-				<a href="#" class="btn btn-primary btn-lg">View Catalogue</a>
+				<a href="/viewCarCatalog" class="btn btn-primary btn-lg">View Catalogue</a>
 		</div>
 </body>
 

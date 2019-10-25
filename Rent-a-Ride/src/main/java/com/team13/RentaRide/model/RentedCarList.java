@@ -1,5 +1,6 @@
 package com.team13.RentaRide.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +19,10 @@ public final class RentedCarList {
         return instance;
     }
     
-    public void addRentals(Car c, Client cl , Date dueDate) {
-    	Date currentDate = new Date();
-
-		String cancelReturn = ((currentDate).compareTo(dueDate) >=0) ? "RETURN" : "CANCEL" ;
+    public void addRentals(Car c, Client cl , LocalDate dueDate) {
+    	LocalDate currentDate = LocalDate.now();
+    	System.out.println(currentDate);
+		String cancelReturn = ((dueDate).isBefore(currentDate)) ? "RETURN" : "CANCEL" ;
     	
 		RentedCar rc = new RentedCar(c, cl, dueDate);
 		rc.setOperation(cancelReturn);

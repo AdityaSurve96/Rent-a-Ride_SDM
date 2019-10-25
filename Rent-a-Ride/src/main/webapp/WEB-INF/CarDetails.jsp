@@ -39,10 +39,10 @@
  <div class="col-md-6"><label class="pull-left">${CarType}</label></div>
  </div>
  
-  <div class="form">
+<%--   <div class="form">
  <div class="col-md-6"><label class="pull-right">License Number:</label></div>
  <div class="col-md-6"><label class="pull-left">${CarLicensePlate}</label></div>
- </div>
+ </div> --%>
  
  <div class="form">
  <div class="col-md-6"><label class="pull-right">Color:</label></div>
@@ -55,9 +55,17 @@
  <div align="center">
   <form method="post">
 	  <input value="${CarLicensePlate}" type = "hidden" name = "licensePlate" />
-	  <input type="submit" class="btn btn-primary btn-sm" formaction="/rentTheSelectedCar${CarAvailablity}" value="${showRentOrNot}" />
+	  
+	  <input type="submit" id = "resButtoon"   class="btn btn-primary btn-sm" 
+	  					   formaction="/reserveThisCar" value="${canReserveOrNot}"  ${disableOrNo}/>
+	  					   
+	  <input type="submit" id = "rentButtoon"  class="btn btn-primary btn-sm" 
+	  					   formaction="/rentThisCar" value="${canRentOrNot}"  ${disableOrNo} />
+	  					   
 		<a href="/back" class="btn btn-primary btn-sm">Back</a>
 		<a href="/next" class="btn btn-primary btn-sm">Next</a>
+		
+		<a href="/backtoCarCatalog" class="btn btn-primary btn-sm">Back to Car Catalog</a>
 </form>
 </div>
 

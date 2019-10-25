@@ -1,16 +1,14 @@
 package com.team13.RentaRide.model;
 
+import java.time.LocalDate;
 
 public class Client {
 	
 	private String driverLicenceNumber;
 	private String clientFirstName;
 	private String clientLastName;
-	private Integer phoneNumber;
-	private String licenceExpiryDate;
-	
-	
-	
+	private String phoneNumber;
+	private LocalDate licenceExpiryDate;
 	
 	
 	public String getDriverLicenceNumber() {
@@ -32,29 +30,20 @@ public class Client {
 		this.clientLastName = clientLastName;
 	}
 	
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getLicenceExpiryDate() {
+	public LocalDate getLicenceExpiryDate() {
 		return licenceExpiryDate;
 	}
-	public void setLicenceExpiryDate(String licenceExpiryDate) {
+	public void setLicenceExpiryDate(LocalDate licenceExpiryDate) {
 		this.licenceExpiryDate = licenceExpiryDate;
 	}
 
-	public Client(String driverLicenceNumber, String clientFirstName, String clientLastName, Integer phoneNumber,
-			String licenceExpiryDate) {
-		super();
-		this.driverLicenceNumber = driverLicenceNumber;
-		this.clientFirstName = clientFirstName;
-		this.clientLastName = clientLastName;
-		this.phoneNumber = phoneNumber;
-		this.licenceExpiryDate = licenceExpiryDate;
 	
-	}
 
 
 }

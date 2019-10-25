@@ -93,8 +93,7 @@ public class ModifyCarReservationController {
 			if(rentedItem.getRentedCar().getLicensePlateNumber().equals(CarLicenseNoForForm)) {
 				rentedList.remove(rentedItem);
 				deletedRental = rentedItem;
-				deletedRental.getRentedCar().setAvailable(true);
-				deletedRental.getRentedCar().setAvailableToRentOrNot(true);
+				deletedRental.getRentedCar().setAvailableReservedOrRented("AVAILABLE");
 				break;
 			}
 		}

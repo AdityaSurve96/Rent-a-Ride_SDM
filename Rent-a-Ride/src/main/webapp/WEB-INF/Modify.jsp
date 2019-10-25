@@ -113,7 +113,7 @@ a:hover {
   <strong><label >Car Licence No : </label>
 </strong>
   <input value = "${carLicenseNumber}" type="text" name="CarLicenseNo" readonly><br><br>
-   <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
+  <%--  <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm"> --%>
 
    <strong> <label>Client First Name: </label>
 
