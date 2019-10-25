@@ -13,108 +13,54 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class CarDetailsController {
-	Integer index=0;
-	@RequestMapping("/carDetailView1")
-	public ModelAndView showCarDetails1(@RequestParam String licensePlateInput1) {
-		index = Integer.parseInt(licensePlateInput1);
+	
+
+	Car c=null;
+	
+	@RequestMapping("/carDetailView")
+	public ModelAndView showCarDetails1(@RequestParam String licensePlateInput) {
+		String carNumber = licensePlateInput;
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-		//		CarHolder chold = CarHolder.getInstance();
-		//		 = chold.getCars();
+		
+		
+		
+		for (Car car : carsList) {
+			String lic = car.getLicensePlateNumber();
 
-		Car aCarObject = carsList.get((index-1));
+			if(lic.equals(carNumber)) {
+				c = car;
+				break;
+				
+			}
+		}
 
-		ModelAndView modelAndView = showCarView(aCarObject);
-
-		return modelAndView;
-	}
-	@RequestMapping("/carDetailView2")
-	public ModelAndView showCarDetails2(@RequestParam String licensePlateInput2) {
-
-		index = Integer.parseInt(licensePlateInput2);
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		//		CarHolder chold = CarHolder.getInstance();
-		//		 = chold.getCars();
-
-		Car aCarObject = carsList.get((index-1));
-
-
-		ModelAndView modelAndView = showCarView(aCarObject);
-
-		return modelAndView;
-
-	}
-
-	@RequestMapping("/carDetailView3")
-	public ModelAndView showCarDetails3(@RequestParam String licensePlateInput3) {
-
-		index = Integer.parseInt(licensePlateInput3);
-
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		//		CarHolder chold = CarHolder.getInstance();
-		//		 = chold.getCars();
-
-		Car aCarObject = carsList.get((index-1));
-
-		ModelAndView modelAndView = showCarView(aCarObject);
+		ModelAndView modelAndView = showCarView(c);
 
 		return modelAndView;
 	}
 	
 	
-	@RequestMapping("/carDetailView4")
-	public ModelAndView showCarDetails4(@RequestParam String licensePlateInput4) {
-
-		index = Integer.parseInt(licensePlateInput4);
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		//		CarHolder chold = CarHolder.getInstance();
-		//		 = chold.getCars();
-		Car aCarObject = carsList.get((index-1));
-
-		ModelAndView modelAndView = showCarView(aCarObject);
-
-		return modelAndView;
-	}
 	
-	
-	@RequestMapping("/carDetailView5")
-	public ModelAndView showCarDetails5(@RequestParam String licensePlateInput5) {
-
-		index = Integer.parseInt(licensePlateInput5);
-
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		//		CarHolder chold = CarHolder.getInstance();
-		//		 = chold.getCars();
-		Car aCarObject = carsList.get((index-1));
-
-		ModelAndView modelAndView = showCarView(aCarObject);
-
-		return modelAndView;
-
-
-	}
 
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
-		System.out.println("FROM PREV "+index);
+
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-	
-		if( index > 1 ) {
-
-			Car prevCar = carsList.get((index-2));
-			index = index - 1 ;
-			System.out.println("FROM PREV NEW "+index);
+		Integer index=0;
+		index= carsList.indexOf(c);
+		if( index > 0 ) {
+			
+			Car prevCar = carsList.get((index-1));
+			c=prevCar;
+			
 			ModelAndView modelAndView = showCarView(prevCar);
 			return modelAndView;
 		}
 
 		else {
-			Car sameCar = carsList.get((index-1));
+			Car sameCar = c;
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}
@@ -123,25 +69,51 @@ public class CarDetailsController {
 
 	@RequestMapping("/next")
 	public ModelAndView showNextCar() {
-		System.out.println("FROM NEXT "+index);
+		
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-
-		if( index < 5 ) {
-
-			Car nextCar = carsList.get((index));
-			index = index + 1 ;
-			System.out.println("FROM NEXT NEW "+index);
+		Integer index=0;
+		index= carsList.indexOf(c);
+		if( index < (carsList.size()-1) ) {
+			
+			
+			Car nextCar = carsList.get(index+1);
+			c=nextCar;
+//			Car nextCar = carsList.get((index));
+//			index = index + 1 ;
+//			System.out.println("FROM NEXT NEW "+index);
 			ModelAndView modelAndView = showCarView(nextCar);
 			return modelAndView;
 		}
 		else {
-			Car sameCar = carsList.get((index-1));
+			Car sameCar = c;
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}
 
 	}
+	
+	@RequestMapping("/backtoCarCatalog")
+	public ModelAndView showCarCatalogPage() {
+		
+		ModelAndView modelAndView = new ModelAndView("CarCatalog");
+		DataStore ds = DataStore.getInstance();
+		
+		modelAndView.addObject("cars", ds.getAllCars());
+		
+		return modelAndView;
+	}
+
+
+
+//	
+//	@RequestMapping("/SearchClient")
+//	public ModelAndView searchThisClient(@RequestParam String)
+//	
+	
+	
+	
+	
 	public ModelAndView showCarView(Car c) {
 		ModelAndView modelAndView= new ModelAndView("CarDetails");
 
@@ -152,11 +124,23 @@ public class CarDetailsController {
 		modelAndView.addObject("CarType",c.getType());
 		modelAndView.addObject("CarLicensePlate",c.getLicensePlateNumber());
 		modelAndView.addObject("CarColor",c.getColor());
-		modelAndView.addObject("CarAvail",c.getAvailableToRentOrNot());
-		modelAndView.addObject("CarAvailablity",c.isAvailable());
-		String rentedOrNot = c.isAvailable() ? "Rent" : "RENTED"; 
-		modelAndView.addObject("showRentOrNot",rentedOrNot);
-
+		
+		
+		if(c.getAvailableReservedOrRented().equals("AVAILABLE")) {
+			modelAndView.addObject("canReserveOrNot", "Reserve Now");
+			modelAndView.addObject("canRentOrNot",    "Rent Now");
+		}
+		else if(c.getAvailableReservedOrRented().equals("Reserved"))
+		{
+			modelAndView.addObject("canReserveOrNot", "Already Reserved");
+			modelAndView.addObject("canRentOrNot",    "Cannot Rent Now");
+			modelAndView.addObject("disableOrNo" , "disabled");
+		}
+		else {
+			modelAndView.addObject("canReserveOrNot", "Cannot Reserve Now");
+			modelAndView.addObject("canRentOrNot",    "Already Rented");
+			modelAndView.addObject("disableOrNo" , "disabled");
+		}
 		return modelAndView;
 	}
 	
