@@ -14,39 +14,35 @@
 
 
 <div class="container" align="center">
-<h2 style="text-align:center"><strong>${CarMake} ${CarModel} Details</strong></h2>
+<h2 style="text-align:center"><strong>${car.make} ${car.model} Details</strong></h2>
 
 <img src="images/car1.jpg" style="width:350px;height:200px;">
- <p class="price">$ ${price}</p>
+ <p class="price">$ ${car.price}</p>
  
  <div class="form">
  <div class="col-md-6"><label class="pull-right">Model:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarModel}</label></div>
+ <div class="col-md-6"><label class="pull-left">${car.model}</label></div>
  </div>
  
   <div class="form">
  <div class="col-md-6"><label class="pull-right">Make:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarMake}</label></div>
+ <div class="col-md-6"><label class="pull-left">${car.make}</label></div>
  </div>
  
   <div class="form">
  <div class="col-md-6"><label class="pull-right">Year:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarYear}</label></div>
+ <div class="col-md-6"><label class="pull-left">${car.year}</label></div>
  </div>
  
   <div class="form">
  <div class="col-md-6"><label class="pull-right">Car:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarType}</label></div>
+ <div class="col-md-6"><label class="pull-left">${car.type}</label></div>
  </div>
  
-<%--   <div class="form">
- <div class="col-md-6"><label class="pull-right">License Number:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarLicensePlate}</label></div>
- </div> --%>
  
  <div class="form">
  <div class="col-md-6"><label class="pull-right">Color:</label></div>
- <div class="col-md-6"><label class="pull-left">${CarColor}</label></div>
+ <div class="col-md-6"><label class="pull-left">${car.color}</label></div>
  </div>
 </div>
  
@@ -54,7 +50,7 @@
  
  <div align="center">
   <form method="post">
-	  <input value="${CarLicensePlate}" type = "hidden" name = "licensePlate" />
+	  <input value="${car.licensePlateNumber}" type = "hidden" name = "licensePlate" />
 	  
 	  <input type="submit" id = "resButtoon"   class="btn btn-primary btn-sm" 
 	  					   formaction="/reserveThisCar" value="${canReserveOrNot}"  ${disableOrNo}/>

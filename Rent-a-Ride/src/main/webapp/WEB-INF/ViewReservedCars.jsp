@@ -34,8 +34,8 @@
 			<th style="width: 10%;">Client D.L</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
-			<th style="width: 10%;">Modification</th>
-			<th style="width: 10%;">Deletion</th>
+			<th style="width: 10%;">Operation</th>
+		
 		</tr>
 		
 		<c:forEach var="reservedCar" items="${reservations}" varStatus="loopCounter">

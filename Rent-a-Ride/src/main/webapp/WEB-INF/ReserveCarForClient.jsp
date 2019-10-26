@@ -22,21 +22,19 @@
  <br><br>
 <div align="center">
 
+
 <div class="form">
  	<div class="col-md-6"><label class="pull-right">Car License Number:</label></div>
- 
- 	<div class="col-md-6"><input value = "${carLicenseNumber}" class="pull-left" type="text" name="CarLicenseNo" readonly></div>
-
-	<%--  <input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm"> --%> 	 
+ 	<div class="col-md-6"><input value = "${licensePlateNumber}" class="pull-left" type="text" name="CarLicenseNo" readonly></div>
  
  </div>
  <br>
- 
   <div class="form">
 
  	<div class="col-md-6"><label class="pull-right">Client Drivers License:</label></div>
  	<div class="col-md-6"><input value ="${driverLicenseNumber}" class="pull-left" type="text" name="driverLicenceNumber"></div>
  	<div><button type="submit" class="btn btn-primary btn-sm" formaction="/searchThisClient">Search this Client</button></div>
+ 	<div><font color="red">${clientNotFoundMessage}</font></div>
  	</div>
  <br>
  <div class="form">
