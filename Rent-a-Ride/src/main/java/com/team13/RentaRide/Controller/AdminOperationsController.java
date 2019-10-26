@@ -1,5 +1,6 @@
 package com.team13.RentaRide.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.Admin;
+import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
@@ -89,6 +91,38 @@ public class AdminOperationsController {
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalsPage");
 		return modelAndView;
 
+	}
+
+	@RequestMapping(value = "/addNewCarPage", method = RequestMethod.POST)
+	public ModelAndView addNewCarPage() {
+
+		return new ModelAndView("CreateNewCarPage");
+	}
+
+	@RequestMapping(value = "/addNewCar", method = RequestMethod.POST)
+	public ModelAndView addNewCar(@RequestParam String licensePlateNumber, @RequestParam String carDescription,
+			@RequestParam String carModel, @RequestParam String carType, @RequestParam String carMake,
+			@RequestParam String carYear, @RequestParam String carColor, @RequestParam String carPrice) {
+
+		try {
+			Car car = new Car();
+			car.setAvailableReservedOrRented("Available");
+			car.setColor(carColor);
+			car.setDescription(carDescription);
+			car.setLicensePlateNumber(licensePlateNumber);
+			car.setMake(carMake);
+			car.setModel(carModel);
+			car.setPrice(new BigDecimal(carPrice));
+			car.setType(carType);
+			car.setYear(Integer.valueOf(carYear));
+			System.out.println("created car: " + car);
+			DataStore.getInstance().getAllCars().add(car);
+			return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+		} catch (Exception e) {
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.addObject("errorMessage", "Error while adding the Car, " + e.getMessage());
+			return modelAndView;
+		}
 	}
 
 }
