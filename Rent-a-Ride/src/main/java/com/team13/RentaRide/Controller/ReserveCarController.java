@@ -167,18 +167,55 @@ public class ReserveCarController {
 			cl.setDriverLicenceNumber(driverLicenceNumber);
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
-		ModelAndView modelAndView = new ModelAndView("ViewReservedCars");
+		
 		ReservedCar resCar = new ReservedCar(c,cl , pickupDate, dropoffDate);
 		resCars.add(resCar);
+		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
 	
-		modelAndView.addObject("reservations", resCars);
 		return modelAndView;
 		
 
 	}
 
+	
+	@RequestMapping(value="/cancelThisReservation")
+	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
+		
+		DataStore ds = DataStore.getInstance();
+		List<ReservedCar> resCars = ds.getReservedCars();
+		List<Car> allCars = ds.getAllCars();
+ 		for (ReservedCar reservedCar : resCars) {
+			if(reservedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
+				for (Car car : allCars) {
+					if(car.equals(reservedCar.getCar())) {
+						car.setAvailableReservedOrRented("Available");
+						resCars.remove(reservedCar);
+						break;
+					}
+				}
+				
+			}
+			break;
+		}
+ 		
+		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
+		return modelAndView;
+	}
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/backToCarCatalog")
@@ -195,11 +232,6 @@ public class ReserveCarController {
 
 
 	}
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value= "/backToRentedCarList")
 	public ModelAndView showRentedCarsPage() {

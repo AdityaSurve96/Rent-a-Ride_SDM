@@ -21,6 +21,7 @@
 	<div class="col-md-6">
 		<h3>
 			<a href="/backToRentedCarList"><u>See All Rentals</u></a>
+			<a href="/backToReservedCarList"><u>See All Reservations</u></a>
 		</h3>
 	</div> 
 	</div>
