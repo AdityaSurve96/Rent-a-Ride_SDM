@@ -159,4 +159,21 @@ public class AdminOperationsController {
 		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
 	}
 
+	@RequestMapping(value = "/deleteCar")
+	public ModelAndView deleteCar(@RequestParam String currentLicensePlateNumber) {
+
+		List<Car> tempCars = new ArrayList<Car>();
+		tempCars.addAll(DataStore.getInstance().getAllCars());
+		int index = 0;
+		for (Car tempCar : tempCars) {
+			if (tempCar.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
+				DataStore.getInstance().getAllCars().remove(index);
+				break;
+			}
+			index++;
+		}
+
+		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+	}
+
 }
