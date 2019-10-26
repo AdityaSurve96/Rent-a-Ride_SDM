@@ -43,7 +43,7 @@
 				<br><br>
 				<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-md" formaction="/tryToLoginAsAdmin" value="Sign In" >Login</button>
-						<button type="submit"  class="btn btn-primary btn-md" formaction="/tryToRegisterAdmin" value="Sign Up" >Register</button>
+						<button type="submit"  class="btn btn-primary btn-md" formaction="/registerAdmin" value="Sign Up" >Register</button>
 						<button type="reset"  class="btn btn-primary btn-md" >Reset</button>
 				</div>
 				

@@ -74,7 +74,7 @@ public class CarFilterController {
 			carsToSend.add(car);
 		}
 
-		return new ModelAndView("CarCatalog", "cars", carsToSend);
+		return new ModelAndView("AdminCarCatalogPage", "cars", carsToSend);
 
 	}
 
