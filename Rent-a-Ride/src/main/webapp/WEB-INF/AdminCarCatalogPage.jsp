@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<form method="POST" action="filterCars">
+<form>
 <div class="container">
 <h3>Car Catalog Management</h3>
 <hr style="clear:both;"/>
@@ -69,7 +69,7 @@
 			<option value="Green">Green</option>
 		</select>
 		&nbsp; 
-		<button type="submit" formaction="searchCarInAdminCatalog">
+		<button type="submit" formaction="/filterCars" formmethod="post">
 			<i class="fa fa-search text-green" aria-hidden="true"></i>
 		</button>
 		<input class="pull-right btn btn-primary btn-sm" type="submit" formaction="/addNewCarPage" value="Add">
