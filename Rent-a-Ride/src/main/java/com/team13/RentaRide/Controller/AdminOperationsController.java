@@ -125,4 +125,38 @@ public class AdminOperationsController {
 		}
 	}
 
+	@RequestMapping(value = "/editCar")
+	public ModelAndView editCar(@RequestParam String currentLicensePlateNumber) {
+		System.out.println("licensePlateNumber: " + currentLicensePlateNumber);
+		Car currentCar = null;
+
+		for (Car car : DataStore.getInstance().getAllCars()) {
+			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
+				currentCar = car;
+				break;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("EditCarPage", "car", currentCar);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
+	public ModelAndView saveCarChanges(Car car) {
+
+		for (Car currentCar : DataStore.getInstance().getAllCars()) {
+			if (currentCar.getLicensePlateNumber().equals(car.getLicensePlateNumber())) {
+				currentCar.setColor(car.getColor());
+				currentCar.setDescription(car.getDescription());
+				currentCar.setMake(car.getMake());
+				currentCar.setModel(car.getModel());
+				currentCar.setPrice(car.getPrice());
+				currentCar.setType(car.getType());
+				currentCar.setYear(car.getYear());
+				break;
+			}
+		}
+		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+	}
+
 }
