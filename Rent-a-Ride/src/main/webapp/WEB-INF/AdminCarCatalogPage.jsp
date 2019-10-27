@@ -69,10 +69,10 @@
 			<option value="Green">Green</option>
 		</select>
 		&nbsp; 
-		<button type="submit" formaction="/filterCars" formmethod="post">
+		<button type="submit" formaction="/filterCars" formmethod="get">
 			<i class="fa fa-search text-green" aria-hidden="true"></i>
 		</button>
-		<input class="pull-right btn btn-primary btn-sm" type="submit" formaction="/addNewCarPage" value="Add">
+		<input class="pull-right btn btn-primary btn-sm" type="submit" formmethod="post" formaction="/addNewCarPage" value="Add">
 		
 <!-- 		<input type="submit" value="Search" class="btn btn-primary btn-md pull-right"/> -->
 </div>
