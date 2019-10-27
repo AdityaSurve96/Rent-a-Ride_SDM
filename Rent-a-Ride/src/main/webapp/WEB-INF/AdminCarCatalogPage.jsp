@@ -68,8 +68,18 @@
 			<option value="Blue">Blue</option>
 			<option value="Green">Green</option>
 		</select>
+		
+		&nbsp;<label>Availability</label>
+		<input type="hidden" name="availabilityInput" id="availabilityInput"/>
+		<select id="availability" onChange="setInputValue('availability')">
+			<option value="invalid">---</option>
+			<option value="Available">Available</option>
+			<option value="Reserved">Reserved</option>
+			<option value="Rented">Rented</option>
+		</select>
+		
 		&nbsp; 
-		<button type="submit" formaction="/filterCars" formmethod="get">
+		<button type="submit" formaction="/filterCarsForAdmin" formmethod="post">
 			<i class="fa fa-search text-green" aria-hidden="true"></i>
 		</button>
 		<input class="pull-right btn btn-primary btn-sm" type="submit" formmethod="post" formaction="/addNewCarPage" value="Add">
@@ -88,12 +98,11 @@
 			<th style="width: 10%;">Model</th>
 			<th style="width: 10%;">Type</th>
 			<th style="width: 10%;">Make</th>
-			<th style="width: 10%;">Year</th>
+			<th style="width: 5%;">Year</th>
 			<th style="width: 10%;">Color</th>
-			<th style="width: 10%;">Price</th>
+			<th style="width: 5%;">Price</th>
+			<th style="width: 10%;">Availability</th>
 			<th style="width: 13%;">Operations</th>
-			
-			
 		</tr>
 		
 		<c:forEach var="car" items="${cars}" varStatus="loop">
@@ -105,6 +114,7 @@
 			<td>${car.year}</td>
 			<td>${car.color}</td>
 			<td>$${car.price}</td>
+			<td>${car.availableReservedOrRented}</td>
 			<td>  
 				<form method = "post">  
 					<span> 

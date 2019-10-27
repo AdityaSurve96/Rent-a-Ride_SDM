@@ -12,7 +12,7 @@
 
 </head>
 <body>
-<form method="POST" action="filterCars">
+<form method="POST" action="filterCarsForClerk">
 <div class="container">
 	<div align="right">
 	<div class="col-md-6">
@@ -79,14 +79,23 @@
 			<option value="Green">Green</option>
 		</select>
 
+		&nbsp;<label>Availability</label>
+		<input type="hidden" name="availabilityInput" id="availabilityInput"/>
+		<select id="availability" onChange="setInputValue('availability')">
+			<option value="invalid">---</option>
+			<option value="Available">Available</option>
+			<option value="Reserved">Reserved</option>
+			<option value="Rented">Rented</option>
+		</select>
+
 		&nbsp; 
 		<input type="submit" value="Search" class="btn btn-primary btn-md"/>
 
-		&nbsp; 
-		<input class="custom-control-input" id="showOnlyAvailable" type="checkbox"/>
-        <label class="custom-control-label" for="checkbox-large">
-            Show Only Available
-        </label>
+<!-- 		&nbsp;  -->
+<!-- 		<input class="custom-control-input" id="showOnlyAvailable" type="checkbox"/> -->
+<!--         <label class="custom-control-label" for="checkbox-large"> -->
+<!--             Show Only Available -->
+<!--         </label> -->
 </div>
 </div>
 </form>

@@ -16,11 +16,31 @@ import com.team13.RentaRide.utils.DataStore;
 @Controller
 public class CarFilterController {
 
-	@RequestMapping(value = "/filterCars", method = RequestMethod.POST)
-	public ModelAndView getFilteredCarInfo(@RequestParam String modelInput, @RequestParam String typeInput,
+	@RequestMapping(value = "/filterCarsForClerk", method = RequestMethod.POST)
+	public ModelAndView filterCarsForClerk(@RequestParam String modelInput, @RequestParam String typeInput,
 			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput,
-			@RequestParam Integer yearOffset) {
+			@RequestParam Integer yearOffset, @RequestParam String availabilityInput) {
 
+		List<Car> carsToSend = filterCars(modelInput, typeInput, makeInput, colorInput, yearInput, yearOffset,
+				availabilityInput);
+		return new ModelAndView("CarCatalog", "cars", carsToSend);
+
+	}
+
+	@RequestMapping(value = "/filterCarsForAdmin", method = RequestMethod.POST)
+	public ModelAndView filterCarsForAdmin(@RequestParam String modelInput, @RequestParam String typeInput,
+			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput,
+			@RequestParam Integer yearOffset, @RequestParam String availabilityInput) {
+
+		List<Car> carsToSend = filterCars(modelInput, typeInput, makeInput, colorInput, yearInput, yearOffset,
+				availabilityInput);
+
+		return new ModelAndView("AdminCarCatalogPage", "cars", carsToSend);
+
+	}
+
+	private List<Car> filterCars(String modelInput, String typeInput, String makeInput, String colorInput,
+			String yearInput, Integer yearOffset, String availabilityInput) {
 		DataStore ds = DataStore.getInstance();
 
 		List<Car> cars = ds.getAllCars();
@@ -55,6 +75,12 @@ public class CarFilterController {
 //			System.out.println("Checking yearInput " + yearInput + " and car year" + car.getYear());
 //			System.out.println("yearOffset " + yearOffset);
 
+			if (!StringUtils.isEmpty(availabilityInput)
+					&& !availabilityInput.equals(car.getAvailableReservedOrRented())) {
+//				System.out.println("setting make color false");
+				continue;
+			}
+
 			if (yearOffset == null && !StringUtils.isEmpty(yearInput)
 					&& !Integer.valueOf(yearInput).equals(car.getYear())) {
 				continue;
@@ -71,9 +97,7 @@ public class CarFilterController {
 
 			carsToSend.add(car);
 		}
-
-		return new ModelAndView("AdminCarCatalogPage", "cars", carsToSend);
-
+		return carsToSend;
 	}
 
 }

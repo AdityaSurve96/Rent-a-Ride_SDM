@@ -30,10 +30,16 @@ function setInputValue(type) {
 		var yearInput = document.getElementById("yearInput");
 		yearInput.setAttribute('value', yearFilter);
 		break;
+
+	case 'availability':
+		var availabilityDropdown = document.getElementById("availability");
+		var availabilityFilter = availabilityDropdown.options[availabilityDropdown.selectedIndex].value;
+		var availabilityInput = document.getElementById("availabilityInput");
+		availabilityInput.setAttribute('value', availabilityFilter);
+		break;
 	}
 
 };
-
 
 function filterCars() {
 
@@ -103,7 +109,6 @@ function filterCars() {
 			}
 		}
 
-
 		// type filter
 		if (typeTd && typeFilter != 'invalid') {
 			var txtValue = typeTd.textContent || typeTd.innerText;
@@ -138,21 +143,20 @@ function filterCars() {
 
 }
 
-
 function getCurrentDate() {
-	
+
 	var today = new Date();
 	var dd = today.getDate();
-	var mm = today.getMonth()+1; 
+	var mm = today.getMonth() + 1;
 	var yyyy = today.getFullYear();
-	 if(dd<10){
-	        dd='0'+dd
-	    } 
-	    if(mm<10){
-	        mm='0'+mm
-	    } 
+	if (dd < 10) {
+		dd = '0' + dd
+	}
+	if (mm < 10) {
+		mm = '0' + mm
+	}
 
-	today = yyyy+'-'+mm+'-'+dd;
+	today = yyyy + '-' + mm + '-' + dd;
 	console.log(today);
 	document.getElementByID("now").setAttribute("min", today);
 }

@@ -16,8 +16,6 @@ public class Car {
 	private String availableReservedOrRented;
 
 
-	
-
 	public String getAvailableReservedOrRented() {
 		return availableReservedOrRented;
 	}
