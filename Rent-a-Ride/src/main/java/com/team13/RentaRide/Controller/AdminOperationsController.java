@@ -282,7 +282,6 @@ public class AdminOperationsController {
 		modelAndView.addObject("cars", carsList);
 
 		return modelAndView;
-
 	}
 
 	@RequestMapping(value = "/filterReservationRecordsForAdmin", method = RequestMethod.POST)
@@ -292,6 +291,7 @@ public class AdminOperationsController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
 //			
 	) {
+		System.out.println("licensePlateNumberInput: "+licensePlateNumberInput);
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
 		List<ReservedCar> reservedCars = DataStore.getInstance().getReservedCars();
 		List<ReservedCar> reservedCarsToSend = new ArrayList<>();
@@ -335,6 +335,7 @@ public class AdminOperationsController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
 //			
 	) {
+		System.out.println("licensePlateNumberInput: "+licensePlateNumberInput);
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
 		List<RentedCar> rentals = DataStore.getInstance().getRentedCars();
