@@ -13,8 +13,7 @@
 <meta charset="ISO-8859-1">
 <title>Client List</title>
 </head>
-<body>
-
+<body>	
 
 <form method = post>
 

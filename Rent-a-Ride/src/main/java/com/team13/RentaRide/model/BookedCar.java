@@ -1,6 +1,7 @@
 package com.team13.RentaRide.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class BookedCar {
 	
@@ -9,13 +10,25 @@ public class BookedCar {
 	private Client associatedClient;
 	private LocalDate startDate;
 	private LocalDate dueDate;
+	private Date bookingTimestamp;
 	
 	
+
+	public Date getBookingTimestamp() {
+		return bookingTimestamp;
+	}
+
+
+	public void setBookingTimestamp(Date bookingTimestamp) {
+		this.bookingTimestamp = bookingTimestamp;
+	}
+
+
 	public Car getCar() {
 		return car;
 	}
 
-
+	
 	public void setCar(Car car) {
 		this.car = car;
 	}

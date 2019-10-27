@@ -281,7 +281,6 @@ public class AdminOperationsController {
 		modelAndView.addObject("cars", carsList);
 		
 		return modelAndView;
-
-
+		
 	}
 }

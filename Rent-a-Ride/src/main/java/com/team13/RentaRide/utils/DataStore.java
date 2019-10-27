@@ -1,9 +1,13 @@
 package com.team13.RentaRide.utils;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Clerk;
@@ -26,6 +30,7 @@ public final class DataStore {
 
 
 	private DataStore() {
+		
 
 		clients = new ArrayList<Client>();
 		clerks = new ArrayList<Clerk>();
@@ -328,9 +333,42 @@ public final class DataStore {
 	}
 
 	public void addSomeCarstoRentedCars() {
+		Date d1 ;
+		Date d2 ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d= null;
+		
 		RentedCar renCar1 = new RentedCar(getAllCars().get(2), getAllClients().get(0), LocalDate.now(), LocalDate.of(2019, 12, 13));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				renCar1.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		RentedCar renCar2 = new RentedCar(getAllCars().get(7), getAllClients().get(2), LocalDate.now(), LocalDate.of(2019, 12, 17));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				renCar2.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		RentedCar renCar3 = new RentedCar(getAllCars().get(9), getAllClients().get(4), LocalDate.now(), LocalDate.of(2019, 12, 25));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				renCar3.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		rentedCars.add(renCar1);
 		rentedCars.add(renCar2);
 		rentedCars.add(renCar3);
@@ -338,9 +376,47 @@ public final class DataStore {
 	}
 
 	public void addSomeCarstoReservedCars() {
+		
+		Date d1 ;
+		Date d2 ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d= null;
+		
+		
 		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2020, 01, 15), LocalDate.of(2020, 01, 20));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				resCar1.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		
 		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2020, 02, 05), LocalDate.of(2020, 02, 10));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			 resCar2.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2020, 04, 10), LocalDate.of(2020, 04, 25));
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			 resCar3.setBookingTimestamp(d2);	
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		reservedCars.add(resCar1);
 		reservedCars.add(resCar2);
 		reservedCars.add(resCar3);

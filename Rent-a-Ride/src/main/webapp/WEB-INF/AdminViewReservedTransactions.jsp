@@ -35,6 +35,7 @@
 			<th style="width: 10%;">Client D.L</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
+			<th style="width: 10%;">TimeStamp</th>
 			
 		
 		</tr>
@@ -47,6 +48,8 @@
 			<td>${reservedCar.associatedClient.driverLicenceNumber}</td>
 			<td>${reservedCar.startDate}</td>
 			<td>${reservedCar.dueDate}</td>
+			<td>${reservedCar.bookingTimestamp}</td>
+			
 			
 			
 		</tr>

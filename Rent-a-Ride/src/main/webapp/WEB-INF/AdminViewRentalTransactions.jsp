@@ -35,7 +35,7 @@
 			<th style="width: 10%;">Client D.L</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
-			
+			<th style="width: 10%;">TimeStamp</th>
 		
 		</tr>
 		
@@ -47,6 +47,8 @@
 			<td>${rentedCar.associatedClient.driverLicenceNumber}</td>
 			<td>${rentedCar.startDate}</td>
 			<td>${rentedCar.dueDate}</td>
+			<td>${rentedCar.bookingTimestamp}</td>
+			
 			
 		</tr>
 		</c:forEach>

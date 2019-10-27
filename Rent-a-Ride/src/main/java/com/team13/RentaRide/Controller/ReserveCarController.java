@@ -1,6 +1,10 @@
 package com.team13.RentaRide.Controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -182,6 +186,22 @@ public class ReserveCarController {
 		}
 		
 		ReservedCar resCar = new ReservedCar(c,cl , pickupDate, dropoffDate);
+		
+		Date d1 ;
+		Date d2 ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d= null;
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				resCar.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		resCars.add(resCar);
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions","reservations", resCars);
 	
@@ -299,6 +319,20 @@ public class ReserveCarController {
 		}
 		
 		RentedCar renCar = new RentedCar(c,cl , pickupDate, dropoffDate);
+		
+		Date d1 ;
+		Date d2 ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d= null;
+		d1 = new Date();
+		d = sdf.format(d1);
+		try {
+			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+				renCar.setBookingTimestamp(d2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		renCars.add(renCar);
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions","rentals", renCars);
 	

@@ -63,7 +63,7 @@ public class Car {
 	public void setLicensePlateNumber(String licensePlateNumber) {
 		this.licensePlateNumber = licensePlateNumber;
 	}
-
+	
 	public String getColor() {
 		return color;
 	}
@@ -87,7 +87,6 @@ public class Car {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-
 
 	@Override
 	public String toString() {
