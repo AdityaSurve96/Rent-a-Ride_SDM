@@ -22,8 +22,11 @@ Proposed technology for developement :- Java with Spring
 
 
 
-Steps:
+Steps: 
 1. For Clerk there are 3 emails and passwords with which you can login directly:  
 a. Email :- clerk1@gmail.com and Password : clerk1_2019  and similarly clerk2 and clerk3 
 2. For Admin there are 3 emails and passwords with which you can login directly:  
-b. Email :- admin1@gmail.com and Password : admin1_2019  and similarly admin2 and admin3. 
+b. Email :- admin1@gmail.com and Password : admin1_2019  and similarly admin2 and admin3.  
+
+Inorder to go back to home page for now you can just Re enter the localhost:8080/ link in the browser ( the port number may vary depending on your system).
+
