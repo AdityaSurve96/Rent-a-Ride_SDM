@@ -9,7 +9,7 @@
 <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 
 <meta charset="ISO-8859-1">
-<title>Rental Transactions</title>
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -20,9 +20,8 @@
 	</div>
 	<div class="col-md-6">
 		<h3>
-			<a href="/backToCarCatalog"><u>Car Catalog</u></a>
-			&nbsp; &nbsp; 
-			<a href="/backToReservedCarList"><u>Reserved Transactions</u></a>
+			<a href="/backToCarCatalog"><u>Back to Car Catalog</u></a>
+			<a href="/backToReservedCarList"><u>View Reserved Transaction</u></a>
 		</h3>
 	</div> 
 
@@ -30,14 +29,14 @@
 <div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
-			<th style="width: 20%;">License Plate</th>
-			<th style="width: 10%;">First Name</th>
-			<th style="width: 10%;">Last Name</th>
-			<th style="width: 20%;">License Number</th>
-			<th style="width: 15%;">Pick-Up Date</th>
-			<th style="width: 15%;">Drop-Off Date</th>
-			<th style="width: 15%;">Booking Date-time</th>
-			<th style="width: 5%;">Operation</th>
+			<th style="width: 20%;">Car License Plate Number</th>
+			<th style="width: 20%;">Client First Name</th>
+			<th style="width: 20%;">Client Last Name</th>
+			<th style="width: 10%;">Client D.L</th>
+			<th style="width: 10%;">Pick-Up Date</th>
+			<th style="width: 10%;">Drop-Off Date</th>
+			<th style="width: 10%;">TimeStamp</th>
+			<th style="width: 10%;">Operation</th>
 		
 		</tr>
 		
