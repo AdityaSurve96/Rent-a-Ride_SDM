@@ -2,6 +2,7 @@
 A Vehicle Rental software with server side web application in Java and Spring
 # Rent-A-Ride
 
+Instructions on how to Run mentioned  in the end(Please Scroll Down) 
 
 A Server side web application for a vehicle rental company.  
 Proposed technology for developement :- Java with Spring 
@@ -22,6 +23,7 @@ Proposed technology for developement :- Java with Spring
 
 
 Steps:
-1. Register : With email and Password
-2. Login : Login with Same Credentials
-3. Login to see Car Catalog.
+1. For Clerk there are 3 emails and passwords with which you can login directly:  
+a. Email :- clerk1@gmail.com and Password : clerk1_2019  and similarly clerk2 and clerk3 
+2. For Admin there are 3 emails and passwords with which you can login directly:  
+b. Email :- admin1@gmail.com and Password : admin1_2019  and similarly admin2 and admin3. 
