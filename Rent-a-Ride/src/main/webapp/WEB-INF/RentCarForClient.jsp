@@ -13,85 +13,83 @@
 
 <body>
 
-<form method="post" class="form-horizontal">
-<div align="center">
- <div >
- <h2>Create A New Rental</h2>
- <br>
-<div class="container" align="center">
+<form method="post">
 
-<div class="form-group">
-	 <div class="col-md-5">
-	 	<label class="control-label pull-right">Car License Number:</label>
-	 </div>
-	 <div class="col-md-3">
-	 	<input value = "${carLicenseNumber}" class="form-control pull-left" type="text" name="CarLicenseNo" readonly>
-	 	<input value = "${carLicenseNumber}" type="hidden" name="CarLicenseNoForForm">
-	 </div>
+
+<div class="container" align="center">
+ <div class="form">
+ <h2>Create A New Rental</h2>
+ <br><br>
+<div align="center">
+
+
+<div class="form">
+ 	<div class="col-md-6"><label class="pull-right">Car License Number:</label></div>
+ 	<div class="col-md-6"><input value = "${licensePlateNumber}" class="pull-left" type="text" name="CarLicenseNo" readonly></div>
+ 
+ </div>
+ <br>
+  <div class="form">
+
+ 	<div class="col-md-6"><label class="pull-right">Client Drivers License:</label></div>
+ 	<div class="col-md-6"><input value ="${driverLicenseNumber}" class="pull-left" type="text" name="driverLicenceNumber"></div>
+ 	<div><button type="submit" class="btn btn-primary btn-sm" formaction="/searchThisClient">Search this Client</button></div>
+ 	<div><font color="red">${clientNotFoundMessage}</font></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client First Name:</label></div>
+ 	<div class="col-md-6"><input value ="${clientFirstName}" class="pull-left" type="text" name="clientFirstName"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client Last Name:</label></div>
+ 	<div class="col-md-6"><input value ="${clientLastName}" class="pull-left" type="text" name="clientLastName"></div>
+ 	</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Client Mobile:</label></div>
+ 	<div class="col-md-6"><input value ="${phoneNumber}"  class="pull-left" type="text" name="phoneNumber"></div>
+ 	</div>
+ <br>
+
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Licence Expiry Date:</label></div>
+ 	<div class="col-md-6"><input value ="${licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
+</div>
+ <br>
+ <div class="form">
+ 
+ 	<div class="col-md-6"><label class="pull-right">Vehicle Pickup Date:</label></div>
+ 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" name="pickupDate" placeholder="yyyy/mm/dd" readonly></div>
+ 	</div>
+ <div class="form">
+ 	
+ 	<div class="col-md-6"><label class="pull-right">Vehicle Drop-off Date:</label></div>
+ 	<div class="col-md-6"><input value ="${dropOffDate}" class="pull-left" type="date" name="dropoffDate"></div>
+ 	</div>
+</div>  
+   </div>
+ <div>
+ <br>
+ <div align="center">
+  	<button type="submit" class="btn btn-primary btn-sm" formaction="/carRented">Confirm Rental</button>
+  	<a href="/back" class="btn btn-primary btn-sm">Back</a>
+ </div>
+ </div>
  </div>
  
- <div class="form-group">
- 	<div class="col-md-5">
- 		<label class="control-label pull-right">Client First Name:</label>
- 	</div>
- 	<div class="col-md-3">
- 		<input class="form-control pull-left" type="text" name="clientFirstName">
- 	</div>
- </div>
-
- <div class="form-group">
- 	<div class="col-md-5">
- 		<label class="control-label pull-right">Client Last Name:</label>
- 	</div>
- 	<div class="col-md-3">
- 		<input class="form-control pull-left" type="text" name="clientLastName">
- 	</div>
- </div>
-
- <div class="form-group">
- 	<div class="col-md-5">
- 		<label class="control-label pull-right">Client Mobile:</label>
- 	</div>
- 	<div class="col-md-3">
- 		<input class="form-control pull-left" type="number" name="phoneNumber"></div>
- 	</div>
-
- <div class="form-group">
- 	<div class="col-md-5">
- 		<label class="control-label pull-right">Client Drivers License:</label>
- 	</div>
- 	<div class="col-md-3">
- 		<input class="form-control pull-left" type="text" name="driverLicenceNumber">
- 	</div>
- </div>
-
- <div class="form-group">
-	 	<div class="col-md-5">
-	 		<label class="control-label pull-right">Expiry Date:</label>
-	 	</div>
-	 	<div class="col-md-3">
-	 		<input class="form-control pull-left" type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd">
-	 	</div>
-	</div>
- 	<div class="form-group">
-	 	<div class="col-md-5">
-	 		<label class="control-label pull-right">Rental Due Date:</label>
-	 	</div>
-	 	<div class="col-md-3">
-	 		<input class="form-control pull-left" type="text" name="dueDate" placeholder="yyyy/mm/dd">
-	 	</div>
- 	</div>
-<br>
-	<div class="form-group">
-		<div>
-	  		<button type="submit" class="btn btn-primary btn-md" formaction="/RentCarForClient">Confirm</button>
-	  		<a href="/back" class="btn btn-primary btn-md">Back</a>
-		</div>  
-	</div>
-
-   </div>
- </div>
- </div>
 </form>
 </body>
 </html>
+
+
+
+
+
+
+<!--  -->

@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
 	<link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
 	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
 <div class="container" align="center">
  <div class="form">
- <h2>Create A New Rental</h2>
+ <h2>Create A New Reservation</h2>
  <br><br>
 <div align="center">
 
@@ -62,10 +63,10 @@
  	<div class="col-md-6"><input value ="${licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
 </div>
  <br>
- <div class="form">
+ <div class="form" onload="getCurrentDate()">
  
  	<div class="col-md-6"><label class="pull-right">Vehicle Pickup Date:</label></div>
- 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" name="pickupDate" placeholder="yyyy/mm/dd"></div>
+ 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" id ="now" name="pickupDate" placeholder="yyyy/mm/dd"></div>
  	</div>
  <div class="form">
  	
