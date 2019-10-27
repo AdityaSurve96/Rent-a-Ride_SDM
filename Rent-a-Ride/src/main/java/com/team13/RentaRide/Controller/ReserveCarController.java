@@ -65,7 +65,7 @@ public class ReserveCarController {
 
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("ReserveCarForClient");
-		modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
+		modelAndView.addObject("licensePlateNumber", c.getLicensePlateNumber());
 		return modelAndView;
 
 	}
@@ -73,28 +73,42 @@ public class ReserveCarController {
 
 	
 	@RequestMapping(value = "/searchThisClient",  method = RequestMethod.POST)
-	public ModelAndView searchClient(@RequestParam String driverLicenceNumber) {
-		
-		ModelAndView modelAndView = new ModelAndView("ReserveCarForClient");
+	public ModelAndView searchClient(@RequestParam String driverLicenceNumber, @RequestParam String CarLicenseNo) {
+		ModelAndView modelAndView =null;
+		System.out.println(CarLicenseNo);
 		Client c=null;
 		DataStore ds = DataStore.getInstance();
 		List<Client> clients = ds.getAllClients();
-		
+		boolean flag =false;
 		for (Client client : clients) {
 			String clientsDriverLicenceNumber = client.getDriverLicenceNumber();
 			if(clientsDriverLicenceNumber.equals(driverLicenceNumber)) {
 				c=client;
+				flag=true;
 				break;
+				
 			}
+			
+		}
+		if(flag) {
+			modelAndView= new ModelAndView("ReserveCarForClient");
+			modelAndView.addObject("licensePlateNumber",CarLicenseNo);
+			modelAndView.addObject("driverLicenseNumber",c.getDriverLicenceNumber());
+			modelAndView.addObject("clientFirstName", c.getClientFirstName());
+			modelAndView.addObject("clientLastName", c.getClientLastName());
+			modelAndView.addObject("phoneNumber",c.getPhoneNumber());
+			modelAndView.addObject("licenceExpiryDate", c.getLicenceExpiryDate());
+			return modelAndView;
+		}
+		else {
+			modelAndView = new ModelAndView("ReserveCarForClient");
+			modelAndView.addObject("licensePlateNumber",CarLicenseNo);
+			modelAndView.addObject("driverLicenseNumber",driverLicenceNumber);
+			modelAndView.addObject("clientNotFoundMessage", "Client does not exist already. Please enter the client details manually");
+			return modelAndView;
 		}
 		
-		modelAndView.addObject("clientFirstName", c.getClientFirstName());
-		modelAndView.addObject("clientLastName", c.getClientLastName());
-		modelAndView.addObject("phoneNumber",c.getPhoneNumber());
-		modelAndView.addObject("licenceExpiryDate", c.getLicenceExpiryDate());
 		
-		
-		return modelAndView;
 		
 	}
 	
@@ -105,12 +119,16 @@ public class ReserveCarController {
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName,  @RequestParam String clientLastName,
 									   @RequestParam String phoneNumber,      @RequestParam String driverLicenceNumber,
 									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate licenceExpiryDate, 
+									   
 									   @RequestParam String CarLicenseNo,
+									   
 									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dropoffDate,
 									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDate) {
 		
 
 		System.out.println(dropoffDate);
+		
+		
 		
 		String licnum = CarLicenseNo;
 		DataStore ds = DataStore.getInstance();
@@ -129,30 +147,75 @@ public class ReserveCarController {
 			}
 		}
 
-	
-		Client cl = new Client();
-		cl.setClientFirstName(clientFirstName);
-		cl.setClientLastName(clientLastName);
-		cl.setPhoneNumber(phoneNumber);
-		cl.setDriverLicenceNumber(driverLicenceNumber);
-		cl.setLicenceExpiryDate(licenceExpiryDate);
-		
-		ModelAndView modelAndView = new ModelAndView("ViewReservedCars");
-		
+		List<Client> existingClients = ds.getAllClients();
+		Client cl=null;
 		List<ReservedCar> resCars = ds.getReservedCars();
+		boolean flag =false;
+		for (Client client : existingClients) {
+			if(client.getDriverLicenceNumber().equals(driverLicenceNumber)) {
+				flag =true;
+				cl = client;
+				break;
+			}
+		}
 		
-		ReservedCar resCar = new ReservedCar(c, cl, pickupDate, dropoffDate);
+		if(!flag) {
+			cl= new Client();
+			cl.setClientFirstName(clientFirstName);
+			cl.setClientLastName(clientLastName);
+			cl.setPhoneNumber(phoneNumber);
+			cl.setDriverLicenceNumber(driverLicenceNumber);
+			cl.setLicenceExpiryDate(licenceExpiryDate);
+		}
 		
+		ReservedCar resCar = new ReservedCar(c,cl , pickupDate, dropoffDate);
 		resCars.add(resCar);
-		
-		modelAndView.addObject("reservations", resCars);
+		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
+	
 		return modelAndView;
 		
 
 	}
 
+	
+	@RequestMapping(value="/cancelThisReservation")
+	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
+		
+		DataStore ds = DataStore.getInstance();
+		List<ReservedCar> resCars = ds.getReservedCars();
+		List<Car> allCars = ds.getAllCars();
+ 		for (ReservedCar reservedCar : resCars) {
+			if(reservedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
+				for (Car car : allCars) {
+					if(car.equals(reservedCar.getCar())) {
+						car.setAvailableReservedOrRented("Available");
+						resCars.remove(reservedCar);
+						break;
+					}
+				}
+				
+			}
+			break;
+		}
+ 		
+		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
+		return modelAndView;
+	}
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/backToCarCatalog")
@@ -170,20 +233,22 @@ public class ReserveCarController {
 
 	}
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value= "/backToRentedCarList")
-	public ModelAndView showRentedCarPage() {
+	public ModelAndView showRentedCarsPage() {
 		
 		ModelAndView modelAndView = new ModelAndView("RentedCarList");
+		DataStore ds= DataStore.getInstance();
+		modelAndView.addObject("rentals", ds.getRentedCars());
+		return modelAndView;
+ 		
+	}
+	
+	@RequestMapping(value= "/backToReservedCarList")
+	public ModelAndView showReservedCarsPage() {
 		
-		RentedCarList  rh = RentedCarList.getInstance();
-		modelAndView.addObject("rentals", rh.getRentals());
-
-		
+		ModelAndView modelAndView = new ModelAndView("ViewReservedCars");
+		DataStore ds = DataStore.getInstance();
+		modelAndView.addObject("reservations", ds.getReservedCars());
 		return modelAndView;
  		
 	}
@@ -191,143 +256,12 @@ public class ReserveCarController {
 	
 	
 	
-	@RequestMapping(value = "/modifyCarDetailView1" , method = RequestMethod.POST)
-	public ModelAndView Modify1(@RequestParam String modifyCarNumber1){
-		
-		Integer index  = Integer.parseInt(modifyCarNumber1);
-		ModelAndView modelAndView = setFieldforModification(index);
-			
-		return modelAndView;
-	}
-	@RequestMapping(value = "/modifyCarDetailView2" , method = RequestMethod.POST)
-	public ModelAndView Modify2(@RequestParam String modifyCarNumber2){
-		
-		Integer index  = Integer.parseInt(modifyCarNumber2);
-		ModelAndView modelAndView = setFieldforModification(index);
-			
-		return modelAndView;
-	}
-	@RequestMapping(value = "/modifyCarDetailView3" , method = RequestMethod.POST)
-	public ModelAndView Modify3(@RequestParam String modifyCarNumber3){
-		
-		Integer index  = Integer.parseInt(modifyCarNumber3);
-		ModelAndView modelAndView = setFieldforModification(index);
-			
-		return modelAndView;
-	}
-	@RequestMapping(value = "/modifyCarDetailView4" , method = RequestMethod.POST)
-	public ModelAndView Modify4(@RequestParam String modifyCarNumber4){
-		
-		Integer index  = Integer.parseInt(modifyCarNumber4);
-		ModelAndView modelAndView = setFieldforModification(index);
-			
-		return modelAndView;
-	}
-	@RequestMapping(value = "/modifyCarDetailView5" , method = RequestMethod.POST)
-	public ModelAndView Modify5(@RequestParam String modifyCarNumber5){
-		
-		Integer index  = Integer.parseInt(modifyCarNumber5);
-		ModelAndView modelAndView = setFieldforModification(index);
-			
-		return modelAndView;
-	}
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "/deleteCarDetailView1" , method = RequestMethod.POST)
-	public ModelAndView CancelReturn1(@RequestParam String deleteCarNumber1){
-		
-		Integer index  = Integer.parseInt(deleteCarNumber1);
-		ModelAndView modelAndView = setFieldforCancel(index);
-			
-		return modelAndView;
-	}	
-	
-	
-	@RequestMapping(value = "/deleteCarDetailView2" , method = RequestMethod.POST)
-	public ModelAndView CancelReturn2(@RequestParam String deleteCarNumber2){
-		
-		Integer index  = Integer.parseInt(deleteCarNumber2);
-		ModelAndView modelAndView = setFieldforCancel(index);
-			
-		return modelAndView;
-	}	
-	
-	
-	@RequestMapping(value = "/deleteCarDetailView3" , method = RequestMethod.POST)
-	public ModelAndView CancelReturn3(@RequestParam String deleteCarNumber3){
-		
-		Integer index  = Integer.parseInt(deleteCarNumber3);
-		ModelAndView modelAndView = setFieldforCancel(index);
-			
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/deleteCarDetailView4" , method = RequestMethod.POST)
-	public ModelAndView CancelReturn4(@RequestParam String deleteCarNumber4){
-		
-		Integer index  = Integer.parseInt(deleteCarNumber4);
-		ModelAndView modelAndView = setFieldforCancel(index);
-			
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/deleteCarDetailView5" , method = RequestMethod.POST)
-	public ModelAndView CancelReturn5(@RequestParam String deleteCarNumber5){
-		
-		Integer index  = Integer.parseInt(deleteCarNumber5);
-		ModelAndView modelAndView = setFieldforCancel(index);
-			
-		return modelAndView;
-	}
-	
-	
-	
-	
-	public ModelAndView setFieldforModification(Integer index) {
-		
-		ModelAndView modelAndView = new ModelAndView("Modify");
-		RentedCarList rh = RentedCarList.getInstance();
-		List<RentedCar> rentedCarList = rh.getRentals();
-		RentedCar rCar = rentedCarList.get(index-1);
-		Car theCar = rCar.getRentedCar();
-		Client theClient = rCar.getCarsClient();
-		modelAndView.addObject("carLicenseNumber",theCar.getLicensePlateNumber());
-		modelAndView.addObject("clientFirstName",theClient.getClientFirstName());
-		modelAndView.addObject("clientLastName",theClient.getClientLastName());
-		modelAndView.addObject("phoneNumber",theClient.getPhoneNumber());
-		modelAndView.addObject("driverLicenceNumber",theClient.getDriverLicenceNumber());
-		modelAndView.addObject("licenceExpiryDate",theClient.getLicenceExpiryDate());
-		modelAndView.addObject("dueDate",rCar.getDueDate());
-	
-		return modelAndView;
-		
-	}
-	
-	
-public ModelAndView setFieldforCancel(Integer index) {
-		
-		ModelAndView modelAndView = new ModelAndView("CancelReturn");
-		RentedCarList rh = RentedCarList.getInstance();
-		List<RentedCar> rentedCarList = rh.getRentals();
-		RentedCar rCar = rentedCarList.get(index-1);
-//		Car theCar = rCar.getRentedCar();
-//		Client theClient = rCar.getCarsClient();
-//		modelAndView.addObject("carLicenseNumber",theCar.getLicensePlateNumber());
-//		modelAndView.addObject("clientFirstName",theClient.getClientFirstName());
-//		modelAndView.addObject("clientLastName",theClient.getClientLastName());
-//		modelAndView.addObject("phoneNumber",theClient.getPhoneNumber());
-//		modelAndView.addObject("driverLicenceNumber",theClient.getDriverLicenceNumber());
-//		modelAndView.addObject("licenceExpiryDate",theClient.getLicenceExpiryDate());
-		modelAndView.addObject("dueDate",rCar.getDueDate());
-	
-		return modelAndView;
-		
-	}
+
 }
 
 

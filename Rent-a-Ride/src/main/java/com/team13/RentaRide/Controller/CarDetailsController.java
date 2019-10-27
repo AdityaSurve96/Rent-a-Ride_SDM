@@ -79,9 +79,6 @@ public class CarDetailsController {
 			
 			Car nextCar = carsList.get(index+1);
 			c=nextCar;
-//			Car nextCar = carsList.get((index));
-//			index = index + 1 ;
-//			System.out.println("FROM NEXT NEW "+index);
 			ModelAndView modelAndView = showCarView(nextCar);
 			return modelAndView;
 		}
@@ -106,27 +103,13 @@ public class CarDetailsController {
 
 
 
-//	
-//	@RequestMapping("/SearchClient")
-//	public ModelAndView searchThisClient(@RequestParam String)
-//	
-	
 	
 	
 	
 	public ModelAndView showCarView(Car c) {
-		ModelAndView modelAndView= new ModelAndView("CarDetails");
-
-		modelAndView.addObject("price",c.getPrice());
-		modelAndView.addObject("CarModel",c.getModel());
-		modelAndView.addObject("CarMake",c.getMake());
-		modelAndView.addObject("CarYear",c.getYear());
-		modelAndView.addObject("CarType",c.getType());
-		modelAndView.addObject("CarLicensePlate",c.getLicensePlateNumber());
-		modelAndView.addObject("CarColor",c.getColor());
+		ModelAndView modelAndView= new ModelAndView("CarDetails","car",c);
 		
-		
-		if(c.getAvailableReservedOrRented().equals("AVAILABLE")) {
+		if(c.getAvailableReservedOrRented().equals("Available")) {
 			modelAndView.addObject("canReserveOrNot", "Reserve Now");
 			modelAndView.addObject("canRentOrNot",    "Rent Now");
 		}

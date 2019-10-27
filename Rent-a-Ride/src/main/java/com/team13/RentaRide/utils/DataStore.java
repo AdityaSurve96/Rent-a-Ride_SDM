@@ -216,7 +216,7 @@ public final class DataStore {
 
 		// CAR 4
 		Car c4 = new Car();
-		c4.setAvailableReservedOrRented("AVAILABLE");
+		c4.setAvailableReservedOrRented("Available");
 		c4.setColor("White");
 		c4.setDescription("Perfect for a backpacking trip");
 		c4.setLicensePlateNumber("A44 223");
@@ -229,7 +229,7 @@ public final class DataStore {
 
 		// CAR 5
 		Car c5 = new Car();
-		c5.setAvailableReservedOrRented("AVAILABLE");
+		c5.setAvailableReservedOrRented("Available");
 		c5.setColor("Purple");
 		c5.setDescription("Available with Infant car seat");
 		c5.setLicensePlateNumber("A33 J88");
@@ -242,7 +242,7 @@ public final class DataStore {
 
 		// CAR 6
 		Car c6 = new Car();
-		c6.setAvailableReservedOrRented("AVAILABLE");
+		c6.setAvailableReservedOrRented("Available");
 		c6.setColor("Red");
 		c6.setDescription("Available with Infant car seat");
 		c6.setLicensePlateNumber("Z55 817");
