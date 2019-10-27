@@ -383,7 +383,7 @@ public final class DataStore {
 		String d= null;
 		
 		
-		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2020, 01, 15), LocalDate.of(2020, 01, 20));
+		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2019, 11, 15), LocalDate.of(2019, 11, 20));
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -395,7 +395,7 @@ public final class DataStore {
 		}
 			
 		
-		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2020, 02, 05), LocalDate.of(2020, 02, 10));
+		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2019, 02, 05), LocalDate.of(2019, 02, 10));
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -406,7 +406,7 @@ public final class DataStore {
 			e.printStackTrace();
 		}
 			
-		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2020, 04, 10), LocalDate.of(2020, 04, 25));
+		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2019, 04, 10), LocalDate.of(2019, 04, 25));
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {

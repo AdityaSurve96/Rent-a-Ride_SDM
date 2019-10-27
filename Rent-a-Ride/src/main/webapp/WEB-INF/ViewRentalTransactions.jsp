@@ -20,8 +20,9 @@
 	</div>
 	<div class="col-md-6">
 		<h3>
-			<a href="/backToCarCatalog"><u>Back to Car Catalog</u></a>
-			<a href="/backToReservedCarList"><u>View Reserved Transaction</u></a>
+			<a href="/backToCarCatalog"><u>Car Catalog</u></a>
+			&nbsp; &nbsp;
+			<a href="/backToReservedCarList"><u>Reserved Transaction</u></a>
 		</h3>
 	</div> 
 
@@ -29,15 +30,14 @@
 <div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
-			<th style="width: 20%;">Car License Plate Number</th>
-			<th style="width: 20%;">Client First Name</th>
-			<th style="width: 20%;">Client Last Name</th>
-			<th style="width: 10%;">Client D.L</th>
+			<th style="width: 20%;">License Plate Number</th>
+			<th style="width: 5%;">First Name</th>
+			<th style="width: 5%;">Last Name</th>
+			<th style="width: 20%;">Driving License Number</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
-			<th style="width: 10%;">TimeStamp</th>
+			<th style="width: 20%;">Booking Date-time</th>
 			<th style="width: 10%;">Operation</th>
-		
 		</tr>
 		
 		<c:forEach var="rentedCar" items="${rentals}" varStatus="loopCounter">

@@ -12,32 +12,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-
-<div class="col-md-6">
-	<h2>Reservation Transactions</h2> 
-	</div>
-	<div class="col-md-6">
-		<h3>
-			<a href="/backToCarCatalog"><u>Back to Car Catalog</u></a>
-			<a href="/backToRentedCarList"><u>View Rented Transactions</u></a>
-		</h3>
-	</div> 
-
+<form>
 <hr style="clear:both;"/>
 <div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
-			<th style="width: 20%;">Car License Plate Number</th>
-			<th style="width: 20%;">Client First Name</th>
-			<th style="width: 20%;">Client Last Name</th>
-			<th style="width: 10%;">Client D.L</th>
+			<th style="width: 20%;">License Plate Number</th>
+			<th style="width: 5%;">First Name</th>
+			<th style="width: 5%;">Last Name</th>
+			<th style="width: 20%;">Driving License Number</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
-			<th style="width: 10%;">TimeStamp</th>
+			<th style="width: 20%;">Booking Date-time</th>
 			<th style="width: 10%;">Operation</th>
-		
 		</tr>
 		
 		<c:forEach var="reservedCar" items="${reservations}" varStatus="loopCounter">
@@ -61,6 +48,7 @@
 		
 	</table>
 	</div>
-
+</form>
 </body>
+
 </html>

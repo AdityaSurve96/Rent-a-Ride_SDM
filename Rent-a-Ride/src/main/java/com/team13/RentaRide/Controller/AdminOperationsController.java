@@ -285,6 +285,49 @@ public class AdminOperationsController {
 
 	}
 
+	@RequestMapping(value = "/filterReservationRecordsForAdmin", method = RequestMethod.POST)
+	public ModelAndView filterReservationRecordsForAdmin(@RequestParam String licensePlateNumberInput,
+			@RequestParam String drivingLicenseNumberInput,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
+//			
+	) {
+		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
+		List<ReservedCar> reservedCars = DataStore.getInstance().getReservedCars();
+		List<ReservedCar> reservedCarsToSend = new ArrayList<>();
+
+		for (ReservedCar car : reservedCars) {
+
+			if (!StringUtils.isEmpty(licensePlateNumberInput)
+					&& !licensePlateNumberInput.equals(car.getCar().getLicensePlateNumber())) {
+//				System.out.println("setting model add false");
+				continue;
+			}
+
+			if (!StringUtils.isEmpty(drivingLicenseNumberInput)
+					&& !drivingLicenseNumberInput.equals(car.getAssociatedClient().getDriverLicenceNumber())) {
+//				System.out.println("setting model add false");
+				continue;
+			}
+
+			if (dueDateFilter != null && !dueDateFilter.equals(car.getDueDate())) {
+//				System.out.println("setting model add false");
+				continue;
+			}
+
+			if (pickupDateFilter != null && !pickupDateFilter.equals(car.getStartDate())) {
+//				System.out.println("setting model add false");
+				continue;
+			}
+			reservedCarsToSend.add(car);
+
+		}
+
+		modelAndView.addObject("reservations", reservedCarsToSend);
+		return modelAndView;
+
+	}
+
 	@RequestMapping(value = "/filterRentalRecordsForAdmin", method = RequestMethod.POST)
 	public ModelAndView filterRentalRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,

@@ -65,14 +65,13 @@
 <div class="container">
 	<table id="myTable" class="sortable">
 		<tr class="header">
-			<th style="width: 20%;">License Plate Number</th>
+			<th style="width: 10%;">License Plate Number</th>
 			<th style="width: 5%;">First Name</th>
 			<th style="width: 5%;">Last Name</th>
 			<th style="width: 20%;">Driving License Number</th>
 			<th style="width: 10%;">Pick-Up Date</th>
 			<th style="width: 10%;">Drop-Off Date</th>
 			<th style="width: 20%;">Booking Date-time</th>
-		
 		</tr>
 		
 		<c:forEach var="rentedCar" items="${rentals}" varStatus="loopCounter">
