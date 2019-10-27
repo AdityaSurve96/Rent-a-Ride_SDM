@@ -29,16 +29,7 @@
 
 
 <div class="container">
-<div class="col-md-6">
-	<h2>Reservation Transactions</h2> 
-	</div>
-	<div class="col-md-6">
-		<h3>
-			<a href="/backToCarCatalog"><u>Car Catalog</u></a>
-			&nbsp;&nbsp;
-			<a href="/backToRentedCarList"><u>View Rented Transactions</u></a>
-		</h3>
-	</div> 
+
 	<label>License Plate Number </label> 
 			<input type="hidden" name="licensePlateNumberInput" id="licensePlateNumberInput"/>
 			<select id="licensePlateNumber" onChange="setInputValue('licensePlateNumber')" >
