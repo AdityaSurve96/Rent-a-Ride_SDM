@@ -80,7 +80,7 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
-
+		
 	@RequestMapping(value = "/adminManageCatalog", method = RequestMethod.GET)
 	public ModelAndView adminManageCatalog() {
 		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());

@@ -19,18 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
-import com.team13.RentaRide.model.RentedCarList;
 import com.team13.RentaRide.model.ReservedCar;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class ReserveCarController {
 
+	String page = null;
+	
+	
 	@RequestMapping(value= "/rentThisCar")
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-		
+		page = "CreateRental";
 		Car c=null;
 		for (Car car : carsList) {
 			if(car.getLicensePlateNumber().equals(licensePlate)) {
@@ -43,7 +45,8 @@ public class ReserveCarController {
 
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("RentCarForClient");
-		modelAndView.addObject("carLicenseNumber", c.getLicensePlateNumber());
+		modelAndView.addObject("licensePlateNumber", c.getLicensePlateNumber());
+		modelAndView.addObject("pickUpDate", LocalDate.now());
 		return modelAndView;
 
 	}
@@ -52,7 +55,7 @@ public class ReserveCarController {
 	public ModelAndView showCarReservingPage(@RequestParam String licensePlate) {
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
-		
+		page = "CreateReservation";
 		Car c=null;
 		for (Car car : carsList) {
 			if(car.getLicensePlateNumber().equals(licensePlate)) {
@@ -91,7 +94,16 @@ public class ReserveCarController {
 			
 		}
 		if(flag) {
-			modelAndView= new ModelAndView("ReserveCarForClient");
+			if(page == "CreateReservation") {
+				modelAndView= new ModelAndView("ReserveCarForClient");
+				
+			}
+			else if(page == "CreateRental") {
+				modelAndView= new ModelAndView("RentCarForClient");
+				modelAndView.addObject("pickUpDate", LocalDate.now());
+			}
+			
+		
 			modelAndView.addObject("licensePlateNumber",CarLicenseNo);
 			modelAndView.addObject("driverLicenseNumber",c.getDriverLicenceNumber());
 			modelAndView.addObject("clientFirstName", c.getClientFirstName());
@@ -101,7 +113,14 @@ public class ReserveCarController {
 			return modelAndView;
 		}
 		else {
-			modelAndView = new ModelAndView("ReserveCarForClient");
+			if(page == "CreateReservation") {
+				modelAndView= new ModelAndView("ReserveCarForClient");
+			}
+			else if(page == "CreateRental") {
+				modelAndView= new ModelAndView("RentCarForClient");
+				modelAndView.addObject("pickUpDate", LocalDate.now());
+			}
+			
 			modelAndView.addObject("licensePlateNumber",CarLicenseNo);
 			modelAndView.addObject("driverLicenseNumber",driverLicenceNumber);
 			modelAndView.addObject("clientNotFoundMessage", "Client does not exist already. Please enter the client details manually");
@@ -116,7 +135,7 @@ public class ReserveCarController {
 	
 	
 	@RequestMapping(value ="/carReserved",  method = RequestMethod.POST)
-	public ModelAndView showRentedCars(@RequestParam String clientFirstName,  @RequestParam String clientLastName,
+	public ModelAndView showReservedCars(@RequestParam String clientFirstName,  @RequestParam String clientLastName,
 									   @RequestParam String phoneNumber,      @RequestParam String driverLicenceNumber,
 									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate licenceExpiryDate, 
 									   
@@ -140,7 +159,7 @@ public class ReserveCarController {
 			String lic = car.getLicensePlateNumber();
 
 			if(lic.equals(licnum)) {
-				car.setAvailableReservedOrRented("RESERVED");
+				car.setAvailableReservedOrRented("Reserved");
 				c = car;
 				break;
 				
@@ -170,7 +189,7 @@ public class ReserveCarController {
 		
 		ReservedCar resCar = new ReservedCar(c,cl , pickupDate, dropoffDate);
 		resCars.add(resCar);
-		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
+		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions","reservations", resCars);
 	
 		return modelAndView;
 		
@@ -198,10 +217,101 @@ public class ReserveCarController {
 			break;
 		}
  		
-		ModelAndView modelAndView = new ModelAndView("ViewReservedCars","reservations", resCars);
+		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions","reservations", resCars);
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/handleTheReturnThisRental")
+	public ModelAndView returnSelectedRental(@RequestParam String carLicencePlateNumber) {
+		
+		DataStore ds = DataStore.getInstance();
+		List<RentedCar> renCars = ds.getRentedCars();
+		List<Car> allCars = ds.getAllCars();
+ 		for (RentedCar rentedCar : renCars) {
+			if(rentedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
+				for (Car car : allCars) {
+					if(car.equals(rentedCar.getCar())) {
+						car.setAvailableReservedOrRented("Available");
+						renCars.remove(rentedCar);
+						break;
+					}
+				}
+				
+			}
+			break;
+		}
+ 		
+		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions","rentals", renCars);
 		return modelAndView;
 	}
 
+	
+	
+	
+	
+	
+	@RequestMapping(value ="/carRented",  method = RequestMethod.POST)
+	public ModelAndView showRentedCars(@RequestParam String clientFirstName,  @RequestParam String clientLastName,
+									   @RequestParam String phoneNumber,      @RequestParam String driverLicenceNumber,
+									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate licenceExpiryDate, 
+									   
+									   @RequestParam String CarLicenseNo,
+									   
+									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dropoffDate,
+									   @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDate) {
+		
+
+		System.out.println(dropoffDate);
+		
+		
+		
+		String licnum = CarLicenseNo;
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
+		
+		Car c=null;
+		
+		for (Car car : carsList) {
+			String lic = car.getLicensePlateNumber();
+
+			if(lic.equals(licnum)) {
+				car.setAvailableReservedOrRented("Rented");
+				c = car;
+				break;
+				
+			}
+		}
+
+		List<Client> existingClients = ds.getAllClients();
+		Client cl=null;
+		List<RentedCar> renCars = ds.getRentedCars();
+		boolean flag =false;
+		for (Client client : existingClients) {
+			if(client.getDriverLicenceNumber().equals(driverLicenceNumber)) {
+				flag =true;
+				cl = client;
+				break;
+			}
+		}
+		
+		if(!flag) {
+			cl= new Client();
+			cl.setClientFirstName(clientFirstName);
+			cl.setClientLastName(clientLastName);
+			cl.setPhoneNumber(phoneNumber);
+			cl.setDriverLicenceNumber(driverLicenceNumber);
+			cl.setLicenceExpiryDate(licenceExpiryDate);
+		}
+		
+		RentedCar renCar = new RentedCar(c,cl , pickupDate, dropoffDate);
+		renCars.add(renCar);
+		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions","rentals", renCars);
+	
+		return modelAndView;
+		
+
+	}
 	
 	
 	
@@ -236,7 +346,7 @@ public class ReserveCarController {
 	@RequestMapping(value= "/backToRentedCarList")
 	public ModelAndView showRentedCarsPage() {
 		
-		ModelAndView modelAndView = new ModelAndView("RentedCarList");
+		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions");
 		DataStore ds= DataStore.getInstance();
 		modelAndView.addObject("rentals", ds.getRentedCars());
 		return modelAndView;
@@ -246,19 +356,12 @@ public class ReserveCarController {
 	@RequestMapping(value= "/backToReservedCarList")
 	public ModelAndView showReservedCarsPage() {
 		
-		ModelAndView modelAndView = new ModelAndView("ViewReservedCars");
+		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions");
 		DataStore ds = DataStore.getInstance();
 		modelAndView.addObject("reservations", ds.getReservedCars());
 		return modelAndView;
  		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 
 
