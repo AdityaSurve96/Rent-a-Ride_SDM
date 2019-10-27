@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,22 +42,22 @@
 		
 		<c:forEach var="client" items="${clients}" varStatus="loopCounter">
 		<tr class="CarInfo">
-			<td>${client.driverlicenseNumber}</td>
+			<td>${client.driverLicenceNumber}</td>
 			<td>${client.clientFirstName}</td>
-			<td>${client.clientFirstName}</td>
+			<td>${client.clientLastName}</td>
 			<td>${client.phoneNumber}</td>
-			<td>${client.licenseExpiryDate}</td>
-			
+			<td>${client.licenceExpiryDate}</td>
+			<form method="post" >
 			<td>  
-			<input value= "${loopCounter.count}" type = "hidden" name = "modifyCLientNumber${loopCounter.count}" />
-			<input type= "submit" formaction= "/modifyCLientView${loopCounter.count}" value="MODIFY" />
+			<input value= "${client.driverLicenceNumber}" type = "hidden" name = "driverLicenceNumberForModify" />
+			<input type= "submit" formaction= "/gotoModifyClientRecord" value="MODIFY" />
 			</td>
 			
 			<td>  
-			<input value= "${loopCounter.count}" type = "hidden" name = "deleteClientNumber${loopCounter.count}" />
-			<input type= "submit" formaction= "/deleteClientView${loopCounter.count}" value= "DELETE" />
+			<input value= "${client.driverLicenceNumber}" type = "hidden" name = "driverLicenceNumberForDelete" />
+			<input type= "submit" formaction= "/gotoDeleteClientRecord" value= "DELETE" />
 			</td>
-			
+			</form>
 		</tr>
 		</c:forEach>
 		

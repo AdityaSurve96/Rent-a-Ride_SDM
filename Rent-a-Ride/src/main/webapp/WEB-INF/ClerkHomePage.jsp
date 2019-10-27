@@ -28,7 +28,7 @@
 			
 				<!-- ../../webapp/WEB-INF/jsp/login.jsp -->
 				<br><Br>
-				<a href="LoginClerk" class="btn btn-primary btn-lg">Manage Clients</a> 
+				<a href="/showClientManagement" class="btn btn-primary btn-lg">Manage Clients</a> 
 				
 				<a href="/viewCarCatalog" class="btn btn-primary btn-lg">View Catalogue</a>
 		</div>
