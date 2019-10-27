@@ -24,13 +24,13 @@
 				<div class="row">
 					<h1>Clerk Home Page</h1>
 				</div>
-<br><br>				
+				<br><br>				
 			
 				<!-- ../../webapp/WEB-INF/jsp/login.jsp -->
 				<br><Br>
 				<a href="/showClientManagement" class="btn btn-primary btn-lg">Manage Clients</a> 
 				
-				<a href="/viewCarCatalog" class="btn btn-primary btn-lg">View Catalogue</a>
+				<a href="/viewCarCatalog" class="btn btn-primary btn-lg">View Catalog</a>
 		</div>
 </body>
 
