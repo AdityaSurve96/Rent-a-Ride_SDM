@@ -13,6 +13,18 @@
 </head>
 <body>
 <form>
+<div class="col-md-6">
+	<h2>Reservation Transactions</h2> 
+	</div>
+	<div class="col-md-6">
+		<h3>
+			<a href="/backToCarCatalog"><u>Car Catalog</u></a>
+			&nbsp;&nbsp;
+			<a href="/backToRentedCarList"><u>View Rented Transactions</u></a>
+		</h3>
+	</div> 
+
+
 <hr style="clear:both;"/>
 <div class="container">
 	<table id="myTable" class="sortable">
