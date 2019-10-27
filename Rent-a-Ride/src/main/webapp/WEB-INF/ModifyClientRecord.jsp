@@ -23,7 +23,7 @@
 
 <div class="form">
  <div class="col-md-6"><label class="pull-right">Driver Licence Number:</label></div>
- <div class="col-md-6"><input value = "${client.driverLicenceNumber}" class="pull-left" type="text" name="driverLicenseNumber">
+ <div class="col-md-6"><input value = "${client.driverLicenceNumber}" class="pull-left" type="text" name="driverLicenseNumber" readonly>
  	
  </div>
  </div>
@@ -44,7 +44,7 @@
  <br>
  <div class="form">
  <div class="col-md-6"><label class="pull-right">Client Phone Number:</label></div>
- <div class="col-md-6"><input value = "${client.phoneNumber}" class="pull-left" type="text" name="phoneNumber">
+ <div class="col-md-6"><input value = "${client.phoneNumber}" class="pull-left" type="number" name="phoneNumber">
  	 
  </div>
  </div>
@@ -52,7 +52,7 @@
  <div class="form">
  
  	<div class="col-md-6"><label class="pull-right">Expiry Date:</label></div>
- 	<div class="col-md-6"><input value = "${client.licenceExpiryDate}" class="pull-left" type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
+ 	<div class="col-md-6"><input value = "${client.licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
 
 </div>
  <br>
@@ -61,7 +61,8 @@
  <div>
  <br>
  <div align="center">
-  	<button type="submit" class="btn btn-primary btn-sm" formaction="/ClientManagementPage" name ="ConfirmModify">Confirm</button>
+ 	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberForForm">
+  	<button type="submit" class="btn btn-primary btn-sm" formaction="/gotoClientManagementPageAfterModification" name ="ConfirmModify">Confirm Modification</button>
   	<a href="/ClientManagementPage" class="btn btn-primary btn-sm">Back</a>
  </div>
  </div>

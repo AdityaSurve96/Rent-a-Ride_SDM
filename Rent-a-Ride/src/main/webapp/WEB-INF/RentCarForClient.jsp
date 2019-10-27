@@ -59,13 +59,13 @@
  <div class="form">
  
  	<div class="col-md-6"><label class="pull-right">Licence Expiry Date:</label></div>
- 	<div class="col-md-6"><input value ="${licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
+ 	<div class="col-md-6"><input value ="${licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-mdd"></div>
 </div>
  <br>
  <div class="form">
  
  	<div class="col-md-6"><label class="pull-right">Vehicle Pickup Date:</label></div>
- 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" name="pickupDate" placeholder="yyyy/mm/dd" readonly></div>
+ 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" name="pickupDate" placeholder="yyyy-mm-dd" readonly></div>
  	</div>
  <div class="form">
  	

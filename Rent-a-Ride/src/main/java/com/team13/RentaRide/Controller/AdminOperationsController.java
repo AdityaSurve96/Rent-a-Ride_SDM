@@ -30,6 +30,7 @@ public class AdminOperationsController {
 		return modelAndView;
 	}
 
+	
 	@RequestMapping("/showRentals")
 	public ModelAndView showClientManagementPage() {
 

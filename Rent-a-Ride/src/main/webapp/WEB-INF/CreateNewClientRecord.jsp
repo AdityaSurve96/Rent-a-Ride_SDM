@@ -48,7 +48,7 @@
  <div class="form">
  
  	<div class="col-md-6"><label class="pull-right">Licence Expiry Date:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="text" name="licenceExpiryDate" placeholder="yyyy/mm/dd"></div>
+ 	<div class="col-md-6"><input class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
 </div>
  <br>
 
@@ -57,7 +57,8 @@
  </div>
  <br>
  <div align="center">
-  	<button type="submit" class="btn btn-primary btn-sm" formaction="/ClientManagementPage">Confirm</button>
+ 
+  	<button type="submit" class="btn btn-primary btn-sm" formaction="/goToClientManagementPageAfterCreation">Confirm/Create</button>
   	<a href="/ClientManagementPage" class="btn btn-primary btn-sm">Back</a>
  </div>
  </div>
