@@ -79,7 +79,7 @@
 </div>
 </form>
 <br>
-
+<font color="red">${errorMessage}</font>
 <form>
 	<div class="container">
 	<table id="myTable" class="sortable">
@@ -91,8 +91,9 @@
 			<th style="width: 10%;">Year</th>
 			<th style="width: 10%;">Color</th>
 			<th style="width: 10%;">Price</th>
-			<th style="width: 13%;">
-			</th>
+			<th style="width: 13%;">Operations</th>
+			
+			
 		</tr>
 		
 		<c:forEach var="car" items="${cars}" varStatus="loop">
@@ -115,6 +116,9 @@
 						<button type="submit" formaction="/deleteCar">
 							<i class="fa fa-trash"></i>
 						</button>
+					</span>
+					<span>
+						
 					</span>
 					<input type="hidden" name="currentLicensePlateNumber" value="${car.licensePlateNumber}">
 				</form>

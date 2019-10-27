@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
+import com.team13.RentaRide.model.RentedCar;
+import com.team13.RentaRide.model.ReservedCar;
 import com.team13.RentaRide.utils.DataStore;
 
 @Controller
@@ -31,11 +33,19 @@ public class AdminOperationsController {
 	}
 
 	
-	@RequestMapping("/showRentals")
-	public ModelAndView showClientManagementPage() {
+	@RequestMapping("/adminViewRentals")
+	public ModelAndView showRentals() {
 
-		ModelAndView modelAndView = new ModelAndView("RentalRecordsPage");
+		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions","rentals",DataStore.getInstance().getRentedCars());
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/adminViewReservations")
+	public ModelAndView showReservations() {
 
+		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions","reservations",DataStore.getInstance().getReservedCars());
+		
 		return modelAndView;
 	}
 
@@ -131,16 +141,42 @@ public class AdminOperationsController {
 	public ModelAndView editCar(@RequestParam String currentLicensePlateNumber) {
 		System.out.println("licensePlateNumber: " + currentLicensePlateNumber);
 		Car currentCar = null;
-
+		boolean flag= false;
+		ModelAndView modelAndView = null;
 		for (Car car : DataStore.getInstance().getAllCars()) {
 			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
 				currentCar = car;
 				break;
 			}
 		}
-
-		ModelAndView modelAndView = new ModelAndView("EditCarPage", "car", currentCar);
-		return modelAndView;
+		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
+		List<ReservedCar> resCars = DataStore.getInstance().getReservedCars();
+		for (ReservedCar reservedCar : resCars) {
+			if(reservedCar.getCar().equals(currentCar)) {
+				flag=true;
+				break;
+			}
+		}
+		for (RentedCar rentedCar : renCars) {
+			if(rentedCar.getCar().equals(currentCar)) {
+				flag = true; 
+				break;
+			}
+		}
+		
+		modelAndView = new ModelAndView("EditCarPage", "car", currentCar);
+		if(flag) {
+			
+			modelAndView.addObject("editDecide", "Cannot Edit Car Details, Car cuurently Booked");
+			
+			modelAndView.addObject("readOnly", "readonly");
+			modelAndView.addObject("disableOrNo" , "disabled");
+			
+		}
+		else {
+			modelAndView.addObject("editDecide", "Edit Car Details");
+		}
+		 return modelAndView;
 	}
 
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
@@ -164,18 +200,88 @@ public class AdminOperationsController {
 	@RequestMapping(value = "/deleteCar")
 	public ModelAndView deleteCar(@RequestParam String currentLicensePlateNumber) {
 
-		List<Car> tempCars = new ArrayList<Car>();
-		tempCars.addAll(DataStore.getInstance().getAllCars());
-		int index = 0;
-		for (Car tempCar : tempCars) {
-			if (tempCar.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
-				DataStore.getInstance().getAllCars().remove(index);
+//		List<Car> tempCars = new ArrayList<Car>();
+//		tempCars.addAll(DataStore.getInstance().getAllCars());
+//		int index = 0;
+//		for (Car tempCar : tempCars) {
+//			if (tempCar.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
+//				DataStore.getInstance().getAllCars().remove(index);
+//				break;
+//			}
+//			index++;
+//		}
+		boolean flag = false;
+		ModelAndView modelAndView = null;
+		Car currentCar=null;
+		for (Car car : DataStore.getInstance().getAllCars()) {
+			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
+				currentCar = car;
 				break;
 			}
-			index++;
 		}
-
-		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
+		List<ReservedCar> resCars = DataStore.getInstance().getReservedCars();
+		
+		for (ReservedCar reservedCar : resCars) {
+			if(reservedCar.getCar().equals(currentCar)) {
+				flag=true;
+				break;
+			}
+		}
+		for (RentedCar rentedCar : renCars) {
+			if(rentedCar.getCar().equals(currentCar)) {
+				flag = true; 
+				break;
+			}
+		}
+		List<Car> allCars = DataStore.getInstance().getAllCars();
+		if(flag) {
+			
+		 modelAndView =  new ModelAndView("AdminCarCatalogPage", "cars", allCars);
+		 modelAndView.addObject("errorMessage", "Cannot delete vehicle now  as it is currently booked");
+		 return modelAndView;
+		}
+		else {
+			
+			allCars.remove(currentCar);
+			return new ModelAndView("AdminCarCatalogPage", "cars", allCars);
+		}
 	}
+	
 
+	
+	@RequestMapping(value= "/backToAdminReservedCarList")
+	public ModelAndView showAdminReservedCarsPage() {
+		
+		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
+		DataStore ds = DataStore.getInstance();
+		modelAndView.addObject("reservations", ds.getReservedCars());
+		return modelAndView;
+ 		
+	}
+	
+	@RequestMapping(value= "/backToAdminRentedCarList")
+	public ModelAndView showAdminRentedCarsPage() {
+		
+		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
+		DataStore ds= DataStore.getInstance();
+		modelAndView.addObject("rentals", ds.getRentedCars());
+		return modelAndView;
+ 		
+	}
+	
+	@RequestMapping(value = "/backToAdminCarCatalog")
+	public ModelAndView goToAdminCarCatalog() {
+
+		ModelAndView modelAndView  = new ModelAndView("AdminCarCatalogPage","cars",DataStore.getInstance().getAllCars());
+		
+		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = ds.getAllCars();
+		
+		modelAndView.addObject("cars", carsList);
+		
+		return modelAndView;
+
+
+	}
 }

@@ -24,7 +24,7 @@ public final class DataStore {
 	private static List<RentedCar> rentedCars;
 	private static List<ReservedCar> reservedCars;
 
-	
+
 	private DataStore() {
 
 		clients = new ArrayList<Client>();
@@ -33,7 +33,7 @@ public final class DataStore {
 		carList = new ArrayList<Car>();
 		rentedCars = new ArrayList<RentedCar>();
 		reservedCars = new ArrayList<ReservedCar>();
-		
+
 		addSomeAdmins();
 		addSomeClerks();
 		addSomeClients();
@@ -44,13 +44,13 @@ public final class DataStore {
 
 
 	public static DataStore getInstance() {
-		
+
 		if (instance == null)
 			instance = new DataStore();
 		return instance;
 	}
 
-	
+
 	public void addClerk(String email, String password) {
 
 		Clerk c = new Clerk(email, password);
@@ -59,19 +59,19 @@ public final class DataStore {
 	}
 
 
-	
+
 	public void addAdmin(String email, String password) {
 
 		Admin a = new Admin(email, password);
 
 		admins.add(a);
 	}
-	
 
-	
-	
-	
-	
+
+
+
+
+
 	public static List<Admin> getAdmins() {
 		return admins;
 	}
@@ -125,10 +125,26 @@ public final class DataStore {
 		cl3.setClientLastName("Albert");
 		cl3.setPhoneNumber("7826789987");
 		cl3.setLicenceExpiryDate(LocalDate.of(2034, 11, 01));
+		
+		Client cl4 = new Client();
+		cl4.setDriverLicenceNumber("IUYTRW12345");
+		cl4.setClientFirstName("Thomas");
+		cl4.setClientLastName("Jackson");
+		cl4.setPhoneNumber("1111819987");
+		cl4.setLicenceExpiryDate(LocalDate.of(2044, 01, 01));
+		
+		Client cl5 = new Client();
+		cl5.setDriverLicenceNumber("KKJIU87765");
+		cl5.setClientFirstName("Nathan");
+		cl5.setClientLastName("Douglas");
+		cl5.setPhoneNumber("1010101210");
+		cl5.setLicenceExpiryDate(LocalDate.of(2023, 07, 17));
 
 		clients.add(cl1);
 		clients.add(cl2);
 		clients.add(cl3);
+		clients.add(cl4);
+		clients.add(cl5);
 
 	}
 
@@ -164,13 +180,6 @@ public final class DataStore {
 	}
 
 
-	public void addSomeCarstoRentedCars() {
-			
-	}
-
-	public void addSomeCarstoReservedCars() {
-			
-	}
 
 
 	public void addSomeCarstoList() {
@@ -318,6 +327,24 @@ public final class DataStore {
 
 	}
 
+	public void addSomeCarstoRentedCars() {
+		RentedCar renCar1 = new RentedCar(getAllCars().get(2), getAllClients().get(0), LocalDate.now(), LocalDate.of(2019, 12, 13));
+		RentedCar renCar2 = new RentedCar(getAllCars().get(7), getAllClients().get(2), LocalDate.now(), LocalDate.of(2019, 12, 17));
+		RentedCar renCar3 = new RentedCar(getAllCars().get(9), getAllClients().get(4), LocalDate.now(), LocalDate.of(2019, 12, 25));
+		rentedCars.add(renCar1);
+		rentedCars.add(renCar2);
+		rentedCars.add(renCar3);
+		
+	}
+
+	public void addSomeCarstoReservedCars() {
+		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2020, 01, 15), LocalDate.of(2020, 01, 20));
+		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2020, 02, 05), LocalDate.of(2020, 02, 10));
+		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2020, 04, 10), LocalDate.of(2020, 04, 25));
+		reservedCars.add(resCar1);
+		reservedCars.add(resCar2);
+		reservedCars.add(resCar3);
+	}
 
 
 

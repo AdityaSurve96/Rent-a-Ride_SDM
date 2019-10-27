@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.utils.DataStore;
 

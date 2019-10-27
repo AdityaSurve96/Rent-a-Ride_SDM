@@ -16,7 +16,7 @@
 <form method="post" class="form-horizontal">
 <div align="center">
  <div >
- <h2>Edit Car Details</h2>
+ <h2> ${editDecide}</h2>
  <br>
 <div class="container" align="center">
 
@@ -34,7 +34,7 @@
 	 	<label class="control-label pull-right">Description:</label>
 	 </div>
 	 <div class="col-md-3">
-  		<textarea class="form-control rounded-0" name="description" id="carDescription" rows="2">${car.description}</textarea>
+  		<textarea class="form-control rounded-0" name="description" id="carDescription" rows="2" ${readOnly}>${car.description}</textarea>
 	 </div>
  </div>
  
@@ -43,7 +43,7 @@
  		<label class="control-label pull-right">Model:</label>
  	</div>
  	<div class="col-md-3">
- 		<input value="${car.model}" class="form-control pull-left" type="text" name="model">
+ 		<input value="${car.model}" class="form-control pull-left" type="text" name="model"  ${readOnly}>
  	</div>
  </div>
 
@@ -52,7 +52,7 @@
  		<label class="control-label pull-right">Type:</label>
  	</div>
  	<div class="col-md-3">
- 		<input value="${car.type}" class="form-control pull-left" type="text" name="type">
+ 		<input value="${car.type}" class="form-control pull-left" type="text" name="type"  ${readOnly}>
  	</div>
  </div>
 
@@ -61,7 +61,7 @@
  		<label class="control-label pull-right">Make:</label>
  	</div>
  	<div class="col-md-3">
- 		<input value="${car.make}"  class="form-control pull-left" type="text" name="make"></div>
+ 		<input value="${car.make}"  class="form-control pull-left" type="text" name="make"  ${readOnly}></div>
  	</div>
 
  <div class="form-group">
@@ -69,7 +69,7 @@
  		<label class="control-label pull-right">Year:</label>
  	</div>
  	<div class="col-md-3">
- 		<input value="${car.year}" class="form-control pull-left" type="number" name="year">
+ 		<input value="${car.year}" class="form-control pull-left" type="number" name="year"  ${readOnly}>
  	</div>
  </div>
 
@@ -78,7 +78,7 @@
  		<label class="control-label pull-right">Color:</label>
 	</div>
 	<div class="col-md-3">
-		<input value="${car.color}" class="form-control pull-left" type="text" name="color">
+		<input value="${car.color}" class="form-control pull-left" type="text" name="color"  ${readOnly}>
 	</div>
 </div>
 
@@ -87,7 +87,7 @@
  		<label class="control-label pull-right">Price:</label>
 	</div>
 	<div class="col-md-3">
-		<input value="${car.price}" class="form-control pull-left" step="0.01" name="price">
+		<input value="${car.price}" class="form-control pull-left" step="0.01" name="price"  ${readOnly}>
 	</div>
 </div>
 
@@ -95,7 +95,7 @@
 
  <div class="form-group">
 	<div>
-		<button type="submit" class="btn btn-primary btn-md" formaction="/saveCarChanges">Save Changes</button>
+		<button type="submit" class="btn btn-primary btn-md" formaction="/saveCarChanges" ${disableOrNo}>Save Changes</button>
 	  	<a href="/adminManageCatalog" class="btn btn-primary btn-md">Cancel</a>
 	</div>  
  </div>
