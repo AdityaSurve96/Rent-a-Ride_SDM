@@ -23,8 +23,20 @@ Proposed technology for developement :- Java with Spring
 
 
 Steps: 
+1. Download the project from the releases tab - either "Deliverable 1" i.e Iteration2 or "Deliverable 2(Most Recent)" i.e Iteration3). 
+2. Download Eclipse IDE pr Spring tool Suite 4 to run the application.  
+&nbsp; &nbsp; Link for Spring tool suite 4 : https://spring.io/tools &nbsp; Scroll down on this page for download link. 
+3. Import the project into Eclipse/ Spring tool suite 4 as a MAVEN PROEJECT and wait for all dependencies to load. 
+4. Just to be safe refresh the project once and then run the main java file as Java Application ( For eclipse) or as Spring boot application ( in Spring tool suite 4). 
+&nbsp; &nbsp; Main file is located under folder : "src/main/java/com/team13/RentaRide/RentARideApplication.java". 
+5. After the application runs successfully ( it may take a few seconds till the application starts completely), 
+&nbsp; &nbsp; Go to browser and type http://localhost:8080/ in the top url search box. ( port number may vary and is displayed in the console after running the application in last few lines).  
+6. Now you will see the home page of the application. Next instructions are mentioned below ..  
+
+
+
 1. For Clerk there are 3 emails and passwords with which you can login directly:  
-a. Email :- clerk1@gmail.com and Password : clerk1_2019  and similarly clerk2 and clerk3 
+a. Email :- clerk1@gmail.com and Password : clerk1_2019  and similarly clerk2 and clerk3  
 2. For Admin there are 3 emails and passwords with which you can login directly:  
 b. Email :- admin1@gmail.com and Password : admin1_2019  and similarly admin2 and admin3.  
 
