@@ -83,7 +83,7 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
-	public ModelAndView registerClerk(@RequestParam String email, @RequestParam String password) {
+	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
 		if (!email.isEmpty() && !password.isEmpty()) {
 			DataStore.getAdmins().add(new Admin(email, password));

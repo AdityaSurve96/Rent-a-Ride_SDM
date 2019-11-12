@@ -16,7 +16,7 @@ public class CarDetailsController {
 	Car c=null;
 	
 	@RequestMapping("/carDetailView")
-	public ModelAndView showCarDetails1(@RequestParam String licensePlateInput) {
+	public ModelAndView showCarDetails(@RequestParam String licensePlateInput) {
 		String carNumber = licensePlateInput;
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();

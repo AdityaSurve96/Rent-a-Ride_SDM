@@ -26,16 +26,23 @@ public class DatabaseCreator {
 		String useDb = "USE "+schemaName+";";
 		
 		
-		String createTableAdmin  = "CREATE TABLE IF NOT EXISTS  Admin (ID int, Email varchar(255), Password varchar(255) );";
+		String createTableAdmin  =      "CREATE TABLE IF NOT EXISTS  Admin       (id int NOT NULL, email varchar(255), password varchar(255), PRIMARY KEY (id) );";
 		
 		
-		String createTableClerk  = "CREATE TABLE IF NOT EXISTS  Clerk (ID int, Email varchar(255), Password varchar(255) );";
+		String createTableClerk  =      "CREATE TABLE IF NOT EXISTS  Clerk       (id int NOT NULL, email varchar(255), password varchar(255), PRIMARY KEY (id) );";
 		
 		
-		String createTableCar    = "CREATE TABLE IF NOT EXISTS  Car   (ID int, licensePlateNumber varchar(30), make varchar(20), model varchar(20), type varchar(20), color varchar(20), year int(4), description varchar(255), price DECIMAL(3,2), availableReservedOrRented varchar(20));";
+		String createTableCar    =      "CREATE TABLE IF NOT EXISTS  Car         (id int NOT NULL, license_plate_number varchar(30), make varchar(20), model varchar(20), type varchar(20), color varchar(20), year int(4), description varchar(255), price DECIMAL(3,2), available_reserved_or_rented varchar(20), PRIMARY KEY (id));";
 		
 		
-		String createTableClient = "CREATE TABLE IF NOT EXISTS  Client  (ID int, driverLicenceNumber varchar(30), clientFirstName varchar(30), clientLastName varchar(30), phoneNumber varchar(10), licenceExpiryDate Date);";
+		String createTableClient =	    "CREATE TABLE IF NOT EXISTS  Client      (id int NOT NULL, driver_licence_number varchar(30), client_first_name varchar(30), client_last_name varchar(30), phone_number varchar(10), licence_expiry_date Date , PRIMARY KEY (id) );";
+		
+		
+		String createTableReservedCar = "CREATE TABLE IF NOT EXISTS  ReservedCar (id int NOT NULL, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP , PRIMARY KEY (id), FOREIGN KEY (car_id) REFERENCES Car(id), FOREIGN KEY (client_id) REFERENCES Client(id) ); ";
+		
+		
+		String createTableRentedCar =   "CREATE TABLE IF NOT EXISTS  RentedCar   (id int NOT NULL, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP , PRIMARY KEY (id), FOREIGN KEY (car_id) REFERENCES Car(id), FOREIGN KEY (client_id) REFERENCES Client(id) ); ";
+		
 		
 		
 		try (Connection con = DriverManager.getConnection(urlShort, user, password);
@@ -59,6 +66,14 @@ public class DatabaseCreator {
 			
 			Statement st6 = con.createStatement();
 			st6.execute(createTableClient);
+			
+			Statement st7 = con.createStatement();
+			st7.execute(createTableRentedCar);
+			
+			Statement st8 = con.createStatement();
+			st8.execute(createTableReservedCar);
+			
+		
 			
 	
 			
