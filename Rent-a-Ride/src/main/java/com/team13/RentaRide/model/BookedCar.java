@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class BookedCar {
 	
-	
+	protected Integer id;
 	private Car car;
 	private Client associatedClient;
 	private LocalDate startDate;

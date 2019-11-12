@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Car {
 
+	protected Integer id;
 	private String licensePlateNumber;
 
 	private String make;

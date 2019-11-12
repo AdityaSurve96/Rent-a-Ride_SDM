@@ -24,7 +24,7 @@ public class CarFilterController {
 		List<Car> carsToSend = filterCars(modelInput, typeInput, makeInput, colorInput, yearInput, yearOffset,
 				availabilityInput);
 		return new ModelAndView("CarCatalog", "cars", carsToSend);
-
+		
 	}
 
 	@RequestMapping(value = "/filterCarsForAdmin", method = RequestMethod.POST)

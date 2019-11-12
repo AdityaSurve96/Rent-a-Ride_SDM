@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Client {
 	
+	protected Integer id;
 	private String driverLicenceNumber;
 	private String clientFirstName;
 	private String clientLastName;

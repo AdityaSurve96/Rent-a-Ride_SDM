@@ -1,7 +1,7 @@
 package com.team13.RentaRide.model;
 
 public class User {
-	
+	protected Integer id;
 	private  String email;
 	private  String password;
 	
