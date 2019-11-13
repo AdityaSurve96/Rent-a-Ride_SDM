@@ -83,15 +83,13 @@ public class ReservedCarTdGateway {
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
 
-		if (startDate != null && dueDate != null) {
-			query.append("where start_date = ? and due_date = ?");
+		if (startDate == null && dueDate == null) {
+			return null;
 		}
 
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(query.toString());
-			statement.setDate(1, Date.valueOf(startDate));
-			statement.setDate(2, Date.valueOf(dueDate));
 		} catch (SQLException e2) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e2.printStackTrace();
