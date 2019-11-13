@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class ReservedCar extends BookedCar {
 
-	public ReservedCar(Car car, Client associatedClient, LocalDate startDate, LocalDate dueDate, Integer id,
+	public ReservedCar(Integer id,Car car, Client associatedClient, LocalDate startDate, LocalDate dueDate, 
 			Date bookingTimestamp) {
-		super(car, associatedClient, startDate, dueDate, id, bookingTimestamp);
+		super(id, car, associatedClient, startDate, dueDate, bookingTimestamp);
 		// TODO Auto-generated constructor stub
 	}
 

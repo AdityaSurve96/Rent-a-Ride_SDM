@@ -52,7 +52,7 @@ public class BookedCar {
 		this.dueDate = dueDate;
 	}
 
-	public BookedCar(Car car, Client associatedClient, LocalDate startDate, LocalDate dueDate, Integer id,
+	public BookedCar( Integer id,Car car, Client associatedClient, LocalDate startDate, LocalDate dueDate,
 			Date bookingTimestamp) {
 		super();
 		this.car = car;

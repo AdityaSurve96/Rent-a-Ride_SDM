@@ -172,7 +172,7 @@ public class ReserveCarController {
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
 
-		ReservedCar resCar = new ReservedCar(c, cl, pickupDate, dropoffDate, null, new Date());
+		ReservedCar resCar = new ReservedCar(null, c, cl, pickupDate, dropoffDate,  new Date());
 
 		Date d1;
 		Date d2;
@@ -266,7 +266,6 @@ public class ReserveCarController {
 				car.setAvailableReservedOrRented("Rented");
 				c = car;
 				break;
-
 			}
 		}
 
@@ -291,7 +290,7 @@ public class ReserveCarController {
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
 
-		RentedCar renCar = new RentedCar(c, cl, pickupDate, dropoffDate, 1000, new Date());
+		RentedCar renCar = new RentedCar(1000,c, cl, pickupDate, dropoffDate,  new Date());
 
 		Date d1;
 		Date d2;
