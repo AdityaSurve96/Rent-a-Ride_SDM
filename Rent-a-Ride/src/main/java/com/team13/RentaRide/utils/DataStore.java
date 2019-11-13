@@ -23,14 +23,11 @@ public final class DataStore {
 	private static List<Admin> admins;
 	private static List<Client> clients;
 
-
 	private static List<Car> carList;
 	private static List<RentedCar> rentedCars;
 	private static List<ReservedCar> reservedCars;
 
-
 	private DataStore() {
-		
 
 		clients = new ArrayList<Client>();
 		clerks = new ArrayList<Clerk>();
@@ -47,14 +44,12 @@ public final class DataStore {
 		addSomeCarstoReservedCars();
 	}
 
-
 	public static DataStore getInstance() {
 
 		if (instance == null)
 			instance = new DataStore();
 		return instance;
 	}
-
 
 	public void addClerk(String email, String password) {
 
@@ -63,8 +58,6 @@ public final class DataStore {
 		clerks.add(c);
 	}
 
-
-
 	public void addAdmin(String email, String password) {
 
 		Admin a = new Admin(email, password);
@@ -72,31 +65,24 @@ public final class DataStore {
 		admins.add(a);
 	}
 
-
-
-
-
-
 	public static List<Admin> getAdmins() {
 		return admins;
 	}
 
-
-	public List<Clerk> getRegisteredClerks(){
+	public List<Clerk> getRegisteredClerks() {
 
 		return clerks;
 	}
 
-
-	public List<Client> getAllClients(){
+	public List<Client> getAllClients() {
 		return clients;
 	}
 
-	public List<ReservedCar> getReservedCars(){
+	public List<ReservedCar> getReservedCars() {
 		return reservedCars;
 	}
 
-	public List<RentedCar> getRentedCars(){
+	public List<RentedCar> getRentedCars() {
 		return rentedCars;
 	}
 
@@ -105,10 +91,7 @@ public final class DataStore {
 		return carList;
 	}
 
-
-
 	private void addSomeClients() {
-
 
 		Client cl1 = new Client();
 		cl1.setDriverLicenceNumber("ABCD20162040");
@@ -130,14 +113,14 @@ public final class DataStore {
 		cl3.setClientLastName("Albert");
 		cl3.setPhoneNumber("7826789987");
 		cl3.setLicenceExpiryDate(LocalDate.of(2034, 11, 01));
-		
+
 		Client cl4 = new Client();
 		cl4.setDriverLicenceNumber("IUYTRW12345");
 		cl4.setClientFirstName("Thomas");
 		cl4.setClientLastName("Jackson");
 		cl4.setPhoneNumber("1111819987");
 		cl4.setLicenceExpiryDate(LocalDate.of(2044, 01, 01));
-		
+
 		Client cl5 = new Client();
 		cl5.setDriverLicenceNumber("KKJIU87765");
 		cl5.setClientFirstName("Nathan");
@@ -153,26 +136,19 @@ public final class DataStore {
 
 	}
 
-
 	private void addSomeClerks() {
-
-
 
 		Clerk clk1 = new Clerk("clerk1@gmail.com", "clerk1_2019");
 		Clerk clk2 = new Clerk("clerk2@gmail.com", "clerk2_2019");
-		Clerk clk3=  new Clerk("clerk3@gmail.com", "clerk3_2019");
+		Clerk clk3 = new Clerk("clerk3@gmail.com", "clerk3_2019");
 
 		clerks.add(clk1);
 		clerks.add(clk2);
 		clerks.add(clk3);
 
-
 	}
 
-
 	private void addSomeAdmins() {
-
-
 
 		Admin ad1 = new Admin("admin1@gmail.com", "admin1_2019");
 		Admin ad2 = new Admin("admin2@gmail.com", "admin2_2019");
@@ -184,12 +160,9 @@ public final class DataStore {
 
 	}
 
-
-
-
 	public void addSomeCarstoList() {
 
-		//CAR 1
+		// CAR 1
 		Car c1 = new Car();
 		c1.setAvailableReservedOrRented("Available");
 		c1.setColor("Red");
@@ -200,7 +173,6 @@ public final class DataStore {
 		c1.setPrice(BigDecimal.valueOf(25.55d));
 		c1.setType("Sedan");
 		c1.setYear(2011);
-
 
 		// CAR 2
 		Car c2 = new Car();
@@ -214,7 +186,6 @@ public final class DataStore {
 		c2.setType("SUV");
 		c2.setYear(2009);
 
-
 		// CAR 3
 		Car c3 = new Car();
 		c3.setAvailableReservedOrRented("Rented");
@@ -226,7 +197,6 @@ public final class DataStore {
 		c3.setPrice(BigDecimal.valueOf(25.90d));
 		c3.setType("SUV");
 		c3.setYear(2010);
-
 
 		// CAR 4
 		Car c4 = new Car();
@@ -240,7 +210,6 @@ public final class DataStore {
 		c4.setType("SUV");
 		c4.setYear(2017);
 
-
 		// CAR 5
 		Car c5 = new Car();
 		c5.setAvailableReservedOrRented("Available");
@@ -252,7 +221,6 @@ public final class DataStore {
 		c5.setPrice(BigDecimal.valueOf(49.12d));
 		c5.setType("Sedan");
 		c5.setYear(2011);
-
 
 		// CAR 6
 		Car c6 = new Car();
@@ -314,10 +282,6 @@ public final class DataStore {
 		c10.setType("Sedan");
 		c10.setYear(2018);
 
-
-
-
-
 		carList.add(c1);
 		carList.add(c2);
 		carList.add(c3);
@@ -329,42 +293,44 @@ public final class DataStore {
 		carList.add(c9);
 		carList.add(c10);
 
-
 	}
 
 	public void addSomeCarstoRentedCars() {
-		Date d1 ;
-		Date d2 ;
+		Date d1;
+		Date d2;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String d= null;
-		
-		RentedCar renCar1 = new RentedCar(getAllCars().get(2), getAllClients().get(0), LocalDate.now(), LocalDate.of(2019, 12, 13));
+		String d = null;
+
+		RentedCar renCar1 = new RentedCar(getAllCars().get(2), getAllClients().get(0), LocalDate.now(),
+				LocalDate.of(2019, 12, 13), 1001, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-				renCar1.setBookingTimestamp(d2);
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			renCar1.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RentedCar renCar2 = new RentedCar(getAllCars().get(7), getAllClients().get(2), LocalDate.now(), LocalDate.of(2019, 12, 17));
+
+		RentedCar renCar2 = new RentedCar(getAllCars().get(7), getAllClients().get(2), LocalDate.now(),
+				LocalDate.of(2019, 12, 17), 1002, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-				renCar2.setBookingTimestamp(d2);
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			renCar2.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RentedCar renCar3 = new RentedCar(getAllCars().get(9), getAllClients().get(4), LocalDate.now(), LocalDate.of(2019, 12, 25));
+		RentedCar renCar3 = new RentedCar(getAllCars().get(9), getAllClients().get(4), LocalDate.now(),
+				LocalDate.of(2019, 12, 25), 1002, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-				renCar3.setBookingTimestamp(d2);
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			renCar3.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -372,62 +338,55 @@ public final class DataStore {
 		rentedCars.add(renCar1);
 		rentedCars.add(renCar2);
 		rentedCars.add(renCar3);
-		
+
 	}
 
 	public void addSomeCarstoReservedCars() {
-		
-		Date d1 ;
-		Date d2 ;
+
+		Date d1;
+		Date d2;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String d= null;
-		
-		
-		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2019, 11, 15), LocalDate.of(2019, 11, 20));
+		String d = null;
+
+		ReservedCar resCar1 = new ReservedCar(getAllCars().get(1), getAllClients().get(0), LocalDate.of(2019, 11, 15),
+				LocalDate.of(2019, 11, 20), 1001, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-				resCar1.setBookingTimestamp(d2);
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			resCar1.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-		
-		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2019, 02, 05), LocalDate.of(2019, 02, 10));
+
+		ReservedCar resCar2 = new ReservedCar(getAllCars().get(6), getAllClients().get(1), LocalDate.of(2019, 02, 05),
+				LocalDate.of(2019, 02, 10), 1002, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-			 resCar2.setBookingTimestamp(d2);
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			resCar2.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2019, 04, 10), LocalDate.of(2019, 04, 25));
+
+		ReservedCar resCar3 = new ReservedCar(getAllCars().get(8), getAllClients().get(4), LocalDate.of(2019, 04, 10),
+				LocalDate.of(2019, 04, 25), 1003, new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
-			 d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-			 resCar3.setBookingTimestamp(d2);	
+			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+			resCar3.setBookingTimestamp(d2);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		reservedCars.add(resCar1);
 		reservedCars.add(resCar2);
 		reservedCars.add(resCar3);
 	}
-
-
-
-
-
-
-
-
 
 }

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class Car {
 
 	protected Integer id;
+
 	private String licensePlateNumber;
 
 	private String make;
@@ -16,6 +17,13 @@ public class Car {
 	private BigDecimal price;
 	private String availableReservedOrRented;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getAvailableReservedOrRented() {
 		return availableReservedOrRented;
@@ -64,7 +72,7 @@ public class Car {
 	public void setLicensePlateNumber(String licensePlateNumber) {
 		this.licensePlateNumber = licensePlateNumber;
 	}
-	
+
 	public String getColor() {
 		return color;
 	}
