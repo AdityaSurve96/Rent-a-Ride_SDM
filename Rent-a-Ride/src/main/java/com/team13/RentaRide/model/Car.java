@@ -1,6 +1,11 @@
 package com.team13.RentaRide.model;
 
 import java.math.BigDecimal;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 public class Car {
 
@@ -96,6 +101,20 @@ public class Car {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+/**
+ * 
+ * @param id
+ * @param licensePlateNumber
+ * @param make
+ * @param model
+ * @param type
+ * @param color
+ * @param year
+ * @param description
+ * @param price
+ * @param availableReservedOrRented
+ */
+	
 
 	@Override
 	public String toString() {

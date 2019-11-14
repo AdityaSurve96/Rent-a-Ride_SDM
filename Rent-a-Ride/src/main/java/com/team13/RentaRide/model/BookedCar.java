@@ -1,7 +1,13 @@
 package com.team13.RentaRide.model;
 
 import java.time.LocalDate;
+
 import java.util.Date;
+/**
+ * Model for Booked Car
+ * @author Team 13
+ *
+ */
 
 public class BookedCar {
 
@@ -52,6 +58,15 @@ public class BookedCar {
 		this.dueDate = dueDate;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @param car
+	 * @param associatedClient
+	 * @param startDate
+	 * @param dueDate
+	 * @param bookingTimestamp
+	 */
 	public BookedCar( Integer id,Car car, Client associatedClient, LocalDate startDate, LocalDate dueDate,
 			Date bookingTimestamp) {
 		super();

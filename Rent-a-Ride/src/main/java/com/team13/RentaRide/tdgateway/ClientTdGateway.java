@@ -86,6 +86,18 @@ public class ClientTdGateway {
 		view_client.append("select * from Clients");
 		return view_client;
 	}
+	
+	private StringBuilder getUpdateQuery() {
+		StringBuilder update_client = new StringBuilder();
+		update_client.append("UPDATE Client SET clientFirstName = ?, clientLastName = ?, phoneNumber = ?, licenceExpiryDate = ? WHERE licenceDriverNumber = ? ");
+		return update_client;
+	}
+	
+	private StringBuilder getDeleteQuery() {
+		StringBuilder delete_client = new StringBuilder();
+		delete_client.append("DELETE FROM Client WHERE licenceDriverNumber = ?");
+		return delete_client;
+	}
 
 
 }
