@@ -78,18 +78,21 @@ public class ReservedCarTdGateway {
 		return resultSet;
 	}
 
+	/////
 	public ResultSet getAllReservedCarsByDates(LocalDate startDate, LocalDate dueDate) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
 
-		if (startDate == null && dueDate == null) {
-			return null;
+		if (startDate != null && dueDate != null) {
+			query.append("where start_date = ? and due_date = ?");
 		}
 
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(query.toString());
+			statement.setDate(1, Date.valueOf(startDate));
+			statement.setDate(2, Date.valueOf(dueDate));
 		} catch (SQLException e2) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e2.printStackTrace();
@@ -114,6 +117,7 @@ public class ReservedCarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return result;
 	}
+	////
 
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.AdminDataMapper;
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
@@ -22,6 +23,8 @@ import com.team13.RentaRide.utils.DataStore;
 @Controller
 public class AdminOperationsController {
 
+	
+	private AdminDataMapper adminDataMapper = new AdminDataMapper();
 	@RequestMapping("/AdminLoginPage")
 	public ModelAndView showLoginPage() {
 		return new ModelAndView("AdminLoginPage");
@@ -58,7 +61,7 @@ public class AdminOperationsController {
 		System.out.println("here**************");
 		try {
 			boolean flag = false;
-			List<Admin> admins = DataStore.getAdmins();
+			List<Admin> admins = adminDataMapper.getAllAdminRecords();
 			System.out.println("admins: " + admins);
 
 			for (Admin admin : admins) {
@@ -86,7 +89,13 @@ public class AdminOperationsController {
 	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
 		if (!email.isEmpty() && !password.isEmpty()) {
-			DataStore.getAdmins().add(new Admin(email, password));
+			
+			
+			
+			Admin admin = new Admin(email, password);
+			adminDataMapper.addAdminRecord(admin);
+			
+			//DataStore.getAdmins().add(admin);
 			return new ModelAndView("AdminLoginPage");
 		}
 
@@ -132,6 +141,7 @@ public class AdminOperationsController {
 			car.setType(carType);
 			car.setYear(Integer.valueOf(carYear));
 			System.out.println("created car: " + car);
+			
 			DataStore.getInstance().getAllCars().add(car);
 			return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
 		} catch (Exception e) {
