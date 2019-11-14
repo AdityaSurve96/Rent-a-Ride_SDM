@@ -11,57 +11,53 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Clerk;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.utils.DataStore;
+
 @Controller
 public class ClerkOperationController {
-	
-	
+
 	@RequestMapping("/tryToRegisterAsClerk")
 	public ModelAndView showRegisterClerkPage() {
 
 		return new ModelAndView("ClerkRegisterPage");
 
 	}
-	
 
-	@RequestMapping(value = "/clerkRegistered" , method = RequestMethod.POST)
+	@RequestMapping(value = "/clerkRegistered", method = RequestMethod.POST)
 	public ModelAndView registerClerk(@RequestParam String email, @RequestParam String password) {
 
 		DataStore ds = DataStore.getInstance();
 		ds.addClerk(email, password);
-		
+
 		return new ModelAndView("ClerkLoginPage");
 	}
 
-	
 	@RequestMapping("/viewCarCatalog")
 	public ModelAndView showCarCatalogPage() {
-		
+
 		ModelAndView modelAndView = new ModelAndView("CarCatalog");
 
 		DataStore ds = DataStore.getInstance();
-		
+
 		modelAndView.addObject("cars", ds.getAllCars());
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/showClientManagement")
 	public ModelAndView showClientManagementPage() {
-		
+
 		ModelAndView modelAndView = new ModelAndView("ClientManagementPage");
 		DataStore ds = DataStore.getInstance();
 		List<Client> clientList = ds.getAllClients();
 		modelAndView.addObject("clients", clientList);
 		return modelAndView;
 	}
-	
 
 	@RequestMapping("/ClerkLoginPage")
 	public ModelAndView showLoginPage() {
 		return new ModelAndView("ClerkLoginPage");
 	}
-		
-	
+
 	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 

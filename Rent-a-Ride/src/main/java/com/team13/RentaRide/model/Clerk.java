@@ -7,8 +7,8 @@ public class Clerk extends User{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Clerk [email=" + getEmail() + ", password=" + getPassword() + "]";
+	}	
 }

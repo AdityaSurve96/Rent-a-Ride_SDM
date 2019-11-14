@@ -1,12 +1,10 @@
 package com.team13.RentaRide;
 
-import java.time.LocalDate;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.tdgateway.DatabaseCreator;
+import com.team13.RentaRide.utils.DataStore;
 
 @SpringBootApplication
 public class RentARideApplication {
@@ -14,6 +12,8 @@ public class RentARideApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RentARideApplication.class, args);
 		DatabaseCreator.testDb();
+
+		DataStore ds = DataStore.getInstance();
 
 		// TEST CODE
 

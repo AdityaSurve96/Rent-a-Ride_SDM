@@ -198,7 +198,7 @@ public class ReserveCarController {
 	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
 
 		DataStore ds = DataStore.getInstance();
-		List<ReservedCar> resCars = ds.getReservedCars();
+		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		List<Car> allCars = ds.getAllCars();
 		for (ReservedCar reservedCar : resCars) {
 			if (reservedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
@@ -340,7 +340,7 @@ public class ReserveCarController {
 
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions");
 		DataStore ds = DataStore.getInstance();
-		modelAndView.addObject("reservations", ds.getReservedCars());
+		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
 		return modelAndView;
 
 	}

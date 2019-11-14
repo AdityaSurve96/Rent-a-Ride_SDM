@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.AdminDataMapper;
+import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
@@ -25,6 +26,8 @@ public class AdminOperationsController {
 
 	
 	private AdminDataMapper adminDataMapper = new AdminDataMapper();
+	private ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
+
 	@RequestMapping("/AdminLoginPage")
 	public ModelAndView showLoginPage() {
 		return new ModelAndView("AdminLoginPage");
@@ -50,10 +53,9 @@ public class AdminOperationsController {
 	@RequestMapping("/adminViewReservations")
 	public ModelAndView showReservations() {
 
-		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions", "reservations",
-				DataStore.getInstance().getReservedCars());
+		List<ReservedCar> cars = reservedCarMapper.getAllReservedCars();
 
-		return modelAndView;
+		return new ModelAndView("AdminViewReservedTransactions", "reservations", cars);
 	}
 
 	@RequestMapping(value = "/tryToLoginAsAdmin", method = RequestMethod.POST)
@@ -164,7 +166,7 @@ public class AdminOperationsController {
 			}
 		}
 		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
-		List<ReservedCar> resCars = DataStore.getInstance().getReservedCars();
+		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		for (ReservedCar reservedCar : resCars) {
 			if (reservedCar.getCar().equals(currentCar)) {
 				flag = true;
@@ -233,7 +235,7 @@ public class AdminOperationsController {
 			}
 		}
 		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
-		List<ReservedCar> resCars = DataStore.getInstance().getReservedCars();
+		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 
 		for (ReservedCar reservedCar : resCars) {
 			if (reservedCar.getCar().equals(currentCar)) {
@@ -301,32 +303,30 @@ public class AdminOperationsController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
 //			
 	) {
-		System.out.println("licensePlateNumberInput: "+licensePlateNumberInput);
+		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
-		List<ReservedCar> reservedCars = DataStore.getInstance().getReservedCars();
+
+		List<ReservedCar> reservedCars = reservedCarMapper.getAllReservedCars();
+
 		List<ReservedCar> reservedCarsToSend = new ArrayList<>();
 
 		for (ReservedCar car : reservedCars) {
 
 			if (!StringUtils.isEmpty(licensePlateNumberInput)
 					&& !licensePlateNumberInput.equals(car.getCar().getLicensePlateNumber())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (!StringUtils.isEmpty(drivingLicenseNumberInput)
 					&& !drivingLicenseNumberInput.equals(car.getAssociatedClient().getDriverLicenceNumber())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (dueDateFilter != null && !dueDateFilter.equals(car.getDueDate())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (pickupDateFilter != null && !pickupDateFilter.equals(car.getStartDate())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 			reservedCarsToSend.add(car);
@@ -345,7 +345,7 @@ public class AdminOperationsController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
 //			
 	) {
-		System.out.println("licensePlateNumberInput: "+licensePlateNumberInput);
+		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
 		List<RentedCar> rentals = DataStore.getInstance().getRentedCars();
