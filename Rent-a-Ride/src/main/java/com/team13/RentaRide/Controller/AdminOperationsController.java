@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.AdminDataMapper;
+
 import com.team13.RentaRide.mapper.ReservedCarDataMapper;
+
+import com.team13.RentaRide.mapper.CarDataMapper;
+import com.team13.RentaRide.mapper.RentedCarDataMapper;
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
@@ -24,7 +28,9 @@ import com.team13.RentaRide.utils.DataStore;
 @Controller
 public class AdminOperationsController {
 
+	private CarDataMapper carDataMapper = new CarDataMapper();
 	
+	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
 	private AdminDataMapper adminDataMapper = new AdminDataMapper();
 	private ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
 
@@ -45,7 +51,7 @@ public class AdminOperationsController {
 	public ModelAndView showRentals() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions", "rentals",
-				DataStore.getInstance().getRentedCars());
+				rentedCarDataMapper.getAllRentedCars());
 
 		return modelAndView;
 	}
@@ -109,7 +115,7 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/adminManageCatalog", method = RequestMethod.GET)
 	public ModelAndView adminManageCatalog() {
-		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 	}
 
 	@RequestMapping(value = "/adminViewRentals", method = RequestMethod.POST)
@@ -144,6 +150,8 @@ public class AdminOperationsController {
 			car.setYear(Integer.valueOf(carYear));
 			System.out.println("created car: " + car);
 			
+			carDataMapper.addCarRecord(car);
+			
 			DataStore.getInstance().getAllCars().add(car);
 			return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
 		} catch (Exception e) {
@@ -159,13 +167,13 @@ public class AdminOperationsController {
 		Car currentCar = null;
 		boolean flag = false;
 		ModelAndView modelAndView = null;
-		for (Car car : DataStore.getInstance().getAllCars()) {
+		for (Car car : carDataMapper.getAllCars()) {
 			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
 				currentCar = car;
 				break;
 			}
 		}
-		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
+		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		for (ReservedCar reservedCar : resCars) {
 			if (reservedCar.getCar().equals(currentCar)) {
@@ -197,7 +205,7 @@ public class AdminOperationsController {
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
 	public ModelAndView saveCarChanges(Car car) {
 
-		for (Car currentCar : DataStore.getInstance().getAllCars()) {
+		for (Car currentCar : carDataMapper.getAllCars()) {
 			if (currentCar.getLicensePlateNumber().equals(car.getLicensePlateNumber())) {
 				currentCar.setColor(car.getColor());
 				currentCar.setDescription(car.getDescription());
@@ -209,32 +217,22 @@ public class AdminOperationsController {
 				break;
 			}
 		}
-		return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 	}
 
 	@RequestMapping(value = "/deleteCar")
 	public ModelAndView deleteCar(@RequestParam String currentLicensePlateNumber) {
 
-//		List<Car> tempCars = new ArrayList<Car>();
-//		tempCars.addAll(DataStore.getInstance().getAllCars());
-//		int index = 0;
-//		for (Car tempCar : tempCars) {
-//			if (tempCar.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
-//				DataStore.getInstance().getAllCars().remove(index);
-//				break;
-//			}
-//			index++;
-//		}
 		boolean flag = false;
 		ModelAndView modelAndView = null;
 		Car currentCar = null;
-		for (Car car : DataStore.getInstance().getAllCars()) {
+		for (Car car : carDataMapper.getAllCars()) {
 			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
 				currentCar = car;
 				break;
 			}
 		}
-		List<RentedCar> renCars = DataStore.getInstance().getRentedCars();
+		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 
 		for (ReservedCar reservedCar : resCars) {
@@ -249,7 +247,7 @@ public class AdminOperationsController {
 				break;
 			}
 		}
-		List<Car> allCars = DataStore.getInstance().getAllCars();
+		List<Car> allCars = carDataMapper.getAllCars();
 		if (flag) {
 
 			modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", allCars);
@@ -267,7 +265,7 @@ public class AdminOperationsController {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
 		DataStore ds = DataStore.getInstance();
-		modelAndView.addObject("reservations", ds.getReservedCars());
+		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
 		return modelAndView;
 
 	}
@@ -277,7 +275,7 @@ public class AdminOperationsController {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
 		DataStore ds = DataStore.getInstance();
-		modelAndView.addObject("rentals", ds.getRentedCars());
+		modelAndView.addObject("rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 
 	}
@@ -286,7 +284,7 @@ public class AdminOperationsController {
 	public ModelAndView goToAdminCarCatalog() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminCarCatalogPage", "cars",
-				DataStore.getInstance().getAllCars());
+				carDataMapper.getAllCars());
 
 		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = ds.getAllCars();
@@ -300,9 +298,8 @@ public class AdminOperationsController {
 	public ModelAndView filterReservationRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
-			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
-//			
-	) {
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
+		
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
 
@@ -342,9 +339,8 @@ public class AdminOperationsController {
 	public ModelAndView filterRentalRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
-			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter
-//			
-	) {
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
+		
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
