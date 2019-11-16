@@ -111,6 +111,14 @@ public class CarTdGateway {
 
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = new StringBuilder();
+		boolean flag = false;
+		if(parameterMap.size()==2) {
+			flag = true;
+			query.append("UPDATE Car SET")
+				 .append("available_reserved_or_rented = ?")
+				 .append("WHERE license_plate_number = ?");
+		}
+		else {
 		 		query.append("UPDATE Car SET")
 		 		.append("make = ?,")
 		 		.append("model = ?,")
@@ -121,7 +129,8 @@ public class CarTdGateway {
 				.append("price = ?,")
 				.append("available_reserved_or_rented = ?")
 				.append("WHERE license_plate_number = ?");
-
+		}
+		
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(query.toString());
@@ -132,17 +141,23 @@ public class CarTdGateway {
 		}
 		try {
 			
-			statement.setString(1, (String) parameterMap.get("MAKE"));
-			statement.setString(2, (String) parameterMap.get("MODEL"));
-			statement.setString(3, (String) parameterMap.get("TYPE"));
-			
-			statement.setString(4, (String) parameterMap.get("COLOR"));
-			statement.setInt(5, (Integer) parameterMap.get("YEAR"));
-			statement.setString(6, (String) parameterMap.get("DESCRIPTION"));
-			statement.setBigDecimal(7, (BigDecimal) parameterMap.get("PRICE"));
-			statement.setString(8, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
-			statement.setString(9, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+			if( flag) {
+				statement.setString(1, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+				statement.setString(2, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
 
+			}
+			else { 
+				statement.setString(1, (String) parameterMap.get("MAKE"));
+				statement.setString(2, (String) parameterMap.get("MODEL"));
+				statement.setString(3, (String) parameterMap.get("TYPE"));
+				
+				statement.setString(4, (String) parameterMap.get("COLOR"));
+				statement.setInt(5, (Integer) parameterMap.get("YEAR"));
+				statement.setString(6, (String) parameterMap.get("DESCRIPTION"));
+				statement.setBigDecimal(7, (BigDecimal) parameterMap.get("PRICE"));
+				statement.setString(8, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+				statement.setString(9, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+			}
 			
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);

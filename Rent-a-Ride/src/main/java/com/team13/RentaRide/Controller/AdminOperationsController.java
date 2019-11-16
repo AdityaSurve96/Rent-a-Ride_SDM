@@ -151,14 +151,6 @@ public class AdminOperationsController {
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 	}
 
-	@RequestMapping(value = "/adminViewRentals", method = RequestMethod.POST)
-	public ModelAndView adminViewRentals() {
-
-		ModelAndView modelAndView = new ModelAndView("AdminViewRentalsPage");
-		return modelAndView;
-
-	}
-
 	@RequestMapping(value = "/addNewCarPage", method = RequestMethod.POST)
 	public ModelAndView addNewCarPage() {
 
@@ -197,8 +189,8 @@ public class AdminOperationsController {
 			
 			carDataMapper.addCarRecord(car);
 			
-			DataStore.getInstance().getAllCars().add(car);
-			return new ModelAndView("AdminCarCatalogPage", "cars", DataStore.getInstance().getAllCars());
+//			DataStore.getInstance().getAllCars().add(car);
+			return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 		} catch (Exception e) {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("errorMessage", "Error while adding the Car, " + e.getMessage());
@@ -319,7 +311,7 @@ public class AdminOperationsController {
 	public ModelAndView showAdminReservedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
-		DataStore ds = DataStore.getInstance();
+//		DataStore ds = DataStore.getInstance();
 		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
 		return modelAndView;
 
@@ -329,7 +321,7 @@ public class AdminOperationsController {
 	public ModelAndView showAdminRentedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
-		DataStore ds = DataStore.getInstance();
+//		DataStore ds = DataStore.getInstance();
 		modelAndView.addObject("rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 
@@ -341,8 +333,8 @@ public class AdminOperationsController {
 		ModelAndView modelAndView = new ModelAndView("AdminCarCatalogPage", "cars",
 				carDataMapper.getAllCars());
 
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
+//		DataStore ds = DataStore.getInstance();
+		List<Car> carsList = carDataMapper.getAllCars();
 
 		modelAndView.addObject("cars", carsList);
 

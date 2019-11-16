@@ -167,10 +167,7 @@ public class ClientTdGateway {
 		return client_resultSet;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+
 	private StringBuilder getSelectQuery() {
 		StringBuilder view_client = new StringBuilder();
 		view_client.append("select * from Clients");

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.mapper.RentedCarDataMapper;
 import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Car;
@@ -30,7 +31,7 @@ import com.team13.RentaRide.utils.DataStore;
 public class ReserveCarController {
 	
 	RentedCarDataMapper rentedCarDataMapper  = new RentedCarDataMapper();
-	
+	CarDataMapper carDataMapper = new CarDataMapper();
 	String page = null;
 	ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
 	/**
@@ -262,25 +263,15 @@ public class ReserveCarController {
  * @return
  */
 	@RequestMapping(value = "/handleTheReturnThisRental")
-	public ModelAndView returnSelectedRental(@RequestParam String carLicencePlateNumber) {
-
-		DataStore ds = DataStore.getInstance();
-		List<RentedCar> renCars = ds.getRentedCars();
-		List<Car> allCars = ds.getAllCars();
-		for (RentedCar rentedCar : renCars) {
-			if (rentedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
-				for (Car car : allCars) {
-					if (car.equals(rentedCar.getCar())) {
-						car.setAvailableReservedOrRented("Available");
-						renCars.remove(rentedCar);
-						break;
-					}
-				}
-
-			}
-			break;
-		}
-
+	public ModelAndView returnSelectedRental(@RequestParam String carLicensePlateNumber) {
+		
+		rentedCarDataMapper.handleReturnOfVehicle(carLicensePlateNumber);
+		Car c = new Car();
+		c.setAvailableReservedOrRented("Available");
+		c.setLicensePlateNumber(carLicensePlateNumber);
+		carDataMapper.modifyCarRecord(c);	
+		
+		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
 		return modelAndView;
 	}
