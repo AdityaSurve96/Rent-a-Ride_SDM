@@ -18,6 +18,8 @@ import com.team13.RentaRide.utils.DatabaseUtils;
  *
  */
 
+import ch.qos.logback.classic.db.DBAppender;
+
 public class RentedCarTdGateway {
 	/**
 	 * 
@@ -63,6 +65,7 @@ public class RentedCarTdGateway {
 		} catch (Exception e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
 			e.printStackTrace();
+			return false;
 		}
 		
 		try {
@@ -70,6 +73,7 @@ public class RentedCarTdGateway {
 		} catch (Exception e) {
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
 			e.printStackTrace();
+			return false;
 		}
 		
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
@@ -78,14 +82,90 @@ public class RentedCarTdGateway {
 	}
 	
 	
+	public boolean deleteRecord(String licensePlateNumber) {
+		
+		Connection connection = DatabaseUtils.getDbConnection();
+		StringBuilder query = getDeleteQuery();
+		
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement(query.toString());
+			
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+			
+		}
+		try {
+			statement.setString(1, licensePlateNumber);
+				
+		} catch (Exception e) {
+			
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+		
+		try {
+			statement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+		
 	
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		
+		return true;
+		
+	}
+	
+	
+	public ResultSet findRentedCarByLicensePlateNumber( String licensePlateNumber) {
+		Connection connection = DatabaseUtils.getDbConnection();
+		StringBuilder query = getSelectQuery();
+		
+		query.append("where license_plate_number = ?");
+		
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement(query.toString());
+			
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+			
+		}
+		try {
+			statement.setString(1, licensePlateNumber);
+			
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
+		ResultSet resultSet = null;
+		try {
+			resultSet =  statement.executeQuery();
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+	
+		
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return resultSet;
+
+		
+	}
 	
 	public ResultSet selectAllRentedCars() {
-
-	/**
-	 * 
-	 * @return
-	 */
 
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -210,6 +290,13 @@ public class RentedCarTdGateway {
 		return query;
 	}
 	
+	private StringBuilder getDeleteQuery() {
+		
+		StringBuilder query = new StringBuilder();
+		query.append("delete from rentedcar where car_id = (select id from car where license_plate_number = ?");
+		
+		return query;
+	}
 	
 
 }

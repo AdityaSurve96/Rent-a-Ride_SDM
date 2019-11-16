@@ -60,6 +60,42 @@ public class RentedCarDataMapper {
 	}
 	
 	
+	public boolean handleReturnOfVehicle(String licensePlateNumber) {
+		
+		try {
+			return gateway.deleteRecord(licensePlateNumber);
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+	
+	}
+	
+	
+	
+	public List<RentedCar> getRentedCarByLicensePlateNumber(String licensePlateNumber) {
+		
+		ResultSet resultSet = gateway.findRentedCarByLicensePlateNumber(licensePlateNumber);
+		
+		if (resultSet == null) {
+			return new ArrayList<>();
+		}
+		
+		List<RentedCar> renCars = new ArrayList<RentedCar>();
+		
+		try {
+			renCars = parseResultSet(resultSet);
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+		
+		return renCars;
+		
+		
+	}
 	
 	public List<RentedCar> getRentedCarsByStartDate(LocalDate startDate){
 		
