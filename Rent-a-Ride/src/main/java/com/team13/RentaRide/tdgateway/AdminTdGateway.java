@@ -10,6 +10,7 @@ import java.util.Map;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class AdminTdGateway {
+	
 	public boolean insertAdminRecord(Map<String, String> map) {
 		Connection connection = DatabaseUtils.getDbConnection();
 		String query = "INSERT INTO Admin VALUES (default,?,?)";

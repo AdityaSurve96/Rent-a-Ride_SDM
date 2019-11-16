@@ -41,7 +41,7 @@ public class RentedCarDataMapper {
 	
 	public List<RentedCar> getAllRentedCars() {
 
-		ResultSet resultSet = gateway.getAllRentedCars();
+		ResultSet resultSet = gateway.selectAllRentedCars();
 		if (resultSet == null) {
 			return new ArrayList<>();
 		}

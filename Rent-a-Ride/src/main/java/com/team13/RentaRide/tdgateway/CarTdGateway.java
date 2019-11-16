@@ -3,9 +3,13 @@ package com.team13.RentaRide.tdgateway;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 
+import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class CarTdGateway {
@@ -13,7 +17,7 @@ public class CarTdGateway {
 	public boolean insertCarRecord(Map<String, Object> parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "INSERT INTO Car VALUES (default, ?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO Car VALUES (default, ?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement statement = null;
 		try {
@@ -25,17 +29,16 @@ public class CarTdGateway {
 		}
 		try {
 			
-			statement.setInt(1, (Integer) parameterMap.get("CAR_ID"));
-			statement.setString(2, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
-			statement.setString(3, (String) parameterMap.get("MAKE"));
-			statement.setString(4, (String) parameterMap.get("MODEL"));
-			statement.setString(5, (String) parameterMap.get("TYPE"));
+			statement.setString(1, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+			statement.setString(2, (String) parameterMap.get("MAKE"));
+			statement.setString(3, (String) parameterMap.get("MODEL"));
+			statement.setString(4, (String) parameterMap.get("TYPE"));
 			
-			statement.setString(6, (String) parameterMap.get("COLOR"));
-			statement.setInt(7, (Integer) parameterMap.get("YEAR"));
-			statement.setString(8, (String) parameterMap.get("DESCRIPTION"));
-			statement.setBigDecimal(9, (BigDecimal) parameterMap.get("PRICE"));
-			statement.setString(10, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+			statement.setString(5, (String) parameterMap.get("COLOR"));
+			statement.setInt(6, (Integer) parameterMap.get("YEAR"));
+			statement.setString(7, (String) parameterMap.get("DESCRIPTION"));
+			statement.setBigDecimal(8, (BigDecimal) parameterMap.get("PRICE"));
+			statement.setString(9, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
 			
 			
 		} catch (SQLException e) {
@@ -43,7 +46,7 @@ public class CarTdGateway {
 			e.printStackTrace();
 			return false;
 		}
-
+		
 		try {
 			statement.execute();
 		} catch (SQLException e) {
@@ -54,6 +57,46 @@ public class CarTdGateway {
 
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
+	}
+	
+	
+	public ResultSet findAllCars() {
+		
+		Connection connection = DatabaseUtils.getDbConnection();
+		StringBuilder query = getSelectQuery();
+		
+		Statement statement = null;
+		
+		try {
+			statement = connection.createStatement();
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+		ResultSet resultSet = null;
+		
+		try {
+			resultSet = statement.executeQuery(query.toString());
+			
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+			
+		}
+		
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return resultSet;
+	}
+	
+	
+	
+	private StringBuilder getSelectQuery() {
+		StringBuilder query = new StringBuilder();
+		query.append("select * from car");
+		return query;
+		
 	}
 
 }

@@ -94,6 +94,7 @@ public final class DataStore {
 	private void addSomeClients() {
 
 		Client cl1 = new Client();
+		cl1.setId(111);
 		cl1.setDriverLicenceNumber("ABCD20162040");
 		cl1.setClientFirstName("Richard");
 		cl1.setClientLastName("Pariath");
@@ -164,6 +165,7 @@ public final class DataStore {
 
 		// CAR 1
 		Car c1 = new Car();
+		c1.setId(10);
 		c1.setAvailableReservedOrRented("Available");
 		c1.setColor("Red");
 		c1.setDescription("Newly renovated and refurbished");
@@ -176,6 +178,7 @@ public final class DataStore {
 
 		// CAR 2
 		Car c2 = new Car();
+	
 		c2.setAvailableReservedOrRented("Reserved");
 		c2.setColor("Blue");
 		c2.setDescription("Good for a mountain trip");

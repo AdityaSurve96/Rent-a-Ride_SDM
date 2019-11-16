@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.team13.RentaRide.utils.DatabaseUtils;
@@ -20,10 +21,11 @@ public class RentedCarTdGateway {
 		String query = "INSERT INTO RentedCar VALUES (default , ?,?,?,?,?) ";
 		
 		PreparedStatement statement = null;
-		
+		System.out.println(parameterMap);
 		try {
 			
 			statement = connection.prepareStatement(query);
+			System.out.println(statement);
 		} catch (Exception e) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e.printStackTrace();
@@ -40,7 +42,10 @@ public class RentedCarTdGateway {
 			LocalDate due_date = (LocalDate) parameterMap.get("DUE_DATE");
 			statement.setDate(4,java.sql.Date.valueOf(due_date));
 			
-			statement.setTimestamp(5, (Timestamp) parameterMap.get("BOOKING_TIMESTAMP"));
+			Date timeStampDateFormat = (Date) (parameterMap.get("BOOKING_TIMESTAMP"));
+			
+			Timestamp timeStamp = new Timestamp(timeStampDateFormat.getTime());
+			statement.setTimestamp(5, timeStamp);
 			
 			
 			
@@ -57,10 +62,14 @@ public class RentedCarTdGateway {
 		}
 		
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		
 		return true;
 	}
 	
-	public ResultSet getAllRentedCars() {
+	
+	
+	
+	public ResultSet selectAllRentedCars() {
 
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
@@ -157,7 +166,7 @@ public class RentedCarTdGateway {
 		return resultSet;
 		
 		
-	}
+	}	
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select car.*, client.*, ");

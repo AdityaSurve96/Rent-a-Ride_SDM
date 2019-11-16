@@ -37,6 +37,7 @@ public class ReservedCarTdGateway {
 			statement.setTimestamp(5, (Timestamp) parameterMap.get("BOOKING_TIMESTAMP"));
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			
 			e.printStackTrace();
 			return false;
 		}

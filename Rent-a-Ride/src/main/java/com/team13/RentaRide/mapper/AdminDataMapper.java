@@ -13,7 +13,7 @@ import com.team13.RentaRide.utils.DatabaseUtils;
 import com.team13.RentaRide.tdgateway.*;
 
 public class AdminDataMapper {
-	AdminTdGateway gtway = new AdminTdGateway();
+	private AdminTdGateway gtway = new AdminTdGateway();
 	public boolean addAdminRecord(Admin admin) {
 		try {
 			HashMap<String, String> map = new HashMap<>();
