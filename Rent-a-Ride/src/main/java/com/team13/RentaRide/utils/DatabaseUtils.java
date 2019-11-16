@@ -8,6 +8,10 @@ public class DatabaseUtils {
 	public static Connection dbConnection;
 
 	public static final String CREATE_STATEMENT_ERROR_MESSAGE = "Error while creating statement";
+	
+	public static final String DELETE_STATEMENT_ERROR_MESSAGE = "Error while deleting statement";
+	public static final String MODIFY_STATEMENT_ERROR_MESSAGE = "Error while modifying statement";
+
 
 	public static final String PARAMETER_ERROR_MESSAGE = "Error while setting parameters to query";
 	public static final String QUERY_EXECUTION_ERROR_MESSAGE = "Error while executing the query";

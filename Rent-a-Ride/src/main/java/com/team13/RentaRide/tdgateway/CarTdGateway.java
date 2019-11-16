@@ -81,7 +81,7 @@ public class CarTdGateway {
 		try {
 			statement = connection.prepareStatement(query);
 		} catch (SQLException e1) {
-			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			System.out.println(DatabaseUtils.DELETE_STATEMENT_ERROR_MESSAGE);
 			e1.printStackTrace();
 			return false;
 		}
@@ -107,7 +107,60 @@ public class CarTdGateway {
 		return true;
 	}
 	
-	
+	public boolean modifyCarRecord(Map<String, Object> parameterMap) {
+
+		Connection connection = DatabaseUtils.getDbConnection();
+		StringBuilder query = new StringBuilder();
+		 		query.append("UPDATE Car SET")
+		 		.append("make = ?,")
+		 		.append("model = ?,")
+				.append("type = ?,")
+				.append("color = ?,")
+				.append("year = ?,")
+				.append("description = ?,")
+				.append("price = ?,")
+				.append("available_reserved_or_rented = ?")
+				.append("WHERE license_plate_number = ?");
+
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query.toString());
+		} catch (SQLException e1) {
+			System.out.println(DatabaseUtils.MODIFY_STATEMENT_ERROR_MESSAGE);
+			e1.printStackTrace();
+			return false;
+		}
+		try {
+			
+			statement.setString(1, (String) parameterMap.get("MAKE"));
+			statement.setString(2, (String) parameterMap.get("MODEL"));
+			statement.setString(3, (String) parameterMap.get("TYPE"));
+			
+			statement.setString(4, (String) parameterMap.get("COLOR"));
+			statement.setInt(5, (Integer) parameterMap.get("YEAR"));
+			statement.setString(6, (String) parameterMap.get("DESCRIPTION"));
+			statement.setBigDecimal(7, (BigDecimal) parameterMap.get("PRICE"));
+			statement.setString(8, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+			statement.setString(9, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+
+			
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+		
+		try {
+			statement.execute();
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return true;
+	}
 	
 	
 	public ResultSet findAllCars() {
