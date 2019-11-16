@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.RentedCarDataMapper;
 import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
@@ -22,7 +23,9 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class ReserveCarController {
-
+	
+	RentedCarDataMapper rentedCarDataMapper  = new RentedCarDataMapper();
+	
 	String page = null;
 	ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
 
@@ -186,7 +189,9 @@ public class ReserveCarController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		
 		resCars.add(resCar);
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 
@@ -290,7 +295,7 @@ public class ReserveCarController {
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
 
-		RentedCar renCar = new RentedCar(1000,c, cl, pickupDate, dropoffDate,  new Date());
+		RentedCar renCar = new RentedCar(null, c, cl, pickupDate, dropoffDate,  new Date());
 
 		Date d1;
 		Date d2;
@@ -304,6 +309,9 @@ public class ReserveCarController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		
+		rentedCarDataMapper.addRentedCarRecord(renCar);
+		
 		renCars.add(renCar);
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
 
@@ -329,8 +337,8 @@ public class ReserveCarController {
 	public ModelAndView showRentedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions");
-		DataStore ds = DataStore.getInstance();
-		modelAndView.addObject("rentals", ds.getRentedCars());
+//		DataStore ds = DataStore.getInstance();
+		modelAndView.addObject("rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 
 	}
@@ -339,7 +347,8 @@ public class ReserveCarController {
 	public ModelAndView showReservedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions");
-		DataStore ds = DataStore.getInstance();
+//		DataStore ds = DataStore.getInstance();
+
 		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
 		return modelAndView;
 
