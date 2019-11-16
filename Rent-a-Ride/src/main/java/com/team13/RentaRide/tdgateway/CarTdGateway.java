@@ -72,6 +72,44 @@ public class CarTdGateway {
 	}
 	
 	
+	public boolean deleteCarRecord(String carLicencePlateNumber) {
+
+		Connection connection = DatabaseUtils.getDbConnection();
+		String query = "DELETE from Car where LICENSE_PLATE_NUMBER = ?";
+
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query);
+		} catch (SQLException e1) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e1.printStackTrace();
+			return false;
+		}
+		try {
+			
+			statement.setString(1, carLicencePlateNumber);
+			
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+		
+		try {
+			statement.execute();
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return false;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return true;
+	}
+	
+	
+	
+	
 	public ResultSet findAllCars() {
 		
 		Connection connection = DatabaseUtils.getDbConnection();

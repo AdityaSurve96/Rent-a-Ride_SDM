@@ -38,6 +38,17 @@ public class CarDataMapper {
 		}
 	}
 	
+	public boolean deleteCarRecord(String carLicensePlateNumber) {
+		try {
+
+			return carGateway.deleteCarRecord(carLicensePlateNumber);
+			
+		} catch (Exception e) {
+			System.out.println("Error while deleting a car record in the database");
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	public  List<Car> getAllCars(){
 		
