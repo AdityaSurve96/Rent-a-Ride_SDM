@@ -20,6 +20,11 @@ import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
 import com.team13.RentaRide.utils.DataStore;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 @Controller
 public class ReserveCarController {
@@ -28,6 +33,11 @@ public class ReserveCarController {
 	
 	String page = null;
 	ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
+	/**
+	 * 
+	 * @param licensePlate
+	 * @return
+	 */
 
 	@RequestMapping(value = "/rentThisCar")
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
@@ -51,7 +61,11 @@ public class ReserveCarController {
 		return modelAndView;
 
 	}
-
+/**
+ * 
+ * @param licensePlate
+ * @return
+ */
 	@RequestMapping(value = "/reserveThisCar")
 	public ModelAndView showCarReservingPage(@RequestParam String licensePlate) {
 		DataStore ds = DataStore.getInstance();
@@ -73,7 +87,12 @@ public class ReserveCarController {
 		return modelAndView;
 
 	}
-
+/**
+ * 
+ * @param driverLicenceNumber
+ * @param CarLicenseNo
+ * @return
+ */
 	@RequestMapping(value = "/searchThisClient", method = RequestMethod.POST)
 	public ModelAndView searchClient(@RequestParam String driverLicenceNumber, @RequestParam String CarLicenseNo) {
 		ModelAndView modelAndView = null;
@@ -124,7 +143,18 @@ public class ReserveCarController {
 		}
 
 	}
-
+/**
+ * 
+ * @param clientFirstName
+ * @param clientLastName
+ * @param phoneNumber
+ * @param driverLicenceNumber
+ * @param licenceExpiryDate
+ * @param CarLicenseNo
+ * @param dropoffDate
+ * @param pickupDate
+ * @return
+ */
 	@RequestMapping(value = "/carReserved", method = RequestMethod.POST)
 	public ModelAndView showReservedCars(@RequestParam String clientFirstName, @RequestParam String clientLastName,
 			@RequestParam String phoneNumber, @RequestParam String driverLicenceNumber,
@@ -198,7 +228,11 @@ public class ReserveCarController {
 		return modelAndView;
 
 	}
-
+/**
+ * 
+ * @param carLicencePlateNumber
+ * @return
+ */
 	@RequestMapping(value = "/cancelThisReservation")
 	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
 
@@ -222,7 +256,11 @@ public class ReserveCarController {
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param carLicencePlateNumber
+ * @return
+ */
 	@RequestMapping(value = "/handleTheReturnThisRental")
 	public ModelAndView returnSelectedRental(@RequestParam String carLicencePlateNumber) {
 
@@ -246,7 +284,18 @@ public class ReserveCarController {
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param clientFirstName
+ * @param clientLastName
+ * @param phoneNumber
+ * @param driverLicenceNumber
+ * @param licenceExpiryDate
+ * @param CarLicenseNo
+ * @param dropoffDate
+ * @param pickupDate
+ * @return
+ */
 	@RequestMapping(value = "/carRented", method = RequestMethod.POST)
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName, @RequestParam String clientLastName,
 			@RequestParam String phoneNumber, @RequestParam String driverLicenceNumber,
@@ -342,7 +391,10 @@ public class ReserveCarController {
 		return modelAndView;
 
 	}
-
+/**
+ * 
+ * @return
+ */
 	@RequestMapping(value = "/backToReservedCarList")
 	public ModelAndView showReservedCarsPage() {
 

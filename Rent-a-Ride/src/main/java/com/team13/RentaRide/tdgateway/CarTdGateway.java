@@ -1,6 +1,7 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +9,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
+/**
+ * Car Table data GateWay 
+ * @author team 13
+ */
 
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class CarTdGateway {
+	
+	/**
+	 * 
+	 * @param parameterMap hashmap created to keep all car record content
+	 * @throws SQLexception is thrown if the query fails expected execution.
+	 * @return false if there is some error in query execution else true if the query is executed successfully.
+	 */
 
 	public boolean insertCarRecord(Map<String, Object> parameterMap) {
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Client {
 	
-	protected Integer client_id;
+	protected Integer id;
 	
 	private String driverLicenceNumber;
 	private String clientFirstName;
@@ -13,10 +13,10 @@ public class Client {
 	private LocalDate licenceExpiryDate;
 	
 	public Integer getId() {
-		return client_id;
+		return id;
 	}
-	public void setId(Integer client_id) {
-		this.client_id = client_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getDriverLicenceNumber() {
 		return driverLicenceNumber;

@@ -1,6 +1,11 @@
 package com.team13.RentaRide.model;
 
 public class Clerk extends User{
+	/**
+	 * 
+	 * @param email
+	 * @param password
+	 */
 
 	public Clerk(String email, String password) {
 		super(email, password);

@@ -10,7 +10,7 @@ import java.util.Map;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class AdminTdGateway {
-	
+
 	public boolean insertAdminRecord(Map<String, String> map) {
 		Connection connection = DatabaseUtils.getDbConnection();
 		String query = "INSERT INTO Admin VALUES (default,?,?)";
@@ -44,6 +44,11 @@ public class AdminTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 
 	public ResultSet getAllAdminRecords() {
 
@@ -69,7 +74,10 @@ public class AdminTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}
-
+/**
+ * 
+ * @return
+ */
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select * from Admin");

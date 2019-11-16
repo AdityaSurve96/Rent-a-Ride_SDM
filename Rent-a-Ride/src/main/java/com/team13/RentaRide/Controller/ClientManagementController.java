@@ -12,10 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.utils.DataStore;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 @Controller
 
 public class ClientManagementController {
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/createNewClient")
 	public ModelAndView createClientRecord() {
 
@@ -23,7 +32,15 @@ public class ClientManagementController {
 
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param driverLicenceNumber
+ * @param clientFirstName
+ * @param clientLastName
+ * @param phoneNumber
+ * @param licenceExpiryDate
+ * @return
+ */
 	@RequestMapping("/goToClientManagementPageAfterCreation")
 	public ModelAndView confirmCreationOfClient(@RequestParam String driverLicenceNumber,
 			@RequestParam String clientFirstName, @RequestParam String clientLastName, @RequestParam String phoneNumber,
@@ -41,7 +58,11 @@ public class ClientManagementController {
 
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param driverLicenceNumberForModify
+ * @return
+ */
 	@RequestMapping("/gotoModifyClientRecord")
 	public ModelAndView showClientModificationPage(@RequestParam String driverLicenceNumberForModify) {
 
@@ -61,7 +82,11 @@ public class ClientManagementController {
 
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param driverLicenceNumberForDelete
+ * @return
+ */
 	@RequestMapping("/gotoDeleteClientRecord")
 	public ModelAndView deleteClientRecord(@RequestParam String driverLicenceNumberForDelete) {
 
@@ -77,7 +102,15 @@ public class ClientManagementController {
 
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @param driverLicenseNumber
+ * @param clientFirstName
+ * @param clientLastName
+ * @param phoneNumber
+ * @param licenceExpiryDate
+ * @return
+ */
 	@RequestMapping(value = "/gotoClientManagementPageAfterModification", method = RequestMethod.POST)
 	public ModelAndView confirmClientRecordModify(@RequestParam String driverLicenseNumber,
 			@RequestParam String clientFirstName, @RequestParam String clientLastName, @RequestParam String phoneNumber,

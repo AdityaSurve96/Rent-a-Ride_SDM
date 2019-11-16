@@ -24,13 +24,34 @@ import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
 import com.team13.RentaRide.utils.DataStore;
+/**
+ * The controller for Admin Operations.
+ * @author team 13 
+ *
+ */
 
 @Controller
 public class AdminOperationsController {
 
+
 	private CarDataMapper carDataMapper = new CarDataMapper();
 	
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
+
+	
+	/**
+	 * <p>The different Admin operations controlled by this classes are mentioned as follows</p>
+	 * <ol>
+	 * <li>Successful login of Admin </li>
+	 *  <li>Manage the Car catalog </li>
+	 *  <li>Viewing Rental Cars </li>
+	 *  <li>Viewing Reserved Cars </li>
+	 *  <li>Viewing Returned Cars </li>
+	 *  <li>Viewing Cancelled Cars </li>
+	 * </ol>
+	 */
+
+
 	private AdminDataMapper adminDataMapper = new AdminDataMapper();
 	private ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
 
@@ -65,6 +86,12 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/tryToLoginAsAdmin", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		System.out.println("here**************");
 		try {
@@ -94,6 +121,12 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
 		if (!email.isEmpty() && !password.isEmpty()) {
@@ -133,6 +166,18 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/addNewCar", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param licensePlateNumber
+	 * @param carDescription
+	 * @param carModel
+	 * @param carType
+	 * @param carMake
+	 * @param carYear
+	 * @param carColor
+	 * @param carPrice
+	 * @return
+	 */
 	public ModelAndView addNewCar(@RequestParam String licensePlateNumber, @RequestParam String carDescription,
 			@RequestParam String carModel, @RequestParam String carType, @RequestParam String carMake,
 			@RequestParam String carYear, @RequestParam String carColor, @RequestParam String carPrice) {
@@ -162,6 +207,11 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/editCar")
+	/**
+	 * 
+	 * @param currentLicensePlateNumber
+	 * @return
+	 */
 	public ModelAndView editCar(@RequestParam String currentLicensePlateNumber) {
 		System.out.println("licensePlateNumber: " + currentLicensePlateNumber);
 		Car currentCar = null;
@@ -203,6 +253,11 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param car
+	 * @return
+	 */
 	public ModelAndView saveCarChanges(Car car) {
 
 		for (Car currentCar : carDataMapper.getAllCars()) {
@@ -295,6 +350,14 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/filterReservationRecordsForAdmin", method = RequestMethod.POST)
+	/**
+	 * 
+	 * @param licensePlateNumberInput
+	 * @param drivingLicenseNumberInput
+	 * @param dueDateFilter
+	 * @param pickupDateFilter
+	 * @return
+	 */
 	public ModelAndView filterReservationRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
@@ -334,7 +397,14 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
-
+/**
+ * 
+ * @param licensePlateNumberInput
+ * @param drivingLicenseNumberInput
+ * @param dueDateFilter
+ * @param pickupDateFilter
+ * @return
+ */
 	@RequestMapping(value = "/filterRentalRecordsForAdmin", method = RequestMethod.POST)
 	public ModelAndView filterRentalRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,

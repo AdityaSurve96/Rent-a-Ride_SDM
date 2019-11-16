@@ -1,6 +1,7 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +12,18 @@ import java.util.Date;
 import java.util.HashMap;
 
 import com.team13.RentaRide.utils.DatabaseUtils;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 public class RentedCarTdGateway {
+	/**
+	 * 
+	 * @param parameterMap
+	 * @return
+	 */
 	
 	public boolean insertRentedCarRecord(HashMap<String, Object> parameterMap) {
 		
@@ -71,6 +82,12 @@ public class RentedCarTdGateway {
 	
 	public ResultSet selectAllRentedCars() {
 
+	/**
+	 * 
+	 * @return
+	 */
+
+
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
 
@@ -96,7 +113,11 @@ public class RentedCarTdGateway {
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param startDate
+	 * @return
+	 */
 	public ResultSet findRentedCarsByStartDate(LocalDate startDate) {
 		
 		Connection connection  = DatabaseUtils.getDbConnection();
@@ -132,7 +153,11 @@ public class RentedCarTdGateway {
 		
 	}
 
-	
+	/**
+	 * 
+	 * @param dueDate
+	 * @return
+	 */
 	public ResultSet findRentedCarsByDueDate(LocalDate dueDate) {
 		
 		Connection connection  = DatabaseUtils.getDbConnection();
@@ -166,7 +191,15 @@ public class RentedCarTdGateway {
 		return resultSet;
 		
 		
+
 	}	
+
+	
+	/**
+	 * 
+	 * @return
+	 */
+
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select car.*, client.*, ");

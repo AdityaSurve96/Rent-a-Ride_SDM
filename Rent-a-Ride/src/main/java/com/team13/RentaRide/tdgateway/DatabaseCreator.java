@@ -1,6 +1,7 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,10 +9,19 @@ import java.util.Properties;
 
 import com.team13.RentaRide.utils.DatabaseUtils;
 import com.team13.RentaRide.utils.PropertyFileReaderUtils;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 public class DatabaseCreator {
 
 	public static void testDb() {
+		/**
+		 * 
+		 */
+		
 		Properties dbProperties = PropertyFileReaderUtils.getProperties();
 
 		String user = dbProperties.getProperty("db.username");

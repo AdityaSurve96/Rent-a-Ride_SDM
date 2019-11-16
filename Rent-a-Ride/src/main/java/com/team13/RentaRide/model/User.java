@@ -1,4 +1,9 @@
 package com.team13.RentaRide.model;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 public class User {
 	protected Integer id;

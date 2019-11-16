@@ -1,15 +1,26 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
+/**
+ * <h3>Clerk Table Data Gateway</h3>
+ * @author team 13
+ */
 
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class ClerkTdGateway {
+	/**
+	 * 
+	 * @param hmClerk
+	 * @throws 
+	 * @return
+	 */
 
 	public boolean insertClerkRecord(Map<String, Object> hmClerk) {
 
@@ -45,6 +56,10 @@ public class ClerkTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 
 	public ResultSet getAllClerkRecords() {
 
@@ -72,6 +87,11 @@ public class ClerkTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();

@@ -2,6 +2,7 @@ package com.team13.RentaRide.Controller;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +13,18 @@ import com.team13.RentaRide.model.Clerk;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.utils.DataStore;
 
+/**
+ * 
+ * @author Admin
+ *
+ */
 @Controller
 public class ClerkOperationController {
+	/**
+	 * 
+	 * @return
+	 */
+	
 
 	@RequestMapping("/tryToRegisterAsClerk")
 	public ModelAndView showRegisterClerkPage() {
@@ -21,6 +32,12 @@ public class ClerkOperationController {
 		return new ModelAndView("ClerkRegisterPage");
 
 	}
+	/**
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 
 	@RequestMapping(value = "/clerkRegistered", method = RequestMethod.POST)
 	public ModelAndView registerClerk(@RequestParam String email, @RequestParam String password) {
@@ -30,7 +47,10 @@ public class ClerkOperationController {
 
 		return new ModelAndView("ClerkLoginPage");
 	}
-
+/**
+ * 
+ * @return
+ */
 	@RequestMapping("/viewCarCatalog")
 	public ModelAndView showCarCatalogPage() {
 
@@ -43,6 +63,11 @@ public class ClerkOperationController {
 		return modelAndView;
 	}
 
+	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/showClientManagement")
 	public ModelAndView showClientManagementPage() {
 
@@ -52,13 +77,22 @@ public class ClerkOperationController {
 		modelAndView.addObject("clients", clientList);
 		return modelAndView;
 	}
-
+/**
+ * 
+ * @return
+ */
 	@RequestMapping("/ClerkLoginPage")
 	public ModelAndView showLoginPage() {
 		return new ModelAndView("ClerkLoginPage");
 	}
-
+/**
+ * 
+ * @param email
+ * @param password
+ * @return
+ */
 	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
+	
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 
 		boolean flag = false;

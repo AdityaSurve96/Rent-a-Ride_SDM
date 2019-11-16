@@ -5,6 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.team13.RentaRide.tdgateway.DatabaseCreator;
 import com.team13.RentaRide.utils.DataStore;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 @SpringBootApplication
 public class RentARideApplication {

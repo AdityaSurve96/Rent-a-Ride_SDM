@@ -1,6 +1,7 @@
 package com.team13.RentaRide.Controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -12,15 +13,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DataStore;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 @Controller
 public class CarFilterController {
+	/**
+	 * 
+	 * @param modelInput
+	 * @param typeInput
+	 * @param makeInput
+	 * @param colorInput
+	 * @param yearInput
+	 * @param yearOffset
+	 * @param availabilityInput
+	 * @return
+	 */
 
 	@RequestMapping(value = "/filterCarsForClerk", method = RequestMethod.POST)
 	public ModelAndView filterCarsForClerk(@RequestParam String modelInput, @RequestParam String typeInput,
 			@RequestParam String makeInput, @RequestParam String colorInput, @RequestParam String yearInput,
 			@RequestParam Integer yearOffset, @RequestParam String availabilityInput) {
-
 		List<Car> carsToSend = filterCars(modelInput, typeInput, makeInput, colorInput, yearInput, yearOffset,
 				availabilityInput);
 		return new ModelAndView("CarCatalog", "cars", carsToSend);

@@ -11,9 +11,18 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import com.team13.RentaRide.utils.DatabaseUtils;
+/**
+ * 
+ * @author Admin
+ *
+ */
 
 public class ReservedCarTdGateway {
-
+/**
+ * 
+ * @param parameterMap
+ * @return
+ */
 	public boolean insertReservedCarRecord(Map<String, Object> parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -53,7 +62,10 @@ public class ReservedCarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public ResultSet getAllReservedCars() {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -79,7 +91,12 @@ public class ReservedCarTdGateway {
 		return resultSet;
 	}
 
-	/////
+	/**
+	 * 
+	 * @param startDate
+	 * @param dueDate
+	 * @return
+	 */
 	public ResultSet getAllReservedCarsByDates(LocalDate startDate, LocalDate dueDate) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -118,8 +135,10 @@ public class ReservedCarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return result;
 	}
-	////
-
+	/**
+	 * 
+	 * @return
+	 */
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select car.*, client.*, ");
