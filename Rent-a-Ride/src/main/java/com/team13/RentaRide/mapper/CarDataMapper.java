@@ -1,9 +1,14 @@
 package com.team13.RentaRide.mapper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.tdgateway.CarTdGateway;
+import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class CarDataMapper {
 	
@@ -24,14 +29,65 @@ public class CarDataMapper {
 			parameterMap.put("PRICE", carObj.getPrice());
 			parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
 
-
-
 			return carGateway.insertCarRecord(parameterMap);
+			
 		} catch (Exception e) {
 			System.out.println("Error while inserting a reserved car record in the database");
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	
+	public  List<Car> getAllCars(){
+		
+		ResultSet resultSet = carGateway.findAllCars();
+		
+		if(resultSet == null) {
+			return new ArrayList<Car>();
+		}
+		
+		List<Car> allCars = new ArrayList<Car>();
+		
+		try {
+			allCars = parseResultSet(resultSet);
+		} catch (Exception e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return new ArrayList<Car>();
+		}
+		
+		return allCars;
+		
+		
+	}
+	
+	
+	
+	
+	public List<Car> parseResultSet(ResultSet resultSet) throws SQLException {
+		
+		List<Car> allCars = new ArrayList<Car>();
+		
+		while (resultSet.next()) {
+			
+			Car car = new Car();
+			car.setId(resultSet.getInt(1));	
+			car.setLicensePlateNumber(resultSet.getString(2));
+			car.setMake(resultSet.getString(3));
+			car.setModel(resultSet.getString(4));
+			car.setType(resultSet.getString(5));
+			car.setColor(resultSet.getString(6));
+			car.setYear(resultSet.getInt(7));
+			car.setDescription(resultSet.getString(8));
+			car.setPrice(resultSet.getBigDecimal(9));
+			car.setAvailableReservedOrRented(resultSet.getString(10));
+			
+			allCars.add(car);
+			
+		}
+		return allCars;
+		
 	}
 
 }
