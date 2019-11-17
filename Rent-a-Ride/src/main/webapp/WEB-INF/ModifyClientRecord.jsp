@@ -12,7 +12,7 @@
 
 <body>
 
-<form method="post">
+<form method="post" class="form-horizontal">
 <div class="container" align="center">
  <div class="form">
  <h2>Modify Client Record</h2>
@@ -44,7 +44,7 @@
 
 </div>  
 </div>
-<br><br>
+<br>
 <div align="center">
  <div class="form-group">
   	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberInput">

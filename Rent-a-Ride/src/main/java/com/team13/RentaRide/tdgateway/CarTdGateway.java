@@ -110,12 +110,12 @@ public class CarTdGateway {
 		boolean flag = false;
 		if (parameterMap.size() == 2) {
 			flag = true;
-			query.append("UPDATE Car SET").append("available_reserved_or_rented = ?")
-					.append("WHERE license_plate_number = ?");
+			query.append("UPDATE Car SET ").append("available_reserved_or_rented = ? ")
+					.append(" WHERE license_plate_number = ?");
 		} else {
-			query.append("UPDATE Car SET").append("make = ?,").append("model = ?,").append("type = ?,")
-					.append("color = ?,").append("year = ?,").append("description = ?,").append("price = ?,")
-					.append("available_reserved_or_rented = ?").append("WHERE license_plate_number = ?");
+			query.append("UPDATE Car SET ").append(" make = ?,").append("  model = ?,").append(" type = ?,")
+					.append(" color = ?,").append(" year = ?,").append(" description = ?,").append(" price = ?,")
+					.append(" available_reserved_or_rented = ?").append(" WHERE license_plate_number = ?");
 		}
 
 		PreparedStatement statement = null;

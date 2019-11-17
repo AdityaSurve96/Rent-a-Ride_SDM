@@ -12,11 +12,12 @@
 
 <body>
 
-<form method="post">
+<form method="post" class="form-horizontal">
 <div class="container" align="center">
  <div class="form">
  <h2>Create New Client</h2>
  <br><br>
+<div class="container col-md-12">	
 <div class="form-group">
  
  	<div class="col-md-5"><label class="control-label pull-right pull-right">Driver Licence Number:</label></div>
@@ -41,13 +42,13 @@
  	<div class="col-md-5"><label class="control-label pull-right">Licence Expiry Date:</label></div>
  	<div class="col-md-3"><input class="form-control pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
 </div>
-
+<br>
 </div>  
 </div>
- <div class="form-group">
+</div>
+ <div class="form-group" align="center">
   	<button type="submit" class="btn btn-primary btn-md" formaction="/goToClientManagementPageAfterCreation">Confirm</button>
   	<a href="/ClientManagementPage" class="btn btn-primary btn-md">Back</a>
- </div>
  </div>
  
 </form>

@@ -49,12 +49,12 @@
 			<form method="post" >
 			<td>  
 			<input value= "${client.driverLicenceNumber}" type = "hidden" name = "driverLicenceNumberForModify" />
-			<input type= "submit" formaction= "/gotoModifyClientRecord" value="MODIFY" />
+			<input class="btn btn-primary btn-sm" type= "submit" formaction= "/gotoModifyClientRecord" value="Modify" />
 			</td>
 			
 			<td>  
 			<input value= "${client.driverLicenceNumber}" type = "hidden" name = "driverLicenceNumberForDelete" />
-			<input type= "submit" formaction= "/gotoDeleteClientRecord" value= "DELETE" />
+			<input class="btn btn-danger btn-sm" type= "submit" formaction= "/gotoDeleteClientRecord" value= "Delete" />
 			</td>
 			</form>
 		</tr>

@@ -245,19 +245,7 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
 	public ModelAndView saveCarChanges(Car car) {
-
-		for (Car currentCar : carDataMapper.getAllCars()) {
-			if (currentCar.getLicensePlateNumber().equals(car.getLicensePlateNumber())) {
-				currentCar.setColor(car.getColor());
-				currentCar.setDescription(car.getDescription());
-				currentCar.setMake(car.getMake());
-				currentCar.setModel(car.getModel());
-				currentCar.setPrice(car.getPrice());
-				currentCar.setType(car.getType());
-				currentCar.setYear(car.getYear());
-				break;
-			}
-		}
+		carDataMapper.modifyCarRecord(car);
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 	}
 
@@ -444,7 +432,7 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
-	
+
 	@RequestMapping("/showReturnedCancelledReservations")
 	public ModelAndView showReturnedOrCancelledTransactions() {
 
