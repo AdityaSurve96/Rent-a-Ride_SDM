@@ -1,7 +1,6 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +17,7 @@ public class ClerkTdGateway {
 	/**
 	 * 
 	 * @param hmClerk
-	 * @throws 
-	 * @return
+	 * @throws @return
 	 */
 
 	public boolean insertClerkRecord(Map<String, Object> hmClerk) {
@@ -56,6 +54,7 @@ public class ClerkTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -63,9 +62,9 @@ public class ClerkTdGateway {
 
 	public ResultSet getAllClerkRecords() {
 
-		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
 
+		Connection connection = DatabaseUtils.getDbConnection();
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
@@ -87,7 +86,7 @@ public class ClerkTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -98,6 +97,35 @@ public class ClerkTdGateway {
 		query.append("select id, email, password");
 		query.append("from clerk");
 		return query;
+	}
+
+	public ResultSet getClerkByEmailPassword(String email, String password) {
+
+		StringBuilder query = getSelectQuery();
+		query.append(" where email = '" + email + "'");
+		query.append(" and password = '" + password + "'");
+		
+		Statement statement = null;
+		try {
+			Connection connection = DatabaseUtils.getDbConnection();
+			statement = connection .createStatement();
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		ResultSet resultSet = null;
+		try {
+			resultSet = statement.executeQuery(query.toString());
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return resultSet;
 	}
 
 }

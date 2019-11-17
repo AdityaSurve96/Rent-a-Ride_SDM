@@ -1,7 +1,6 @@
 package com.team13.RentaRide.model;
 
 import java.time.LocalDate;
-
 import java.util.Date;
 /**
  * Model for Booked Car

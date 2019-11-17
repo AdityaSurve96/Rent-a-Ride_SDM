@@ -1,12 +1,10 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;

@@ -50,9 +50,26 @@ public class ClerkDataMapper {
 
 		List<Clerk> resClerk = new ArrayList<>();
 		while (resultSet.next()) {
-			Clerk user = new Clerk(resultSet.getString(1), resultSet.getString(2));
+			Clerk user = getModelFromResultSet(resultSet);
 			resClerk.add(user);
 		}
 		return resClerk;
+	}
+
+	private Clerk getModelFromResultSet(ResultSet resultSet) throws SQLException {
+		Clerk user = new Clerk(resultSet.getString(1), resultSet.getString(2));
+		return user;
+	}
+
+	public Clerk getClerkByEmailPassword(String email, String password) {
+
+		ResultSet result = clerkgateway.getClerkByEmailPassword(email, password);
+		try {
+			return getModelFromResultSet(result);
+		} catch (SQLException e) {
+			System.out.println("Error while getting clerk record from db");
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

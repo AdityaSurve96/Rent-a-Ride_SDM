@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.team13.RentaRide.model.Admin;
-import com.team13.RentaRide.model.Car;
-import com.team13.RentaRide.model.ReservedCar;
+import com.team13.RentaRide.tdgateway.AdminTdGateway;
 import com.team13.RentaRide.utils.DatabaseUtils;
-import com.team13.RentaRide.tdgateway.*;
 
 public class AdminDataMapper {
 	private AdminTdGateway gtway = new AdminTdGateway();

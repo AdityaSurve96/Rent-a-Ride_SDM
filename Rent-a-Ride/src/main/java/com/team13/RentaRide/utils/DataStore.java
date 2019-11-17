@@ -178,7 +178,7 @@ public final class DataStore {
 
 		// CAR 2
 		Car c2 = new Car();
-	
+
 		c2.setAvailableReservedOrRented("Reserved");
 		c2.setColor("Blue");
 		c2.setDescription("Good for a mountain trip");
@@ -304,7 +304,7 @@ public final class DataStore {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String d = null;
 
-		RentedCar renCar1 = new RentedCar( 1001,getAllCars().get(2), getAllClients().get(0), LocalDate.now(),
+		RentedCar renCar1 = new RentedCar(1001, getAllCars().get(2), getAllClients().get(0), LocalDate.now(),
 				LocalDate.of(2019, 12, 13), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
@@ -316,8 +316,8 @@ public final class DataStore {
 			e.printStackTrace();
 		}
 
-		RentedCar renCar2 = new RentedCar(1002,getAllCars().get(7), getAllClients().get(2), LocalDate.now(),
-				LocalDate.of(2019, 12, 17),  new Date());
+		RentedCar renCar2 = new RentedCar(1002, getAllCars().get(7), getAllClients().get(2), LocalDate.now(),
+				LocalDate.of(2019, 12, 17), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -328,7 +328,7 @@ public final class DataStore {
 			e.printStackTrace();
 		}
 		RentedCar renCar3 = new RentedCar(1003, getAllCars().get(9), getAllClients().get(4), LocalDate.now(),
-				LocalDate.of(2019, 12, 25),  new Date());
+				LocalDate.of(2019, 12, 25), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -351,8 +351,8 @@ public final class DataStore {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String d = null;
 
-		ReservedCar resCar1 = new ReservedCar(1001,getAllCars().get(1), getAllClients().get(0), LocalDate.of(2019, 11, 15),
-				LocalDate.of(2019, 11, 20), new Date());
+		ReservedCar resCar1 = new ReservedCar(1001, getAllCars().get(1), getAllClients().get(0),
+				LocalDate.of(2019, 11, 15), LocalDate.of(2019, 11, 20), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -363,8 +363,8 @@ public final class DataStore {
 			e.printStackTrace();
 		}
 
-		ReservedCar resCar2 = new ReservedCar(1002,getAllCars().get(6), getAllClients().get(1), LocalDate.of(2019, 02, 05),
-				LocalDate.of(2019, 02, 10),  new Date());
+		ReservedCar resCar2 = new ReservedCar(1002, getAllCars().get(6), getAllClients().get(1),
+				LocalDate.of(2019, 02, 05), LocalDate.of(2019, 02, 10), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
@@ -375,8 +375,8 @@ public final class DataStore {
 			e.printStackTrace();
 		}
 
-		ReservedCar resCar3 = new ReservedCar(1003, getAllCars().get(8), getAllClients().get(4), LocalDate.of(2019, 04, 10),
-				LocalDate.of(2019, 04, 25),  new Date());
+		ReservedCar resCar3 = new ReservedCar(1003, getAllCars().get(8), getAllClients().get(4),
+				LocalDate.of(2019, 04, 10), LocalDate.of(2019, 04, 25), new Date());
 		d1 = new Date();
 		d = sdf.format(d1);
 		try {
