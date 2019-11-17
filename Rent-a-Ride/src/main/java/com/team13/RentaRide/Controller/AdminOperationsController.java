@@ -35,15 +35,16 @@ public class AdminOperationsController {
 
 
 	private CarDataMapper carDataMapper = new CarDataMapper();
-	
+
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
 
-	
+
 	/**
 	 * <p>The different Admin operations controlled by this classes are mentioned as follows</p>
 	 * <ol>
 	 * <li>Successful login of Admin </li>
-	 *  <li>Manage the Car catalog </li>
+	 *  <li>Manage the Car catalog(includes creation,modification,deletion of cars) </li>
+	 *  <li>searching on filters for different cars</li>
 	 *  <li>Viewing Rental Cars </li>
 	 *  <li>Viewing Reserved Cars </li>
 	 *  <li>Viewing Returned Cars </li>
@@ -122,20 +123,20 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
 	/**
-	 * 
-	 * @param email
-	 * @param password
+	 * This calls the registration page if the admin is logging the system for the first time.
+	 * @param email : email id of the Admin.
+	 * @param password : password of the Admin.
 	 * @return
 	 */
 	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
 		if (!email.isEmpty() && !password.isEmpty()) {
-			
-			
-			
+
+
+
 			Admin admin = new Admin(email, password);
 			adminDataMapper.addAdminRecord(admin);
-			
+
 			//DataStore.getAdmins().add(admin);
 			return new ModelAndView("AdminLoginPage");
 		}
@@ -160,15 +161,15 @@ public class AdminOperationsController {
 	@RequestMapping(value = "/addNewCar", method = RequestMethod.POST)
 	/**
 	 * 
-	 * @param licensePlateNumber
-	 * @param carDescription
-	 * @param carModel
-	 * @param carType
-	 * @param carMake
-	 * @param carYear
-	 * @param carColor
-	 * @param carPrice
-	 * @return
+	 * @param licensePlateNumber licence plate number of the car.
+	 * @param carDescription proper description of car like company name etc.
+	 * @param carModel model name of the car
+	 * @param carType type of the car like SUV,Sedan etc.
+	 * @param carMake manufacturer of the car.
+	 * @param carYear year that car was manufactured etc.
+	 * @param carColor color of the car.
+	 * @param carPrice price of the car.
+	 * @return model and View after adding a new car.
 	 */
 	public ModelAndView addNewCar(@RequestParam String licensePlateNumber, @RequestParam String carDescription,
 			@RequestParam String carModel, @RequestParam String carType, @RequestParam String carMake,
@@ -186,11 +187,13 @@ public class AdminOperationsController {
 			car.setType(carType);
 			car.setYear(Integer.valueOf(carYear));
 			System.out.println("created car: " + car);
-			
+
 			carDataMapper.addCarRecord(car);
+
 			
 //			DataStore.getInstance().getAllCars().add(car);
 			return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
+
 		} catch (Exception e) {
 			ModelAndView modelAndView = new ModelAndView();
 			modelAndView.addObject("errorMessage", "Error while adding the Car, " + e.getMessage());
@@ -200,9 +203,9 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/editCar")
 	/**
-	 * 
-	 * @param currentLicensePlateNumber
-	 * @return
+	 * to modify a car licence plate number is taken as a reference key based on which other all attributes of car will get modified.
+	 * @param currentLicensePlateNumber the licence plate number of the car that needs to be modified is fetched.
+	 * @return model and view of the modified car.
 	 */
 	public ModelAndView editCar(@RequestParam String currentLicensePlateNumber) {
 		System.out.println("licensePlateNumber: " + currentLicensePlateNumber);
@@ -245,11 +248,6 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
-	/**
-	 * 
-	 * @param car
-	 * @return
-	 */
 	public ModelAndView saveCarChanges(Car car) {
 
 		for (Car currentCar : carDataMapper.getAllCars()) {
@@ -343,18 +341,18 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/filterReservationRecordsForAdmin", method = RequestMethod.POST)
 	/**
-	 * 
-	 * @param licensePlateNumberInput
-	 * @param drivingLicenseNumberInput
-	 * @param dueDateFilter
-	 * @param pickupDateFilter
-	 * @return
+	 * to search a car using filters in reservation records.
+	 * @param licensePlateNumberInput the licence plate number of the reserved car that needs to be filtered is fetched.
+	 * @param drivingLicenseNumberInput the driving licence number of the reserved car that needs to be filtered is fetched.
+	 * @param dueDateFilter the due date of the reserved car that needs to be filtered is fetched.
+	 * @param pickupDateFilter the pickup date of the reserved car that needs to be filtered is fetched.
+	 * @return model and view of reserved car after applying filters for reserved cars.
 	 */
 	public ModelAndView filterReservationRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
-		
+
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
 
@@ -389,20 +387,20 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
-/**
- * 
- * @param licensePlateNumberInput
- * @param drivingLicenseNumberInput
- * @param dueDateFilter
- * @param pickupDateFilter
- * @return
- */
+	/**
+	 * to search a car using filters in reservation records.
+	 * @param licensePlateNumberInput the licence plate number of the rented car that needs to be filtered is fetched.
+	 * @param drivingLicenseNumberInput the driving licence number of the rented car that needs to be filtered is fetched.
+	 * @param dueDateFilter the due date of the rented car that needs to be filtered is fetched.
+	 * @param pickupDateFilter the pickup date of the rented car that needs to be filtered is fetched.
+	 * @return model and view of reserved car after applying filters for rented cars.
+	 */
 	@RequestMapping(value = "/filterRentalRecordsForAdmin", method = RequestMethod.POST)
 	public ModelAndView filterRentalRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
-		
+
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
@@ -413,23 +411,19 @@ public class AdminOperationsController {
 		for (RentedCar rental : rentals) {
 			if (!StringUtils.isEmpty(licensePlateNumberInput)
 					&& !licensePlateNumberInput.equals(rental.getCar().getLicensePlateNumber())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (!StringUtils.isEmpty(drivingLicenseNumberInput)
 					&& !drivingLicenseNumberInput.equals(rental.getAssociatedClient().getDriverLicenceNumber())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (dueDateFilter != null && !dueDateFilter.equals(rental.getDueDate())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 
 			if (pickupDateFilter != null && !pickupDateFilter.equals(rental.getStartDate())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
 			rentalsToSend.add(rental);

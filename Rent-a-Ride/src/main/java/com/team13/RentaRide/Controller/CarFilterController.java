@@ -14,23 +14,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DataStore;
 /**
- * 
- * @author Admin
+ * Car filter Controller
+ * @author Team 13
  *
  */
 
 @Controller
 public class CarFilterController {
 	/**
-	 * 
-	 * @param modelInput
-	 * @param typeInput
-	 * @param makeInput
-	 * @param colorInput
-	 * @param yearInput
-	 * @param yearOffset
-	 * @param availabilityInput
-	 * @return
+	 * @param modelInput model of the car filtered to search the specified car.
+	 * @param typeInput type of the car filtered to search the specified car.
+	 * @param makeInput make of the car filtered to search the specified car.
+	 * @param colorInput color of the car filtered to search the specified car.
+	 * @param yearInput year of the car filtered to search the specified car.
+	 * @param yearOffset year offset of the car filtered to search the specified car.
+	 * @param availabilityInput availability of the car filtered to search the specified car.
+	 * @return model and view after successful filteration.
 	 */
 
 	@RequestMapping(value = "/filterCarsForClerk", method = RequestMethod.POST)
@@ -54,7 +53,16 @@ public class CarFilterController {
 		return new ModelAndView("AdminCarCatalogPage", "cars", carsToSend);
 
 	}
-
+	/**
+	 * @param modelInput model of the car filtered to search the specified car.
+	 * @param typeInput type of the car filtered to search the specified car.
+	 * @param makeInput make of the car filtered to search the specified car.
+	 * @param colorInput color of the car filtered to search the specified car.
+	 * @param yearInput year of the car filtered to search the specified car.
+	 * @param yearOffset year offset of the car filtered to search the specified car.
+	 * @param availabilityInput availability of the car filtered to search the specified car.
+	 * @return cars to send after successful filteration.
+	 */
 	private List<Car> filterCars(String modelInput, String typeInput, String makeInput, String colorInput,
 			String yearInput, Integer yearOffset, String availabilityInput) {
 		DataStore ds = DataStore.getInstance();
@@ -64,36 +72,24 @@ public class CarFilterController {
 		Integer yearFilter = !StringUtils.isEmpty(yearInput) ? Integer.valueOf(yearInput) : 0;
 
 		for (Car car : cars) {
-
-//			System.out.println("Checking modelInput" + modelInput + " and car model" + car.getModel());
 			if (!StringUtils.isEmpty(modelInput) && !modelInput.equals(car.getModel())) {
-//				System.out.println("setting model add false");
 				continue;
 			}
-//			System.out.println("Checking typeInput " + typeInput + " and car type" + car.getType());
 
 			if (!StringUtils.isEmpty(typeInput) && !typeInput.equals(car.getType())) {
-//				System.out.println("setting type add false");
 				continue;
 			}
-//			System.out.println("Checking makeInput " + makeInput + " and car make" + car.getMake());
 
 			if (!StringUtils.isEmpty(makeInput) && !makeInput.equals(car.getMake())) {
-//				System.out.println("setting make add false");
 				continue;
 			}
-//			System.out.println("Checking colorInput " + colorInput + " and car color" + car.getColor());
 
 			if (!StringUtils.isEmpty(colorInput) && !colorInput.equals(car.getColor())) {
-//				System.out.println("setting make color false");
 				continue;
 			}
-//			System.out.println("Checking yearInput " + yearInput + " and car year" + car.getYear());
-//			System.out.println("yearOffset " + yearOffset);
 
 			if (!StringUtils.isEmpty(availabilityInput)
 					&& !availabilityInput.equals(car.getAvailableReservedOrRented())) {
-//				System.out.println("setting make color false");
 				continue;
 			}
 

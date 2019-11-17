@@ -10,14 +10,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DataStore;
 /**
- * 
- * @author Admin
+ * Controller for Car
+ * @author team 13
  *
  */
 
 @Controller
 public class CarDetailsController {
-	
+	/**
+	 * The controller for car has different operations like:
+	 * <li>Can browse detailed view of car</li>
+	 * <li>check availability of car</li>
+	 * <li>view the precious or next detailed view of car</li>
+	 * <li>can go back to car catalog</li>
+	 */
 
 	Car c=null;
 	
@@ -44,9 +50,6 @@ public class CarDetailsController {
 		return modelAndView;
 	}
 	
-	
-	
-
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 
@@ -104,13 +107,9 @@ public class CarDetailsController {
 		
 		return modelAndView;
 	}
-
-
-
 	/**
-	 * 
-	 * @param c
-	 * @return
+	 * @param c car object is passed to check the availability of the car
+	 * @return model and view of car.
 	 */
 	
 	
