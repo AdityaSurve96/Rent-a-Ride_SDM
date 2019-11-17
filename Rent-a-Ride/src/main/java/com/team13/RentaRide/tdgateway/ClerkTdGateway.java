@@ -95,7 +95,7 @@ public class ClerkTdGateway {
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select id, email, password");
-		query.append("from clerk");
+		query.append(" from clerk");
 		return query;
 	}
 

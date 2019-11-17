@@ -281,7 +281,7 @@ public class RentedCarTdGateway {
 		StringBuilder query = new StringBuilder();
 		query.append("select car.*, client.*, ");
 		query.append("ren_car.id, ren_car.start_date, ren_car.due_date, ren_car.booking_timestamp ");
-		query.append("from reservedcar ren_car ");
+		query.append("from rentedcar ren_car ");
 		query.append("join car on (ren_car.car_id = car.id) ");
 		query.append("join client on (ren_car.client_id = client.id) ");
 		return query;

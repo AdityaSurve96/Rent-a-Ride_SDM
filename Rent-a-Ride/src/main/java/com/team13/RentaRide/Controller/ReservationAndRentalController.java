@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.CancelledReturnedDataMapper;
 import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.mapper.ClientDataMapper;
 import com.team13.RentaRide.mapper.RentedCarDataMapper;
@@ -29,12 +30,14 @@ import com.team13.RentaRide.model.ReservedCar;
  */
 
 @Controller
+
 public class ReservationAndRentalController {
 
 	ClientDataMapper clientDataMapper = new ClientDataMapper();
 	CarDataMapper carDataMapper = new CarDataMapper();
 	RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
-
+	CancelledReturnedDataMapper crDataMapper = new CancelledReturnedDataMapper();
+	String returnOrCancel = null;
 	String page = null;
 
 	ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
@@ -196,10 +199,14 @@ public class ReservationAndRentalController {
 	@RequestMapping(value = "/handleTheReturnThisRental")
 	public ModelAndView returnSelectedRental(@RequestParam String carLicensePlateNumber) {
 
+		returnOrCancel = "Return";
+		crDataMapper.addRecord(carLicensePlateNumber, returnOrCancel);
+
 		rentedCarDataMapper.handleReturnOfVehicle(carLicensePlateNumber);
 		Car c = new Car();
 		c.setAvailableReservedOrRented("Available");
 		c.setLicensePlateNumber(carLicensePlateNumber);
+
 		carDataMapper.modifyCarRecord(c);
 
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals",
@@ -237,7 +244,7 @@ public class ReservationAndRentalController {
 			selectedClient = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber,
 					licenceExpiryDate);
 		}
-
+		
 		RentedCar rentedCar = createRentedCarObject(dropoffDate, pickupDate, selectedCar, selectedClient);
 		rentedCarDataMapper.addRentedCarRecord(rentedCar);
 		return new ModelAndView("ViewRentalTransactions", "rentals", reservedCarMapper.getAllReservedCars());

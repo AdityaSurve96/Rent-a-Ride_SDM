@@ -10,7 +10,7 @@ import java.util.Date;
 public class ReservedCar extends BookedCar {
 	/**
 	 * 
-	 * @param id
+	 * @param id	
 	 * @param car
 	 * @param associatedClient
 	 * @param startDate
