@@ -21,6 +21,7 @@ import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
 import com.team13.RentaRide.utils.DataStore;
+
 /**
  * 
  * @author Admin
@@ -29,11 +30,14 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class ReserveCarController {
-	
-	RentedCarDataMapper rentedCarDataMapper  = new RentedCarDataMapper();
+
 	CarDataMapper carDataMapper = new CarDataMapper();
+	RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
+
 	String page = null;
+
 	ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
+
 	/**
 	 * 
 	 * @param licensePlate
@@ -42,58 +46,33 @@ public class ReserveCarController {
 
 	@RequestMapping(value = "/rentThisCar")
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		page = "CreateRental";
-		Car c = null;
-		for (Car car : carsList) {
-			if (car.getLicensePlateNumber().equals(licensePlate)) {
-
-				c = car;
-				break;
-
-			}
-		}
-
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("RentCarForClient");
-		modelAndView.addObject("licensePlateNumber", c.getLicensePlateNumber());
+		modelAndView.addObject("licensePlateNumber", licensePlate);
 		modelAndView.addObject("pickUpDate", LocalDate.now());
 		return modelAndView;
-
 	}
-/**
- * 
- * @param licensePlate
- * @return
- */
+
+	/**
+	 * 
+	 * @param licensePlate
+	 * @return
+	 */
 	@RequestMapping(value = "/reserveThisCar")
 	public ModelAndView showCarReservingPage(@RequestParam String licensePlate) {
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		page = "CreateReservation";
-		Car c = null;
-		for (Car car : carsList) {
-			if (car.getLicensePlateNumber().equals(licensePlate)) {
-
-				c = car;
-				break;
-
-			}
-		}
-
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("ReserveCarForClient");
-		modelAndView.addObject("licensePlateNumber", c.getLicensePlateNumber());
+		modelAndView.addObject("licensePlateNumber", licensePlate);
 		return modelAndView;
 
 	}
-/**
- * 
- * @param driverLicenceNumber
- * @param CarLicenseNo
- * @return
- */
+
+	/**
+	 * 
+	 * @param driverLicenceNumber
+	 * @param CarLicenseNo
+	 * @return
+	 */
 	@RequestMapping(value = "/searchThisClient", method = RequestMethod.POST)
 	public ModelAndView searchClient(@RequestParam String driverLicenceNumber, @RequestParam String CarLicenseNo) {
 		ModelAndView modelAndView = null;
@@ -144,18 +123,19 @@ public class ReserveCarController {
 		}
 
 	}
-/**
- * 
- * @param clientFirstName
- * @param clientLastName
- * @param phoneNumber
- * @param driverLicenceNumber
- * @param licenceExpiryDate
- * @param CarLicenseNo
- * @param dropoffDate
- * @param pickupDate
- * @return
- */
+
+	/**
+	 * 
+	 * @param clientFirstName
+	 * @param clientLastName
+	 * @param phoneNumber
+	 * @param driverLicenceNumber
+	 * @param licenceExpiryDate
+	 * @param CarLicenseNo
+	 * @param dropoffDate
+	 * @param pickupDate
+	 * @return
+	 */
 	@RequestMapping(value = "/carReserved", method = RequestMethod.POST)
 	public ModelAndView showReservedCars(@RequestParam String clientFirstName, @RequestParam String clientLastName,
 			@RequestParam String phoneNumber, @RequestParam String driverLicenceNumber,
@@ -206,7 +186,7 @@ public class ReserveCarController {
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
 
-		ReservedCar resCar = new ReservedCar(null, c, cl, pickupDate, dropoffDate,  new Date());
+		ReservedCar resCar = new ReservedCar(null, c, cl, pickupDate, dropoffDate, new Date());
 
 		Date d1;
 		Date d2;
@@ -220,73 +200,76 @@ public class ReserveCarController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		resCars.add(resCar);
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 
 		return modelAndView;
 
 	}
-/**
- * 
- * @param carLicencePlateNumber
- * @return
- */
+
+	/**
+	 * 
+	 * @param carLicencePlateNumber
+	 * @return
+	 */
 	@RequestMapping(value = "/cancelThisReservation")
 	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
 
-		DataStore ds = DataStore.getInstance();
-		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
-		List<Car> allCars = ds.getAllCars();
-		for (ReservedCar reservedCar : resCars) {
-			if (reservedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
-				for (Car car : allCars) {
-					if (car.equals(reservedCar.getCar())) {
-						car.setAvailableReservedOrRented("Available");
-						resCars.remove(reservedCar);
-						break;
-					}
-				}
+		reservedCarMapper.deleteCarReservationByLicense(carLicencePlateNumber);
 
-			}
-			break;
-		}
+//		DataStore ds = DataStore.getInstance();
+		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
+//		List<Car> allCars = ds.getAllCars();
+//		for (ReservedCar reservedCar : resCars) {
+//			if (reservedCar.getCar().getLicensePlateNumber().equals(carLicencePlateNumber)) {
+//				for (Car car : allCars) {
+//					if (car.equals(reservedCar.getCar())) {
+//						car.setAvailableReservedOrRented("Available");
+//						resCars.remove(reservedCar);
+//						break;
+//					}
+//				}
+//
+//			}
+//			break;
+//		}
 
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 		return modelAndView;
 	}
-/**
- * 
- * @param carLicencePlateNumber
- * @return
- */
+
+	/**
+	 * 
+	 * @param carLicencePlateNumber
+	 * @return
+	 */
 	@RequestMapping(value = "/handleTheReturnThisRental")
 	public ModelAndView returnSelectedRental(@RequestParam String carLicensePlateNumber) {
-		
+
 		rentedCarDataMapper.handleReturnOfVehicle(carLicensePlateNumber);
 		Car c = new Car();
 		c.setAvailableReservedOrRented("Available");
 		c.setLicensePlateNumber(carLicensePlateNumber);
-		carDataMapper.modifyCarRecord(c);	
-		
+		carDataMapper.modifyCarRecord(c);
+
 		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
 		return modelAndView;
 	}
-/**
- * 
- * @param clientFirstName
- * @param clientLastName
- * @param phoneNumber
- * @param driverLicenceNumber
- * @param licenceExpiryDate
- * @param CarLicenseNo
- * @param dropoffDate
- * @param pickupDate
- * @return
- */
+
+	/**
+	 * 
+	 * @param clientFirstName
+	 * @param clientLastName
+	 * @param phoneNumber
+	 * @param driverLicenceNumber
+	 * @param licenceExpiryDate
+	 * @param CarLicenseNo
+	 * @param dropoffDate
+	 * @param pickupDate
+	 * @return
+	 */
 	@RequestMapping(value = "/carRented", method = RequestMethod.POST)
 	public ModelAndView showRentedCars(@RequestParam String clientFirstName, @RequestParam String clientLastName,
 			@RequestParam String phoneNumber, @RequestParam String driverLicenceNumber,
@@ -335,7 +318,7 @@ public class ReserveCarController {
 			cl.setLicenceExpiryDate(licenceExpiryDate);
 		}
 
-		RentedCar renCar = new RentedCar(null, c, cl, pickupDate, dropoffDate,  new Date());
+		RentedCar renCar = new RentedCar(null, c, cl, pickupDate, dropoffDate, new Date());
 
 		Date d1;
 		Date d2;
@@ -349,9 +332,9 @@ public class ReserveCarController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		rentedCarDataMapper.addRentedCarRecord(renCar);
-		
+
 		renCars.add(renCar);
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
 
@@ -382,10 +365,11 @@ public class ReserveCarController {
 		return modelAndView;
 
 	}
-/**
- * 
- * @return
- */
+
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/backToReservedCarList")
 	public ModelAndView showReservedCarsPage() {
 

@@ -109,4 +109,11 @@ public class ReservedCarDataMapper {
 		return resCars;
 	}
 
+	public void deleteCarReservationByLicense(String carLicencePlateNumber) {
+
+		
+		gateway.deleteCarReservation(carLicencePlateNumber);
+		
+	}
+
 }

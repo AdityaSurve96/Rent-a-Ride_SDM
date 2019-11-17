@@ -46,7 +46,7 @@ public class ReservedCarTdGateway {
 			statement.setTimestamp(5, (Timestamp) parameterMap.get("BOOKING_TIMESTAMP"));
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
-			
+
 			e.printStackTrace();
 			return false;
 		}
@@ -147,6 +147,21 @@ public class ReservedCarTdGateway {
 		query.append("join car on (res_car.car_id = car.id) ");
 		query.append("join client on (res_car.client_id = client.id) ");
 		return query;
+	}
+
+	public void deleteCarReservation(String carLicencePlateNumber) {
+
+		String deleteQuery = "delete from reservedcar where car.id in (select id from car where license_plate_number = ?) ";
+		Connection connection = DatabaseUtils.getDbConnection();
+		PreparedStatement statement;
+		try {
+			statement = connection.prepareStatement(deleteQuery.toString());
+			statement.setString(1, carLicencePlateNumber);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+
 	}
 
 }

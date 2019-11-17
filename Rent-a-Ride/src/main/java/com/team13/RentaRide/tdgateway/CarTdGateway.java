@@ -1,29 +1,27 @@
 package com.team13.RentaRide.tdgateway;
 
 import java.math.BigDecimal;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 import java.util.Map;
 /**
  * Car Table data GateWay 
  * @author team 13
  */
 
-import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class CarTdGateway {
-	
+
 	/**
 	 * 
 	 * @param parameterMap hashmap created to keep all car record content
 	 * @throws SQLexception is thrown if the query fails expected execution.
-	 * @return false if there is some error in query execution else true if the query is executed successfully.
+	 * @return false if there is some error in query execution else true if the
+	 *         query is executed successfully.
 	 */
 
 	public boolean insertCarRecord(Map<String, Object> parameterMap) {
@@ -40,25 +38,24 @@ public class CarTdGateway {
 			return false;
 		}
 		try {
-			
+
 			statement.setString(1, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
 			statement.setString(2, (String) parameterMap.get("MAKE"));
 			statement.setString(3, (String) parameterMap.get("MODEL"));
 			statement.setString(4, (String) parameterMap.get("TYPE"));
-			
+
 			statement.setString(5, (String) parameterMap.get("COLOR"));
 			statement.setInt(6, (Integer) parameterMap.get("YEAR"));
 			statement.setString(7, (String) parameterMap.get("DESCRIPTION"));
 			statement.setBigDecimal(8, (BigDecimal) parameterMap.get("PRICE"));
 			statement.setString(9, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
-			
-			
+
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		try {
 			statement.execute();
 		} catch (SQLException e) {
@@ -70,8 +67,7 @@ public class CarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
-	
-	
+
 	public boolean deleteCarRecord(String carLicencePlateNumber) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -86,15 +82,15 @@ public class CarTdGateway {
 			return false;
 		}
 		try {
-			
+
 			statement.setString(1, carLicencePlateNumber);
-			
+
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		try {
 			statement.execute();
 		} catch (SQLException e) {
@@ -106,31 +102,22 @@ public class CarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
-	
+
 	public boolean modifyCarRecord(Map<String, Object> parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = new StringBuilder();
 		boolean flag = false;
-		if(parameterMap.size()==2) {
+		if (parameterMap.size() == 2) {
 			flag = true;
-			query.append("UPDATE Car SET")
-				 .append("available_reserved_or_rented = ?")
-				 .append("WHERE license_plate_number = ?");
+			query.append("UPDATE Car SET").append("available_reserved_or_rented = ?")
+					.append("WHERE license_plate_number = ?");
+		} else {
+			query.append("UPDATE Car SET").append("make = ?,").append("model = ?,").append("type = ?,")
+					.append("color = ?,").append("year = ?,").append("description = ?,").append("price = ?,")
+					.append("available_reserved_or_rented = ?").append("WHERE license_plate_number = ?");
 		}
-		else {
-		 		query.append("UPDATE Car SET")
-		 		.append("make = ?,")
-		 		.append("model = ?,")
-				.append("type = ?,")
-				.append("color = ?,")
-				.append("year = ?,")
-				.append("description = ?,")
-				.append("price = ?,")
-				.append("available_reserved_or_rented = ?")
-				.append("WHERE license_plate_number = ?");
-		}
-		
+
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(query.toString());
@@ -140,17 +127,16 @@ public class CarTdGateway {
 			return false;
 		}
 		try {
-			
-			if( flag) {
+
+			if (flag) {
 				statement.setString(1, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
 				statement.setString(2, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
 
-			}
-			else { 
+			} else {
 				statement.setString(1, (String) parameterMap.get("MAKE"));
 				statement.setString(2, (String) parameterMap.get("MODEL"));
 				statement.setString(3, (String) parameterMap.get("TYPE"));
-				
+
 				statement.setString(4, (String) parameterMap.get("COLOR"));
 				statement.setInt(5, (Integer) parameterMap.get("YEAR"));
 				statement.setString(6, (String) parameterMap.get("DESCRIPTION"));
@@ -158,13 +144,13 @@ public class CarTdGateway {
 				statement.setString(8, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
 				statement.setString(9, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		try {
 			statement.execute();
 		} catch (SQLException e) {
@@ -176,15 +162,14 @@ public class CarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
-	
-	
+
 	public ResultSet findAllCars() {
-		
+
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = getSelectQuery();
-		
+
 		Statement statement = null;
-		
+
 		try {
 			statement = connection.createStatement();
 		} catch (Exception e) {
@@ -193,29 +178,61 @@ public class CarTdGateway {
 			return null;
 		}
 		ResultSet resultSet = null;
-		
+
 		try {
 			resultSet = statement.executeQuery(query.toString());
-			
+
 		} catch (Exception e) {
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
 			e.printStackTrace();
 			return null;
-			
+
 		}
-		
+
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}
-	
-	
-	
+
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
 		query.append("select * from car");
 		return query;
-		
+
+	}
+
+	public ResultSet getCarByLicensePlateNumber(String licensePlateNumber) {
+
+		Connection connection = DatabaseUtils.getDbConnection();
+		String query = "select * from car where license_plate_number = ?";
+
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query);
+		} catch (SQLException e1) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e1.printStackTrace();
+			return null;
+		}
+		try {
+			statement.setString(1, licensePlateNumber);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		ResultSet result = null;
+		try {
+			result = statement.executeQuery(query);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return result;
+
 	}
 
 }
-
