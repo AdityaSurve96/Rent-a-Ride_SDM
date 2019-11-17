@@ -125,7 +125,25 @@ public class CarDataMapper {
 	}
 
 	public Car getCarByLicenseNumber(String licensePlateNumber) {
-		return carGateway.getCarByLicensePlateNumber(licensePlateNumber);
+		ResultSet result = carGateway.getCarByLicensePlateNumber(licensePlateNumber);
+		Car car = new Car();
+		try {
+			car.setId(result.getInt(1));
+			car.setLicensePlateNumber(licensePlateNumber);
+			car.setMake(result.getString(3));
+			car.setModel(result.getString(4));
+			car.setType(result.getString(5));
+			car.setColor(result.getString(6));
+			car.setYear(result.getInt(7));
+			car.setDescription(result.getString(8));
+			car.setPrice(result.getBigDecimal(9));
+			car.setAvailableReservedOrRented(result.getString(10));
+			return car;
+		} catch (SQLException e) {
+			System.out.println("Error while setting parameters to ");
+			e.printStackTrace();
+			return null;
+		}
 
 	}
 
