@@ -235,4 +235,72 @@ public class CarTdGateway {
 
 	}
 
+	public ResultSet getNextCarFromId(Integer carId) {
+
+		String query = "select * from car where id = (select min(id) from car where id > ?)";
+		Connection connection = DatabaseUtils.getDbConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query);
+		} catch (SQLException e1) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e1.printStackTrace();
+			return null;
+		}
+		try {
+			statement.setInt(1, carId);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		ResultSet result = null;
+		try {
+			result = statement.executeQuery(query);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return result;
+
+	}
+
+	public ResultSet getPreviousCarFromId(Integer carId) {
+
+		String query = "select * from car where id = (select max(id) from car where id < ?)";
+		Connection connection = DatabaseUtils.getDbConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(query);
+		} catch (SQLException e1) {
+			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
+			e1.printStackTrace();
+			return null;
+		}
+		try {
+			statement.setInt(1, carId);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		ResultSet result = null;
+		try {
+			result = statement.executeQuery(query);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return null;
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return result;
+
+	}
+
 }

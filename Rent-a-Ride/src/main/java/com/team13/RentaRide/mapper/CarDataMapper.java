@@ -101,50 +101,52 @@ public class CarDataMapper {
 
 	public List<Car> parseResultSet(ResultSet resultSet) throws SQLException {
 
-		List<Car> allCars = new ArrayList<Car>();
-
+		List<Car> allCars = new ArrayList<>();
 		while (resultSet.next()) {
-
-			Car car = new Car();
-			car.setId(resultSet.getInt(1));
-			car.setLicensePlateNumber(resultSet.getString(2));
-			car.setMake(resultSet.getString(3));
-			car.setModel(resultSet.getString(4));
-			car.setType(resultSet.getString(5));
-			car.setColor(resultSet.getString(6));
-			car.setYear(resultSet.getInt(7));
-			car.setDescription(resultSet.getString(8));
-			car.setPrice(resultSet.getBigDecimal(9));
-			car.setAvailableReservedOrRented(resultSet.getString(10));
-
+			Car car = getModelFromResultSet(resultSet);
 			allCars.add(car);
-
 		}
 		return allCars;
 
 	}
 
-	public Car getCarByLicenseNumber(String licensePlateNumber) {
-		ResultSet result = carGateway.getCarByLicensePlateNumber(licensePlateNumber);
+	private Car getModelFromResultSet(ResultSet resultSet) throws SQLException {
 		Car car = new Car();
+		car.setId(resultSet.getInt(1));
+		car.setLicensePlateNumber(resultSet.getString(2));
+		car.setMake(resultSet.getString(3));
+		car.setModel(resultSet.getString(4));
+		car.setType(resultSet.getString(5));
+		car.setColor(resultSet.getString(6));
+		car.setYear(resultSet.getInt(7));
+		car.setDescription(resultSet.getString(8));
+		car.setPrice(resultSet.getBigDecimal(9));
+		car.setAvailableReservedOrRented(resultSet.getString(10));
+		return car;
+	}
+
+	public Car getCarByLicenseNumber(String licensePlateNumber) {
+		ResultSet resultSet = carGateway.getCarByLicensePlateNumber(licensePlateNumber);
 		try {
-			car.setId(result.getInt(1));
-			car.setLicensePlateNumber(licensePlateNumber);
-			car.setMake(result.getString(3));
-			car.setModel(result.getString(4));
-			car.setType(result.getString(5));
-			car.setColor(result.getString(6));
-			car.setYear(result.getInt(7));
-			car.setDescription(result.getString(8));
-			car.setPrice(result.getBigDecimal(9));
-			car.setAvailableReservedOrRented(result.getString(10));
-			return car;
+			return getModelFromResultSet(resultSet);
 		} catch (SQLException e) {
 			System.out.println("Error while setting parameters to ");
 			e.printStackTrace();
 			return null;
 		}
 
+	}
+
+	public Car getNextCarFromId(Integer carId) {
+
+		ResultSet resultSet = carGateway.getNextCarFromId(carId);
+		try {
+			return getModelFromResultSet(resultSet);
+		} catch (SQLException e) {
+			System.out.println("Error while setting parameters to ");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

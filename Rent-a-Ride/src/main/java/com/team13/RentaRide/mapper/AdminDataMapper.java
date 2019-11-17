@@ -14,47 +14,48 @@ import com.team13.RentaRide.tdgateway.*;
 
 public class AdminDataMapper {
 	private AdminTdGateway gtway = new AdminTdGateway();
+
 	public boolean addAdminRecord(Admin admin) {
 		try {
 			HashMap<String, String> map = new HashMap<>();
-			map.put("email",admin.getEmail());
-			map.put("password",admin.getPassword());
+			map.put("email", admin.getEmail());
+			map.put("password", admin.getPassword());
 			return gtway.insertAdminRecord(map);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Error while inserting a admin record in the database");
 			e.printStackTrace();
 			return false;
 		}
 	}
-		
-		public List<Admin> getAllAdminRecords() {
 
-			ResultSet resultSet = gtway.getAllAdminRecords();
-			if (resultSet == null) {
-				return new ArrayList<>();
-			}
+	public List<Admin> getAllAdminRecords() {
 
-			List<Admin> admins = new ArrayList<>();
-			try {
-				admins = parseResultSet(resultSet);
-			} catch (SQLException e) {
-				System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
-				e.printStackTrace();
-				return new ArrayList<>();
-			}
+		ResultSet resultSet = gtway.getAllAdminRecords();
+		if (resultSet == null) {
+			return new ArrayList<>();
+		}
 
-			return admins;
-	
-	}
-		private List<Admin> parseResultSet(ResultSet resultSet) throws SQLException {
-			List<Admin> admins = new ArrayList<>();
-			while (resultSet.next()) {
-				Admin admin = new Admin(resultSet.getString(2),resultSet.getString(3));
-				admins.add(admin);
-			}
-			
-		
+		List<Admin> admins = new ArrayList<>();
+		try {
+			admins = parseResultSet(resultSet);
+		} catch (SQLException e) {
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
+
 		return admins;
-		}		
+
+	}
+
+	private List<Admin> parseResultSet(ResultSet resultSet) throws SQLException {
+		List<Admin> admins = new ArrayList<>();
+		while (resultSet.next()) {
+			Admin admin = new Admin(resultSet.getString(2), resultSet.getString(3));
+			admins.add(admin);
+		}
+
+		return admins;
+	}
 
 }

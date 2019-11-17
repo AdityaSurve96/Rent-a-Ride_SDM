@@ -194,6 +194,13 @@ public class ClientTdGateway {
 		return delete_client;
 	}
 
+	public ResultSet getClientByDrivingLicense(String driverLicenceNumber) {
+
+		
+		
+		return null;
+	}
+
 	
 
 

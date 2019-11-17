@@ -57,6 +57,8 @@
 	  					   
 	  <input type="submit" id = "rentButtoon"  class="btn btn-primary btn-sm" 
 	  					   formaction="/rentThisCar" value="${canRentOrNot}"  ${disableOrNo} />
+	  
+	  <input type="hidden" name="carId" id="carId" value="${car.id}"/>
 	  					   
 		<a href="/back" class="btn btn-primary btn-sm">Back</a>
 		<a href="/next" class="btn btn-primary btn-sm">Next</a>

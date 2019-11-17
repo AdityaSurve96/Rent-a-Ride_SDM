@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.CarDataMapper;
+import com.team13.RentaRide.mapper.ClientDataMapper;
 import com.team13.RentaRide.mapper.RentedCarDataMapper;
 import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Car;
@@ -30,7 +31,8 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class ReserveCarController {
-
+	
+	ClientDataMapper clientDataMapper = new ClientDataMapper();
 	CarDataMapper carDataMapper = new CarDataMapper();
 	RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
 
@@ -91,6 +93,9 @@ public class ReserveCarController {
 			}
 
 		}
+		
+		
+		
 		if (flag) {
 			if (page == "CreateReservation") {
 				modelAndView = new ModelAndView("ReserveCarForClient");
@@ -154,6 +159,7 @@ public class ReserveCarController {
 
 		Car c = null;
 
+		
 		for (Car car : carsList) {
 			String lic = car.getLicensePlateNumber();
 
@@ -177,6 +183,8 @@ public class ReserveCarController {
 			}
 		}
 
+		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumber);
+		
 		if (!flag) {
 			cl = new Client();
 			cl.setClientFirstName(clientFirstName);

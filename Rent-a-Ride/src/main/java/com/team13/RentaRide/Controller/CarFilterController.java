@@ -1,7 +1,6 @@
 package com.team13.RentaRide.Controller;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.model.Car;
-import com.team13.RentaRide.utils.DataStore;
+
 /**
  * 
  * @author Admin
@@ -21,6 +21,8 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class CarFilterController {
+	private CarDataMapper carDataMapper = new CarDataMapper();
+
 	/**
 	 * 
 	 * @param modelInput
@@ -40,7 +42,7 @@ public class CarFilterController {
 		List<Car> carsToSend = filterCars(modelInput, typeInput, makeInput, colorInput, yearInput, yearOffset,
 				availabilityInput);
 		return new ModelAndView("CarCatalog", "cars", carsToSend);
-		
+
 	}
 
 	@RequestMapping(value = "/filterCarsForAdmin", method = RequestMethod.POST)
@@ -57,9 +59,7 @@ public class CarFilterController {
 
 	private List<Car> filterCars(String modelInput, String typeInput, String makeInput, String colorInput,
 			String yearInput, Integer yearOffset, String availabilityInput) {
-		DataStore ds = DataStore.getInstance();
-
-		List<Car> cars = ds.getAllCars();
+		List<Car> cars = carDataMapper.getAllCars();
 		List<Car> carsToSend = new ArrayList<>();
 		Integer yearFilter = !StringUtils.isEmpty(yearInput) ? Integer.valueOf(yearInput) : 0;
 

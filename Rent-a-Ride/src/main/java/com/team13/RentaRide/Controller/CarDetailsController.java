@@ -1,14 +1,16 @@
 package com.team13.RentaRide.Controller;
-import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.model.Car;
-import com.team13.RentaRide.utils.DataStore;
+
 /**
  * 
  * @author Admin
@@ -17,123 +19,79 @@ import com.team13.RentaRide.utils.DataStore;
 
 @Controller
 public class CarDetailsController {
-	
 
-	Car c=null;
-	
+	CarDataMapper carDataMapper = new CarDataMapper();
+	private static List<Car> cars = new ArrayList<Car>();
+	private Car currentCar = null;
+
 	@RequestMapping("/carDetailView")
 	public ModelAndView showCarDetails(@RequestParam String licensePlateInput) {
-		String carNumber = licensePlateInput;
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		
-		
-		
-		for (Car car : carsList) {
-			String lic = car.getLicensePlateNumber();
-
-			if(lic.equals(carNumber)) {
-				c = car;
-				break;
-				
-			}
-		}
-
-		ModelAndView modelAndView = showCarView(c);
-
-		return modelAndView;
+		cars = carDataMapper.getAllCars();
+		currentCar = carDataMapper.getCarByLicenseNumber(licensePlateInput);
+		return showCarView(currentCar);
 	}
-	
-	
-	
 
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		Integer index=0;
-		index= carsList.indexOf(c);
-		if( index > 0 ) {
-			
-			Car prevCar = carsList.get((index-1));
-			c=prevCar;
-			
+		List<Car> carsList = carDataMapper.getAllCars();
+		Integer index = 0;
+		index = carsList.indexOf(currentCar);
+		if (index > 0) {
+
+			Car prevCar = carsList.get((index - 1));
+			currentCar = prevCar;
 			ModelAndView modelAndView = showCarView(prevCar);
 			return modelAndView;
 		}
 
 		else {
-			Car sameCar = c;
+			Car sameCar = currentCar;
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}
 	}
-
 
 	@RequestMapping("/next")
 	public ModelAndView showNextCar() {
-		
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-		Integer index=0;
-		index= carsList.indexOf(c);
-		if( index < (carsList.size()-1) ) {
-			
-			
-			Car nextCar = carsList.get(index+1);
-			c=nextCar;
+
+		Integer index = 0;
+		index = cars.indexOf(currentCar);
+		if (index < (cars.size() - 1)) {
+			Car nextCar = cars.get(index + 1);
+			currentCar = nextCar;
 			ModelAndView modelAndView = showCarView(nextCar);
 			return modelAndView;
-		}
-		else {
-			Car sameCar = c;
+		} else {
+			Car sameCar = currentCar;
 			ModelAndView modelAndView = showCarView(sameCar);
 			return modelAndView;
 		}
 
 	}
-	
+
 	@RequestMapping("/backtoCarCatalog")
 	public ModelAndView showCarCatalogPage() {
-		
 		ModelAndView modelAndView = new ModelAndView("CarCatalog");
-		DataStore ds = DataStore.getInstance();
-		
-		modelAndView.addObject("cars", ds.getAllCars());
-		
+		modelAndView.addObject("cars", carDataMapper.getAllCars());
 		return modelAndView;
 	}
 
-
-
-	/**
-	 * 
-	 * @param c
-	 * @return
-	 */
-	
-	
-	public ModelAndView showCarView(Car c) {
-		ModelAndView modelAndView= new ModelAndView("CarDetails","car",c);
-		
-		if(c.getAvailableReservedOrRented().equals("Available")) {
+	public ModelAndView showCarView(Car car) {
+		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", car);
+		if (car.getAvailableReservedOrRented().equals("Available")) {
 			modelAndView.addObject("canReserveOrNot", "Reserve Now");
-			modelAndView.addObject("canRentOrNot",    "Rent Now");
-		}
-		else if(c.getAvailableReservedOrRented().equals("Reserved"))
-		{
+			modelAndView.addObject("canRentOrNot", "Rent Now");
+		} else if (car.getAvailableReservedOrRented().equals("Reserved")) {
 			modelAndView.addObject("canReserveOrNot", "Already Reserved");
-			modelAndView.addObject("canRentOrNot",    "Cannot Rent Now");
-			modelAndView.addObject("disableOrNo" , "disabled");
-		}
-		else {
+			modelAndView.addObject("canRentOrNot", "Cannot Rent Now");
+			modelAndView.addObject("disableOrNo", "disabled");
+		} else {
 			modelAndView.addObject("canReserveOrNot", "Cannot Reserve Now");
-			modelAndView.addObject("canRentOrNot",    "Already Rented");
-			modelAndView.addObject("disableOrNo" , "disabled");
+			modelAndView.addObject("canRentOrNot", "Already Rented");
+			modelAndView.addObject("disableOrNo", "disabled");
 		}
 		return modelAndView;
 	}
-	
 
 }

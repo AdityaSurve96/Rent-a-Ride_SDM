@@ -102,7 +102,7 @@ public class ReservedCarDataMapper {
 			LocalDate dueDateDb = resultSet.getDate(19).toLocalDate();
 			Date bookingTimestamp = resultSet.getTimestamp(20);
 
-			ReservedCar resCar = new ReservedCar(resCarId, car, client, startDateDb, dueDateDb,  bookingTimestamp);
+			ReservedCar resCar = new ReservedCar(resCarId, car, client, startDateDb, dueDateDb, bookingTimestamp);
 			resCars.add(resCar);
 
 		}
@@ -110,10 +110,8 @@ public class ReservedCarDataMapper {
 	}
 
 	public void deleteCarReservationByLicense(String carLicencePlateNumber) {
-
-		
 		gateway.deleteCarReservation(carLicencePlateNumber);
-		
+
 	}
 
 }

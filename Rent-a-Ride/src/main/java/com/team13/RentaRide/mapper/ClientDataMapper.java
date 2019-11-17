@@ -11,20 +11,20 @@ import com.team13.RentaRide.tdgateway.ClientTdGateway;
 import com.team13.RentaRide.utils.DatabaseUtils;
 
 public class ClientDataMapper {
-	ClientTdGateway client_gateway = new ClientTdGateway();
+	ClientTdGateway clientDataGateway = new ClientTdGateway();
 
 	public boolean addClientRecord(Client client) {
 		try {
 			HashMap<String, Object> client_parameterMap = new HashMap<>();
-			
+
 			client_parameterMap.put("CLIENT_ID", client.getId());
 			client_parameterMap.put("DRIVER_LICENCE_NUMBER", client.getDriverLicenceNumber());
-			client_parameterMap.put("CLIENT_FIRST_NAME",client.getClientFirstName() );
+			client_parameterMap.put("CLIENT_FIRST_NAME", client.getClientFirstName());
 			client_parameterMap.put("CLIENT_LAST_NAME", client.getClientLastName());
 			client_parameterMap.put("CLIENT_PHONE_NUMBER", client.getPhoneNumber());
 			client_parameterMap.put("CLIENT_LICENCE_EXPIRY_DATE", client.getLicenceExpiryDate());
 
-			return client_gateway.insertClientRecord(client_parameterMap);
+			return clientDataGateway.insertClientRecord(client_parameterMap);
 		} catch (Exception e) {
 			System.out.println("Error while inserting a client record in the database");
 			e.printStackTrace();
@@ -32,87 +32,88 @@ public class ClientDataMapper {
 		}
 	}
 
-	
-	
-	
-	
 	public boolean deleteClientRecord(String driverLicenceNumber) {
 		try {
-			return client_gateway.deleteClient(driverLicenceNumber);
-			
-			
+			return clientDataGateway.deleteClient(driverLicenceNumber);
+
 		} catch (Exception e) {
 			System.out.println("Error while deleting a client record in the database");
 			e.printStackTrace();
 			return false;
 		}
 	}
-	
+
 	public boolean modifyClientRecord(Client client) {
-			try {
-				HashMap<String, Object> client_parameterMap = new HashMap<>();
-				
-				client_parameterMap.put("CLIENT_ID", client.getId());
-				client_parameterMap.put("DRIVER_LICENCE_NUMBER", client.getDriverLicenceNumber());
-				client_parameterMap.put("CLIENT_FIRST_NAME",client.getClientFirstName() );
-				client_parameterMap.put("CLIENT_LAST_NAME", client.getClientLastName());
-				client_parameterMap.put("CLIENT_PHONE_NUMBER", client.getPhoneNumber());
-				client_parameterMap.put("CLIENT_LICENCE_EXPIRY_DATE", client.getLicenceExpiryDate());
+		try {
+			HashMap<String, Object> client_parameterMap = new HashMap<>();
 
-				return client_gateway.modifyClient(client_parameterMap);
-			} 
-			catch (Exception e) 
-			{
-				System.out.println("Error while modifying a client record in the database");
-				e.printStackTrace();
-				return false;
-			}
-			
+			client_parameterMap.put("CLIENT_ID", client.getId());
+			client_parameterMap.put("DRIVER_LICENCE_NUMBER", client.getDriverLicenceNumber());
+			client_parameterMap.put("CLIENT_FIRST_NAME", client.getClientFirstName());
+			client_parameterMap.put("CLIENT_LAST_NAME", client.getClientLastName());
+			client_parameterMap.put("CLIENT_PHONE_NUMBER", client.getPhoneNumber());
+			client_parameterMap.put("CLIENT_LICENCE_EXPIRY_DATE", client.getLicenceExpiryDate());
+
+			return clientDataGateway.modifyClient(client_parameterMap);
+		} catch (Exception e) {
+			System.out.println("Error while modifying a client record in the database");
+			e.printStackTrace();
+			return false;
+		}
+
 	}
-	
-	
-	
-	
-	
-	
-	public List<Client> getAllClients(){
 
-		ResultSet client_resultSet = client_gateway.getAllClients();
-		if (client_resultSet == null) {
+	public List<Client> getAllClients() {
+
+		ResultSet resultSet = clientDataGateway.getAllClients();
+		if (resultSet == null) {
 			return new ArrayList<>();
 		}
 
-		List<Client> client_data = new ArrayList<>();
+		List<Client> clients = new ArrayList<>();
 		try {
-			client_data = parseClientResultSet(client_resultSet);
+			clients = parseClientResultSet(resultSet);
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
 			e.printStackTrace();
 			return new ArrayList<>();
 		}
 
-		return client_data;
+		return clients;
 
 	}
 
-	private List<Client> parseClientResultSet(ResultSet client_resultSet) throws SQLException {
-		List<Client> client_data = new ArrayList<>();
-		while (client_resultSet.next()) {
-
-			Client client = new Client();
-			client.setId(client_resultSet.getInt(1));
-			client.setDriverLicenceNumber(client_resultSet.getString(2));
-			client.setClientFirstName(client_resultSet.getString(3));
-			client.setClientLastName(client_resultSet.getString(4));
-			client.setPhoneNumber(client_resultSet.getString(5));
-			client.setLicenceExpiryDate(client_resultSet.getDate(6).toLocalDate());
-			
-			client_data.add(client);
-
+	private List<Client> parseClientResultSet(ResultSet resultSet) throws SQLException {
+		List<Client> clients = new ArrayList<>();
+		while (resultSet.next()) {
+			Client client = getModelFromResultSet(resultSet);
+			clients.add(client);
 		}
-		return client_data;
+		return clients;
 	}
 
+	private Client getModelFromResultSet(ResultSet resultSet) throws SQLException {
+		Client client = new Client();
+		client.setId(resultSet.getInt(1));
+		client.setDriverLicenceNumber(resultSet.getString(2));
+		client.setClientFirstName(resultSet.getString(3));
+		client.setClientLastName(resultSet.getString(4));
+		client.setPhoneNumber(resultSet.getString(5));
+		client.setLicenceExpiryDate(resultSet.getDate(6).toLocalDate());
+		return client;
+	}
 
+	public Client getClientByDrivingLicense(String driverLicenceNumber) {
+
+		ResultSet result = clientDataGateway.getClientByDrivingLicense(driverLicenceNumber);
+		Client client = null;
+		try {
+			client = getModelFromResultSet(result);
+		} catch (SQLException e) {
+			System.out.println("Error while getting client record from database");
+			e.printStackTrace();
+		}
+		return client;
+	}
 
 }

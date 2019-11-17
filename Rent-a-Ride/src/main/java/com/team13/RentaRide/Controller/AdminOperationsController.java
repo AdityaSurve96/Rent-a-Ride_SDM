@@ -14,43 +14,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.AdminDataMapper;
-
-import com.team13.RentaRide.mapper.ReservedCarDataMapper;
-
 import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.mapper.RentedCarDataMapper;
+import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Admin;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
-import com.team13.RentaRide.utils.DataStore;
+
 /**
  * The controller for Admin Operations.
- * @author team 13 
+ * 
+ * @author team 13
  *
  */
 
 @Controller
 public class AdminOperationsController {
 
-
 	private CarDataMapper carDataMapper = new CarDataMapper();
-	
+
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
 
-	
 	/**
-	 * <p>The different Admin operations controlled by this classes are mentioned as follows</p>
+	 * <p>
+	 * The different Admin operations controlled by this classes are mentioned as
+	 * follows
+	 * </p>
 	 * <ol>
-	 * <li>Successful login of Admin </li>
-	 *  <li>Manage the Car catalog </li>
-	 *  <li>Viewing Rental Cars </li>
-	 *  <li>Viewing Reserved Cars </li>
-	 *  <li>Viewing Returned Cars </li>
-	 *  <li>Viewing Cancelled Cars </li>
+	 * <li>Successful login of Admin</li>
+	 * <li>Manage the Car catalog</li>
+	 * <li>Viewing Rental Cars</li>
+	 * <li>Viewing Reserved Cars</li>
+	 * <li>Viewing Returned Cars</li>
+	 * <li>Viewing Cancelled Cars</li>
 	 * </ol>
 	 */
-
 
 	private AdminDataMapper adminDataMapper = new AdminDataMapper();
 	private ReservedCarDataMapper reservedCarMapper = new ReservedCarDataMapper();
@@ -130,13 +129,9 @@ public class AdminOperationsController {
 	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
 		if (!email.isEmpty() && !password.isEmpty()) {
-			
-			
-			
+
 			Admin admin = new Admin(email, password);
 			adminDataMapper.addAdminRecord(admin);
-			
-			//DataStore.getAdmins().add(admin);
 			return new ModelAndView("AdminLoginPage");
 		}
 
@@ -186,10 +181,8 @@ public class AdminOperationsController {
 			car.setType(carType);
 			car.setYear(Integer.valueOf(carYear));
 			System.out.println("created car: " + car);
-			
+
 			carDataMapper.addCarRecord(car);
-			
-//			DataStore.getInstance().getAllCars().add(car);
 			return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 		} catch (Exception e) {
 			ModelAndView modelAndView = new ModelAndView();
@@ -311,7 +304,6 @@ public class AdminOperationsController {
 	public ModelAndView showAdminReservedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
-//		DataStore ds = DataStore.getInstance();
 		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
 		return modelAndView;
 
@@ -321,7 +313,6 @@ public class AdminOperationsController {
 	public ModelAndView showAdminRentedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
-//		DataStore ds = DataStore.getInstance();
 		modelAndView.addObject("rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 
@@ -330,10 +321,8 @@ public class AdminOperationsController {
 	@RequestMapping(value = "/backToAdminCarCatalog")
 	public ModelAndView goToAdminCarCatalog() {
 
-		ModelAndView modelAndView = new ModelAndView("AdminCarCatalogPage", "cars",
-				carDataMapper.getAllCars());
+		ModelAndView modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 
-//		DataStore ds = DataStore.getInstance();
 		List<Car> carsList = carDataMapper.getAllCars();
 
 		modelAndView.addObject("cars", carsList);
@@ -354,7 +343,7 @@ public class AdminOperationsController {
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
-		
+
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 		ModelAndView modelAndView = new ModelAndView("AdminViewReservedTransactions");
 
@@ -389,24 +378,25 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
-/**
- * 
- * @param licensePlateNumberInput
- * @param drivingLicenseNumberInput
- * @param dueDateFilter
- * @param pickupDateFilter
- * @return
- */
+
+	/**
+	 * 
+	 * @param licensePlateNumberInput
+	 * @param drivingLicenseNumberInput
+	 * @param dueDateFilter
+	 * @param pickupDateFilter
+	 * @return
+	 */
 	@RequestMapping(value = "/filterRentalRecordsForAdmin", method = RequestMethod.POST)
 	public ModelAndView filterRentalRecordsForAdmin(@RequestParam String licensePlateNumberInput,
 			@RequestParam String drivingLicenseNumberInput,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
-		
+
 		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
 
 		ModelAndView modelAndView = new ModelAndView("AdminViewRentalTransactions");
-		List<RentedCar> rentals = DataStore.getInstance().getRentedCars();
+		List<RentedCar> rentals = rentedCarDataMapper.getAllRentedCars();
 
 		List<RentedCar> rentalsToSend = new ArrayList<>();
 
