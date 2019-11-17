@@ -57,8 +57,7 @@ public class ClerkDataMapper {
 	}
 
 	private Clerk getModelFromResultSet(ResultSet resultSet) throws SQLException {
-		Clerk user = new Clerk(resultSet.getString(1), resultSet.getString(2));
-		return user;
+		return new Clerk(resultSet.getString(1), resultSet.getString(2));
 	}
 
 	public Clerk getClerkByEmailPassword(String email, String password) {
