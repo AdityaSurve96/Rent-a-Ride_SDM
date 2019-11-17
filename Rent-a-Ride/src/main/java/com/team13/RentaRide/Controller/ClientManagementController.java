@@ -71,9 +71,9 @@ public class ClientManagementController {
 	 */
 	@RequestMapping("/gotoModifyClientRecord")
 	public ModelAndView showClientModificationPage(@RequestParam String driverLicenceNumberForModify) {
+		System.out.println("Checking driverLicenceNumberForModify: " + driverLicenceNumberForModify);
 		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForModify);
-		ModelAndView modelAndView = new ModelAndView("ModifyClientRecord", "client", client);
-		return modelAndView;
+		return new ModelAndView("ModifyClientRecord", "client", client);
 	}
 
 	/**
@@ -100,14 +100,14 @@ public class ClientManagementController {
 	 * @return
 	 */
 	@RequestMapping(value = "/gotoClientManagementPageAfterModification", method = RequestMethod.POST)
-	public ModelAndView confirmClientRecordModify(@RequestParam String driverLicenseNumber,
+	public ModelAndView confirmClientRecordModify(@RequestParam String driverLicenseNumberInput,
 			@RequestParam String clientFirstName, @RequestParam String clientLastName, @RequestParam String phoneNumber,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate licenceExpiryDate) {
 
 		Client client = new Client();
 		client.setClientFirstName(clientFirstName);
 		client.setClientLastName(clientLastName);
-		client.setDriverLicenceNumber(driverLicenseNumber);
+		client.setDriverLicenceNumber(driverLicenseNumberInput);
 		client.setLicenceExpiryDate(licenceExpiryDate);
 		client.setPhoneNumber(phoneNumber);
 

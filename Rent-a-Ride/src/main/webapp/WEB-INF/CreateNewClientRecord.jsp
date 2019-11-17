@@ -13,54 +13,40 @@
 <body>
 
 <form method="post">
-
-
 <div class="container" align="center">
  <div class="form">
  <h2>Create New Client</h2>
  <br><br>
-<div align="center">
-
-<div class="form">
+<div class="form-group">
  
- 	<div class="col-md-6"><label class="pull-right">Driver Licence Number:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="text" name="driverLicenceNumber"></div>
+ 	<div class="col-md-5"><label class="control-label pull-right pull-right">Driver Licence Number:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" type="text" name="driverLicenceNumber"></div>
+ </div>
+ <div class="form-group">
+ 
+ 	<div class="col-md-5"><label class="control-label pull-right">Client First Name:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" type="text" name="clientFirstName"></div>
  	</div>
- <br>
- <div class="form">
+ <div class="form-group">
  
- 	<div class="col-md-6"><label class="pull-right">Client First Name:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="text" name="clientFirstName"></div>
+ 	<div class="col-md-5"><label class="control-label pull-right">Client Last Name:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" type="text" name="clientLastName"></div>
  	</div>
- <br>
- <div class="form">
+ <div class="form-group">
  
- 	<div class="col-md-6"><label class="pull-right">Client Last Name:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="text" name="clientLastName"></div>
- 	</div>
- <br>
- <div class="form">
- 
- 	<div class="col-md-6"><label class="pull-right">Client Phone Number:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="number" name="phoneNumber"></div>
- 	</div>
- <br>
- <div class="form">
- 
- 	<div class="col-md-6"><label class="pull-right">Licence Expiry Date:</label></div>
- 	<div class="col-md-6"><input class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
+ 	<div class="col-md-5"><label class="control-label pull-right">Client Phone Number:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" type="number" name="phoneNumber"></div>
+ </div>
+ <div class="form-group">
+ 	<div class="col-md-5"><label class="control-label pull-right">Licence Expiry Date:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
 </div>
- <br>
 
 </div>  
-   </div>
- </div>
- <br>
- <div align="center">
- 
-  	<button type="submit" class="btn btn-primary btn-sm" formaction="/goToClientManagementPageAfterCreation">Confirm/Create</button>
-  	<a href="/ClientManagementPage" class="btn btn-primary btn-sm">Back</a>
- </div>
+</div>
+ <div class="form-group">
+  	<button type="submit" class="btn btn-primary btn-md" formaction="/goToClientManagementPageAfterCreation">Confirm</button>
+  	<a href="/ClientManagementPage" class="btn btn-primary btn-md">Back</a>
  </div>
  </div>
  

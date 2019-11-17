@@ -13,58 +13,44 @@
 <body>
 
 <form method="post">
-
-
 <div class="container" align="center">
  <div class="form">
- <h2>Modify A Client Record</h2>
+ <h2>Modify Client Record</h2>
  <br><br>
-<div align="center">
-
-<div class="form">
- <div class="col-md-6"><label class="pull-right">Driver Licence Number:</label></div>
- <div class="col-md-6"><input value = "${client.driverLicenceNumber}" class="pull-left" type="text" name="driverLicenseNumber" readonly>
- 	
- </div>
- </div>
- <br>
- <div class="form">
- <div class="col-md-6"><label class="pull-right">Client First Name:</label></div>
- <div class="col-md-6"><input value = "${client.clientFirstName}" class="pull-left" type="text" name="clientFirstName" >
- 	
- </div>
- </div>
- <br>
- <div class="form">
- <div class="col-md-6"><label class="pull-right">Client Last Name:</label></div>
- <div class="col-md-6"><input value = "${client.clientLastName}" class="pull-left" type="text" name="clientLastName" >
- 	 
- </div>
- </div>
- <br>
- <div class="form">
- <div class="col-md-6"><label class="pull-right">Client Phone Number:</label></div>
- <div class="col-md-6"><input value = "${client.phoneNumber}" class="pull-left" type="number" name="phoneNumber">
- 	 
- </div>
- </div>
- <br>
- <div class="form">
+<div class="form-group">
  
- 	<div class="col-md-6"><label class="pull-right">Expiry Date:</label></div>
- 	<div class="col-md-6"><input value = "${client.licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
-
-</div>
- <br>
-</div>  
-   </div>
- <div>
- <br>
- <div align="center">
- 	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberForForm">
-  	<button type="submit" class="btn btn-primary btn-sm" formaction="/gotoClientManagementPageAfterModification" name ="ConfirmModify">Confirm Modification</button>
-  	<a href="/ClientManagementPage" class="btn btn-primary btn-sm">Back</a>
+ 	<div class="col-md-5"><label class="control-label pull-right pull-right">Driver Licence Number:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.driverLicenceNumber}" type="text" name="driverLicenseNumber" readonly></div>
  </div>
+ <div class="form-group">
+ 
+ 	<div class="col-md-5"><label class="control-label pull-right">Client First Name:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientFirstName}" type="text" name="clientFirstName"></div>
+ 	</div>
+ <div class="form-group">
+ 
+ 	<div class="col-md-5"><label class="control-label pull-right">Client Last Name:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientLastName}" type="text" name="clientLastName"></div>
+ 	</div>
+ <div class="form-group">
+ 
+ 	<div class="col-md-5"><label class="control-label pull-right">Client Phone Number:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.phoneNumber}"  type="number" name="phoneNumber"></div>
+ </div>
+ <div class="form-group">
+ 	<div class="col-md-5"><label class="control-label pull-right">Licence Expiry Date:</label></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.licenceExpiryDate}"  type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
+</div>
+
+</div>  
+</div>
+<br><br>
+<div align="center">
+ <div class="form-group">
+  	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberInput">
+  	<button type="submit" class="btn btn-primary btn-md" formaction="/gotoClientManagementPageAfterModification" 
+  	name ="ConfirmModify">Confirm</button>
+  	<a href="/ClientManagementPage" class="btn btn-primary btn-md">Back</a>
  </div>
  </div>
  

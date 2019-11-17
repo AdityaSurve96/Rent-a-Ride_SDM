@@ -109,8 +109,12 @@ public class ClientDataMapper {
 	public Client getClientByDrivingLicense(String driverLicenceNumber) {
 
 		ResultSet result = clientDataGateway.getClientByDrivingLicense(driverLicenceNumber);
+		if (result == null) {
+			return null;
+		}
 		Client client = null;
 		try {
+			result.next();
 			client = getModelFromResultSet(result);
 		} catch (SQLException e) {
 			System.out.println("Error while getting client record from database");

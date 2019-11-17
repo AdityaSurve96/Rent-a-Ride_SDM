@@ -26,7 +26,6 @@
 		<div>
 			<h2>Sign In</h2>
 			<br><br>
-			
 				<div class="form-group">
 					<div class="col-md-5">
 						<label class="control-label pull-right">Username</label>
