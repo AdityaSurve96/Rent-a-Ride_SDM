@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.team13.RentaRide.tdgateway.DatabaseCreator;
 import com.team13.RentaRide.utils.DataStore;
 /**
- * 
- * @author Admin
+ * The system initiates the spring boot application and database from this class. 
+ * @author Team 13
  *
  */
 

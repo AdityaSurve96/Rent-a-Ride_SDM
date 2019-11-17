@@ -12,13 +12,21 @@ import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.model.Car;
 
 /**
+ * Controller for Car
  * 
- * @author Admin
+ * @author team 13
  *
  */
 
 @Controller
 public class CarDetailsController {
+	/**
+	 * The controller for car has different operations like:
+	 * <li>Can browse detailed view of car</li>
+	 * <li>check availability of car</li>
+	 * <li>view the precious or next detailed view of car</li>
+	 * <li>can go back to car catalog</li>
+	 */
 
 	CarDataMapper carDataMapper = new CarDataMapper();
 	private static List<Car> cars = new ArrayList<Car>();
@@ -77,8 +85,14 @@ public class CarDetailsController {
 		return modelAndView;
 	}
 
+	/**
+	 * @param car car object is passed to check the availability of the car
+	 * @return model and view of car.
+	 */
+
 	public ModelAndView showCarView(Car car) {
 		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", car);
+
 		if (car.getAvailableReservedOrRented().equals("Available")) {
 			modelAndView.addObject("canReserveOrNot", "Reserve Now");
 			modelAndView.addObject("canRentOrNot", "Rent Now");
