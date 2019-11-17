@@ -21,7 +21,6 @@ import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Client;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
-import com.team13.RentaRide.utils.DataStore;
 
 /**
  * 
@@ -79,22 +78,10 @@ public class ReservationAndRentalController {
 	public ModelAndView searchClient(@RequestParam String driverLicenceNumber, @RequestParam String CarLicenseNo) {
 		ModelAndView modelAndView = null;
 		System.out.println(CarLicenseNo);
-		Client c = null;
-		DataStore ds = DataStore.getInstance();
-		List<Client> clients = ds.getAllClients();
-		boolean flag = false;
-		for (Client client : clients) {
-			String clientsDriverLicenceNumber = client.getDriverLicenceNumber();
-			if (clientsDriverLicenceNumber.equals(driverLicenceNumber)) {
-				c = client;
-				flag = true;
-				break;
 
-			}
+		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumber);
 
-		}
-
-		if (flag) {
+		if (client != null) {
 			if (page == "CreateReservation") {
 				modelAndView = new ModelAndView("ReserveCarForClient");
 
@@ -104,11 +91,11 @@ public class ReservationAndRentalController {
 			}
 
 			modelAndView.addObject("licensePlateNumber", CarLicenseNo);
-			modelAndView.addObject("driverLicenseNumber", c.getDriverLicenceNumber());
-			modelAndView.addObject("clientFirstName", c.getClientFirstName());
-			modelAndView.addObject("clientLastName", c.getClientLastName());
-			modelAndView.addObject("phoneNumber", c.getPhoneNumber());
-			modelAndView.addObject("licenceExpiryDate", c.getLicenceExpiryDate());
+			modelAndView.addObject("driverLicenseNumber", client.getDriverLicenceNumber());
+			modelAndView.addObject("clientFirstName", client.getClientFirstName());
+			modelAndView.addObject("clientLastName", client.getClientLastName());
+			modelAndView.addObject("phoneNumber", client.getPhoneNumber());
+			modelAndView.addObject("licenceExpiryDate", client.getLicenceExpiryDate());
 			return modelAndView;
 		} else {
 			if (page == "CreateReservation") {
@@ -149,44 +136,26 @@ public class ReservationAndRentalController {
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dropoffDate,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDate) {
 
-		System.out.println(dropoffDate);
-
-		String licnum = CarLicenseNo;
-		DataStore ds = DataStore.getInstance();
-		List<Car> carsList = ds.getAllCars();
-
-		Car c = null;
-
-		for (Car car : carsList) {
-			String lic = car.getLicensePlateNumber();
-
-			if (lic.equals(licnum)) {
-				car.setAvailableReservedOrRented("Reserved");
-				c = car;
-				break;
-
-			}
-		}
-
-		List<Client> existingClients = ds.getAllClients();
-		Client cl = null;
-		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
-		boolean flag = false;
-		for (Client client : existingClients) {
-			if (client.getDriverLicenceNumber().equals(driverLicenceNumber)) {
-				flag = true;
-				cl = client;
-				break;
-			}
+		Car selectedCar = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
+		if (selectedCar == null) {
+			System.out.println("No car found with license " + CarLicenseNo);
+			return null;
 		}
 
 		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumber);
-
-		if (!flag) {
-			cl = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber, licenceExpiryDate);
+		if (client == null) {
+			client = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber,
+					licenceExpiryDate);
 		}
 
-		ReservedCar resCar = new ReservedCar(null, c, cl, pickupDate, dropoffDate, new Date());
+		ReservedCar reservedCar = createReservedCar(dropoffDate, pickupDate, selectedCar, client);
+		reservedCarMapper.addReservedCarRecord(reservedCar);
+		return new ModelAndView("ViewReservedTransactions", "reservations", reservedCarMapper.getAllReservedCars());
+
+	}
+
+	private ReservedCar createReservedCar(LocalDate dropoffDate, LocalDate pickupDate, Car selectedCar, Client client) {
+		ReservedCar reservedCar = new ReservedCar(null, selectedCar, client, pickupDate, dropoffDate, new Date());
 
 		Date d1;
 		Date d2;
@@ -196,16 +165,14 @@ public class ReservationAndRentalController {
 		d = sdf.format(d1);
 		try {
 			d2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
-			resCar.setBookingTimestamp(d2);
+			reservedCar.setBookingTimestamp(d2);
+
 		} catch (ParseException e) {
+			System.out.println("Error while parsing booking date");
 			e.printStackTrace();
+			return null;
 		}
-
-		resCars.add(resCar);
-		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions", "reservations", resCars);
-
-		return modelAndView;
-
+		return reservedCar;
 	}
 
 	/**
@@ -235,8 +202,8 @@ public class ReservationAndRentalController {
 		c.setLicensePlateNumber(carLicensePlateNumber);
 		carDataMapper.modifyCarRecord(c);
 
-		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
-		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", renCars);
+		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals",
+				rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 	}
 
