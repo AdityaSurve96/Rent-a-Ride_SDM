@@ -17,17 +17,17 @@ public class CancelledReturnedTdGateway {
 		
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = new StringBuilder();
-		query.append("insert into cancelledreturned (car_id, client_id, start_date,due_date,booking_timestamp, cancelled_returned_timestamp")
-			 .append("select car_id, client_id, start_date,due_date,booking_timestamp, CURRENT_TIMESTAMP()");
+		query.append("insert into cancelledreturned (car_id, client_id, start_date,due_date,booking_timestamp, cancelled_returned_timestamp) ")
+			 .append(" select car_id, client_id, start_date,due_date,booking_timestamp, CURRENT_TIMESTAMP()");
 			
 			if(ReturnOrCancel == "Return") {
-				 query.append("from rentedcar");
+				 query.append(" from rentedcar");
 			 }
 			else if(ReturnOrCancel == "Cancel") {
-				 query.append("from reservedCar");
+				 query.append(" from reservedCar");
 			 }
 				 
-			query.append("where car_id = ( select id from car where license_plate_number = ? );" );
+			query.append(" where car_id = ( select id from car where license_plate_number = ? );" );
 		
 		PreparedStatement statement = null;
 		

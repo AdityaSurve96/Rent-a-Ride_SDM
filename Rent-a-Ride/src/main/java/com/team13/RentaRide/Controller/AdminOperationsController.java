@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.AdminDataMapper;
+import com.team13.RentaRide.mapper.CancelledReturnedDataMapper;
 import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.mapper.RentedCarDataMapper;
 import com.team13.RentaRide.mapper.ReservedCarDataMapper;
 import com.team13.RentaRide.model.Admin;
+import com.team13.RentaRide.model.CancelledReturnedBooking;
 import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.RentedCar;
 import com.team13.RentaRide.model.ReservedCar;
@@ -33,7 +35,7 @@ import com.team13.RentaRide.model.ReservedCar;
 public class AdminOperationsController {
 
 	private CarDataMapper carDataMapper = new CarDataMapper();
-
+	private CancelledReturnedDataMapper crDataMapper = new CancelledReturnedDataMapper();
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
 
 	/**
@@ -442,4 +444,13 @@ public class AdminOperationsController {
 		return modelAndView;
 
 	}
+	
+	@RequestMapping("/showReturnedCancelledReservations")
+	public ModelAndView showReturnedOrCancelledTransactions() {
+
+		List<CancelledReturnedBooking> retCanbookings = crDataMapper.getAllRecords();
+
+		return new ModelAndView("ReturnedAndCancelledTransactions", "returnedCancelled", retCanbookings);
+	}
+
 }

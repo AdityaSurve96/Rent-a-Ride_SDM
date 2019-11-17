@@ -1,5 +1,7 @@
 package com.team13.RentaRide.Controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,8 +94,9 @@ public class ClerkOperationController {
 	@RequestMapping(value = "/tryTologinAsClerk", method = RequestMethod.POST)
 
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
-		Clerk clerk = clerkDataMapper.getClerkByEmailPassword(email, password);
+		List<Clerk> clerk = clerkDataMapper.getClerkByEmailPassword(email, password);
 
+		
 		if (clerk != null) {
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
 			return modelAndView;

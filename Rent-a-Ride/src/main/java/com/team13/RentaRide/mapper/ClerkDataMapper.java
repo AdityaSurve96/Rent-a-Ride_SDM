@@ -57,14 +57,15 @@ public class ClerkDataMapper {
 	}
 
 	private Clerk getModelFromResultSet(ResultSet resultSet) throws SQLException {
+		
 		return new Clerk(resultSet.getString(1), resultSet.getString(2));
 	}
 
-	public Clerk getClerkByEmailPassword(String email, String password) {
+	public List<Clerk> getClerkByEmailPassword(String email, String password) {
 
 		ResultSet result = clerkgateway.getClerkByEmailPassword(email, password);
 		try {
-			return getModelFromResultSet(result);
+			return parseResultSet(result);
 		} catch (SQLException e) {
 			System.out.println("Error while getting clerk record from db");
 			e.printStackTrace();

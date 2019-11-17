@@ -52,7 +52,7 @@
 			
 			<td>  
 			<form method ="post">
-			<input value= "${rentedCar.car.licensePlateNumber}" type = "hidden" name = "carLicencePlateNumber" />
+			<input value= "${rentedCar.car.licensePlateNumber}" type = "hidden" name = "carLicensePlateNumber" />
 			<input type = "submit" formaction="/handleTheReturnThisRental" value="RETURN">
 			</form>
 			</td>

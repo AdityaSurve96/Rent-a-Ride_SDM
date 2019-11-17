@@ -83,6 +83,7 @@ public class ClerkTdGateway {
 			return null;
 		}
 
+
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}
@@ -94,21 +95,21 @@ public class ClerkTdGateway {
 
 	private StringBuilder getSelectQuery() {
 		StringBuilder query = new StringBuilder();
-		query.append("select id, email, password");
-		query.append(" from clerk");
+		query.append("select email, password from clerk");
 		return query;
 	}
 
 	public ResultSet getClerkByEmailPassword(String email, String password) {
 
 		StringBuilder query = getSelectQuery();
-		query.append(" where email = '" + email + "'");
-		query.append(" and password = '" + password + "'");
+		query.append(" where email = '" + email + "' and password = '"+ password + "' ;");
 		
-		Statement statement = null;
+		PreparedStatement st = null;
+//		Statement statement = null;
 		try {
 			Connection connection = DatabaseUtils.getDbConnection();
-			statement = connection .createStatement();
+			st= connection.prepareStatement(query.toString());
+//			statement = connection.createStatement();
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e.printStackTrace();
@@ -117,13 +118,15 @@ public class ClerkTdGateway {
 
 		ResultSet resultSet = null;
 		try {
-			resultSet = statement.executeQuery(query.toString());
+			resultSet = st.executeQuery();
+//			resultSet = statement.executeQuery(query.toString());
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
 			e.printStackTrace();
 			return null;
 		}
-
+	
+	
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return resultSet;
 	}

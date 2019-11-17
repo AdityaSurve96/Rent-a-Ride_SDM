@@ -44,8 +44,8 @@ public class ReservationAndRentalController {
 
 	/**
 	 * 
-	 * @param licensePlate
-	 * @return
+	 * @param  licensePlate
+	 * @return 
 	 */
 
 	@RequestMapping(value = "/rentThisCar")
