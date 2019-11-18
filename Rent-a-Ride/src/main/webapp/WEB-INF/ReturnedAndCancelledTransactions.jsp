@@ -80,14 +80,14 @@
 		
 		<c:forEach var="retCanBooking" items="${returnedCancelled}" varStatus="loopCounter">
 		<tr class="CarInfo">
-			<td>${cancelledReturnedBooking.car.licensePlateNumber}</td>
-			<td>${cancelledReturnedBooking.associatedClient.clientFirstName}</td>
-			<td>${cancelledReturnedBooking.associatedClient.clientLastName}</td>
-			<td>${cancelledReturnedBooking.associatedClient.driverLicenceNumber}</td>
-			<td>${cancelledReturnedBooking.startDate}</td>
-			<td>${cancelledReturnedBooking.dueDate}</td>
-			<td>${cancelledReturnedBooking.bookingTimestamp}</td>
-			<td>${cancelledReturnedBooking.cancelReturnTimeStamp}</td>
+			<td>${retCanBooking.car.licensePlateNumber}</td>
+			<td>${retCanBooking.associatedClient.clientFirstName}</td>
+			<td>${retCanBooking.associatedClient.clientLastName}</td>
+			<td>${retCanBooking.associatedClient.driverLicenceNumber}</td>
+			<td>${retCanBooking.startDate}</td>
+			<td>${retCanBooking.dueDate}</td>
+			<td>${retCanBooking.bookingTimestamp}</td>
+			<td>${retCanBooking.cancelReturnTimeStamp}</td>
 		</tr>
 		</c:forEach>
 		

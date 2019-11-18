@@ -6,7 +6,7 @@ import java.util.Date;
 public class CancelledReturnedBooking extends BookedCar {
 
 	
-	Date cancelReturnTimeStamp;
+	private Date cancelReturnTimeStamp;
 	
 	public CancelledReturnedBooking(Integer id, Car car, Client associatedClient, LocalDate startDate,
 			LocalDate dueDate, Date bookingTimestamp, Date cancelReturnTimeStamp) {
