@@ -42,38 +42,42 @@ public class CarDetailsController {
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 
-		Integer index = cars.indexOf(currentCar);
-		if (index > 0) {
+		Integer index = getIndexOfCar(currentCar, cars);
+		System.out.println("checking index and size " + index + ", " + cars.size());
 
+		if (index != null && index != 0) {
 			Car prevCar = cars.get((index - 1));
 			currentCar = prevCar;
-			ModelAndView modelAndView = showCarView(prevCar);
-			return modelAndView;
-		}
-
-		else {
+			return showCarView(prevCar);
+		} else {
 			Car sameCar = currentCar;
-			ModelAndView modelAndView = showCarView(sameCar);
-			return modelAndView;
+			return showCarView(sameCar);
 		}
+	}
+
+	private Integer getIndexOfCar(Car paramCar, List<Car> carList) {
+
+		int index = 0;
+		for (Car car : carList) {
+			if (car.getLicensePlateNumber().equals(paramCar.getLicensePlateNumber())) {
+				return index;
+			}
+			index++;
+		}
+		return null;
 	}
 
 	@RequestMapping("/next")
 	public ModelAndView showNextCar() {
-
-		System.out.println("cars now : " + cars);
-		System.out.println("checking currentCar: " + currentCar);
-		Integer index = cars.indexOf(currentCar);
-		System.out.println("index of current car " + index);
-		if (index < (cars.size() - 1)) {
-			Car nextCar = cars.get(index + 1);
+		Integer index = getIndexOfCar(currentCar, cars);
+		System.out.println("checking index and size " + index + ", " + cars.size());
+		if (index != null && index + 1 != cars.size()) {
+			Car nextCar = cars.get((index + 1));
 			currentCar = nextCar;
-			ModelAndView modelAndView = showCarView(nextCar);
-			return modelAndView;
+			return showCarView(nextCar);
 		} else {
 			Car sameCar = currentCar;
-			ModelAndView modelAndView = showCarView(sameCar);
-			return modelAndView;
+			return showCarView(sameCar);
 		}
 
 	}

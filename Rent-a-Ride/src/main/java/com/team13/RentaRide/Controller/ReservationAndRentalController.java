@@ -44,8 +44,8 @@ public class ReservationAndRentalController {
 
 	/**
 	 * 
-	 * @param  licensePlate
-	 * @return 
+	 * @param licensePlate
+	 * @return
 	 */
 
 	@RequestMapping(value = "/rentThisCar")
@@ -83,12 +83,13 @@ public class ReservationAndRentalController {
 		System.out.println(CarLicenseNo);
 
 		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumber);
+		System.out.println("page: " + page);
 
 		if (client != null) {
-			if (page == "CreateReservation") {
+			if (page.equals("CreateReservation")) {
 				modelAndView = new ModelAndView("ReserveCarForClient");
 
-			} else if (page == "CreateRental") {
+			} else if (page.equals("CreateRental")) {
 				modelAndView = new ModelAndView("RentCarForClient");
 				modelAndView.addObject("pickUpDate", LocalDate.now());
 			}
@@ -101,9 +102,9 @@ public class ReservationAndRentalController {
 			modelAndView.addObject("licenceExpiryDate", client.getLicenceExpiryDate());
 			return modelAndView;
 		} else {
-			if (page == "CreateReservation") {
+			if (page.equals("CreateReservation")) {
 				modelAndView = new ModelAndView("ReserveCarForClient");
-			} else if (page == "CreateRental") {
+			} else if (page.equals("CreateRental")) {
 				modelAndView = new ModelAndView("RentCarForClient");
 				modelAndView.addObject("pickUpDate", LocalDate.now());
 			}
@@ -158,7 +159,7 @@ public class ReservationAndRentalController {
 		c.setLicensePlateNumber(CarLicenseNo);
 
 		carDataMapper.modifyCarRecord(c);
-		
+
 		return new ModelAndView("ViewReservedTransactions", "reservations", reservedCarMapper.getAllReservedCars());
 
 	}
@@ -255,7 +256,7 @@ public class ReservationAndRentalController {
 			selectedClient = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber,
 					licenceExpiryDate);
 		}
-		
+
 		RentedCar rentedCar = createRentedCarObject(dropoffDate, pickupDate, selectedCar, selectedClient);
 		rentedCarDataMapper.addRentedCarRecord(rentedCar);
 		Car c = new Car();
