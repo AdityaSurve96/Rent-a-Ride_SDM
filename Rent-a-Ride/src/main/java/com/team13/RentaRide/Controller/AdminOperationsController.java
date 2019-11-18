@@ -435,7 +435,7 @@ public class AdminOperationsController {
 		List<CancelledReturnedBooking> retCanbookings = crDataMapper.getAllRecords();
 
 		return new ModelAndView("ReturnedAndCancelledTransactions", "returnedCancelled", retCanbookings);
-	}
+	}	
 	
 	@RequestMapping("/adminHomePage")
 	public ModelAndView backToAdminHome() {

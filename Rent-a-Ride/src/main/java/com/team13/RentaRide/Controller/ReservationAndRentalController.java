@@ -230,8 +230,7 @@ public class ReservationAndRentalController {
 
 		carDataMapper.modifyCarRecord(c);
 
-		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals",
-				rentedCarDataMapper.getAllRentedCars());
+		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 	}
 

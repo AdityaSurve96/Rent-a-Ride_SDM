@@ -290,7 +290,7 @@ public class RentedCarTdGateway {
 	private StringBuilder getDeleteQuery() {
 		
 		StringBuilder query = new StringBuilder();
-		query.append("delete from rentedcar where car_id = (select id from car where license_plate_number = ?");
+		query.append("delete from rentedcar where car_id = (select id from car where license_plate_number = ?) ");
 		
 		return query;
 	}
