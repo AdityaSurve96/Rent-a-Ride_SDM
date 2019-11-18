@@ -96,7 +96,7 @@
  <div class="form-group">
 	<div>
 		<button type="submit" class="btn btn-primary btn-md" formaction="/addNewCar">Confirm</button>
-	  	<a href="/back" class="btn btn-primary btn-md">Back</a>
+	  	<a href="/adminManageCatalog" class="btn btn-primary btn-md">Back</a>
 	</div>  
  </div>
 

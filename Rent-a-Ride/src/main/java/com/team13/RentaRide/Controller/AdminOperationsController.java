@@ -34,6 +34,7 @@ import com.team13.RentaRide.model.ReservedCar;
 @Controller
 public class AdminOperationsController {
 
+	private boolean isAnyAdminLoggedIn=false;
 	private CarDataMapper carDataMapper = new CarDataMapper();
 	private CancelledReturnedDataMapper crDataMapper = new CancelledReturnedDataMapper();
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
@@ -60,13 +61,6 @@ public class AdminOperationsController {
 		return new ModelAndView("AdminLoginPage");
 	}
 
-	@RequestMapping("/manageCatalog")
-	public ModelAndView showCarCatalogPage() {
-
-		ModelAndView modelAndView = new ModelAndView("CarCatalog");
-
-		return modelAndView;
-	}
 
 	@RequestMapping("/adminViewRentals")
 	public ModelAndView showRentals() {
@@ -89,25 +83,35 @@ public class AdminOperationsController {
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		System.out.println("here**************");
 		try {
-			boolean flag = false;
-			List<Admin> admins = adminDataMapper.getAllAdminRecords();
-			System.out.println("admins: " + admins);
-
-			for (Admin admin : admins) {
-				if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
-					flag = true;
-					break;
-				}
-			}
-
-			if (flag) {
-				ModelAndView modelAndView = new ModelAndView("AdminHomePage");
+			if(isAnyAdminLoggedIn) {
+				ModelAndView modelAndView = new ModelAndView("AdminLoginPage");
+				modelAndView.addObject("errorMessage","Cannot Login .. Another Admin is currently logged in!!");
 				return modelAndView;
-
 			}
-			ModelAndView modelAndView = new ModelAndView("AdminLoginPage");
-			modelAndView.addObject("errorMessage", "INVALID LOGIN! Please try again.");
-			return modelAndView;
+			else {
+				boolean flag = false;
+				List<Admin> admins = adminDataMapper.getAllAdminRecords();
+				System.out.println("admins: " + admins);
+
+				for (Admin admin : admins) {
+					if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
+						flag = true;
+						isAnyAdminLoggedIn = true;
+						break;
+					}
+				}
+
+				if (flag) {
+					ModelAndView modelAndView = new ModelAndView("AdminHomePage");
+					return modelAndView;
+
+				}
+				ModelAndView modelAndView = new ModelAndView("AdminLoginPage");
+				modelAndView.addObject("errorMessage", "INVALID LOGIN! Please try again.");
+				return modelAndView;
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -432,5 +436,17 @@ public class AdminOperationsController {
 
 		return new ModelAndView("ReturnedAndCancelledTransactions", "returnedCancelled", retCanbookings);
 	}
-
+	
+	@RequestMapping("/adminHomePage")
+	public ModelAndView backToAdminHome() {
+		
+		return new ModelAndView("AdminHomePage");
+	}
+		
+	@RequestMapping("/adminLogout")
+	public ModelAndView adminLogout() {
+		isAnyAdminLoggedIn = false;
+		return new ModelAndView("main");
+		
+	}
 }

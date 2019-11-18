@@ -27,6 +27,7 @@
 			<a href="/adminManageCatalog" class="btn btn-primary btn-lg">Manage Catalog</a> 
 			<a href="/adminViewRentals" class="btn btn-primary btn-lg">View Rental Transactions</a>
 			<a href="/adminViewReservations" class="btn btn-primary btn-lg">View Reservation Transactions</a>
+			<a href="/adminLogout" class="btn btn-primary btn-lg">Logout</a> 
 		</div>
 </body>
 

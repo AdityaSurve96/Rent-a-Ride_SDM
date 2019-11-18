@@ -97,6 +97,7 @@
 	<div>
 		<button type="submit" class="btn btn-primary btn-md" formaction="/saveCarChanges" ${disableOrNo}>Save Changes</button>
 	  	<a href="/adminManageCatalog" class="btn btn-primary btn-md">Cancel</a>
+	  	
 	</div>  
  </div>
 

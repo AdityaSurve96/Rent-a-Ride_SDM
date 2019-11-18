@@ -21,9 +21,11 @@
 	</div>
 	<div class="col-md-6">
 		<h3>
-			<a href="/backToAdminCarCatalog"><u>Car Catalog</u></a>
+			<a href="/adminManageCatalog"><u>Car Catalog</u></a>
 			&nbsp; &nbsp;
 			<a href="/backToAdminRentedCarList"><u>Rented Transactions</u></a>
+			&nbsp; &nbsp;
+			<a href="/adminLogout" ><u>Logout</u></a>
 		</h3>
 	</div>
 

@@ -17,6 +17,14 @@
 <form>
 <div class="container">
 <h3>Car Catalog Management</h3>
+
+	<div class="col-md-6">
+		<h3>
+			<a href="/adminLogout"><u>Logout</u></a>
+			&nbsp; &nbsp;
+			<a href="/adminHomePage"><u>Back To Home Page</u></a>
+		</h3>
+	</div>
 <hr style="clear:both;"/>
 	<div>
 		<label>Model</label> 
