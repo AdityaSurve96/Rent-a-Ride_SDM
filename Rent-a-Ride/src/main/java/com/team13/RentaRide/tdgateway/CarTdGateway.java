@@ -206,7 +206,7 @@ public class CarTdGateway {
 
 		System.out.println("***licensePlateNumber : " + licensePlateNumber);
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "select * from car where license_plate_number = '" + licensePlateNumber+"'";
+		String query = "select * from car where license_plate_number = '" + licensePlateNumber + "'";
 
 		Statement statement = null;
 		try {

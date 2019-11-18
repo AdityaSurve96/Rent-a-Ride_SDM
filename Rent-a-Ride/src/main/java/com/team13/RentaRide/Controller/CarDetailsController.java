@@ -42,8 +42,7 @@ public class CarDetailsController {
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 
-		Integer index = 0;
-		index = cars.indexOf(currentCar);
+		Integer index = cars.indexOf(currentCar);
 		if (index > 0) {
 
 			Car prevCar = cars.get((index - 1));
@@ -63,6 +62,7 @@ public class CarDetailsController {
 	public ModelAndView showNextCar() {
 
 		System.out.println("cars now : " + cars);
+		System.out.println("checking currentCar: " + currentCar);
 		Integer index = cars.indexOf(currentCar);
 		System.out.println("index of current car " + index);
 		if (index < (cars.size() - 1)) {
