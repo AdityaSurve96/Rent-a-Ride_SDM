@@ -160,3 +160,4 @@ function getCurrentDate() {
 	console.log(today);
 	document.getElementByID("now").setAttribute("min", today);
 }
+

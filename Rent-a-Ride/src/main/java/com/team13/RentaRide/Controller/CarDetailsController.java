@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +33,9 @@ public class CarDetailsController {
 	private static List<Car> cars = new ArrayList<Car>();
 	private Car currentCar = null;
 
+	
+	
+	
 	@RequestMapping("/carDetailView")
 	public ModelAndView showCarDetails(@RequestParam String licensePlateInput) {
 		cars = carDataMapper.getAllCars();
@@ -97,14 +101,21 @@ public class CarDetailsController {
 	public ModelAndView showCarView(Car car) {
 		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", car);
 
-		if (car.getAvailableReservedOrRented().equals("Available")) {
-			modelAndView.addObject("canReserveOrNot", "Reserve Now");
-			modelAndView.addObject("canRentOrNot", "Rent Now");
-		} else if (car.getAvailableReservedOrRented().equals("Reserved")) {
+		if (car.isEditing()) {
+			modelAndView.addObject("canReserveOrNot", "Unavaialable for Reserving");
+			modelAndView.addObject("canRentOrNot", "Unavaialable for Renting");
+			modelAndView.addObject("disableOrNo", "disabled");
+		}
+		 else if (car.getAvailableReservedOrRented().equals("Reserved")) {
 			modelAndView.addObject("canReserveOrNot", "Already Reserved");
 			modelAndView.addObject("canRentOrNot", "Cannot Rent Now");
 			modelAndView.addObject("disableOrNo", "disabled");
-		} else {
+		} 
+		else if (car.getAvailableReservedOrRented().equals("Available")) {
+			modelAndView.addObject("canReserveOrNot", "Reserve Now");
+			modelAndView.addObject("canRentOrNot", "Rent Now");
+		}	
+		else if (car.getAvailableReservedOrRented().equals("Rented")){
 			modelAndView.addObject("canReserveOrNot", "Cannot Reserve Now");
 			modelAndView.addObject("canRentOrNot", "Already Rented");
 			modelAndView.addObject("disableOrNo", "disabled");

@@ -53,7 +53,13 @@ public class ReservationAndRentalController {
 	@RequestMapping(value = "/rentThisCar")
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
 		page = CREATE_RENTAL;
-		ModelAndView modelAndView;
+		
+		Car c = new Car();
+		c.setEditing(true);
+		c.setLicensePlateNumber(licensePlate);
+		carDataMapper.modifyCarRecord(c);
+		
+		ModelAndView modelAndView=null;
 		modelAndView = new ModelAndView("RentCarForClient");
 		modelAndView.addObject("licensePlateNumber", licensePlate);
 		modelAndView.addObject("pickUpDate", LocalDate.now());
@@ -68,7 +74,14 @@ public class ReservationAndRentalController {
 	@RequestMapping(value = "/reserveThisCar")
 	public ModelAndView showCarReservingPage(@RequestParam String licensePlate) {
 		page = CREATE_RESERVATION;
-		ModelAndView modelAndView;
+		
+		
+		Car c = carDataMapper.getCarByLicenseNumber(licensePlate);
+		c.setEditing(true);
+		c.setLicensePlateNumber(licensePlate);
+		carDataMapper.modifyCarRecord(c);
+		
+		ModelAndView modelAndView=null;
 		modelAndView = new ModelAndView("ReserveCarForClient");
 		modelAndView.addObject("licensePlateNumber", licensePlate);
 		return modelAndView;
@@ -163,13 +176,15 @@ public class ReservationAndRentalController {
 
 		ReservedCar reservedCar = createReservedCar(dropoffDate, pickupDate, selectedCar, client);
 		reservedCarMapper.addReservedCarRecord(reservedCar);
+		
 		Car c = new Car();
 		c.setAvailableReservedOrRented("Reserved");
+		c.setEditing(true);
 		c.setLicensePlateNumber(CarLicenseNo);
 
 		carDataMapper.modifyCarRecord(c);
-
-		return new ModelAndView("ViewReservedTransactions", "reservations", reservedCarMapper.getAllReservedCars());
+		List<ReservedCar> rescars =  reservedCarMapper.getAllReservedCars();
+		return new ModelAndView("ViewReservedTransactions", "reservations",rescars);
 
 	}
 
@@ -202,6 +217,9 @@ public class ReservationAndRentalController {
 	@RequestMapping(value = "/cancelThisReservation")
 	public ModelAndView cancelSelectedReservation(@RequestParam String carLicencePlateNumber) {
 
+		returnOrCancel = "Cancel";
+		crDataMapper.addRecord(carLicencePlateNumber, returnOrCancel);
+		
 		reservedCarMapper.deleteCarReservationByLicense(carLicencePlateNumber);
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		Car c = new Car();
@@ -273,6 +291,7 @@ public class ReservationAndRentalController {
 		RentedCar rentedCar = createRentedCarObject(dropoffDate, pickupDate, selectedCar, selectedClient);
 		rentedCarDataMapper.addRentedCarRecord(rentedCar);
 		Car c = new Car();
+		c.setEditing(true);
 		c.setAvailableReservedOrRented("Rented");
 		c.setLicensePlateNumber(CarLicenseNo);
 
@@ -325,6 +344,7 @@ public class ReservationAndRentalController {
 	public ModelAndView showRentedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions");
+		
 		modelAndView.addObject("rentals", rentedCarDataMapper.getAllRentedCars());
 		return modelAndView;
 
@@ -338,9 +358,9 @@ public class ReservationAndRentalController {
 	public ModelAndView showReservedCarsPage() {
 
 		ModelAndView modelAndView = new ModelAndView("ViewReservedTransactions");
-//		DataStore ds = DataStore.getInstance();
 
-		modelAndView.addObject("reservations", reservedCarMapper.getAllReservedCars());
+		List<ReservedCar> rescars =  reservedCarMapper.getAllReservedCars();
+		modelAndView.addObject("reservations",rescars);
 		return modelAndView;
 
 	}

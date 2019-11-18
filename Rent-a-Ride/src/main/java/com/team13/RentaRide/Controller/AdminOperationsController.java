@@ -180,6 +180,7 @@ public class AdminOperationsController {
 			car.setPrice(new BigDecimal(carPrice));
 			car.setType(carType);
 			car.setYear(Integer.valueOf(carYear));
+			car.setEditing(false);
 			System.out.println("created car: " + car);
 
 			carDataMapper.addCarRecord(car);
@@ -212,6 +213,7 @@ public class AdminOperationsController {
 				break;
 			}
 		}
+		
 		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		for (ReservedCar reservedCar : resCars) {
@@ -236,6 +238,11 @@ public class AdminOperationsController {
 			modelAndView.addObject("disableOrNo", "disabled");
 
 		} else {
+			
+			currentCar.setEditing(true);
+			currentCar.setLicensePlateNumber(currentLicensePlateNumber);
+			carDataMapper.modifyCarRecord(currentCar);
+			
 			modelAndView.addObject("editDecide", "Edit Car Details");
 		}
 		return modelAndView;
@@ -243,6 +250,7 @@ public class AdminOperationsController {
 
 	@RequestMapping(value = "/saveCarChanges", method = RequestMethod.POST)
 	public ModelAndView saveCarChanges(Car car) {
+		car.setEditing(false);
 		carDataMapper.modifyCarRecord(car);
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 	}
@@ -476,7 +484,15 @@ public class AdminOperationsController {
 		List<CancelledReturnedBooking> retCanbookings = crDataMapper.getAllRecords();
 
 		return new ModelAndView("ReturnedAndCancelledTransactions", "returnedCancelled", retCanbookings);
-	}	
+	}
+	
+	@RequestMapping(value = "/backToAdminManageCatalog",  method = RequestMethod.POST)
+	public ModelAndView backToAdminManageCatalog(Car car) {
+		car.setEditing(false);
+		carDataMapper.modifyCarRecord(car);
+		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
+		
+	}
 	
 	@RequestMapping("/adminHomePage")
 	public ModelAndView backToAdminHome() {

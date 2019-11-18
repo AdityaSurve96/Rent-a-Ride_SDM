@@ -79,7 +79,8 @@
  <br>
  <div align="center">
   	<button type="submit" class="btn btn-primary btn-sm" formaction="/carReserved">Confirm Reservation</button>
-  	<a href="/back" class="btn btn-primary btn-sm">Back</a>
+  	<button type="submit" class="btn btn-primary btn-sm" formaction="/backfromReservation">Back</button>
+  	
  </div>
  </div>
  </div>

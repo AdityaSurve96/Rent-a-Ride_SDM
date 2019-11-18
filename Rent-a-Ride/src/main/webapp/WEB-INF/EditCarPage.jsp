@@ -91,12 +91,18 @@
 	</div>
 </div>
 
+<div class="form-group">
+	<div class="col-md-3">
+		<input value="${car.availableReservedOrRented}" type="hidden" name="availableReservedOrRented"  ${readOnly}>
+	</div>
+</div>
+
 <br>
 
  <div class="form-group">
 	<div>
 		<button type="submit" class="btn btn-primary btn-md" formaction="/saveCarChanges" ${disableOrNo}>Save Changes</button>
-	  	<a href="/adminManageCatalog" class="btn btn-primary btn-md">Cancel</a>
+	  	<button type="submit" class="btn btn-primary btn-md" formaction="/backToAdminManageCatalog" >Cancel</a>
 	  	
 	</div>  
  </div>

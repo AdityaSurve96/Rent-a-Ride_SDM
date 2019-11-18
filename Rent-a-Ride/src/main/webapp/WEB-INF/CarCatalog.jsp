@@ -118,7 +118,7 @@
 			<form method = "post">  
 				<input value="${car.licensePlateNumber}"  type = "hidden" name = "licensePlateInput" />
 			
-				<input class="btn btn-primary btn-sm"  type="submit" formaction="/carDetailView" value="${car.availableReservedOrRented}" />
+				<input class="btn btn-primary btn-sm" type="submit" formaction="/carDetailView" value="${car.availableReservedOrRented}" />
 			 </form>
 			</td>
 		</tr>

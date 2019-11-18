@@ -28,6 +28,7 @@ public class CarDataMapper {
 			parameterMap.put("DESCRIPTION", carObj.getDescription());
 			parameterMap.put("PRICE", carObj.getPrice());
 			parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+			parameterMap.put("EDITING", carObj.isEditing());
 
 			return carGateway.insertCarRecord(parameterMap);
 
@@ -54,11 +55,36 @@ public class CarDataMapper {
 		System.out.println("carObj -- " + carObj);
 		try {
 			HashMap<String, Object> parameterMap = new HashMap<>();
-
-			if (carObj.getYear() == null && carObj.getColor() == null) {
-				parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+		// when admin clicks edit
+			if(carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Available") && carObj.getColor() != null) {
+				parameterMap.put("EDITING", carObj.isEditing());
 				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
-			} else {
+
+			}
+//		// when clerk wants to rent/reserve a car
+//			else if (carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Available") && carObj.getColor() != null) {
+//				parameterMap.put("EDITING", carObj.isEditing());
+//				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
+//			
+//			}
+		// when clerk reserves a car
+			else if (carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Reserved") && carObj.getColor() == null) {
+				parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+				parameterMap.put("EDITING", carObj.isEditing());
+				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
+			
+			} 
+			// when clerk rents a car	
+			else if (carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Rented") && carObj.getColor() == null) {
+				parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+				parameterMap.put("EDITING", carObj.isEditing());
+				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
+			
+			} 
+		
+			// when admin saves after editing or cancelling
+			else if (!carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Available") && carObj.getColor() != null){
+				
 				parameterMap.put("CAR_ID", carObj.getId());
 				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
 				parameterMap.put("MAKE", carObj.getMake());
@@ -69,6 +95,7 @@ public class CarDataMapper {
 				parameterMap.put("DESCRIPTION", carObj.getDescription());
 				parameterMap.put("PRICE", carObj.getPrice());
 				parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+				parameterMap.put("EDITING", carObj.isEditing());
 			}
 			return carGateway.modifyCarRecord(parameterMap);
 
@@ -124,6 +151,7 @@ public class CarDataMapper {
 		car.setDescription(resultSet.getString(8));
 		car.setPrice(resultSet.getBigDecimal(9));
 		car.setAvailableReservedOrRented(resultSet.getString(10));
+		car.setEditing(resultSet.getBoolean(11));
 		return car;
 	}
 

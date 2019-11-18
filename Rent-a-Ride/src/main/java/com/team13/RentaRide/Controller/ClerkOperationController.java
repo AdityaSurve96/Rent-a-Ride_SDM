@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team13.RentaRide.mapper.CarDataMapper;
 import com.team13.RentaRide.mapper.ClerkDataMapper;
 import com.team13.RentaRide.mapper.ClientDataMapper;
+import com.team13.RentaRide.model.Car;
 import com.team13.RentaRide.model.Clerk;
 
 /**
@@ -59,8 +60,8 @@ public class ClerkOperationController {
 	public ModelAndView showCarCatalogPage() {
 
 		ModelAndView modelAndView = new ModelAndView("CarCatalog");
-		modelAndView.addObject("cars", carDataMapper.getAllCars());
-
+		List<Car> allCars = carDataMapper.getAllCars();
+		modelAndView.addObject("cars", allCars);
 		return modelAndView;
 	}
 

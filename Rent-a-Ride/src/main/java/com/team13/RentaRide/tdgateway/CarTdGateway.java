@@ -27,7 +27,7 @@ public class CarTdGateway {
 	public boolean insertCarRecord(Map<String, Object> parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "INSERT INTO Car VALUES (default, ?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO Car VALUES (default, ?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement statement = null;
 		try {
@@ -49,6 +49,7 @@ public class CarTdGateway {
 			statement.setString(7, (String) parameterMap.get("DESCRIPTION"));
 			statement.setBigDecimal(8, (BigDecimal) parameterMap.get("PRICE"));
 			statement.setString(9, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+			statement.setBoolean(10, (Boolean) parameterMap.get("EDITING"));
 
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
@@ -109,17 +110,33 @@ public class CarTdGateway {
 
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = new StringBuilder();
-		boolean flag = false;
+		Integer count = 0;
 		System.out.println("parameterMap.size()  " + parameterMap.size());
+		
 		if (parameterMap.size() == 2) {
-			flag = true;
-			query.append("UPDATE Car SET ").append("available_reserved_or_rented = ? ")
-					.append(" WHERE license_plate_number = ?");
+			count = 2;
+			
+			query.append("UPDATE Car SET ").append("editing = ? ")
+				 .append(" WHERE license_plate_number = ?");
+			
 			System.out.println("executing query: " + query);
-		} else {
+		
+		} 
+		else if (parameterMap.size() == 3) {
+			
+			count = 3;
+			
+			query.append("UPDATE Car SET ").append("editing = ? , ")
+			     .append("available_reserved_or_rented = ? " )
+			     .append(" WHERE license_plate_number = ?");
+		}
+		
+		else {
+		
 			query.append("UPDATE Car SET ").append(" make = ?,").append("  model = ?,").append(" type = ?,")
 					.append(" color = ?,").append(" year = ?,").append(" description = ?,").append(" price = ?,")
-					.append(" available_reserved_or_rented = ?").append(" WHERE license_plate_number = ?");
+					.append(" available_reserved_or_rented = ? ,").append(" editing = ? ")
+					.append(" WHERE license_plate_number = ?");
 		}
 
 		PreparedStatement statement = null;
@@ -132,11 +149,18 @@ public class CarTdGateway {
 		}
 		try {
 
-			if (flag) {
-				statement.setString(1, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+			if (count == 2) {
+				statement.setBoolean(1, (Boolean) parameterMap.get("EDITING"));
 				statement.setString(2, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
 
-			} else {
+			}
+			else if ( count == 3) {
+				
+				statement.setBoolean(1, (Boolean) parameterMap.get("EDITING"));
+				statement.setString(2, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
+				statement.setString(3, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+			}
+			else {
 				statement.setString(1, (String) parameterMap.get("MAKE"));
 				statement.setString(2, (String) parameterMap.get("MODEL"));
 				statement.setString(3, (String) parameterMap.get("TYPE"));
@@ -146,7 +170,9 @@ public class CarTdGateway {
 				statement.setString(6, (String) parameterMap.get("DESCRIPTION"));
 				statement.setBigDecimal(7, (BigDecimal) parameterMap.get("PRICE"));
 				statement.setString(8, (String) parameterMap.get("AVAILABLE_RESERVED_RENTED"));
-				statement.setString(9, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+				statement.setBoolean(9, (Boolean) parameterMap.get("EDITING"));
+				statement.setString(10, (String) parameterMap.get("LICENSE_PLATE_NUMBER"));
+				
 			}
 
 		} catch (SQLException e) {

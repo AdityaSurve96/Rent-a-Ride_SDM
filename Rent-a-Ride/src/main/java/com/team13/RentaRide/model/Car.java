@@ -22,6 +22,15 @@ public class Car {
 	private String description;
 	private BigDecimal price;
 	private String availableReservedOrRented;
+	private boolean editing;
+
+	public boolean isEditing() {
+		return editing;
+	}
+
+	public void setEditing(boolean editing) {
+		this.editing = editing;
+	}
 
 	public Integer getId() {
 		return id;
@@ -107,7 +116,8 @@ public class Car {
 	public String toString() {
 		return "Car [id=" + id + ", licensePlateNumber=" + licensePlateNumber + ", make=" + make + ", model=" + model
 				+ ", type=" + type + ", color=" + color + ", year=" + year + ", description=" + description + ", price="
-				+ price + ", availableReservedOrRented=" + availableReservedOrRented + "]";
+				+ price + ", availableReservedOrRented=" + availableReservedOrRented + ", editing=" + editing + "]";
 	}
+
 
 }

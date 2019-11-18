@@ -32,13 +32,13 @@ public class DatabaseCreator {
 		
 		String useDb = "USE " + schemaName + ";";
 
-		String createTableAdmin = "CREATE TABLE IF NOT EXISTS  Admin       (id int NOT NULL auto_increment, email varchar(255), password varchar(255), PRIMARY KEY (id) );";
+		String createTableAdmin = "CREATE TABLE IF NOT EXISTS  Admin       (id int NOT NULL auto_increment, email varchar(255) UNIQUE, password varchar(255) UNIQUE, PRIMARY KEY (id) );";
 
-		String createTableClerk = "CREATE TABLE IF NOT EXISTS  Clerk       (id int NOT NULL auto_increment, email varchar(255), password varchar(255), PRIMARY KEY (id) );";
+		String createTableClerk = "CREATE TABLE IF NOT EXISTS  Clerk       (id int NOT NULL auto_increment, email varchar(255) UNIQUE, password varchar(255) UNIQUE, PRIMARY KEY (id) );";
 
-		String createTableCar = "CREATE TABLE IF NOT EXISTS  Car         (id int NOT NULL auto_increment, license_plate_number varchar(30), make varchar(20), model varchar(20), type varchar(20), color varchar(20), year int(4), description varchar(255), price DECIMAL(5,2), available_reserved_or_rented varchar(20), PRIMARY KEY (id));";
+		String createTableCar = "CREATE TABLE IF NOT EXISTS  Car         (id int NOT NULL auto_increment, license_plate_number varchar(30) UNIQUE, make varchar(20), model varchar(20), type varchar(20), color varchar(20), year int(4), description varchar(255), price DECIMAL(5,2), available_reserved_or_rented varchar(20), editing BOOLEAN, PRIMARY KEY (id));";
 
-		String createTableClient = "CREATE TABLE IF NOT EXISTS  Client      (id int NOT NULL auto_increment, driver_licence_number varchar(30), client_first_name varchar(30), client_last_name varchar(30), phone_number varchar(10), licence_expiry_date Date , PRIMARY KEY (id) );";
+		String createTableClient = "CREATE TABLE IF NOT EXISTS  Client      (id int NOT NULL auto_increment, driver_licence_number varchar(30) UNIQUE, client_first_name varchar(30), client_last_name varchar(30), phone_number varchar(10), licence_expiry_date Date , editing BOOLEAN, PRIMARY KEY (id) );";
 
 		String createTableReservedCar = "CREATE TABLE IF NOT EXISTS  ReservedCar (id int NOT NULL auto_increment, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP , PRIMARY KEY (id), FOREIGN KEY (car_id) REFERENCES Car(id), FOREIGN KEY (client_id) REFERENCES Client(id) ); ";
 

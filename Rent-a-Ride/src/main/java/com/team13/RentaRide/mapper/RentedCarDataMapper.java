@@ -160,19 +160,20 @@ public List<RentedCar> getRentedCarsByDueDate(LocalDate dueDate){
 			car.setDescription(resultSet.getString(8));
 			car.setPrice(resultSet.getBigDecimal(9));
 			car.setAvailableReservedOrRented(resultSet.getString(10));
-
+			car.setEditing(resultSet.getBoolean(11));
+			
 			Client client = new Client();
-			client.setId(resultSet.getInt(11));
-			client.setDriverLicenceNumber(resultSet.getString(12));
-			client.setClientFirstName(resultSet.getString(13));
-			client.setClientLastName(resultSet.getString(14));
-			client.setPhoneNumber(resultSet.getString(15));
-			client.setLicenceExpiryDate(resultSet.getDate(16).toLocalDate());
+			client.setId(resultSet.getInt(12));
+			client.setDriverLicenceNumber(resultSet.getString(13));
+			client.setClientFirstName(resultSet.getString(14));
+			client.setClientLastName(resultSet.getString(15));
+			client.setPhoneNumber(resultSet.getString(16));
+			client.setLicenceExpiryDate(resultSet.getDate(17).toLocalDate());
 
-			Integer renCarId = resultSet.getInt(17);
-			LocalDate startDateDb = resultSet.getDate(18).toLocalDate();
-			LocalDate dueDateDb = resultSet.getDate(19).toLocalDate();
-			Date bookingTimestamp = resultSet.getTimestamp(20);
+			Integer renCarId = resultSet.getInt(18);
+			LocalDate startDateDb = resultSet.getDate(19).toLocalDate();
+			LocalDate dueDateDb = resultSet.getDate(20).toLocalDate();
+			Date bookingTimestamp = resultSet.getTimestamp(21);
 
 			RentedCar renCar = new RentedCar(renCarId, car, client, startDateDb, dueDateDb,  bookingTimestamp);
 			renCars.add(renCar);
