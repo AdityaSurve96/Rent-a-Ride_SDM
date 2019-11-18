@@ -33,6 +33,8 @@ import com.team13.RentaRide.model.ReservedCar;
 
 public class ReservationAndRentalController {
 
+	private static final String CREATE_RENTAL = "CreateRental";
+	private static final String CREATE_RESERVATION = "CreateReservation";
 	ClientDataMapper clientDataMapper = new ClientDataMapper();
 	CarDataMapper carDataMapper = new CarDataMapper();
 	RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
@@ -50,6 +52,7 @@ public class ReservationAndRentalController {
 
 	@RequestMapping(value = "/rentThisCar")
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
+		page = CREATE_RENTAL;
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("RentCarForClient");
 		modelAndView.addObject("licensePlateNumber", licensePlate);
@@ -64,6 +67,7 @@ public class ReservationAndRentalController {
 	 */
 	@RequestMapping(value = "/reserveThisCar")
 	public ModelAndView showCarReservingPage(@RequestParam String licensePlate) {
+		page = CREATE_RESERVATION;
 		ModelAndView modelAndView;
 		modelAndView = new ModelAndView("ReserveCarForClient");
 		modelAndView.addObject("licensePlateNumber", licensePlate);
@@ -86,14 +90,13 @@ public class ReservationAndRentalController {
 		System.out.println("page: " + page);
 
 		if (client != null) {
-			if (page.equals("CreateReservation")) {
+			if (page.equals(CREATE_RESERVATION)) {
 				modelAndView = new ModelAndView("ReserveCarForClient");
 
-			} else if (page.equals("CreateRental")) {
+			} else if (page.equals(CREATE_RENTAL)) {
 				modelAndView = new ModelAndView("RentCarForClient");
 				modelAndView.addObject("pickUpDate", LocalDate.now());
 			}
-
 			modelAndView.addObject("licensePlateNumber", CarLicenseNo);
 			modelAndView.addObject("driverLicenseNumber", client.getDriverLicenceNumber());
 			modelAndView.addObject("clientFirstName", client.getClientFirstName());
@@ -102,9 +105,9 @@ public class ReservationAndRentalController {
 			modelAndView.addObject("licenceExpiryDate", client.getLicenceExpiryDate());
 			return modelAndView;
 		} else {
-			if (page.equals("CreateReservation")) {
+			if (page.equals(CREATE_RESERVATION)) {
 				modelAndView = new ModelAndView("ReserveCarForClient");
-			} else if (page.equals("CreateRental")) {
+			} else if (page.equals(CREATE_RENTAL)) {
 				modelAndView = new ModelAndView("RentCarForClient");
 				modelAndView.addObject("pickUpDate", LocalDate.now());
 			}
