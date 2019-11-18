@@ -153,6 +153,12 @@ public class ReservationAndRentalController {
 
 		ReservedCar reservedCar = createReservedCar(dropoffDate, pickupDate, selectedCar, client);
 		reservedCarMapper.addReservedCarRecord(reservedCar);
+		Car c = new Car();
+		c.setAvailableReservedOrRented("Reserved");
+		c.setLicensePlateNumber(CarLicenseNo);
+
+		carDataMapper.modifyCarRecord(c);
+		
 		return new ModelAndView("ViewReservedTransactions", "reservations", reservedCarMapper.getAllReservedCars());
 
 	}
@@ -188,6 +194,11 @@ public class ReservationAndRentalController {
 
 		reservedCarMapper.deleteCarReservationByLicense(carLicencePlateNumber);
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
+		Car c = new Car();
+		c.setAvailableReservedOrRented("Available");
+		c.setLicensePlateNumber(carLicencePlateNumber);
+
+		carDataMapper.modifyCarRecord(c);
 		return new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 	}
 
@@ -247,6 +258,11 @@ public class ReservationAndRentalController {
 		
 		RentedCar rentedCar = createRentedCarObject(dropoffDate, pickupDate, selectedCar, selectedClient);
 		rentedCarDataMapper.addRentedCarRecord(rentedCar);
+		Car c = new Car();
+		c.setAvailableReservedOrRented("Rented");
+		c.setLicensePlateNumber(CarLicenseNo);
+
+		carDataMapper.modifyCarRecord(c);
 		return new ModelAndView("ViewRentalTransactions", "rentals", reservedCarMapper.getAllReservedCars());
 
 	}

@@ -203,7 +203,7 @@ public class CarTdGateway {
 	public ResultSet getCarByLicensePlateNumber(String licensePlateNumber) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "select * from car where license_plate_number = ?";
+		String query = "select * from car where license_plate_number = ? ";
 
 		PreparedStatement statement = null;
 		try {

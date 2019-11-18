@@ -149,11 +149,11 @@ public class ReservedCarTdGateway {
 		return query;
 	}
 
-	public void deleteCarReservation(String carLicencePlateNumber) {
+	public boolean deleteCarReservation(String carLicencePlateNumber) {
 
-		String deleteQuery = "delete from reservedcar where car.id in (select id from car where license_plate_number = ?) ";
+		String deleteQuery = "delete from reservedcar where car_id in (select id from car where license_plate_number = ?) ";
 		Connection connection = DatabaseUtils.getDbConnection();
-		PreparedStatement statement;
+		PreparedStatement statement=null;
 		try {
 			statement = connection.prepareStatement(deleteQuery.toString());
 			statement.setString(1, carLicencePlateNumber);
@@ -161,6 +161,17 @@ public class ReservedCarTdGateway {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e.printStackTrace();
 		}
+		
+		try {
+			statement.execute();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
+		}
+
+		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
+		return true;
 
 	}
 
