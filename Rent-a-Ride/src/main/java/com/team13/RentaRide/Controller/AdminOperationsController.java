@@ -86,12 +86,6 @@ public class AdminOperationsController {
 	}
 
 	@RequestMapping(value = "/tryToLoginAsAdmin", method = RequestMethod.POST)
-	/**
-	 * 
-	 * @param email
-	 * @param password
-	 * @return
-	 */
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		System.out.println("here**************");
 		try {
@@ -276,16 +270,14 @@ public class AdminOperationsController {
 				break;
 			}
 		}
-		List<Car> allCars = carDataMapper.getAllCars();
 		if (flag) {
-
-			modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", allCars);
+			modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 			modelAndView.addObject("errorMessage", "Cannot delete vehicle now  as it is currently booked");
 			return modelAndView;
 		} else {
 
-			allCars.remove(currentCar);
-			return new ModelAndView("AdminCarCatalogPage", "cars", allCars);
+			carDataMapper.deleteCarRecord(currentLicensePlateNumber);
+			return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 		}
 	}
 

@@ -70,12 +70,14 @@ public class CarTdGateway {
 
 	public boolean deleteCarRecord(String carLicencePlateNumber) {
 
+		System.out.println("deleting car for carLicencePlateNumber: " + carLicencePlateNumber);
 		Connection connection = DatabaseUtils.getDbConnection();
 		String query = "DELETE from Car where LICENSE_PLATE_NUMBER = ?";
 
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(query);
+			System.out.println("delete car statement: " + statement);
 		} catch (SQLException e1) {
 			System.out.println(DatabaseUtils.DELETE_STATEMENT_ERROR_MESSAGE);
 			e1.printStackTrace();
@@ -202,22 +204,16 @@ public class CarTdGateway {
 
 	public ResultSet getCarByLicensePlateNumber(String licensePlateNumber) {
 
+		System.out.println("***licensePlateNumber : " + licensePlateNumber);
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "select * from car where license_plate_number = ?";
+		String query = "select * from car where license_plate_number = "+licensePlateNumber;
 
-		PreparedStatement statement = null;
+		Statement statement = null;
 		try {
 			statement = connection.prepareStatement(query);
 		} catch (SQLException e1) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e1.printStackTrace();
-			return null;
-		}
-		try {
-			statement.setString(1, licensePlateNumber);
-		} catch (SQLException e) {
-			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
-			e.printStackTrace();
 			return null;
 		}
 

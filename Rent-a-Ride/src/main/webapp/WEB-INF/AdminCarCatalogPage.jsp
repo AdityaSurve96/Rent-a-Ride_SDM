@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
 <form>
 <div class="container">
 <h3>Car Catalog Management</h3>
@@ -22,38 +23,34 @@
 		<input type="hidden" name="modelInput" id="modelInput"/>
 		<select id="model" onChange="setInputValue('model')" >
 			<option value="invalid">---</option>
-			<option value="D6">D6</option>
-			<option value="X6">X6</option>
-			<option value="X3">X3</option>
-			<option value="Cruze">Cruze</option>
-			<option value="Mirage">Mirage</option>
+			<c:forEach var="car" items="${cars}" varStatus="loop">
+				<option value="${car.model}">${car.model}</option>
+			</c:forEach>
 		</select>
 		&nbsp;<label>Type</label>
 		<input type="hidden" name="typeInput" id="typeInput"/>
 		<select id="type" onChange="setInputValue('type')">
 			<option value="invalid">---</option>
-			<option value="Sedan">Sedan</option>
-			<option value="SUV">SUV</option>
+			<c:forEach var="car" items="${cars}" varStatus="loop">
+				<option value="${car.type}">${car.type}</option>
+			</c:forEach>
 		</select> 
 		&nbsp;<label>Make</label> 
 		<input type="hidden" name="makeInput" id="makeInput"/>
 		<select id="make" onChange="setInputValue('make')">
 			<option value="invalid">---</option>
-			<option value="Volvo">Volvo</option>
-			<option value="BMW">BMW</option>
-			<option value="Chevrolet">Chevrolet</option>
-			<option value="Mitsubishi">Mitsubishi</option>
-		</select> 
+			<c:forEach var="car" items="${cars}" varStatus="loop">
+				<option value="${car.make}">${car.make}</option>
+			</c:forEach>
+		</select>
 		
 		&nbsp;<label>Year</label>
 		<input type="hidden" name="yearInput" id="yearInput"/>
 		<select id="year" onChange="setInputValue('year')">
 			<option value="invalid">---</option>
-			<option value="2011">2011</option>
-			<option value="2009">2009</option>
-			<option value="2010">2010</option>
-			<option value="2017">2017</option>
-			<option value="2012">2012</option>
+			<c:forEach var="car" items="${cars}" varStatus="loop">
+				<option value="${car.year}">${car.year}</option>
+			</c:forEach>
 		</select>
 		&nbsp;<label>Year Offset</label>			
 		<input size="3" type="number" maxlength="3" name="yearOffset" width="10" max="5"/>
@@ -62,11 +59,9 @@
 		<input type="hidden" name="colorInput" id="colorInput"/>
 		<select id="color" onChange="setInputValue('color')">
 			<option value="invalid">---</option>
-			<option value="Red">Red</option>
-			<option value="Black">Black</option>
-			<option value="White">White</option>
-			<option value="Blue">Blue</option>
-			<option value="Green">Green</option>
+			<c:forEach var="car" items="${cars}" varStatus="loop">
+				<option value="${car.color}">${car.color}</option>
+			</c:forEach>
 		</select>
 		
 		&nbsp;<label>Availability</label>
