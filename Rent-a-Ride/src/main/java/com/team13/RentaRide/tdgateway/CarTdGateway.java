@@ -206,11 +206,11 @@ public class CarTdGateway {
 
 		System.out.println("***licensePlateNumber : " + licensePlateNumber);
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "select * from car where license_plate_number = "+licensePlateNumber;
+		String query = "select * from car where license_plate_number = '" + licensePlateNumber+"'";
 
 		Statement statement = null;
 		try {
-			statement = connection.prepareStatement(query);
+			statement = connection.createStatement();
 		} catch (SQLException e1) {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e1.printStackTrace();

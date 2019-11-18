@@ -128,6 +128,7 @@ public class CarDataMapper {
 	public Car getCarByLicenseNumber(String licensePlateNumber) {
 		ResultSet resultSet = carGateway.getCarByLicensePlateNumber(licensePlateNumber);
 		try {
+			resultSet.next();
 			return getModelFromResultSet(resultSet);
 		} catch (SQLException e) {
 			System.out.println("Error while setting parameters to ");

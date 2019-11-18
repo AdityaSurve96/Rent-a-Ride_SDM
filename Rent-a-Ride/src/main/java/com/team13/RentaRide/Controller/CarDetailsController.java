@@ -42,12 +42,11 @@ public class CarDetailsController {
 	@RequestMapping("/back")
 	public ModelAndView showPreviousCar() {
 
-		List<Car> carsList = carDataMapper.getAllCars();
 		Integer index = 0;
-		index = carsList.indexOf(currentCar);
+		index = cars.indexOf(currentCar);
 		if (index > 0) {
 
-			Car prevCar = carsList.get((index - 1));
+			Car prevCar = cars.get((index - 1));
 			currentCar = prevCar;
 			ModelAndView modelAndView = showCarView(prevCar);
 			return modelAndView;
@@ -63,8 +62,9 @@ public class CarDetailsController {
 	@RequestMapping("/next")
 	public ModelAndView showNextCar() {
 
-		Integer index = 0;
-		index = cars.indexOf(currentCar);
+		System.out.println("cars now : " + cars);
+		Integer index = cars.indexOf(currentCar);
+		System.out.println("index of current car " + index);
 		if (index < (cars.size() - 1)) {
 			Car nextCar = cars.get(index + 1);
 			currentCar = nextCar;
