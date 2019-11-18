@@ -263,6 +263,11 @@ public class ReservationAndRentalController {
 		if (selectedClient == null) {
 			selectedClient = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber,
 					licenceExpiryDate);
+			
+			System.out.println("adding client " + selectedClient);
+			clientDataMapper.addClientRecord(selectedClient);
+			selectedClient = clientDataMapper.getClientByDrivingLicense(selectedClient.getDriverLicenceNumber());
+			System.out.println("created client : " + selectedClient);
 		}
 
 		RentedCar rentedCar = createRentedCarObject(dropoffDate, pickupDate, selectedCar, selectedClient);
@@ -272,7 +277,7 @@ public class ReservationAndRentalController {
 		c.setLicensePlateNumber(CarLicenseNo);
 
 		carDataMapper.modifyCarRecord(c);
-		return new ModelAndView("ViewRentalTransactions", "rentals", reservedCarMapper.getAllReservedCars());
+		return new ModelAndView("ViewRentalTransactions", "rentals", rentedCarDataMapper.getAllRentedCars());
 
 	}
 
