@@ -106,7 +106,7 @@ public class RentedCarTdGateway {
 		}
 		
 		try {
-			statement.executeUpdate();
+			statement.execute();
 		} catch (Exception e) {
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);
 			e.printStackTrace();
