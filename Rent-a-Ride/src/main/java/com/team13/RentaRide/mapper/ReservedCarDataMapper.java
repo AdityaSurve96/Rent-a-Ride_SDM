@@ -18,6 +18,7 @@ public class ReservedCarDataMapper {
 	ReservedCarTdGateway gateway = new ReservedCarTdGateway();
 
 	public boolean addReservedCarRecord(ReservedCar reservedCar) {
+		System.out.println("***reservedCar: " + reservedCar);
 		try {
 			HashMap<String, Object> parameterMap = new HashMap<>();
 

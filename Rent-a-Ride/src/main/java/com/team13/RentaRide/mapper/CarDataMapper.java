@@ -51,11 +51,13 @@ public class CarDataMapper {
 	}
 
 	public boolean modifyCarRecord(Car carObj) {
+		System.out.println("carObj -- " + carObj);
 		try {
 			HashMap<String, Object> parameterMap = new HashMap<>();
 
 			if (carObj.getYear() == null && carObj.getColor() == null) {
 				parameterMap.put("AVAILABLE_RESERVED_RENTED", carObj.getAvailableReservedOrRented());
+				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());
 			} else {
 				parameterMap.put("CAR_ID", carObj.getId());
 				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getLicensePlateNumber());

@@ -114,14 +114,14 @@ public class ClientDataMapper {
 		}
 		Client client = null;
 		try {
-			result.next();
-			if (result.isLast()) {
+			if (!result.next()) {
 				return null;
 			}
 			client = getModelFromResultSet(result);
 		} catch (SQLException e) {
 			System.out.println("Error while getting client record from database");
 			e.printStackTrace();
+			return null;
 		}
 		return client;
 	}

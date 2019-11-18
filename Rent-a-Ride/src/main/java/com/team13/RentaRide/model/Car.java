@@ -1,6 +1,7 @@
 package com.team13.RentaRide.model;
 
 import java.math.BigDecimal;
+
 /**
  * 
  * @author Admin
@@ -101,25 +102,12 @@ public class Car {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-/**
- * 
- * @param id
- * @param licensePlateNumber
- * @param make
- * @param model
- * @param type
- * @param color
- * @param year
- * @param description
- * @param price
- * @param availableReservedOrRented
- */
-	
 
 	@Override
 	public String toString() {
-		return "Car [make=" + make + ", model=" + model + ", type=" + type + ", licenseNumber=" + licensePlateNumber
-				+ ", color=" + color + ", description=" + description + ", price=" + price + ", year=" + year + "]";
+		return "Car [id=" + id + ", licensePlateNumber=" + licensePlateNumber + ", make=" + make + ", model=" + model
+				+ ", type=" + type + ", color=" + color + ", year=" + year + ", description=" + description + ", price="
+				+ price + ", availableReservedOrRented=" + availableReservedOrRented + "]";
 	}
 
 }

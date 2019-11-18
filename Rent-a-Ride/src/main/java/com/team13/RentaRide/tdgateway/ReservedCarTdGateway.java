@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 import com.team13.RentaRide.utils.DatabaseUtils;
+
 /**
  * 
  * @author Admin
@@ -18,11 +19,11 @@ import com.team13.RentaRide.utils.DatabaseUtils;
  */
 
 public class ReservedCarTdGateway {
-/**
- * 
- * @param parameterMap
- * @return
- */
+	/**
+	 * 
+	 * @param parameterMap
+	 * @return
+	 */
 	public boolean insertReservedCarRecord(Map<String, Object> parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -43,10 +44,11 @@ public class ReservedCarTdGateway {
 			statement.setDate(3, java.sql.Date.valueOf(startDate));
 			LocalDate dueDate = (LocalDate) parameterMap.get("DUE_DATE");
 			statement.setDate(4, java.sql.Date.valueOf(dueDate));
-			statement.setTimestamp(5, (Timestamp) parameterMap.get("BOOKING_TIMESTAMP"));
+			java.util.Date bookingDate = (java.util.Date) parameterMap.get("BOOKING_TIMESTAMP");
+			Timestamp bookingTimestamp = new Timestamp(bookingDate.getTime());
+			statement.setTimestamp(5, bookingTimestamp);
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
-
 			e.printStackTrace();
 			return false;
 		}
@@ -62,10 +64,11 @@ public class ReservedCarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return true;
 	}
-/**
- * 
- * @return
- */
+
+	/**
+	 * 
+	 * @return
+	 */
 	public ResultSet getAllReservedCars() {
 
 		Connection connection = DatabaseUtils.getDbConnection();
@@ -135,6 +138,7 @@ public class ReservedCarTdGateway {
 		System.out.println(DatabaseUtils.QUERY_SUCCESSFUL_MESSAGE);
 		return result;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -153,7 +157,7 @@ public class ReservedCarTdGateway {
 
 		String deleteQuery = "delete from reservedcar where car_id in (select id from car where license_plate_number = ?) ";
 		Connection connection = DatabaseUtils.getDbConnection();
-		PreparedStatement statement=null;
+		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(deleteQuery.toString());
 			statement.setString(1, carLicencePlateNumber);
@@ -161,10 +165,10 @@ public class ReservedCarTdGateway {
 			System.out.println(DatabaseUtils.CREATE_STATEMENT_ERROR_MESSAGE);
 			e.printStackTrace();
 		}
-		
+
 		try {
 			statement.execute();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(DatabaseUtils.QUERY_EXECUTION_ERROR_MESSAGE);

@@ -110,10 +110,12 @@ public class CarTdGateway {
 		Connection connection = DatabaseUtils.getDbConnection();
 		StringBuilder query = new StringBuilder();
 		boolean flag = false;
+		System.out.println("parameterMap.size()  " + parameterMap.size());
 		if (parameterMap.size() == 2) {
 			flag = true;
 			query.append("UPDATE Car SET ").append("available_reserved_or_rented = ? ")
 					.append(" WHERE license_plate_number = ?");
+			System.out.println("executing query: " + query);
 		} else {
 			query.append("UPDATE Car SET ").append(" make = ?,").append("  model = ?,").append(" type = ?,")
 					.append(" color = ?,").append(" year = ?,").append(" description = ?,").append(" price = ?,")

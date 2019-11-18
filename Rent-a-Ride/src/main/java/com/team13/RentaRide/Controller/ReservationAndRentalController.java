@@ -153,6 +153,12 @@ public class ReservationAndRentalController {
 		if (client == null) {
 			client = createNewClient(clientFirstName, clientLastName, phoneNumber, driverLicenceNumber,
 					licenceExpiryDate);
+			// insert client record in db, and fetch it again from db to obtain the id...
+			System.out.println("adding client " + client);
+			clientDataMapper.addClientRecord(client);
+			client = clientDataMapper.getClientByDrivingLicense(client.getDriverLicenceNumber());
+			System.out.println("created client : " + client);
+
 		}
 
 		ReservedCar reservedCar = createReservedCar(dropoffDate, pickupDate, selectedCar, client);
