@@ -97,7 +97,7 @@ public class ClerkOperationController {
 		List<Clerk> clerk = clerkDataMapper.getClerkByEmailPassword(email, password);
 
 		
-		if (clerk != null) {
+		if (!clerk.isEmpty()) {
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
 			return modelAndView;
 		}

@@ -429,6 +429,47 @@ public class AdminOperationsController {
 
 	}
 
+	
+	@RequestMapping(value = "/filterCancelledReturnedRecordsForAdmin", method = RequestMethod.POST)
+
+	public ModelAndView filterCancelledReturnedRecordsForAdmin(@RequestParam String licensePlateNumberInput,
+			@RequestParam String drivingLicenseNumberInput,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dueDateFilter,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate pickupDateFilter) {
+
+		System.out.println("licensePlateNumberInput: " + licensePlateNumberInput);
+
+		ModelAndView modelAndView = new ModelAndView("ReturnedAndCancelledTransactions");
+		List<CancelledReturnedBooking> canRetBookings = crDataMapper.getAllRecords();
+
+		List<CancelledReturnedBooking> toSend = new ArrayList<>();
+
+		for (CancelledReturnedBooking canRet : canRetBookings) {
+			if (!StringUtils.isEmpty(licensePlateNumberInput)
+					&& !licensePlateNumberInput.equals(canRet.getCar().getLicensePlateNumber())) {
+				continue;
+			}
+
+			if (!StringUtils.isEmpty(drivingLicenseNumberInput)
+					&& !drivingLicenseNumberInput.equals(canRet.getAssociatedClient().getDriverLicenceNumber())) {
+				continue;
+			}
+
+			if (dueDateFilter != null && !dueDateFilter.equals(canRet.getDueDate())) {
+				continue;
+			}
+
+			if (pickupDateFilter != null && !pickupDateFilter.equals(canRet.getStartDate())) {
+				continue;
+			}
+			toSend.add(canRet);
+
+		}
+
+		modelAndView.addObject("returnedCancelled", toSend);
+		return modelAndView;
+
+	}
 	@RequestMapping("/showReturnedCancelledReservations")
 	public ModelAndView showReturnedOrCancelledTransactions() {
 

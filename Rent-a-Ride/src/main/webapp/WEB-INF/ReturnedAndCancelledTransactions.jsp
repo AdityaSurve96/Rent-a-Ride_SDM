@@ -59,7 +59,7 @@
 	<input type="date" name="dueDateFilter" id="dueDateFilter"/>
 	
 	&nbsp; 
-		<button type="submit" formaction="/filterRentalRecordsForAdmin" formmethod="post">
+		<button type="submit" formaction="/filterCancelledReturnedRecordsForAdmin" formmethod="post">
 			<i class="fa fa-search text-green" aria-hidden="true"></i>
 		</button>
 	
