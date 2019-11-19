@@ -49,8 +49,8 @@
  <div class="form-group">
   	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberInput">
   	<button type="submit" class="btn btn-primary btn-md" formaction="/gotoClientManagementPageAfterModification" 
-  	name ="ConfirmModify">Confirm</button>
-  	<a href="/ClientManagementPage" class="btn btn-primary btn-md">Back</a>
+  	name ="ConfirmModify" ${disableOrNot}>Modify Now</button>
+  	<button type="submit" formaction="/backToClientManagementPage" class="btn btn-primary btn-md">Back</a>
  </div>
  </div>
  

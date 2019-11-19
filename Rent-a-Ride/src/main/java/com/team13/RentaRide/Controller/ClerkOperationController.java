@@ -1,5 +1,6 @@
 package com.team13.RentaRide.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class ClerkOperationController {
 	 * 
 	 * @return
 	 */
-
+	public List<Clerk> clerksLoggedIn = new ArrayList<Clerk>();
 	private ClerkDataMapper clerkDataMapper = new ClerkDataMapper();
 	private CarDataMapper carDataMapper = new CarDataMapper();
 	private ClientDataMapper clientDataMapper = new ClientDataMapper();
@@ -96,9 +97,10 @@ public class ClerkOperationController {
 
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		List<Clerk> clerk = clerkDataMapper.getClerkByEmailPassword(email, password);
-
+		
 		
 		if (!clerk.isEmpty()) {
+		
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
 			return modelAndView;
 		}

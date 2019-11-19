@@ -1,6 +1,7 @@
 package com.team13.RentaRide.Controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ import com.team13.RentaRide.model.Client;
 public class ClientManagementController {
 
 	private ClientDataMapper clientDataMapper = new ClientDataMapper();
-
+	
 	/**
 	 * 
 	 * @return
@@ -55,7 +56,8 @@ public class ClientManagementController {
 		client.setDriverLicenceNumber(driverLicenceNumber);
 		client.setLicenceExpiryDate(licenceExpiryDate);
 		client.setPhoneNumber(phoneNumber);
-
+		client.setEditing(false);
+		
 		clientDataMapper.addClientRecord(client);
 
 		ModelAndView modelAndView = new ModelAndView("ClientManagementPage", "clients",
@@ -71,9 +73,33 @@ public class ClientManagementController {
 	 */
 	@RequestMapping("/gotoModifyClientRecord")
 	public ModelAndView showClientModificationPage(@RequestParam String driverLicenceNumberForModify) {
+		
+		ModelAndView modelAndView = new ModelAndView("ModifyClientRecord");
 		System.out.println("Checking driverLicenceNumberForModify: " + driverLicenceNumberForModify);
 		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForModify);
-		return new ModelAndView("ModifyClientRecord", "client", client);
+		
+		client.setEditing(true);
+		clientDataMapper.modifyClientRecord(client);
+		
+//		if(client.isEditing()) {
+//			modelAndView.addObject("disableOrNot","disabled");
+//		}
+		modelAndView.addObject("client",client);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/backToClientManagementPage")
+	public ModelAndView cancelModifyingClient(@RequestParam String driverLicenseNumber) { 
+		
+		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenseNumber);
+		client.setEditing(false);
+		clientDataMapper.modifyClientRecord(client);
+		
+		List<Client> clients = clientDataMapper.getAllClients();
+		ModelAndView modelAndView = new ModelAndView("ClientManagementPage");
+		modelAndView.addObject("clients", clients);
+		
+		return modelAndView;
 	}
 
 	/**
@@ -83,11 +109,25 @@ public class ClientManagementController {
 	 */
 	@RequestMapping("/gotoDeleteClientRecord")
 	public ModelAndView deleteClientRecord(@RequestParam String driverLicenceNumberForDelete) {
-
-		clientDataMapper.deleteClientRecord(driverLicenceNumberForDelete);
-		ModelAndView modelAndView = new ModelAndView("ClientManagementPage", "clients",
-				clientDataMapper.getAllClients());
-		return modelAndView;
+		ModelAndView modelAndView = new ModelAndView("ClientManagementPage");
+		
+		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForDelete);
+		List<Client> clients = clientDataMapper.getAllClients();
+		
+		if(client.isEditing()) {
+			modelAndView.addObject("errorMessage", "CANNOT DELETE THIS CLIENT!!");
+			modelAndView.addObject("clients",clients);
+			return modelAndView;
+		}
+		else {
+			clientDataMapper.deleteClientRecord(driverLicenceNumberForDelete);
+			
+			List<Client> newClients = clientDataMapper.getAllClients();
+			modelAndView.addObject("clients",newClients);
+			
+			return modelAndView;
+		}
+		
 	}
 
 	/**
@@ -110,11 +150,13 @@ public class ClientManagementController {
 		client.setDriverLicenceNumber(driverLicenseNumberInput);
 		client.setLicenceExpiryDate(licenceExpiryDate);
 		client.setPhoneNumber(phoneNumber);
-
+		client.setEditing(false);
+		
 		clientDataMapper.modifyClientRecord(client);
 
-		ModelAndView modelAndView = new ModelAndView("ClientManagementPage", "clients",
-				clientDataMapper.getAllClients());
+		List<Client> clients = clientDataMapper.getAllClients();
+		
+		ModelAndView modelAndView = new ModelAndView("ClientManagementPage", "clients",clients);
 
 		return modelAndView;
 	}

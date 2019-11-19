@@ -26,7 +26,7 @@ public class ClientTdGateway {
 	public boolean insertClientRecord(Map<String, Object> client_parameterMap) {
 
 		Connection connection = DatabaseUtils.getDbConnection();
-		String query = "INSERT INTO Client VALUES (default, ?,?,?,?,?)";
+		String query = "INSERT INTO Client VALUES (default, ?,?,?,?,?,?)";
 
 		PreparedStatement statement = null;
 		try {
@@ -44,7 +44,8 @@ public class ClientTdGateway {
 			statement.setString(4, (String) client_parameterMap.get("CLIENT_PHONE_NUMBER"));
 			LocalDate licenceExpiryDate = (LocalDate) client_parameterMap.get("CLIENT_LICENCE_EXPIRY_DATE");
 			statement.setDate(5, java.sql.Date.valueOf(licenceExpiryDate));
-
+			statement.setBoolean(6, (Boolean) client_parameterMap.get("EDITING")); 
+			
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
 			e.printStackTrace();
@@ -113,7 +114,8 @@ public class ClientTdGateway {
 			statement.setString(3, (String) client_parameterMap.get("CLIENT_PHONE_NUMBER"));
 			LocalDate licenceExpiryDate = (LocalDate) client_parameterMap.get("CLIENT_LICENCE_EXPIRY_DATE");
 			statement.setDate(4, java.sql.Date.valueOf(licenceExpiryDate));
-			statement.setString(5, (String) client_parameterMap.get("DRIVER_LICENCE_NUMBER"));
+			statement.setString(6, (String) client_parameterMap.get("DRIVER_LICENCE_NUMBER"));
+			statement.setBoolean(5, (Boolean) client_parameterMap.get("EDITING"));
 
 		} catch (SQLException e) {
 			System.out.println(DatabaseUtils.PARAMETER_ERROR_MESSAGE);
@@ -176,7 +178,7 @@ public class ClientTdGateway {
 	private StringBuilder getUpdateQuery() {
 		StringBuilder update_client = new StringBuilder();
 		update_client.append(
-				"UPDATE Client SET client_first_name = ?, client_last_name = ?, phone_number = ?, licence_expiry_date = ? WHERE driver_licence_number = ? ");
+				"UPDATE Client SET client_first_name = ?, client_last_name = ?, phone_number = ?, licence_expiry_date = ? , editing = ? WHERE driver_licence_number = ? ");
 		return update_client;
 	}
 

@@ -191,7 +191,7 @@ public class ReservationAndRentalController {
 	private ReservedCar createReservedCar(LocalDate dropoffDate, LocalDate pickupDate, Car selectedCar, Client client) {
 		ReservedCar reservedCar = new ReservedCar(null, selectedCar, client, pickupDate, dropoffDate, new Date());
 
-		Date d1;
+		Date d1; 
 		Date d2;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String d = null;
@@ -222,11 +222,13 @@ public class ReservationAndRentalController {
 		
 		reservedCarMapper.deleteCarReservationByLicense(carLicencePlateNumber);
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
-		Car c = new Car();
+		
+		Car c = carDataMapper.getCarByLicenseNumber(carLicencePlateNumber);
 		c.setAvailableReservedOrRented("Available");
-		c.setLicensePlateNumber(carLicencePlateNumber);
-
+		c.setEditing(false);
+		
 		carDataMapper.modifyCarRecord(c);
+		
 		return new ModelAndView("ViewReservedTransactions", "reservations", resCars);
 	}
 
@@ -242,10 +244,11 @@ public class ReservationAndRentalController {
 		crDataMapper.addRecord(carLicensePlateNumber, returnOrCancel);
 
 		rentedCarDataMapper.handleReturnOfVehicle(carLicensePlateNumber);
-		Car c = new Car();
+		
+		Car c = carDataMapper.getCarByLicenseNumber(carLicensePlateNumber);
 		c.setAvailableReservedOrRented("Available");
-		c.setLicensePlateNumber(carLicensePlateNumber);
-
+		c.setEditing(false);
+		
 		carDataMapper.modifyCarRecord(c);
 
 		ModelAndView modelAndView = new ModelAndView("ViewRentalTransactions", "rentals", rentedCarDataMapper.getAllRentedCars());

@@ -24,6 +24,7 @@
 		<h3>
 			<a href="/createNewClient" class="btn btn-primary btn-lg"><u>Create New Client</u></a>
 		</h3>
+		<font color="red">${errorMessage}</font>
 </div> 
 
 <hr style="clear:both;"/>
@@ -46,6 +47,11 @@
 			<td>${client.clientLastName}</td>
 			<td>${client.phoneNumber}</td>
 			<td>${client.licenceExpiryDate}</td>
+			
+			<input value= "${client.editing}" type = "hidden" name = "editing" />
+		
+			
+			
 			<form method="post" >
 			<td>  
 			<input value= "${client.driverLicenceNumber}" type = "hidden" name = "driverLicenceNumberForModify" />

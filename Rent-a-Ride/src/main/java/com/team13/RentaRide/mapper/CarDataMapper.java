@@ -82,6 +82,14 @@ public class CarDataMapper {
 			
 			} 
 		
+			//when car is res/rented and admin cancels modifying
+			else if(carObj.isEditing() && (carObj.getAvailableReservedOrRented().equals("Rented") || carObj.getAvailableReservedOrRented().equals("Reserved") ) && carObj.getColor() != null ) {
+				
+				parameterMap.put("EDITING", carObj.isEditing());
+				parameterMap.put("LICENSE_PLATE_NUMBER", carObj.getAvailableReservedOrRented());
+			}
+			
+			
 			// when admin saves after editing or cancelling
 			else if (!carObj.isEditing() && carObj.getAvailableReservedOrRented().equals("Available") && carObj.getColor() != null){
 				

@@ -44,7 +44,7 @@ public class DatabaseCreator {
 
 		String createTableRentedCar = "CREATE TABLE IF NOT EXISTS  RentedCar   (id int NOT NULL auto_increment, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP , PRIMARY KEY (id), FOREIGN KEY (car_id) REFERENCES Car(id), FOREIGN KEY (client_id) REFERENCES Client(id) ); ";
 
-		String createTableCancelledReturnedTransactions = "CREATE TABLE IF NOT EXISTS cancelledReturned ( id int NOT NULL auto_increment, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP, cancelled_returned_timestamp TIMESTAMP, PRIMARY KEY (id), FOREIGN KEY (car_id) REFERENCES Car(id), FOREIGN KEY (client_id) REFERENCES Client(id) );" ; 
+		String createTableCancelledReturnedTransactions = "CREATE TABLE IF NOT EXISTS cancelledReturned ( id int NOT NULL auto_increment, car_id int, client_id int, start_date Date, due_date Date, booking_timestamp TIMESTAMP, cancelled_returned_timestamp TIMESTAMP, PRIMARY KEY (id) );" ; 
 		
 	
 		try {

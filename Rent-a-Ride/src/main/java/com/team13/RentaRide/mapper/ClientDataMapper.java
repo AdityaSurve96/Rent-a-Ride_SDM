@@ -25,8 +25,10 @@ public class ClientDataMapper {
 			client_parameterMap.put("CLIENT_LAST_NAME", client.getClientLastName());
 			client_parameterMap.put("CLIENT_PHONE_NUMBER", client.getPhoneNumber());
 			client_parameterMap.put("CLIENT_LICENCE_EXPIRY_DATE", client.getLicenceExpiryDate());
-
+			client_parameterMap.put("EDITING", client.isEditing());
+		
 			return clientDataGateway.insertClientRecord(client_parameterMap);
+			
 		} catch (Exception e) {
 			System.out.println("Error while inserting a client record in the database");
 			e.printStackTrace();
@@ -55,7 +57,8 @@ public class ClientDataMapper {
 			client_parameterMap.put("CLIENT_LAST_NAME", client.getClientLastName());
 			client_parameterMap.put("CLIENT_PHONE_NUMBER", client.getPhoneNumber());
 			client_parameterMap.put("CLIENT_LICENCE_EXPIRY_DATE", client.getLicenceExpiryDate());
-
+			client_parameterMap.put("EDITING", client.isEditing());
+			
 			return clientDataGateway.modifyClient(client_parameterMap);
 		} catch (Exception e) {
 			System.out.println("Error while modifying a client record in the database");
@@ -103,6 +106,8 @@ public class ClientDataMapper {
 		client.setClientLastName(resultSet.getString(4));
 		client.setPhoneNumber(resultSet.getString(5));
 		client.setLicenceExpiryDate(resultSet.getDate(6).toLocalDate());
+		client.setEditing(resultSet.getBoolean(7));
+		
 		return client;
 	}
 

@@ -214,6 +214,10 @@ public class AdminOperationsController {
 			}
 		}
 		
+		if(currentCar.getAvailableReservedOrRented().equals("Reserved") || currentCar.getAvailableReservedOrRented().equals("Rented")) {
+			flag = true;
+		}
+	
 		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		for (ReservedCar reservedCar : resCars) {
@@ -282,9 +286,12 @@ public class AdminOperationsController {
 				break;
 			}
 		}
+		if(currentCar.isEditing()) {
+			flag = true ;
+		}
 		if (flag) {
 			modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
-			modelAndView.addObject("errorMessage", "Cannot delete vehicle now  as it is currently booked");
+			modelAndView.addObject("errorMessage", "Cannot delete vehicle now  as it is currently booked/under booking");
 			return modelAndView;
 		} else {
 
@@ -488,7 +495,12 @@ public class AdminOperationsController {
 	
 	@RequestMapping(value = "/backToAdminManageCatalog",  method = RequestMethod.POST)
 	public ModelAndView backToAdminManageCatalog(Car car) {
-		car.setEditing(false);
+		if(car.getAvailableReservedOrRented().equals("Available")) {
+			car.setEditing(false);
+		}
+		else {
+			car.setEditing(true);
+		}
 		carDataMapper.modifyCarRecord(car);
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 		

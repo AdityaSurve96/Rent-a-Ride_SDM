@@ -24,6 +24,7 @@
 			&nbsp; &nbsp;
 			<a href="/adminHomePage"><u>Back To Home Page</u></a>
 		</h3>
+		<font color="red">${errorMessage}</font>
 	</div>
 <hr style="clear:both;"/>
 	<div>
@@ -92,7 +93,7 @@
 </div>
 </form>
 <br>
-<font color="red">${errorMessage}</font>
+
 <form>
 	<div class="container">
 	<table id="myTable" class="sortable">

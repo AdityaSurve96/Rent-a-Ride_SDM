@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Client {
 
 	protected Integer id;
+	private boolean editing;
 
 	private String driverLicenceNumber;
 	private String clientFirstName;
@@ -13,6 +14,14 @@ public class Client {
 	private String phoneNumber;
 	private LocalDate licenceExpiryDate;
 
+	public boolean isEditing() {
+		return editing;
+	}
+
+	public void setEditing(boolean editing) {
+		this.editing = editing;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

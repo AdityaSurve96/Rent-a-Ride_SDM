@@ -33,7 +33,27 @@ public class CarDetailsController {
 	private static List<Car> cars = new ArrayList<Car>();
 	private Car currentCar = null;
 
+	@RequestMapping("/backfromRental")
+	public ModelAndView backFromRentalPage( @RequestParam String CarLicenseNo) {
+		
+		Car car = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
+		car.setEditing(false);
+		carDataMapper.modifyCarRecord(car);
+		
+		Car c = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
+		return showCarView(c);
+		
+	}
 	
+	@RequestMapping("/backfromReservation")
+	public ModelAndView backFromReservation( @RequestParam String CarLicenseNo) {
+		Car car = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
+		car.setEditing(false);
+		carDataMapper.modifyCarRecord(car);
+		
+		Car c = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
+		return showCarView(c);
+	}
 	
 	
 	@RequestMapping("/carDetailView")
