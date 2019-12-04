@@ -109,15 +109,43 @@ public class AdminOperationsController {
 				ModelAndView modelAndView = new ModelAndView("AdminLoginPage");
 				modelAndView.addObject("errorMessage", "INVALID LOGIN! Please try again.");
 				return modelAndView;
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	
+	@RequestMapping(value = "/registerAdminPage")
+	/**
+	 * This calls the registration page if the admin is logging the system for the
+	 * first time.
+	 * 
+	 * @param email    : email id of the Admin.
+	 * @param password : password of the Admin.
+	 * @return
+	 */
+	public ModelAndView registerAdminPage() {
+
+		return new ModelAndView("AdminRegisterPage");
+
+		
+//		
+//		
+//		if (!email.isEmpty() && !password.isEmpty()) {
+//			Admin admin = new Admin(email, password);
+//			adminDataMapper.addAdminRecord(admin);
+//			return new ModelAndView("AdminLoginPage");
+//		}
+//
+//		ModelAndView modelAndView = new ModelAndView("AdminRegisterPage");
+//		modelAndView.addObject("errorMessage", "Invalid UserId/Password, try again!");
+//		return modelAndView;
+
+	}
 	@RequestMapping(value = "/registerAdmin", method = RequestMethod.POST)
 	/**
 	 * This calls the registration page if the admin is logging the system for the
@@ -129,6 +157,7 @@ public class AdminOperationsController {
 	 */
 	public ModelAndView registerAdmin(@RequestParam String email, @RequestParam String password) {
 
+		
 		if (!email.isEmpty() && !password.isEmpty()) {
 			Admin admin = new Admin(email, password);
 			adminDataMapper.addAdminRecord(admin);
@@ -213,11 +242,19 @@ public class AdminOperationsController {
 				break;
 			}
 		}
-		
+		Car selectedCar = null;
+		if(! CarDetailsController.currentlySelectedCar.isEmpty()) {
+			selectedCar = CarDetailsController.currentlySelectedCar.get(0);
+			if(selectedCar.getLicensePlateNumber().equals(currentCar.getLicensePlateNumber())) {
+				flag = true;
+			}
+		}
+
+
 		if(currentCar.getAvailableReservedOrRented().equals("Reserved") || currentCar.getAvailableReservedOrRented().equals("Rented")) {
 			flag = true;
 		}
-	
+
 		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 		for (ReservedCar reservedCar : resCars) {
@@ -236,17 +273,17 @@ public class AdminOperationsController {
 		modelAndView = new ModelAndView("EditCarPage", "car", currentCar);
 		if (flag) {
 
-			modelAndView.addObject("editDecide", "Cannot Edit Car Details, Car cuurently Booked");
+			modelAndView.addObject("editDecide", "Cannot Edit Car Details, Car curently Unavailable");
 
 			modelAndView.addObject("readOnly", "readonly");
 			modelAndView.addObject("disableOrNo", "disabled");
 
 		} else {
-			
+
 			currentCar.setEditing(true);
 			currentCar.setLicensePlateNumber(currentLicensePlateNumber);
 			carDataMapper.modifyCarRecord(currentCar);
-			
+
 			modelAndView.addObject("editDecide", "Edit Car Details");
 		}
 		return modelAndView;
@@ -271,6 +308,18 @@ public class AdminOperationsController {
 				break;
 			}
 		}
+		Car selectedCar = null;
+		if(! CarDetailsController.currentlySelectedCar.isEmpty()) {
+			selectedCar = CarDetailsController.currentlySelectedCar.get(0);
+			if(selectedCar.getLicensePlateNumber().equals(currentCar.getLicensePlateNumber())) {
+				flag = true;
+			}
+		}
+
+		if(currentCar.getAvailableReservedOrRented().equals("Reserved") || currentCar.getAvailableReservedOrRented().equals("Rented")) {
+			flag = true;
+		}
+
 		List<RentedCar> renCars = rentedCarDataMapper.getAllRentedCars();
 		List<ReservedCar> resCars = reservedCarMapper.getAllReservedCars();
 
@@ -444,7 +493,7 @@ public class AdminOperationsController {
 
 	}
 
-	
+
 	@RequestMapping(value = "/filterCancelledReturnedRecordsForAdmin", method = RequestMethod.POST)
 
 	public ModelAndView filterCancelledReturnedRecordsForAdmin(@RequestParam String licensePlateNumberInput,
@@ -492,7 +541,7 @@ public class AdminOperationsController {
 
 		return new ModelAndView("ReturnedAndCancelledTransactions", "returnedCancelled", retCanbookings);
 	}
-	
+
 	@RequestMapping(value = "/backToAdminManageCatalog",  method = RequestMethod.POST)
 	public ModelAndView backToAdminManageCatalog(Car car) {
 		if(car.getAvailableReservedOrRented().equals("Available")) {
@@ -503,19 +552,19 @@ public class AdminOperationsController {
 		}
 		carDataMapper.modifyCarRecord(car);
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
-		
+
 	}
-	
+
 	@RequestMapping("/adminHomePage")
 	public ModelAndView backToAdminHome() {
-		
+
 		return new ModelAndView("AdminHomePage");
 	}
-		
+
 	@RequestMapping("/adminLogout")
 	public ModelAndView adminLogout() {
 		isAnyAdminLoggedIn = false;
 		return new ModelAndView("main");
-		
+
 	}
 }

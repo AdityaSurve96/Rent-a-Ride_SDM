@@ -2,6 +2,7 @@ package com.team13.RentaRide.Controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Stack;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.ClientDataMapper;
+import com.team13.RentaRide.model.Clerk;
 import com.team13.RentaRide.model.Client;
 
 /**
@@ -73,24 +75,43 @@ public class ClientManagementController {
 	 */
 	@RequestMapping("/gotoModifyClientRecord")
 	public ModelAndView showClientModificationPage(@RequestParam String driverLicenceNumberForModify) {
-		
+		Stack<Clerk> clerksInside  = ClerkOperationController.clerksLoggedIn;
 		ModelAndView modelAndView = new ModelAndView("ModifyClientRecord");
-		System.out.println("Checking driverLicenceNumberForModify: " + driverLicenceNumberForModify);
-		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForModify);
+	Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForModify);
+		if(! client.isEditing()) {
+			client.setEditing(true);
+			clientDataMapper.modifyClientRecord(client);
+			modelAndView.addObject("client",client);
+			return modelAndView;
+		}
+		else {
+			modelAndView.addObject("client",client);
+			modelAndView.addObject("disableOrNot", "disabled");
+			modelAndView.addObject("readOnly", "readonly");
+			return modelAndView;
+			
+		}
 		
-		client.setEditing(true);
-		clientDataMapper.modifyClientRecord(client);
+		
+//		if(clerksInside.size()>1) {
+//			modelAndView.addObject("client",client);
+//			modelAndView.addObject("disableOrNot", "disabled");
+//			modelAndView.addObject("readOnly", "readonly");
+//			return modelAndView;
+//		}
+	
+//		System.out.println("Checking driverLicenceNumberForModify: " + driverLicenceNumberForModify);
+	
 		
 //		if(client.isEditing()) {
 //			modelAndView.addObject("disableOrNot","disabled");
 //		}
-		modelAndView.addObject("client",client);
-		return modelAndView;
+//		modelAndView.addObject("client",client);
+//		return modelAndView;
 	}
 	
 	@RequestMapping("/backToClientManagementPage")
 	public ModelAndView cancelModifyingClient(@RequestParam String driverLicenseNumber) { 
-		
 		Client client = clientDataMapper.getClientByDrivingLicense(driverLicenseNumber);
 		client.setEditing(false);
 		clientDataMapper.modifyClientRecord(client);

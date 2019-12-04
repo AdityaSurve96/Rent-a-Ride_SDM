@@ -2,6 +2,7 @@ package com.team13.RentaRide.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class ClerkOperationController {
 	 * 
 	 * @return
 	 */
-	public List<Clerk> clerksLoggedIn = new ArrayList<Clerk>();
+	public static Stack<Clerk> clerksLoggedIn = new Stack();
 	private ClerkDataMapper clerkDataMapper = new ClerkDataMapper();
 	private CarDataMapper carDataMapper = new CarDataMapper();
 	private ClientDataMapper clientDataMapper = new ClientDataMapper();
@@ -97,10 +98,10 @@ public class ClerkOperationController {
 
 	public ModelAndView showWelcomePage(@RequestParam String email, @RequestParam String password) {
 		List<Clerk> clerk = clerkDataMapper.getClerkByEmailPassword(email, password);
-		
-		
+
+
 		if (!clerk.isEmpty()) {
-		
+			clerksLoggedIn.push(clerk.get(0));
 			ModelAndView modelAndView = new ModelAndView("ClerkHomePage");
 			return modelAndView;
 		}
@@ -109,5 +110,26 @@ public class ClerkOperationController {
 		return modelAndView;
 
 	}
+
+
+	@RequestMapping("/clerkLogout")
+	public ModelAndView clerkLogout() {
+		Stack<Clerk> clerksIn = clerksLoggedIn;
+		if(clerksIn.size()>0) {
+			clerksLoggedIn.pop();
+		}
+		Stack<Clerk> clerksIn2 = clerksLoggedIn;
+		
+		return new ModelAndView("main");
+
+	}
+	
+	@RequestMapping("/clerkBackToHome") 
+	public ModelAndView clerkBackHome() {
+		
+		return new ModelAndView("ClerkHomePage");
+	}
+	
+	
 
 }

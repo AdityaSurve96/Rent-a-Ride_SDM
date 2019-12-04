@@ -28,21 +28,21 @@ public class CarDetailsController {
 	 * <li>view the precious or next detailed view of car</li>
 	 * <li>can go back to car catalog</li>
 	 */
-
+	public static List<Car> currentlySelectedCar = new ArrayList<Car>();
 	CarDataMapper carDataMapper = new CarDataMapper();
 	private static List<Car> cars = new ArrayList<Car>();
 	private Car currentCar = null;
-
+	
 	@RequestMapping("/backfromRental")
 	public ModelAndView backFromRentalPage( @RequestParam String CarLicenseNo) {
-		
+
 		Car car = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
 		car.setEditing(false);
 		carDataMapper.modifyCarRecord(car);
 		
 		Car c = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
 		return showCarView(c);
-		
+
 	}
 	
 	@RequestMapping("/backfromReservation")
@@ -50,15 +50,17 @@ public class CarDetailsController {
 		Car car = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
 		car.setEditing(false);
 		carDataMapper.modifyCarRecord(car);
-		
+
 		Car c = carDataMapper.getCarByLicenseNumber(CarLicenseNo);
 		return showCarView(c);
 	}
 	
 	
+
 	@RequestMapping("/carDetailView")
 	public ModelAndView showCarDetails(@RequestParam String licensePlateInput) {
 		cars = carDataMapper.getAllCars();
+		
 		currentCar = carDataMapper.getCarByLicenseNumber(licensePlateInput);
 		return showCarView(currentCar);
 	}
@@ -108,6 +110,9 @@ public class CarDetailsController {
 
 	@RequestMapping("/backtoCarCatalog")
 	public ModelAndView showCarCatalogPage() {
+		if(!currentlySelectedCar.isEmpty()) {
+			currentlySelectedCar.clear();
+		}
 		ModelAndView modelAndView = new ModelAndView("CarCatalog");
 		modelAndView.addObject("cars", carDataMapper.getAllCars());
 		return modelAndView;
@@ -119,23 +124,27 @@ public class CarDetailsController {
 	 */
 
 	public ModelAndView showCarView(Car car) {
-		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", car);
-
-		if (car.isEditing()) {
+		Car c = carDataMapper.getCarByLicenseNumber(car.getLicensePlateNumber());
+		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", c);
+		if(! currentlySelectedCar.isEmpty()) {
+			currentlySelectedCar.clear();
+		}
+		currentlySelectedCar.add(car);
+		if (c.isEditing()) {
 			modelAndView.addObject("canReserveOrNot", "Unavaialable for Reserving");
 			modelAndView.addObject("canRentOrNot", "Unavaialable for Renting");
 			modelAndView.addObject("disableOrNo", "disabled");
 		}
-		 else if (car.getAvailableReservedOrRented().equals("Reserved")) {
+		else if (c.getAvailableReservedOrRented().equals("Reserved")) {
 			modelAndView.addObject("canReserveOrNot", "Already Reserved");
 			modelAndView.addObject("canRentOrNot", "Cannot Rent Now");
 			modelAndView.addObject("disableOrNo", "disabled");
 		} 
-		else if (car.getAvailableReservedOrRented().equals("Available")) {
+		else if (c.getAvailableReservedOrRented().equals("Available")) {
 			modelAndView.addObject("canReserveOrNot", "Reserve Now");
 			modelAndView.addObject("canRentOrNot", "Rent Now");
 		}	
-		else if (car.getAvailableReservedOrRented().equals("Rented")){
+		else if (c.getAvailableReservedOrRented().equals("Rented")){
 			modelAndView.addObject("canReserveOrNot", "Cannot Reserve Now");
 			modelAndView.addObject("canRentOrNot", "Already Rented");
 			modelAndView.addObject("disableOrNo", "disabled");

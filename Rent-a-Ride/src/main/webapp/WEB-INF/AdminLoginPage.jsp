@@ -21,7 +21,7 @@
 	<form method="post" class="form-horizontal">
 	<div class="container col-md-12">	
 		<div>
-			<h2>Sign In</h2>
+			<h2>Admin: Sign In</h2>
 			<br><br>
 			
 				<div class="form-group">
@@ -43,7 +43,7 @@
 				<br><br>
 				<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-md" formaction="/tryToLoginAsAdmin" value="Sign In" >Login</button>
-						<button type="submit"  class="btn btn-primary btn-md" formaction="/registerAdmin" value="Sign Up" >Register</button>
+						<button type="submit"  class="btn btn-primary btn-md" formaction="/registerAdminPage" value="Sign Up" >Register</button>
 						<button type="reset"  class="btn btn-primary btn-md" >Reset</button>
 				</div>
 				

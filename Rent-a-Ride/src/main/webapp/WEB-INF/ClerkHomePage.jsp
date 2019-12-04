@@ -31,6 +31,8 @@
 				<a href="/showClientManagement" class="btn btn-primary btn-lg">Manage Clients</a> 
 				
 				<a href="/viewCarCatalog" class="btn btn-primary btn-lg">View Catalog</a>
+				
+				<a href="/clerkLogout" class="btn btn-primary btn-lg">Logout</a> 
 		</div>
 </body>
 

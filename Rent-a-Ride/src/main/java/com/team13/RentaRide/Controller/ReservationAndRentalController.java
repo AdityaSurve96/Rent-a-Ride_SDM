@@ -54,7 +54,7 @@ public class ReservationAndRentalController {
 	public ModelAndView showCarRentingPage(@RequestParam String licensePlate) {
 		page = CREATE_RENTAL;
 		
-		Car c = new Car();
+		Car c = carDataMapper.getCarByLicenseNumber(licensePlate);
 		c.setEditing(true);
 		c.setLicensePlateNumber(licensePlate);
 		carDataMapper.modifyCarRecord(c);

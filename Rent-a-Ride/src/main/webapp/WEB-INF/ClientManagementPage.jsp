@@ -22,6 +22,8 @@
 	</div>
 <div class="col-md-6"align="right" >
 		<h3>
+			<a href="/clerkLogout" class="btn btn-primary btn-lg"><u>Logout</u></a>
+			<a href="/clerkBackToHome" class="btn btn-primary btn-lg"><u>Back To Home</u></a>
 			<a href="/createNewClient" class="btn btn-primary btn-lg"><u>Create New Client</u></a>
 		</h3>
 		<font color="red">${errorMessage}</font>

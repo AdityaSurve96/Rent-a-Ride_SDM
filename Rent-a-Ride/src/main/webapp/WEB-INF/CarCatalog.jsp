@@ -84,6 +84,9 @@
 
 		&nbsp; 
 		<input type="submit" value="Search" class="btn btn-primary btn-md"/>
+		
+		<a href="/clerkLogout" class="btn btn-primary btn-md">Logout</a>
+		<a href="/clerkBackToHome" class="btn btn-primary btn-md">Back To Home</a>
 
 <!-- 		&nbsp;  -->
 <!-- 		<input class="custom-control-input" id="showOnlyAvailable" type="checkbox"/> -->

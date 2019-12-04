@@ -25,21 +25,21 @@
  <div class="form-group">
  
  	<div class="col-md-5"><label class="control-label pull-right">Client First Name:</label></div>
- 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientFirstName}" type="text" name="clientFirstName"></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientFirstName}" type="text" name="clientFirstName" ${readOnly}></div>
  	</div>
  <div class="form-group">
  
  	<div class="col-md-5"><label class="control-label pull-right">Client Last Name:</label></div>
- 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientLastName}" type="text" name="clientLastName"></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.clientLastName}" type="text" name="clientLastName" ${readOnly}></div>
  	</div>
  <div class="form-group">
  
  	<div class="col-md-5"><label class="control-label pull-right">Client Phone Number:</label></div>
- 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.phoneNumber}"  type="number" name="phoneNumber"></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.phoneNumber}"  type="number" name="phoneNumber" ${readOnly}></div>
  </div>
  <div class="form-group">
  	<div class="col-md-5"><label class="control-label pull-right">Licence Expiry Date:</label></div>
- 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.licenceExpiryDate}"  type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd"></div>
+ 	<div class="col-md-3"><input class="form-control pull-left" value = "${client.licenceExpiryDate}"  type="date" name="licenceExpiryDate" placeholder="yyyy-mm-dd" ${readOnly}></div>
 </div>
 
 </div>  
@@ -49,7 +49,7 @@
  <div class="form-group">
   	<input value = "${client.driverLicenceNumber}" class="pull-left" type="hidden" name="driverLicenseNumberInput">
   	<button type="submit" class="btn btn-primary btn-md" formaction="/gotoClientManagementPageAfterModification" 
-  	name ="ConfirmModify" ${disableOrNot}>Modify Now</button>
+  	name ="ConfirmModify" ${disableOrNot} >Modify Now</button>
   	<button type="submit" formaction="/backToClientManagementPage" class="btn btn-primary btn-md">Back</a>
  </div>
  </div>

@@ -24,7 +24,7 @@
 	<form method="post" class="form-horizontal">
 	<div class="container col-md-12">	
 		<div>
-			<h2>Sign In</h2>
+			<h2>Clerk: Sign In</h2>
 			<br><br>
 				<div class="form-group">
 					<div class="col-md-5">
