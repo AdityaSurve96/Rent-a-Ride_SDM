@@ -3,21 +3,28 @@
 
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Refresh" content="31	;url=/backToAdminManageCatalogAfterTimeout">
 <head>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/custom.css" rel="stylesheet" />
-	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
+	
 	<link href="styles/car-catalog-style.css" rel="stylesheet" type="text/css">
 	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
+	<!-- <script type="text/javascript" src="scripts/timer.js"></script> -->
+
+    
 </head>
 
 <body>
 
 <form method="post" class="form-horizontal">
 <div align="center">
- <div >
+ <div>
  <h2> ${editDecide}</h2>
  <br>
+ 	
+<br>
 <div class="container" align="center">
 
 <div class="form-group">
@@ -102,12 +109,41 @@
  <div class="form-group">
 	<div>
 		<button type="submit" class="btn btn-primary btn-md" formaction="/saveCarChanges" ${disableOrNo}>Save Changes</button>
-	  	<button type="submit" class="btn btn-primary btn-md" formaction="/backToAdminManageCatalog" >Cancel</a>
+		<button type="submit" class="btn btn-primary btn-md"  id = "toClick" formaction="/backToAdminManageCatalog" >Cancel</button>
+	  	
 	  	
 	</div>  
  </div>
 
+<br>
+<p id="timer"></p>
+ 	
+<script type="text/javascript">
 
+
+		var counter = 30;
+		var timerElement = document.getElementById('timer');
+		
+		var timerId = setInterval(countdown, 1000);
+		
+		function countdown() {
+		
+			if(counter == 0){
+				timerElement.innerHTML = "Time Up.. Rolling Back!!";
+				document.getElementById("toClick").click();
+				}
+			else if  (counter < 5) {
+				timerElement.innerHTML = counter + ' seconds remaining ' + "...Time ALmost Over!!";
+				counter--;
+			} 
+			
+				else {
+				timerElement.innerHTML = counter + ' seconds remaining to complete modification';
+				counter--;
+			}
+		}
+</script>
+<br>
 
 </div>
 </div>

@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Refresh" content="6	;url=/refreshCarDetails">
+
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/custom.css" rel="stylesheet" />
 <script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
@@ -15,6 +17,8 @@
 
 <div class="container" align="center">
 <h2 style="text-align:center"><strong>${car.make} ${car.model} Details</strong></h2>
+
+
 
 <img src="images/car1.jpg" style="width:350px;height:200px;">
  <p class="price">$ ${car.price}</p>
@@ -66,7 +70,35 @@
 		<a href="/backtoCarCatalog" class="btn btn-primary btn-sm">Back to Car Catalog</a>
 </form>
 </div>
+<br>
+<p align = "center" id = "refreshPage"></p>
 
+<script type="text/javascript">
+
+
+		var counter = 5;
+		var timerElement = document.getElementById('refreshPage');
+		
+		var timerId = setInterval(countdown, 1000);
+		
+		function countdown() {
+		
+			if(counter == 0){
+				timerElement.innerHTML = "Reloading Availability Data Now!!";
+				}
+			else if  (counter < 2) {
+				timerElement.innerHTML = counter + ' seconds remaining' + "...Reloading Data Shortly!!";
+				counter--;
+			} 
+			
+				else {
+				timerElement.innerHTML = counter + ' seconds remaining for data refresh';
+				counter--;
+			}
+		}
+</script>
+
+<br>
 
 </body>
 </html>
