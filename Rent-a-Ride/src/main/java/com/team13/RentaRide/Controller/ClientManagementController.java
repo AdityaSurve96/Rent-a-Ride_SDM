@@ -2,7 +2,6 @@ package com.team13.RentaRide.Controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Stack;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team13.RentaRide.mapper.ClientDataMapper;
-import com.team13.RentaRide.model.Clerk;
 import com.team13.RentaRide.model.Client;
 
 /**
@@ -75,7 +73,7 @@ public class ClientManagementController {
 	 */
 	@RequestMapping("/gotoModifyClientRecord")
 	public ModelAndView showClientModificationPage(@RequestParam String driverLicenceNumberForModify) {
-		Stack<Clerk> clerksInside  = ClerkOperationController.clerksLoggedIn;
+	
 		ModelAndView modelAndView = new ModelAndView("ModifyClientRecord");
 	Client client = clientDataMapper.getClientByDrivingLicense(driverLicenceNumberForModify);
 		if(! client.isEditing()) {
@@ -92,22 +90,6 @@ public class ClientManagementController {
 			
 		}
 		
-		
-//		if(clerksInside.size()>1) {
-//			modelAndView.addObject("client",client);
-//			modelAndView.addObject("disableOrNot", "disabled");
-//			modelAndView.addObject("readOnly", "readonly");
-//			return modelAndView;
-//		}
-	
-//		System.out.println("Checking driverLicenceNumberForModify: " + driverLicenceNumberForModify);
-	
-		
-//		if(client.isEditing()) {
-//			modelAndView.addObject("disableOrNot","disabled");
-//		}
-//		modelAndView.addObject("client",client);
-//		return modelAndView;
 	}
 	
 	@RequestMapping("/backToClientManagementPage")

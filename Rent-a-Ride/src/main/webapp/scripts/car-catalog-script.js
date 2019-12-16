@@ -158,6 +158,7 @@ function getCurrentDate() {
 
 	today = yyyy + '-' + mm + '-' + dd;
 	console.log(today);
-	document.getElementByID("now").setAttribute("min", today);
+	var elem = document.getElementByID("now")
+	elem.setAttribute("min", today);
 }
 

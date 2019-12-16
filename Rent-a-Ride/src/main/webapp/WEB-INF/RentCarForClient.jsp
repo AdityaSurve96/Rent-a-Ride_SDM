@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 	<meta http-equiv="refresh" content="46 ;url=/backfromRental"> -->
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/custom.css" rel="stylesheet" />
 	<script type="text/javascript" src="scripts/car-catalog-script.js"></script>  
@@ -62,10 +63,10 @@
  	<div class="col-md-6"><input value ="${licenceExpiryDate}" class="pull-left" type="date" name="licenceExpiryDate" placeholder="yyyy-mm-mdd"></div>
 </div>
  <br>
- <div class="form">
+ <div class="form" onload="getCurrentDate()">
  
  	<div class="col-md-6"><label class="pull-right">Vehicle Pickup Date:</label></div>
- 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" name="pickupDate" placeholder="yyyy-mm-dd" readonly></div>
+ 	<div class="col-md-6"><input value ="${pickUpDate}"  class="pull-left" type="date" id ="now" name="pickupDate" placeholder="yyyy-mm-dd" readonly></div>
  	</div>
  <div class="form">
  	
@@ -79,9 +80,43 @@
  <div align="center">
   	<button type="submit" class="btn btn-primary btn-sm" formaction="/carRented">Confirm Rental</button>
   	
-  	<button type="submit" class="btn btn-primary btn-sm" formaction="/backfromRental">Back</button>
+  	<button type="submit" class="btn btn-primary btn-sm" id = "toClick" formaction="/backfromRental">Back</button>
  </div>
  </div>
+ 
+ 
+ <br>
+<p align = "center" id = "goBacktoCarDetails"></p>
+
+<script type="text/javascript">
+
+
+		var counter = 45;
+		var timerElement = document.getElementById('goBacktoCarDetails');
+	
+		var timerId = setInterval(countdown, 1000);
+		
+		function countdown() {
+		
+			if(counter == 0){
+				timerElement.innerHTML = "Reloading Availability Data Now!!";
+				document.getElementById("toClick").click();
+				}
+			else if  (counter < 5) {
+				timerElement.innerHTML = counter + ' seconds remaining' + "...Reloading Data Shortly!!";
+				counter--;
+			} 
+			
+				else {
+				timerElement.innerHTML = counter + ' seconds remaining for data refresh';
+				counter--;
+			}
+		}
+</script>
+
+<br>
+ 
+ 
  </div>
  
 </form>
