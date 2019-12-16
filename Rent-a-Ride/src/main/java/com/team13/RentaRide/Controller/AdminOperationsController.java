@@ -38,6 +38,7 @@ public class AdminOperationsController {
 	private CarDataMapper carDataMapper = new CarDataMapper();
 	private CancelledReturnedDataMapper crDataMapper = new CancelledReturnedDataMapper();
 	private RentedCarDataMapper rentedCarDataMapper = new RentedCarDataMapper();
+	Car editingCar = null;
 
 	/**
 	 * <p>
@@ -58,6 +59,7 @@ public class AdminOperationsController {
 
 	@RequestMapping("/AdminLoginPage")
 	public ModelAndView showLoginPage() {
+		
 		return new ModelAndView("AdminLoginPage");
 	}
 
@@ -232,6 +234,7 @@ public class AdminOperationsController {
 	 * @return model and view of the modified car.
 	 */
 	public ModelAndView editCar(@RequestParam String currentLicensePlateNumber) {
+		
 		System.out.println("licensePlateNumber: " + currentLicensePlateNumber);
 		Car currentCar = null;
 		boolean flag = false;
@@ -239,6 +242,7 @@ public class AdminOperationsController {
 		for (Car car : carDataMapper.getAllCars()) {
 			if (car.getLicensePlateNumber().equals(currentLicensePlateNumber)) {
 				currentCar = car;
+				editingCar = car;
 				break;
 			}
 		}
@@ -273,10 +277,14 @@ public class AdminOperationsController {
 		modelAndView = new ModelAndView("EditCarPage", "car", currentCar);
 		if (flag) {
 
-			modelAndView.addObject("editDecide", "Cannot Edit Car Details, Car curently Unavailable");
-
-			modelAndView.addObject("readOnly", "readonly");
-			modelAndView.addObject("disableOrNo", "disabled");
+			modelAndView = new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
+			modelAndView.addObject("errorMessage", "Cannot Edit Car Details, This car is currently Unavailable");
+			return modelAndView;
+			
+//			modelAndView.addObject("editDecide", "Cannot Edit Car Details, Car curently Unavailable");
+//
+//			modelAndView.addObject("readOnly", "readonly");
+//			modelAndView.addObject("disableOrNo", "disabled");
 
 		} else {
 
@@ -551,6 +559,19 @@ public class AdminOperationsController {
 			car.setEditing(true);
 		}
 		carDataMapper.modifyCarRecord(car);
+		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
+
+	}
+	
+	@RequestMapping("/backToAdminManageCatalogAfterTimeout")
+	public ModelAndView backToAdminManageCatalogAfterTimeout() {
+		if(editingCar.getAvailableReservedOrRented().equals("Available")) {
+			editingCar.setEditing(false);
+		}
+		else {
+			editingCar.setEditing(true);
+		}
+		carDataMapper.modifyCarRecord(editingCar);
 		return new ModelAndView("AdminCarCatalogPage", "cars", carDataMapper.getAllCars());
 
 	}

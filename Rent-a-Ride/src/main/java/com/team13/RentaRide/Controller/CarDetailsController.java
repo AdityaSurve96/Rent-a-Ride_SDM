@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -118,18 +117,40 @@ public class CarDetailsController {
 		return modelAndView;
 	}
 
+	
+	
+	@RequestMapping("/refreshCarDetails") 
+	public ModelAndView refreshCarDetails() {
+		
+	
+		return showCarView(currentCar);
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * @param car car object is passed to check the availability of the car
 	 * @return model and view of car.
 	 */
 
 	public ModelAndView showCarView(Car car) {
+		
 		Car c = carDataMapper.getCarByLicenseNumber(car.getLicensePlateNumber());
 		ModelAndView modelAndView = new ModelAndView("CarDetails", "car", c);
+		
+		
 		if(! currentlySelectedCar.isEmpty()) {
 			currentlySelectedCar.clear();
 		}
 		currentlySelectedCar.add(car);
+		
+		
 		if (c.isEditing()) {
 			modelAndView.addObject("canReserveOrNot", "Unavaialable for Reserving");
 			modelAndView.addObject("canRentOrNot", "Unavaialable for Renting");
@@ -149,6 +170,8 @@ public class CarDetailsController {
 			modelAndView.addObject("canRentOrNot", "Already Rented");
 			modelAndView.addObject("disableOrNo", "disabled");
 		}
+		
+		
 		return modelAndView;
 	}
 

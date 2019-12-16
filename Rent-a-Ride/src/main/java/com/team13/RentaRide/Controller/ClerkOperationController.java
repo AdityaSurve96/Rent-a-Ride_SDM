@@ -1,6 +1,5 @@
 package com.team13.RentaRide.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -119,17 +118,17 @@ public class ClerkOperationController {
 			clerksLoggedIn.pop();
 		}
 		Stack<Clerk> clerksIn2 = clerksLoggedIn;
-		
+
 		return new ModelAndView("main");
 
 	}
-	
+
 	@RequestMapping("/clerkBackToHome") 
 	public ModelAndView clerkBackHome() {
-		
+
 		return new ModelAndView("ClerkHomePage");
 	}
-	
-	
+
+
 
 }
