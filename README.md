@@ -22,6 +22,10 @@ Proposed technology for developement :- Java with Spring
 
 
 
+A link to the demo with the final update to the fairness protocol with reduced wait time for admins and clerks  
+https://youtu.be/ar5_cf2xHio  
+
+
 Steps: 
 1. Download the project from the releases tab - either "Deliverable 1" i.e Iteration2 or "Deliverable 2(Most Recent)" i.e Iteration3). 
 2. Download Eclipse IDE or Spring tool Suite 4 to run the application.  
